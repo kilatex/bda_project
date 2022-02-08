@@ -41,6 +41,8 @@ Route::get('/notification', [App\Http\Controllers\UserController::class, 'notifi
 // AdminController ROUTES
 Route::get('/create-admin', [App\Http\Controllers\AdminController::class, 'create_admin'])->name('create_admin');
 Route::get('/user-list', [App\Http\Controllers\AdminController::class, 'users_list'])->name('users_list');
+Route::get('/user-categorys', [App\Http\Controllers\AdminController::class, 'category_users'])->name('category_users');
+
 Route::post('/register-admin', [App\Http\Controllers\AdminController::class, 'register_admin'])->name('register_admin');
 Route::get('/user/{id}', [App\Http\Controllers\AdminController::class, 'user_docs'])->name('user_docs');
 Route::get('/docs/pass/{docs_id}', [App\Http\Controllers\AdminController::class, 'pass_docs'])->name('pass_docs');

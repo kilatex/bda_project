@@ -147,4 +147,8 @@ class AdminController extends Controller
         ]);
 
     }
+
+    public function category_users(){
+        return view('admin.category-users');
+    }
 }
