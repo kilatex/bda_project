@@ -149,6 +149,18 @@ class AdminController extends Controller
     }
 
     public function category_users(){
-        return view('admin.category-users');
+        $periodos=DB::table('periodos')->get();
+        $periodos_grado=DB::table('periodogrados')->get();
+        $pregrado=DB::table('pregrados')->get();
+        $postgrados=DB::table('postgrados')->get();
+        $promociones=DB::table('promocions')->get();
+
+        return view('admin.category-users', [
+            'periodos' => $periodos,
+            'periodos_grado' => $periodos_grado,
+            'pregrados' => $pregrado,
+            'postgrados' => $postgrados,
+            'promociones' => $promociones
+        ]);
     }
 }
