@@ -72,6 +72,11 @@
                                 </li>
 
                                 <li class="nav-item ">
+                                    <a id="" class="nav-link "  href="{{ route('my_docs') }}" >
+                                    Mis Documentos
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
                                     <a id="" class="nav-link " href="{{ route('profile') }}"  >
                                     Mi Perfil
                                     </a>
@@ -85,9 +90,7 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">
-                                            Configuración
-                                        </a>
+ 
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
@@ -106,6 +109,13 @@
                                     Revisar Documentos
                                     </a>
                                 </li>
+
+                                <li class="nav-item ">
+                                    <a id="" class="nav-link "  href="{{ route('category_users') }}" >
+                                    Listar Usuarios
+                                    </a>
+                                </li>
+
 
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

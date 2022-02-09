@@ -69,26 +69,52 @@ class AdminController extends Controller
 
     public function users_list(){
         $user = \Auth::user();
-
-        if($user->role != "ADMIN"){
+        if ( $user == null || $user->role != "ADMIN"){
             return redirect()->route('home');
         }
 
         $users = User::Where('role','USER')
                     ->join('documents','users.id', '=' , 'documents.user_id')
                     ->orderBy('users.id','desc')->paginate(12);
+                 
+        $flag = false;
+        foreach($users as $user){
+            if($user->id){
+                $flag = true;
 
-       
+            }else{
+                $flag = false;
+            }
+        }
         
+        if($flag == false){
+
+            $notification = "No hay usuarios para listar ";
+            return redirect()->route('home')->with([
+                'message' => $notification,  
+            ]);
+        }
         
+        $field_name = false;
+        $category = false;
+            
         return view('admin.user-lists',[
-            'users' => $users
+            'users' => $users,
+            'field_name' => $field_name,
+            'category' => $category
         ]);
     }
 
 
 
     public function user_docs($id){
+
+        $user = \Auth::user();
+
+        if ( $user == null || $user->role != "ADMIN"){
+            return redirect()->route('home');
+        }
+
         $id_user = $id;
         $user = User::Where('id',$id_user)->first();
         $docs = Document::where('user_id',$id_user)->first();
@@ -103,6 +129,13 @@ class AdminController extends Controller
 
     
     public function send_message(Request $request){
+
+        $user = \Auth::user();
+
+        if ( $user == null || $user->role != "ADMIN"){
+            return redirect()->route('home');
+        }
+        
         $docs_id = $request->input('document_id');
   
         $messages = Message::where('document_id',$docs_id)->first();
@@ -135,7 +168,11 @@ class AdminController extends Controller
     }
 
     public function pass_docs($docs_id){
+        $user = \Auth::user();
 
+        if ( $user == null || $user->role != "ADMIN"){
+            return redirect()->route('home');
+        }
         $docs = Document::where('id',$docs_id)->first();
         $status = "DONE";
 
@@ -149,11 +186,19 @@ class AdminController extends Controller
     }
 
     public function category_users(){
+        $user = \Auth::user();
+
+        if ( $user == null || $user->role != "ADMIN"){
+            return redirect()->route('home');
+        }
+
         $periodos=DB::table('periodos')->get();
         $periodos_grado=DB::table('periodogrados')->get();
         $pregrado=DB::table('pregrados')->get();
         $postgrados=DB::table('postgrados')->get();
         $promociones=DB::table('promocions')->get();
+
+        
 
         return view('admin.category-users', [
             'periodos' => $periodos,
@@ -161,6 +206,70 @@ class AdminController extends Controller
             'pregrados' => $pregrado,
             'postgrados' => $postgrados,
             'promociones' => $promociones
-        ]);
+        ]); 
     }
+
+    public function users_by_field( Request $request){
+
+        $user = \Auth::user();
+        $field = $request->input('field');
+        $type = $request->input('type');
+
+     
+        if($user == null || $user->role != "ADMIN"){
+            return redirect()->route('home');
+        }
+
+        $users = User::where($type.'_id',$field)->paginate(4);
+        $flag = 0;
+        $field_name = false;
+        $category = false;
+
+        foreach($users as $user){
+            if($user->id){
+                $flag = true;
+                $field_name = $user->$type->name;
+
+                
+
+                if($type == "pregrado"){
+                    $category = "Carrera";
+                }
+
+                if($type == "postgrado"){
+                    $category = "Postgrado";
+                }
+
+                if($type == "promocion"){
+                    $category = "Promoción";
+                }
+                if($type == "periodo"){
+                    $category = "Periodo De Ingreso";
+                }
+
+            }else{
+                $flag = false;
+            }
+        }
+       
+        if($flag == false){
+
+            $notification = "No hay usuarios para listar con este campo";
+            return redirect()->route('home')->with([
+                'message' => $notification,  
+            ]);
+        }
+        
+
+      
+        return view('admin.user-lists',[
+            'users' => $users,
+            'field_name' => $field_name,
+            'category' => $category,
+            'type' => $type 
+        ]);
+        
+    }
+
+
 }

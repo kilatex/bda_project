@@ -42,6 +42,7 @@ Route::get('/notification', [App\Http\Controllers\UserController::class, 'notifi
 Route::get('/create-admin', [App\Http\Controllers\AdminController::class, 'create_admin'])->name('create_admin');
 Route::get('/user-list', [App\Http\Controllers\AdminController::class, 'users_list'])->name('users_list');
 Route::get('/user-categorys', [App\Http\Controllers\AdminController::class, 'category_users'])->name('category_users');
+Route::get('/users-by-field', [App\Http\Controllers\AdminController::class, 'users_by_field'])->name('users_by_field');
 
 Route::post('/register-admin', [App\Http\Controllers\AdminController::class, 'register_admin'])->name('register_admin');
 Route::get('/user/{id}', [App\Http\Controllers\AdminController::class, 'user_docs'])->name('user_docs');
