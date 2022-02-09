@@ -18,7 +18,8 @@
                                 @else
                                 <img src="{{ asset('images/profile.png')}}" class="image-profile-list" alt="" srcset="">
                                 @endif
-                                <h5>{{ $user->name}} {{$user->surname}}</h5>
+                                
+                                <h5>  <a href="{{ route('profile',['id' => $user->id]) }}">{{ $user->name}} {{$user->surname}}  </a>  </h5>
                             </div>
 
                             <a href=" {{ route('user_docs', [ 'id' => $user->id ]) }} ">Ver Los Documentos de Este Usuario</a>

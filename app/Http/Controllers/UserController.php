@@ -31,9 +31,13 @@ class UserController extends Controller
      */
     
      
-    public function profile()
+    public function profile($id)
     {
-        $user = \Auth::user();
+        $user_auth = \Auth::user();
+        $user = User::where('id',$id)->first();
+        if($user->id == $user_auth->id){
+            $user = $user_auth;
+        }
         
         return view('user.user',[
             'user' => $user

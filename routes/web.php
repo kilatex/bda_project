@@ -31,8 +31,7 @@ Route::get('/modify', [App\Http\Controllers\DocumentController::class, 'modify']
 Route::post('/update_docs', [App\Http\Controllers\DocumentController::class, 'update_docs'])->name('update_docs');
 
 // UserController ROUTES
-
-Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
+Route::get('/profile/{id?}', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
 Route::post('/update_profile', [App\Http\Controllers\UserController::class, 'update_profile'])->name('update_profile');
 Route::get('/edit-profile', [App\Http\Controllers\UserController::class, 'edit_profile'])->name('edit_profile');
 Route::get('/img-profile/{filename}', [App\Http\Controllers\UserController::class, 'img_profile'])->name('img_profile');
@@ -43,6 +42,7 @@ Route::get('/create-admin', [App\Http\Controllers\AdminController::class, 'creat
 Route::get('/user-list', [App\Http\Controllers\AdminController::class, 'users_list'])->name('users_list');
 Route::get('/user-categorys', [App\Http\Controllers\AdminController::class, 'category_users'])->name('category_users');
 Route::get('/users-by-field', [App\Http\Controllers\AdminController::class, 'users_by_field'])->name('users_by_field');
+
 
 Route::post('/register-admin', [App\Http\Controllers\AdminController::class, 'register_admin'])->name('register_admin');
 Route::get('/user/{id}', [App\Http\Controllers\AdminController::class, 'user_docs'])->name('user_docs');

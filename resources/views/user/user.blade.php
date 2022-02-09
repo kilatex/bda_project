@@ -14,13 +14,17 @@
             <div class="name offset-md-1 ">
                 <h3>{{ $user->name}}  {{$user->surname}}</h3>
             </div>
+
+         
             <div class="edit-profile offset-md-1">
+                @if($user == \auth::User())
                 <a href="{{route('edit_profile')}}">
                     Editar Perfil
                 <i class="fas fa-user-edit"></i>
                 </a>
+                @endif
             </div>
-
+         
         </div>
 
     </div>
@@ -46,7 +50,11 @@
                 @endif
                 
             @else
-            <h5><a href="{{ route('edit_profile') }}">Completa la información de tu perfil</a> </h5>
+            <h5>     
+                @if($user == \auth::User())
+                <a href="{{ route('edit_profile') }}">Completa la información de tu perfil</a> 
+                @endif
+            </h5>
             @endif
     </div>
 @endsection
