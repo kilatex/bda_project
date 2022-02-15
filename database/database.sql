@@ -108,6 +108,15 @@ CONSTRAINT fk_messages_document FOREIGN KEY(document_id) REFERENCES documents(id
 )ENGINE=InnoDb;
 
 
+CREATE TABLE IF NOT EXISTS corrections(
+id int(255) auto_increment not null,
+document_id int(255),
+created_at datetime,
+updated_at datetime,
+CONSTRAINT pk_corrections PRIMARY KEY(id),
+CONSTRAINT fk_corrections_document FOREIGN KEY(document_id) REFERENCES documents(id)
+)ENGINE=InnoDb;
+
 INSERT INTO `pregrados` (`id`, `name`) 
 VALUES (NULL, 'Ingeniería de Sistemas'), (NULL, 'Ingeniería Civil'),
 (NULL, 'Licenciatura en Administración'),
