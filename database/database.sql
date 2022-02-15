@@ -112,10 +112,15 @@ CREATE TABLE IF NOT EXISTS corrections(
 id int(255) auto_increment not null,
 document_id int(255),
 created_at datetime,
-updated_at datetime,
 CONSTRAINT pk_corrections PRIMARY KEY(id),
 CONSTRAINT fk_corrections_document FOREIGN KEY(document_id) REFERENCES documents(id)
 )ENGINE=InnoDb;
+
+/* TRIGGER  */
+CREATE IF NOT EXISTS DEFINER=`root`@`localhost` TRIGGER `messages_AI` AFTER 
+INSERT ON `messages` FOR EACH ROW BEGIN INSERT INTO 
+corrections(id,document_id,created_at) V
+ALUES (null, NEW.document_id,NOW()); END;
 
 INSERT INTO `pregrados` (`id`, `name`) 
 VALUES (NULL, 'Ingeniería de Sistemas'), (NULL, 'Ingeniería Civil'),

@@ -31,17 +31,31 @@ class UserController extends Controller
      */
     
      
-    public function profile($id)
-    {
-        $user_auth = \Auth::user();
+    public function profile($id = null)
+
+    {   
+
+        //VALIDATE ROUTE PROFILE
         $user = User::where('id',$id)->first();
-        if($user->id == $user_auth->id){
-            $user = $user_auth;
+        $user_auth = \Auth::user();
+        if($user == null){
+
+           
+            return view('user.user',[
+                'user' => $user_auth
+            ]);
+
+        }elseif ($user != null ){
+                   
+            return view('user.user',[
+                'user' => $user
+            ]);
+        }else{
+            return redirect()->route('home')
+            ->with(['message' => 'Ruta Inválida']);
         }
-        
-        return view('user.user',[
-            'user' => $user
-        ]);
+
+
 
     }
 
@@ -88,6 +102,7 @@ class UserController extends Controller
                 $validate = $this->validate($request,[
                     'name' => 'required|string|max:255',
                     'surname' => 'required|string|max:255',
+                    'img_profile' => 'image|max:5000',
                     'dni' => 'required|int|unique:users,dni,'.$id,
                     'email' => 'required|string|email|max:255|unique:users,email,'.$id,
                 ]);

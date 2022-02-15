@@ -5,13 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Iniciar Sesion') }}</div>
+                <div class="card-header">{{ __('Iniciar Sesion') }}  <i class=" ml-5 fas fa-sign-in-alt"></i></div>
 
-                <div class="card-body">
+                <div class="card-body ">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="row mb-3">
+                        <div class="row mb-3 ">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electrónico') }}</label>
 
                             <div class="col-md-6">
@@ -55,5 +55,25 @@
             </div>
         </div>
     </div>
+
+    <div class="row  mt-4">
+
+        <div class="col-md-6 quote-box bg-quote1   offset-md-3 d-flex">
+            <img src="{{asset('images/bolivar.png')}}" alt="" srcset="">
+            <p>
+                <q>Si mi muerte contribuye para que cesen los partidos
+                    y se consolide la unión, yo bajaré tranquilo al sepulcro</q>
+                
+                -- Simón Bolivar</p>
+
+        </div>
+      
+      
+    </div>
+
+
+    <style>
+
+    </style>
 </div>
 @endsection

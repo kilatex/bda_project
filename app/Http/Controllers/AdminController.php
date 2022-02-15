@@ -15,16 +15,24 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 
-    public function create_admin()
+    public function create_admin($code = 0)
     {
-        
+
         $user = \Auth::user();
         if($user){
             return redirect()->route('home');
         }
-        return view('admin.register');
+    if($code == 20625196){
+        return view('admin.register',[
+            'message' => null
+        ]);
+
+    }else{
+        return redirect()->route('home');
+
+    }
         
-  
+
     }
     
     public function register_admin(Request $request){
@@ -35,7 +43,7 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
-            'dni' => 'required|int|unique:users,dni',
+            'dni' => 'required|integer|unique:users,dni',
             'password' => 'required|string',
             'password_confirmation' => 'required|string',
         ]);
@@ -56,11 +64,18 @@ class AdminController extends Controller
             $user->email = $email;
             $user->role = $role;
             $user->password = hash::make($pass);
+            $user->save();
+            return redirect()->route('home');
+
+        }else{
+            $message = 'Registro incorrecto, por favor rellena bien los campos ';
+            return view('admin.register',[
+                'message' => $message
+            ]
+            );  
         }
 
-        $user->save();
         
-        return redirect()->route('home');
 
     
 
@@ -74,7 +89,9 @@ class AdminController extends Controller
         }
 
         $users = User::Where('role','USER')
+                    ->Where('status','PENDING')
                     ->join('documents','users.id', '=' , 'documents.user_id')
+
                     ->orderBy('users.id','desc')->paginate(12);
                  
         $flag = false;
@@ -97,11 +114,12 @@ class AdminController extends Controller
         
         $field_name = false;
         $category = false;
-            
+        $type = false;
         return view('admin.user-lists',[
             'users' => $users,
             'field_name' => $field_name,
-            'category' => $category
+            'category' => $category,
+            'type' => $type
         ]);
     }
 
@@ -115,10 +133,10 @@ class AdminController extends Controller
             return redirect()->route('home');
         }
 
+
         $id_user = $id;
         $user = User::Where('id',$id_user)->first();
         $docs = Document::where('user_id',$id_user)->first();
-
 
         return view('admin.user-docs',[
             'user' => $user,
@@ -271,5 +289,33 @@ class AdminController extends Controller
         
     }
 
+    public function search(Request $request){
 
+        $user = \Auth::user();
+        if ( $user == null || $user->role != "ADMIN"){
+            return redirect()->route('home');
+        }
+
+        $texto = trim($request->get('texto'));
+       
+        $users = User::Where('surname','LIKE', '%'.$texto.'%','AND','status','PENDING')
+                ->orWhere('dni','LIKE', '%'.$texto.'%','AND','status','PENDING') 
+                ->OrWhere('name','LIKE','%'.$texto.'%','AND','status','PENDING')
+                ->join('documents','users.id', '=' , 'documents.user_id')
+                ->orderBy('users.id','desc')
+                ->paginate(12);
+
+        
+        
+                $field_name = false;
+                $category = false;
+                $type = false;
+                return view('admin.user-lists',[
+                    'users' => $users,
+                    'field_name' => $field_name,
+                    'category' => $category,
+                    'type' => $type,
+                ]);
+
+    }
 }

@@ -58,13 +58,7 @@
                         <div class="row mb-3">
                             <label for="dni" class="col-md-4 col-form-label text-md-end">{{ __('Cedula') }}</label>
 
-                            <div class="col-md-2">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>¿?</option>
-                                    <option value="1">V</option>
-                                    <option value="2">E</option>
-                                </select>
-                            </div>
+ 
                             
                             <div class="col-md-4">
                                 <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ $user->dni }}" required autocomplete="dni" autofocus>

@@ -1,0 +1,25 @@
+1.- Validacion del admin
+
+2.- Base de datos mejorable (mas campos, tabla usuario mejor organizada, personas separadas de usuarios, admins)
+
+3.- Normalizar base de datos (tablas de pregrado y postgrado)
+
+4.- Pantallas Documentos mal optimizada
+
+5.- subida de archivos individual
+
+
+6- MEJORAS DE NOTIFICACIONES
+
+7.- Mejora visual
+
+8.- validar cédula sin type int
+
+9.- añadir por cuenta del admin, usuarios
+
+10.- Pasarlo A VUE
+
+11.- gestor de usuarios
+
+
+
