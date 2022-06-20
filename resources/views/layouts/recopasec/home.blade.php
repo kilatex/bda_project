@@ -1,47 +1,32 @@
 @extends('layouts.recopasec.app')
 
 @section('content')
-<div class="container">
-    @if (session('message'))
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Notificación') }}</div>
+<div class="max-w-6xl mx-auto    sm:px-6 lg:px-8">
+    <div class="flex justify-center pt-8 title-web">
+        Recopasec 
+        <img src="{{ asset('images/unefa-logo.png') }}" alt="" srcset="">
+    </div>
 
-                    <div class="card-body">
-                    
-                            <div class="alert alert-success" role="alert">
-                                {{ session('message') }}
-                            </div>
-
-                    
-                    </div>
-                </div>
-                
+    <div class="menu-unefa flex">
+        <div class="item-menu flex mt-3 ">
+            <div class="img-item">
+            <img src="{{ asset('images/home/archivo.png') }}" alt="">
+            </div>
+            <div class="title">
+            <h4>Pasantías</h4>
             </div>
         </div>
-    @endif
-    @if($notification != null)
-                                
-
-    <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Notificación') }}</div>
-
-                    <div class="card-body">
-                    
-                    <div class="alert alert-warning">
-                        Tienes una observación sobre tus documentos subidos
-                        a la plataforma, <a href=" {{route('notification')}} " style="font-weight:bold;"> Haz click para más información</a>
-                    </div>           
-                    
-                    </div>
-                </div>
-                
+        <div class="item-menu flex mt-3 ">
+            <div class="img-item">
+            <img src="{{ asset('images/home/biblioteca.png') }}" alt="">
             </div>
+            <div class="title">
+            <h4>Servicio Comunitario</h4>
+            </div>
+        </div>
     </div>
-    @endif
-    @include('includes.home')
+
+
+
 </div>
 @endsection

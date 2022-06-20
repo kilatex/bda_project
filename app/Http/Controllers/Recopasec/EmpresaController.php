@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Recopasec;
 use App\Http\Controllers\Controller;
-
 use App\Models\Recopasec\Empresa;
 use Illuminate\Http\Request;
 
