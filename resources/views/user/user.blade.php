@@ -12,7 +12,7 @@
             @endif
             </div>
             <div class="name offset-md-1 ">
-                <h3>{{ $user->name}}  {{$user->surname}}</h3>
+                <h3>{{ $user->nombres}}  {{$user->apellidos}}</h3>
             </div>
 
          

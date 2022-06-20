@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\EmpresaController;
-use App\Http\Controllers\ProyectoPController;
-use App\Http\Controllers\ProyectoSController;
-use App\Http\Controllers\TutorCController;
-use App\Http\Controllers\TutorController;
-use App\Http\Controllers\TutorIController;
+use App\Http\Controllers\Recopasec\DireccionController;
+use App\Http\Controllers\Recopasec\EmpresaController;
+use App\Http\Controllers\Recopasec\ProyectoPController;
+use App\Http\Controllers\Recopasec\ProyectoSController;
+use App\Http\Controllers\Recopasec\TutorCController;
+use App\Http\Controllers\Recopasec\TutorController;
+use App\Http\Controllers\Recopasec\TutorIController;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Filter\DirectoryCollectionIterator;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,4 +111,9 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::put('empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update');
         Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy');
     //Rutas para la direccion de la comunidad y la empresa
-        
+        Route::get('direcciones', [DireccionController::class, 'index'])->name('direcciones.index');
+        Route::get('direcciones', [DireccionController::class, 'create'])->name('direcciones.create');
+        Route::post('direcciones', [DireccionController::class, 'store'])->name('direcciones.store');
+        Route::get('direcciones/{direccion}', [DireccionController::class, 'show'])->name('direcciones.show');
+        Route::put('direcciones/{direccion}', [DireccionController::class, 'update'])->name('direcciones.update');
+        Route::delete('direcciones/{direccion}', [DireccionController::class, 'destroy'])->name('direcciones.destroy');

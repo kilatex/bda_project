@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Recopasec;
 use Illuminate\Http\Request;
-use App\Models\Proyecto_Pasantia;
+use App\Http\Controllers\Controller;
+use App\Models\Recopasec\Proyecto_Pasantia;
 
 class ProyectoPController extends Controller
 {

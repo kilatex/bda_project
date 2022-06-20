@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Recopasec;
 use App\Models\Recopasec\Tutor_Comunitario;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TutorCController extends Controller
 {

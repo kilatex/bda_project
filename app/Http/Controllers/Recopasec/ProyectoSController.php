@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Recopasec;
 use Illuminate\Http\Request;
-use App\Models\Proyecto_Comunitario;
+use App\Http\Controllers\Controller;
+use App\Models\Recopasec\Proyecto_Comunitario;
 class ProyectoSController extends Controller
 {
     public function index(){
