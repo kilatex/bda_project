@@ -6,200 +6,354 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 use  App\Models\User;
-use  App\Models\Document;
 use  App\Models\Message;
-use  App\Models\Periodo;
+use  App\Models\Document;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-      /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+
+    public function create_admin($code = 0)
     {
-        $this->middleware('auth');
-    }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    
-     
-    public function profile($id = null)
-
-    {   
-
-        //VALIDATE ROUTE PROFILE
-        $user = User::where('id',$id)->first();
-        $user_auth = \Auth::user();
-        if($user == null){
-
-           
-            return view('user.user',[
-                'user' => $user_auth
-            ]);
-
-        }elseif ($user != null ){
-                   
-            return view('user.user',[
-                'user' => $user
-            ]);
-        }else{
-            return redirect()->route('home')
-            ->with(['message' => 'Ruta Inválida']);
+        $user = \Auth::user();
+        if($user){
+            return redirect()->route('home');
         }
+    if($code == 20625196){
+        return view('admin.register',[
+            'message' => null
+        ]);
 
-
+    }else{
+        return redirect()->route('home');
 
     }
-
-
-
-    public function edit_profile()
-    
-    {        
-
-
-          $this->middleware('isAdmin');
-
-
-            $user = \Auth::user();
-            $periodos=DB::table('periodos')->get();
-            $periodos_grado=DB::table('periodogrados')->get();
-            $pregrado=DB::table('pregrados')->get();
-            $postgrados=DB::table('postgrados')->get();
-            $promociones=DB::table('promocions')->get();
-    
-      
-            return view('user.edit',[
-                'user' => $user,
-                'periodos' => $periodos,
-                'periodos_grado' => $periodos_grado,
-                'pregrado' => $pregrado,
-                'postgrados' => $postgrados,
-                'promociones' => $promociones
-            ]);
         
-            
+
     }
+    
+    public function register_admin(Request $request){
 
+        $user = new User();
+        // Validar Formulario
+        $validate = $this->validate($request,[
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'dni' => 'required|integer|unique:users,dni',
+            'password' => 'required|string',
+            'password_confirmation' => 'required|string',
+        ]);
 
-
-    public function update_profile(Request $request){
-
-                // Conseguir el Usuario Identificado
-                $user =  \Auth::user();
-                $id = $user->id;
-
-                
-                // Validar Formulario
-                $validate = $this->validate($request,[
-                    'name' => 'required|string|max:255',
-                    'surname' => 'required|string|max:255',
-                    'img_profile' => 'image|max:5000',
-                    'dni' => 'required|int|unique:users,dni,'.$id,
-                    'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-                ]);
-
-               
         //Recoger Datos del Usuario
         $name = $request->input('name');
         $surname = $request->input('surname');
         $dni = $request->input('dni');
         $email = $request->input('email');
-        $periodo_ingreso = $request->input('periodo');
-        $periodo_grado = $request->input('periodo_grado');
-        $pregrado = $request->input('pregrado');
+        $pass = $request->input('password');
+        $role = "ADMIN";
+        $confirm_pass = $request->input('password_confirmation');
 
-        $promocion = $request->input('promocion');
+        if($pass == $confirm_pass){
+            $user->name = $name;
+            $user->surname = $surname;
+            $user->dni = $dni;
+            $user->email = $email;
+            $user->role = $role;
+            $user->password = hash::make($pass);
+            $user->save();
+            return redirect()->route('home');
 
-        $postgrado = $request->input('postgrado');
-        $role = "USER";
+        }else{
+            $message = 'Registro incorrecto, por favor rellena bien los campos ';
+            return view('admin.register',[
+                'message' => $message
+            ]
+            );  
+        }
 
-        // Asignar nuevos valores al objeto del usuario
-        $user->name = $name;
-        $user->surname = $surname;
-        $user->dni = $dni;
-        $user->email = $email;
         
-        $img = $request->file('img_profile');
+    
 
-        if($img != null){
-            $image_path_name = time().$img->getClientOriginalName();
-            Storage::putFileAs('/img-profile/',$img, $image_path_name);
-            $user->img = $image_path_name;
-        }
-
-        if($periodo_ingreso != "Seleccione" && $periodo_ingreso != null){
-            $user->periodo_id = $periodo_ingreso;
-        }
-
-        if($postgrado != "Seleccione" && $postgrado != null){
-            $user->postgrado_id = $postgrado;
-        }
-
-        if($pregrado != "Seleccione" && $pregrado != null){
-            $user->pregrado_id = $pregrado;
-        }
-
-        if($periodo_grado != "Seleccione" && $periodo_grado != null){
-            $user->periodoGrado_id = $periodo_grado;
-        }
-
-        if($promocion != "Seleccione" && $promocion != null){
-            $user->promocion_id = $promocion;
-        }
-
-
-
-        $user->role = $role;
-
-        $user->update();
-
-        return redirect()->route('profile')
-                        ->with(['message' => 'User Info Updated']);
 
     }
 
-    public function img_profile($filename){
-        $user =  \Auth::user();
-        $id = $user->id;
-              $file = Storage::disk('img-profile')->get($filename);
- 
-        return new Response($file,200);
-    }  
-
-    public function notification(){
-        $user =  \Auth::user();
-        $user_id = $user->id;
-        if($user_id){
-            $document = Document::where('user_id',$user_id)->first();
-        }else{
-            $document = null;
-            return redirect()->route('home');
-
-        }
-        if($document){
-
-            $document_id = $document->id;
-        }else{
-            $document_id = null;
+    public function users_list(){
+        $user = \Auth::user();
+        if ( $user == null || $user->role != "USER"){
             return redirect()->route('home');
         }
 
-        $message = Message::where('document_id',$document_id)->first();
- 
-        return view('user.notification',[
-            'notification' => $message
+        $users = User::Where('role','USER')
+                    ->orderBy('id','desc')->paginate(12);
+        $flag = false;
+        foreach($users as $user){
+            if($user->id){
+                $flag = true;
+
+            }else{
+                $flag = false;
+            }
+        }
+        
+        if($flag == false){
+
+            $notification = "No hay usuarios para listar ";
+            return redirect()->route('home')->with([
+                'message' => $notification,  
+            ]);
+        }
+        
+        $field_name = false;
+        $category = false;
+        $type = false;
+        return view('admin.user-lists',[
+            'users' => $users,
+            'field_name' => $field_name,
+            'category' => $category,
+            'type' => $type
         ]);
     }
-    
+
+
+
+    public function user_docs($id){
+
+        $user = \Auth::user();
+
+        if ( $user == null || $user->role != "USER"){
+            return redirect()->route('home');
+        }
+
+
+        $id_user = $id;
+        $user = User::Where('id',$id_user)->first();
+        $docs = Document::where('user_id',$id_user)->first();
+
+        return view('admin.user-docs',[
+            'user' => $user,
+            'docs' => $docs
+        ]);
+        
+    }
 
     
+    public function send_message(Request $request){
+
+        $user = \Auth::user();
+
+        if ( $user == null || $user->role != "USER"){
+            return redirect()->route('home');
+        }
+        
+        $docs_id = $request->input('document_id');
+  
+        $messages = Message::where('document_id',$docs_id)->first();
+
+        if($messages == null){
+
+            $validate = $this->validate($request,[
+                'message' => 'required|string',
+                'document_id' => 'required'
+            ]);
+            
+            $message = new Message();
+            $message->document_id = $request->input('document_id');
+            $message->message = $request->input('message');
+    
+    
+            $message->save();
+    
+            $notification = 'Observación Enviada';
+            return redirect()->route('home')->with([
+                'message' => $notification  
+            ]);
+        }else{
+            $message = 'Ya Enviaste una Observación sobre estos documentos ';
+            return redirect()->route('home')->with([
+                'message' => $message
+            ]);  
+        }
+
+    }
+
+    public function pass_docs($docs_id){
+        $user = \Auth::user();
+
+        if ( $user == null || $user->role != "USER"){
+            return redirect()->route('home');
+        }
+        $docs = Document::where('id',$docs_id)->first();
+        $status = "DONE";
+
+        $docs->update(['status'=>'DONE']);
+
+        $notification = 'Documentos Aprobados';
+        return redirect()->route('home')->with([
+            'message' => $notification,  
+        ]);
+
+    }
+
+    public function category_users(){
+        $user = \Auth::user();
+
+        if ( $user == null || $user->role != "USER"){
+            return redirect()->route('home');
+        }
+
+        $pregrado=DB::table('pregrados')->get();
+       
+
+        return view('admin.category-users', [
+            'pregrados' => $pregrado        
+        ]); 
+    }
+    
+    public function searchByCarreer($id){
+        $user = \Auth::user();
+        if ( $user == null || $user->role != "USER"){
+            return redirect()->route('home');
+        }
+
+        $users = User::Where('pregrado_id','USER')
+                    ->orderBy('id','desc')->paginate(12);
+    }
+
+    public function users_by_field( Request $request){
+
+        $user = \Auth::user();
+        $field = $request->input('field');
+        $type = $request->input('type');
+
+     
+        if($user == null || $user->role != "USER"){
+            return redirect()->route('home');
+        }
+
+        $users = User::where($type.'_id',$field)->paginate(4);
+        $flag = 0;
+        $field_name = false;
+        $category = false;
+
+        foreach($users as $user){
+            if($user->id){
+                $flag = true;
+                $field_name = $user->$type->name;
+
+                
+
+                if($type == "pregrado"){
+                    $category = "Carrera";
+                }
+
+                if($type == "postgrado"){
+                    $category = "Postgrado";
+                }
+
+                if($type == "promocion"){
+                    $category = "Promoción";
+                }
+                if($type == "periodo"){
+                    $category = "Periodo De Ingreso";
+                }
+
+            }else{
+                $flag = false;
+            }
+        }
+       
+        if($flag == false){
+
+            $notification = "No hay usuarios para listar con este campo";
+            return redirect()->route('home')->with([
+                'message' => $notification,  
+            ]);
+        }
+        
+
+      
+        return view('admin.user-lists',[
+            'users' => $users,
+            'field_name' => $field_name,
+            'category' => $category,
+            'type' => $type 
+        ]);
+        
+    }
+
+    public function search(Request $request){
+
+        $user = \Auth::user();
+        if ( $user == null || $user->role != "USER"){
+            return redirect()->route('home');
+        }
+
+        $texto = trim($request->get('texto'));
+        $users = User::Where('surname','LIKE', '%'.$texto.'%')
+                ->orWhere('dni','LIKE', '%'.$texto.'%') 
+                ->OrWhere('name','LIKE','%'.$texto.'%')
+                ->OrWhere('email','LIKE','%'.$texto.'%')
+                ->orderBy('id','desc')
+                ->paginate(12);
+
+        
+                $field_name = false;
+                $category = false;
+                $type = false;
+                return view('admin.user-lists',[
+                    'users' => $users,
+                    'field_name' => $field_name,
+                    'category' => $category,
+                    'type' => $type,
+                ]);
+
+    }
+
+    public function expedientes(){
+        $user = \Auth::user();
+        if ( $user == null || $user->role != "USER"){
+            return redirect()->route('home');
+        }
+
+        $users = User::Where('role','USER')
+                    ->Where('status','PENDING')
+                    ->join('documents','users.id', '=' , 'documents.user_id')
+
+                    ->orderBy('users.id','desc')->paginate(12);
+                 
+        $flag = false;
+        foreach($users as $user){
+            if($user->id){
+                $flag = true;
+
+            }else{
+                $flag = false;
+            }
+        }
+        
+        if($flag == false){
+
+            $notification = "No hay usuarios para listar ";
+            return redirect()->route('home')->with([
+                'message' => $notification,  
+            ]);
+        }
+        
+        $field_name = false;
+        $category = false;
+        $type = false;
+        return view('admin.user-lists',[
+            'users' => $users,
+            'field_name' => $field_name,
+            'category' => $category,
+            'type' => $type
+        ]);
+    }
+
+
+
 }

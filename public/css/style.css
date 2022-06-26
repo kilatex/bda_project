@@ -136,10 +136,33 @@ body{
     width: 100%;
 }
 
-
 .my-docs{
     height: 250rem;
     overflow-y: scroll;
+}
+.item-menu{
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    width: 250px;
+    background: white;
+    padding: 5px;
+}
+.item-menu img{
+    width: 70px;
+    margin-left: 5px;
+}
+.item-menu .img-item{
+    align-self: center;
+}
+.item-menu h4{
+    font-weight: bold;
+}
+.item-menu .title{
+    align-self: center;
+    margin-left: 15px;
+}
+.menu-unefa{
+justify-content: space-evenly;
 }
 @media (max-width: 768px) { 
 

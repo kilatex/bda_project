@@ -98,7 +98,7 @@ class DocumentController extends Controller
                     
                     //IMAGE 1
                     $image_path_name1 = time().$path1->getClientOriginalName();
-                    Storage::putFileAs('/documents/',$path1, $image_path_name1);
+                    Storage::putFileAs('/documents/'.$cedula,$path1, $image_path_name1);
                     $document->planilla_datos_personales = $image_path_name1;
                     
                     //IMAGE 2
@@ -121,7 +121,7 @@ class DocumentController extends Controller
                     Storage::putFileAs('/documents/',$path5, $image_path_name5);
                     $document->acta_evaluacion_pasantias = $image_path_name5;
 
-                    //IMAGE 6
+                        //IMAGE 6
                     $image_path_name6 = time().$path6->getClientOriginalName();
                     Storage::putFileAs('/documents/',$path6, $image_path_name6);
                     $document->certificado_pasantias = $image_path_name6;

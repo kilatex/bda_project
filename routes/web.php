@@ -31,18 +31,21 @@ Route::get('/modify', [App\Http\Controllers\DocumentController::class, 'modify']
 Route::post('/update_docs', [App\Http\Controllers\DocumentController::class, 'update_docs'])->name('update_docs');
 
 // UserController ROUTES
-Route::get('/profile/{id?}', [App\Http\Controllers\UserController::class, 'profile'])->name('profile');
-Route::post('/update_profile', [App\Http\Controllers\UserController::class, 'update_profile'])->name('update_profile');
-Route::get('/edit-profile', [App\Http\Controllers\UserController::class, 'edit_profile'])->name('edit_profile');
-Route::get('/img-profile/{filename}', [App\Http\Controllers\UserController::class, 'img_profile'])->name('img_profile');
-Route::get('/notification', [App\Http\Controllers\UserController::class, 'notification'])->name('notification');
+Route::get('/profile/{id?}', [App\Http\Controllers\StudentController::class, 'profile'])->name('profile');
+Route::post('/update_profile', [App\Http\Controllers\StudentController::class, 'update_profile'])->name('update_profile');
+Route::get('/edit-profile', [App\Http\Controllers\StudentController::class, 'edit_profile'])->name('edit_profile');
+Route::get('/img-profile/{filename}', [App\Http\Controllers\StudentController::class, 'img_profile'])->name('img_profile');
+Route::get('/notification', [App\Http\Controllers\StudentController::class, 'notification'])->name('notification');
+Route::get('/estudiantes', [App\Http\Controllers\StudentController::class, 'students_list'])->name('students_list');
 
 // AdminController ROUTES
-Route::get('/create-admin/{code?}', [App\Http\Controllers\AdminController::class, 'create_admin'])->name('create_admin');
-Route::get('/user-list', [App\Http\Controllers\AdminController::class, 'users_list'])->name('users_list');
-Route::get('/user-categorys', [App\Http\Controllers\AdminController::class, 'category_users'])->name('category_users');
-Route::get('/users-by-field', [App\Http\Controllers\AdminController::class, 'users_by_field'])->name('users_by_field');
-Route::get('/user-search/{texto?}', [App\Http\Controllers\AdminController::class, 'search'])->name('search');
+Route::get('/create-admin/{code?}', [App\Http\Controllers\UserController::class, 'create_admin'])->name('create_admin');
+Route::get('/user-list', [App\Http\Controllers\UserController::class, 'users_list'])->name('users_list');
+Route::get('/estudiantes-por-carrera', [App\Http\Controllers\UserController::class, 'category_users'])->name('category_users');
+Route::get('/users-by-field', [App\Http\Controllers\UserController::class, 'users_by_field'])->name('users_by_field');
+Route::get('/user-search/{texto?}', [App\Http\Controllers\UserController::class, 'search'])->name('search');
+Route::get('/expedientes', [App\Http\Controllers\UserController::class, 'expedientes'])->name('expedientes');
+Route::get('/estudiantes/{carrera?}', [App\Http\Controllers\UserController::class, 'students_by_carreer'])->name('students_by_carreer');
 
 
 Route::post('/register-admin', [App\Http\Controllers\AdminController::class, 'register_admin'])->name('register_admin');

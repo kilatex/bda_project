@@ -7,36 +7,55 @@
             <form action="{{ route('search') }}" class="d-flex" method="GET">
                 <label for="">Buscar Usuarios</label>
                 <input class="form-control me-2" name="texto" type="search" placeholder="Buscar Usuarios" aria-label="Search">
-                <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                <input type="submit" value="Buscar" class="btn btn-success mt-2 ">
             </form>
         </div>
 
-            <div class="users-container row justify-content-center">
+            <div class="container">
 
                     @if($field_name != false )
                         <h2 class="text-center">Listado de Usuarios por  {{$category}} : {{$field_name}} </h2>
                     @endif
 
-
+                
 
                     @if(count($users) >=1)
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Cédula</th>
+                            <th scope="col">Nombres y Apellidos</th>
+                            <th scope="col">Carrera</th>
+                            <th scope="col">Semestre</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Más Info</th>
+
+                            </tr>
+                        </thead>
+               
                         @foreach($users as $user)
+            
+                        <tbody class="table-group-divider">
+                            <tr>
+                          
+                                <th scope="row">{{$user->dni}}</th>
+                                <td>{{$user->name}} {{$user->surname}}</td>
+                                <td>Carrera X</td>
+                                <td>Semestre X</td>  
+                                <td>{{$user->email}}</td> 
+                                <td>
+                                    <a href="#">
+                                        Más Info
+                                    </a>
+                                </td> 
+                            
+ 
 
-                        <div class="user bg-white p-3 col-md-3 rounded-3 mx-3 my-2">
-                            <div class="header user-list-box d-flex mb-3">
-                                @if($user->img != null)
-                                <img src="{{route('img_profile',['filename'=> $user->img])}}" class="image-profile-list" alt="" srcset="">
-                                @else
-                                <img src="{{ asset('images/profile.png')}}" class="image-profile-list" alt="" srcset="">
-                                @endif
-                                
-                                <h5>  <a href="{{ route('profile',['id' => $user->user_id]) }}">{{ $user->name}} {{$user->surname}}  </a>  </h5>
-                            </div>
-
-                            <a href=" {{ route('user_docs', [ 'id' => $user->user_id ]) }} ">Ver Los Documentos de Este Usuario</a>
-                        </div>
+                            </tr>
+                        </tbody>
                     
                     @endforeach
+                    </table>
                     @else
                     <h2 class="text-center">Usuarios no encontrados </h2>
                     @endif
