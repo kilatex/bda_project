@@ -19,7 +19,7 @@
                         <option selected>Seleccione</option>
                         @foreach($pregrados as $carrera)
 
-                        <option value="{{$carrera->id}}"> {{$carrera->name}}</option>
+                        <option value="{{$carrera->id}}"> {{$carrera->nombre}}</option>
 
                         @endforeach
                     </select>

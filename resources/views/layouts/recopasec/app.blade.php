@@ -61,24 +61,6 @@
                                     Inicio
                                     </a>
                                 </li>
-                                <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('upload') }}" >
-                                    Subir Documentos
-                                    </a>
-                                </li>
-
-                                <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('my_docs') }}" >
-                                    Mis Documentos
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a id="" class="nav-link " href="{{ route('profile', ['id' => Auth::user()->id]) }}"  >
-                                    Mi Perfil
-                                    </a>
-                                </li>
-
-            
 
                                 <li class="nav-item dropdown ">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -111,19 +93,7 @@
                                     Carreras
                                     </a>
                                 </li>
-
-                                <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('expedientes') }}" >
-                                    Expedientes
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('upload') }}" >
-                                    Nuevo Expediente
-                                    </a>
-                                </li>
                             
-                                
                             @endif
                             <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

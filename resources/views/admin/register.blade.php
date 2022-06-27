@@ -32,9 +32,9 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"  required autocomplete="name" autofocus>
+                                <input id="nombres" type="text" class="form-control @error('nombres') is-invalid @enderror" name="nombres"  required autocomplete="nombres" autofocus>
         
-                                @error('name')
+                                @error('nombres')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -46,9 +46,9 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Apellido') }}</label>
 
                             <div class="col-md-6">
-                                <input id="surname" type="text" class="form-control @error('name') is-invalid @enderror" name="surname"  required autocomplete="surname" autofocus>
+                                <input id="apellidos" type="text" class="form-control @error('apellidos') is-invalid @enderror" name="apellidos"  required autocomplete="apillidos" autofocus>
 
-                                @error('surname')
+                                @error('apellidos')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -63,9 +63,9 @@
 
                             
                             <div class="col-md-6">
-                                <input id="dni" name="dni" type="text" class="form-control @error('dni') is-invalid @enderror"   autofocus>
+                                <input id="cedula" name="cedula" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
 
-                                @error('dni')
+                                @error('cedula')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

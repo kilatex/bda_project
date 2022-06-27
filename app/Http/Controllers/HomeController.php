@@ -29,13 +29,13 @@ class HomeController extends Controller
     {
 
         $user =  \Auth::user();
-        $docs = Document::where('user_id',$user->id)->first();
-        if($docs){
-            $docs_id = $docs->id;
-        }else{
-            $docs_id = null;
-        }
-        $message = Message::where('document_id',$docs_id)->first();
+        // $docs = Document::where('user_id',$user->id)->first();
+        // if($docs){
+        //     $docs_id = $docs->id;
+        // }else{
+        //     $docs_id = null;
+        // }
+        $message = 'messi';
         
 
         return view('home',[

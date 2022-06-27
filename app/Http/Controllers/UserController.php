@@ -40,17 +40,17 @@ class UserController extends Controller
         $user = new User();
         // Validar Formulario
         $validate = $this->validate($request,[
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
+            'cedula' => 'required|integer|unique:users,dni',
+            'nombres' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
-            'dni' => 'required|integer|unique:users,dni',
             'password' => 'required|string',
             'password_confirmation' => 'required|string',
         ]);
 
         //Recoger Datos del Usuario
-        $name = $request->input('name');
-        $surname = $request->input('surname');
+        $name = $request->input('nombres');
+        $surname = $request->input('apellidos');
         $dni = $request->input('dni');
         $email = $request->input('email');
         $pass = $request->input('password');

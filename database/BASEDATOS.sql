@@ -22,10 +22,10 @@ CONSTRAINT pk_users PRIMARY KEY(id)
 
 
 CREATE TABLE IF NOT EXISTS carreras(
-id  int(255) auto_increment not null,
-nombre varchar(255),
-codigo varchar(100),
-CONSTRAINT pk_carreras PRIMARY KEY(id)
+    id  int(255) auto_increment not null,
+    nombre varchar(255),
+    codigo varchar(100),
+    CONSTRAINT pk_carreras PRIMARY KEY(id)
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS estudiantes(

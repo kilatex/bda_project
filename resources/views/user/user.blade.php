@@ -34,12 +34,12 @@
             @if($user->pregrado != null || $user->periodo != null || $user->promocion != null )
 
                 
-                <h5> <strong>{{$user->name}} {{$user->surname}} </strong>
+                <h5> <strong>{{$user->nombres}} {{$user->apellidos}} </strong>
                 @if($user->pregrado != null)
                  --- Estudiante de {{$user->pregrado->name}}</h5>
                 @endif
 
-                <h5>Cédula:  {{$user->dni}}</h5>
+                <h5>Cédula:  {{$user->cedula}}</h5>
 
                 @if($user->periodo != null)
                 <h6>Estudiante desde: {{$user->periodo->name}}</h6>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.recopasec.app')
 
 @section('content')
 <div class="container">

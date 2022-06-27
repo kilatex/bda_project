@@ -12,12 +12,12 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
+                            <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" placeholder="Inserta tu nombre" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="nombres" placeholder="Inserta tu nombre" type="text" class="form-control @error('nombres') is-invalid @enderror" name="nombres" value="{{ old('nombres') }}" required autocomplete="nombres" autofocus>
 
-                                @error('name')
+                                @error('nombres')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -26,12 +26,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Apellido') }}</label>
+                            <label for="napellidos" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
 
                             <div class="col-md-6">
-                                <input id="surname" placeholder="Inserta tu apellido" type="text" class="form-control @error('name') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus>
+                                <input id="apellidos" placeholder="Inserta tus apellidos" type="text" class="form-control @error('apellidos') is-invalid @enderror" name="apellidos" value="{{ old('apellidos') }}" required autocomplete="apellidos" autofocus>
 
-                                @error('surname')
+                                @error('apellidos')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -41,11 +41,11 @@
 
 
                         <div class="row mb-3">
-                            <label for="dni" class="col-md-4 col-form-label text-md-end">{{ __('Cedula') }}</label>
+                            <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cedula') }}</label>
 
 
                             <div class="col-md-6">
-                                <input id="dni" placeholder="Inserta tu cédula" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" autofocus>
+                                <input id="cedula" placeholder="Inserta tu cédula" type="text" class="form-control @error('cedula') is-invalid @enderror" name="cedula" value="{{ old('cedula') }}" required autocomplete="cedula" autofocus>
 
                                 @error('dni')
                                     <span class="invalid-feedback" role="alert">
@@ -68,7 +68,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <input id="role" type="hidden"  name="role" value="USER" required autocomplete="USER">
+                        <input id="rol" type="hidden"  name="rol" value="USER" required autocomplete="USER">
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
@@ -91,7 +91,15 @@
                                 <input id="password-confirm" placeholder="Confirma tu contraseña" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-
+                        <div class="row mb-3">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Departamento</option>
+                                <option value="1">Secretaria</option>
+                                <option value="2">Extension</option>
+                                <option value="3">Biblioteca</option>
+                            </select>
+                        </div>
+                        <br>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

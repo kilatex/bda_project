@@ -38,8 +38,8 @@
                         <tbody class="table-group-divider">
                             <tr>
                           
-                                <th scope="row">{{$user->dni}}</th>
-                                <td>{{$user->name}} {{$user->surname}}</td>
+                                <th scope="row">{{$user->cedula}}</th>
+                                <td>{{$user->nombres}} {{$user->apellidos}}</td>
                                 <td>Carrera X</td>
                                 <td>Semestre X</td>  
                                 <td>{{$user->email}}</td> 
