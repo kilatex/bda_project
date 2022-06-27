@@ -55,7 +55,7 @@
 
                             @else
 
-                            @if(Auth::user()->role == "STUDENT")
+                            @if(Auth::user()->rol == "STUDENT")
                                 <li class="nav-item ">
                                     <a id="" class="nav-link "  href="{{ route('home') }}" >
                                     Inicio
@@ -98,11 +98,11 @@
                                     </div>
                                 </li>
 
-                            @elseif(Auth::user()->role == "USER")
+                            @elseif(Auth::user()->rol == "USER")
 
                                 <li class="nav-item ">
                                     <a id="" class="nav-link "  href="{{ route('students_list') }}" >
-                                    Estudiantes
+                                    Estudiantes     
                                     </a>
                                 </li>
 
@@ -127,7 +127,7 @@
                             @endif
                             <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }}
+                                        {{ Auth::user()->nombres }}
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
