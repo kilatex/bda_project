@@ -19,6 +19,9 @@ class Tutor_Institucional extends Model
         'especialidad_id',
 
     ];
+    public function empresa(){
+        return $this->belongsTo('App\Models\Recopasec\Empresa','empresa_id');
+    }
     public function especialidad(){
         return $this->belongsTo('App\Models\Recopasec\Especialidade','especialidad_id');
     }

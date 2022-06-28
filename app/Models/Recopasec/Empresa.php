@@ -13,8 +13,11 @@ class Empresa extends Model
         'nombre',
         'email',
         'telefono',
-        'empresa_id',
-        'especialidad_id',
+        'departamento',
+        'direccion_id'
 
     ];
+    public function direccion(){
+        return $this->belongsTo('App\Models\Recopasec\Direccione','direccion_id');
+    }
 }

@@ -18,9 +18,6 @@ remember_token varchar(255),
 CONSTRAINT pk_users PRIMARY KEY(id)
 )ENGINE=InnoDb;
 
-
-
-
 CREATE TABLE IF NOT EXISTS carreras(
     id  int(255) auto_increment not null,
     nombre varchar(255),
@@ -30,7 +27,6 @@ CREATE TABLE IF NOT EXISTS carreras(
 
 CREATE TABLE IF NOT EXISTS estudiantes(
     id  int(255) auto_increment not null,
-    
     usuario_id int(255),
     carrera_id int (255),
     CONSTRAINT pk_estudiantes PRIMARY KEY(id),
@@ -63,9 +59,10 @@ CREATE TABLE IF NOT EXISTS empresas(
     nombre varchar(100),
     departamento varchar(100),
     email varchar(255),
-    direccion varchar(100),
     telefono varchar(100),
-    CONSTRAINT pk_empresas PRIMARY KEY(id)
+    direccion_id int(100),
+    CONSTRAINT pk_empresas PRIMARY KEY(id),
+    CONSTRAINT fk_empresas_direcciones FOREIGN KEY(direccion_id) REFERENCES direcciones(id)
 )ENGINE=InnoDb;
 
 

@@ -19,4 +19,10 @@ class Tutor_Comunitario extends Model
         'cargo_id',
 
     ];
+    public function direccion(){
+        return $this->belongsTo('App\Models\Recopasec\Direccione','direccion_id');
+    }
+    public function cargo(){
+        return $this->belongsTo('App\Models\Recopasec\Cargo','cargo_id');
+    }
 }
