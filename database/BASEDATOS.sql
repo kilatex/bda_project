@@ -61,9 +61,8 @@ CREATE TABLE IF NOT EXISTS direcciones(
 CREATE TABLE IF NOT EXISTS empresas(
     id int(255) auto_increment not null,
     nombre varchar(100),
+    departamento varchar(100),
     email varchar(255),
-    estado varchar(100),
-    municipio varchar(100),
     direccion varchar(100),
     telefono varchar(100),
     CONSTRAINT pk_empresas PRIMARY KEY(id)

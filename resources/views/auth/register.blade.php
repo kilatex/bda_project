@@ -92,12 +92,17 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Departamento</option>
-                                <option value="1">Secretaria</option>
-                                <option value="2">Extension</option>
-                                <option value="3">Biblioteca</option>
-                            </select>
+                            <label class="col-md-4 col-form-label text-md-end">{{ __('Departamento') }}</label>
+
+                            <div class="col-md-6">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccionar departamento</option>
+                                    <option value="secretaria">Archivo</option>
+                                    <option value="biblioteca">Biblioteca</option>
+                                    <option value="pasantias">Pasantías</option>
+                                    <option value="serviciocom">Servicio Comunitario</option>
+                                </select>
+                            </div>
                         </div>
                         <br>
                         <div class="row mb-0">
