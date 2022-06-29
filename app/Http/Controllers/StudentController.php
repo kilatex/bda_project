@@ -85,11 +85,7 @@ class StudentController extends Controller
                 'postgrados' => $postgrados,
                 'promociones' => $promociones
             ]);
-        
-            
     }
-
-
 
     public function update_profile(Request $request){
 
