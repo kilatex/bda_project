@@ -14,7 +14,6 @@ password varchar(255),
 created_at datetime,
 updated_at datetime,
 remember_token varchar(255),
-
 CONSTRAINT pk_users PRIMARY KEY(id)
 )ENGINE=InnoDb;
 
@@ -214,4 +213,78 @@ CREATE TABLE IF NOT EXISTS calificacion_pasantias(
     CONSTRAINT fk_calificacion_pasantias_estudiantes FOREIGN KEY(estudiante_id) REFERENCES estudiantes(id)
 )ENGINE=InnoDb;
 
+CREATE TABLE IF NOT EXISTS docentes(
+    id int(255) auto_increment not null,
+    user_id int(255),
+    especialidad varchar(255),
+    telefono_residencial varchar(20),
+    created_at datetime,
+    updated_at datetime,
+    CONSTRAINT pk_docentes PRIMARY KEY(id),
+    CONSTRAINT fk_docentes_users FOREIGN KEY(user_id) REFERENCES users(id)
+
+)ENGINE=InnoDb;
+
+CREATE TABLE IF NOT EXISTS datos_proyectos(
+    id int(255) auto_increment not null,
+    tutor_institucional_id int(255),
+    tutor_academico_id int(255),
+    jurado_examinador_id int(255),
+    CONSTRAINT pk_datos_proyectos PRIMARY KEY(id),
+    CONSTRAINT fk_datos_proyectos_tutor_institucionals FOREIGN KEY(tutor_institucional_id) REFERENCES tutor_institucionals(id),
+    CONSTRAINT fk_datos_proyectos_tutor_academicos FOREIGN KEY(tutor_academico_id) REFERENCES tutor_academicos(id),
+    CONSTRAINT fk_datos_proyectos_docentes FOREIGN KEY(jurado_examinador_id) REFERENCES docentes(id)
+)ENGINE=InnoDb;
+
+CREATE TABLE IF NOT EXISTS proyectos_grados(
+    id int(255) auto_increment not null,
+    titulo varchar(255) not null,
+    autor_id int(255) not null,
+    fecha_presentacion datetime,
+    datos_proyectos_id int(255),
+    tipo_proyecto varchar(100),
+    CONSTRAINT pk_proyectos_grados PRIMARY KEY(id),
+    CONSTRAINT fk_proyectos_grados_estudiantes FOREIGN KEY(autor_id) REFERENCES estudiantes(id),
+    CONSTRAINT fk_proyectos_grados_datos_proyectos FOREIGN KEY(datos_proyectos_id) REFERENCES datos_proyectos(id)
+)ENGINE=InnoDb;
+
+
+CREATE TABLE IF NOT EXISTS datos_libros(
+    id int(255) auto_increment not null,
+    categoria varchar(255),
+    cantidad varchar(255) ,
+    editorial varchar(255) ,
+    year varchar(255),
+    seccion varchar(255), 
+    pais varchar(255),
+    edicion varchar(255), 
+    autor varchar(255),
+    created_at datetime,
+    updated_at datetime,
+    CONSTRAINT pk_datos_libros PRIMARY KEY(id)
+)ENGINE=InnoDb;
+
+CREATE TABLE IF NOT EXISTS libros(
+    id int(255) auto_increment not null,
+    titulo varchar(255),
+    datos_libros_id int(255),
+    CONSTRAINT pk_libros PRIMARY KEY(id),
+    CONSTRAINT fk_libros_datos_libros FOREIGN KEY(datos_libros_id) REFERENCES datos_libros(id)
+)ENGINE=InnoDb;
+
+CREATE TABLE IF NOT EXISTS prestamo_libros(
+    id int(255) auto_increment not null,
+    libro_id int(255),
+    prestamista_est_id int(255),
+    prestamista_doc_id int(255),
+    fecha_prestamo datetime,
+    fecha_entrega datetime,
+    estado varchar(100),
+    created_at datetime,
+    updated_at datetime,
+    CONSTRAINT pk_prestamo_libros PRIMARY KEY(id),
+    CONSTRAINT fk_prestamo_libros_libros FOREIGN KEY(libro_id) REFERENCES libros(id),
+    CONSTRAINT fk_prestamo_libros_prestamista_est FOREIGN KEY(prestamista_est_id) REFERENCES estudiantes(id),
+    CONSTRAINT fk_prestamo_libros_prestamista_doc FOREIGN KEY(prestamista_doc_id) REFERENCES docentes(id)
+)ENGINE=InnoDb;
 

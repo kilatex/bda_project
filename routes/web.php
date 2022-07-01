@@ -108,3 +108,5 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
         Route::put('empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update');
         Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy');
+    //Rutas para la direccion de la comunidad y la empresa
+        
