@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ProyectoPController;
 use App\Http\Controllers\ProyectoSController;
 use App\Http\Controllers\TutorCController;
@@ -99,3 +100,11 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::get('comunitarios/{pasantia}/edit', [ProyectoSController::class, 'edit'])->name('comunitarios.edit');
         Route::put('comunitarios/{pasantia}', [ProyectoSController::class, 'update'])->name('comunitarios.update');
         Route::delete('comunitarios/{pasantia}', [ProyectoSController::class, 'destroy'])->name('comunitarios.destroy');
+    //Rutas para las empresas de pasantias
+        Route::get('empresas', [EmpresaController::class, 'index'])->name('empresas.index');
+        Route::get('empresas/create', [EmpresaController::class, 'create'])->name('empresas.create');
+        Route::post('empresas', [EmpresaController::class, 'store'])->name('empresas.store');
+        Route::get('empresas/{empresa}', [EmpresaController::class, 'show'])->name('empresas.show');
+        Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
+        Route::put('empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update');
+        Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy');
