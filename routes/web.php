@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProyectoPController;
+use App\Http\Controllers\ProyectoSController;
 use App\Http\Controllers\TutorCController;
 use App\Http\Controllers\TutorController;
 use App\Http\Controllers\TutorIController;
@@ -81,3 +83,19 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::get('tutoris/{tutori}/edit', [TutorIController::class, 'edit'])->name('tutoris.edit');
         Route::put('tutoris/{tutori}', [TutorIController::class, 'update'])->name('tutoris.update');
         Route::delete('tutoris/{tutori}', [TutorIController::class, 'destroy'])->name('tutoris.destroy');
+    //Rutas para el proyecto de pasantias
+        Route::get('pasantias', [ProyectoPController::class, 'index'])->name('pasantias.index');
+        Route::get('pasantias/create', [ProyectoPController::class, 'create'])->name('pasantias.create');
+        Route::post('pasantias', [ProyectoPController::class, 'store'])->name('pasantias.store');
+        Route::get('pasantias/{pasantia}', [ProyectoPController::class, 'show'])->name('pasantias.show');
+        Route::get('pasantias/{pasantia}/edit', [ProyectoPController::class, 'edit'])->name('pasantias.edit');
+        Route::put('pasantias/{pasantia}', [ProyectoPController::class, 'update'])->name('pasantias.update');
+        Route::delete('pasantias/{pasantia}', [ProyectoPController::class, 'destroy'])->name('pasantias.destroy');
+    //Rutas para el proyecto comunitario
+        Route::get('comunitarios', [ProyectoSController::class, 'index'])->name('comunitarios.index');
+        Route::get('comunitarios/create', [ProyectoSController::class, 'create'])->name('comunitarios.create');
+        Route::post('comunitarios', [ProyectoSController::class, 'store'])->name('comunitarios.store');
+        Route::get('comunitarios/{pasantia}', [ProyectoSController::class, 'show'])->name('comunitarios.show');
+        Route::get('comunitarios/{pasantia}/edit', [ProyectoSController::class, 'edit'])->name('comunitarios.edit');
+        Route::put('comunitarios/{pasantia}', [ProyectoSController::class, 'update'])->name('comunitarios.update');
+        Route::delete('comunitarios/{pasantia}', [ProyectoSController::class, 'destroy'])->name('comunitarios.destroy');
