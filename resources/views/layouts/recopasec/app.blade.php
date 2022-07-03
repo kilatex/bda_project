@@ -55,32 +55,31 @@
 
                             @else
 
-                            @if(Auth::user()->rol == "STUDENT")
-                                <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('home') }}" >
-                                    Inicio
-                                    </a>
-                                </li>
+                            @if(Auth::user()->rol == "USER_serviciocom")
+                            <li class="nav-item ">
+                                <a id="" class="nav-link "  href="{{ route('students_list') }}" >
+                                Estudiantes
+                                </a>
+                            </li>
 
-                                <li class="nav-item dropdown ">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->nombres }}
-                                    </a>
+                            <li class="nav-item ">
+                                <a id="" class="nav-link "  href="{{ route('category_users') }}" >
+                                Carreras
+                                </a>
+                            </li>
 
-                                    <div class="dropdown-menu dropdown-menu-right k" aria-labelledby="navbarDropdown">
- 
-                                        <a class="dropdown-item text-black" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            {{ __('Salir') }}
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
+                            <li class="nav-item ">
+                                <a id="" class="nav-link "  href="{{ route('comunitarios.index') }}" >
+                                    Proyectos
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a id="" class="nav-link "  href="{{ route('comunitarios.create') }}" >
+                                Nuevo Proyecto
+                                </a>
+                            </li>
 
-                            @elseif(Auth::user()->rol == "USER")
+                            @elseif(Auth::user()->rol == "USER_pasantias")
 
                                 <li class="nav-item ">
                                     <a id="" class="nav-link "  href="{{ route('students_list') }}" >
@@ -93,7 +92,19 @@
                                     Carreras
                                     </a>
                                 </li>
+
+                                <li class="nav-item ">
+                                    <a id="" class="nav-link "  href="{{ route('pasantias.index') }}" >
+                                        Proyectos
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a id="" class="nav-link "  href="{{ route('pasantias.create') }}" >
+                                    Nuevo Proyecto
+                                    </a>
+                                </li>
                             
+                                
                             @endif
                             <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
