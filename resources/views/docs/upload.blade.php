@@ -15,20 +15,25 @@
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body bg-white">
                 
-                <form action=" {{ route('users_by_field') }} " method="GET">
+                <form method="POST" action=" {{ route('subir') }} " enctype="multipart/form-data" >
+                @csrf
                     <div class="d-flex">
                         <div class="select-unefa">
                             <select id="docs" class="form-select " onchange="select()" aria-label="Default select example" name="field">
                                 <option value="null"  selected>Seleccione</option>
-                                <option value="1" >Ing De Sistemas</option>
-                                <option value="2">Ing Eléctrica</option>
-                                <option value="2">Ing Civil</option>
-
+                                <option value="record_academico" >Record Académico</option>
+                                <option value="inscripcion_militar">Inscripcion militar, baja militar o carnet profesional activo o en reserva activa (Si es mayor de edad)</option>
+                                <option value="registro_ingreo_educacion_universitaria">Registro de sistema nacional de ingreso a la educación univeristaria (OPSU)</option>
+                                <option value="copia_titulo_educacion_media">Fotocopia simple del título de educación media</option>
+                                <option value="fondo_negro_titulo_educacion_media">Fondo negro del titulo de educacion media certificado por la instituciond e procedencia</option>
+                                <option value="copia_notas">Fotocopia simple de notas certificadas (educación media) certificadas por la institución de procedencia</option>
+                                <option value="copia_cedula">Fotocopia de cedula de Identidad (Pasaporte en caso de ser extranjero)</option>
+                                <option value="copia_partida_nacimiento">Fotocopia de la partida de nacimiento</option>
                             </select>  
                         </div>
 
                         <div class="file-box">
-                            <input type="file" class="btn btn-primary hidden mt-2" required="required" id="file">
+                            <input type="file" class="btn btn-primary hidden mt-2" name="file" required="required" id="file">
                         </div>
 
                     </div>

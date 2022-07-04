@@ -188,11 +188,12 @@ class StudentController extends Controller
     
     public function students_list(){
         $user = \Auth::user();
-        if ( $user == null || $user->role != "USER"){
+
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 
-        $users = User::Where('role','USER')
+        $users = User::Where('rol','USER')
                     ->orderBy('id','desc')->paginate(2);
                  
         $flag = false;
@@ -212,7 +213,6 @@ class StudentController extends Controller
                 'message' => $notification,  
             ]);
         }
-        
         $field_name = false;
         $category = false;
         $type = false;

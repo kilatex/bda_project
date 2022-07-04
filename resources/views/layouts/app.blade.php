@@ -118,7 +118,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('upload') }}" >
+                                    <a id="" class="nav-link "  href="{{ route('select_user_to_new_file') }}" >
                                     Nuevo Expediente
                                     </a>
                                 </li>
