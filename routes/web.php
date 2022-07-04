@@ -4,9 +4,7 @@ use App\Http\Controllers\Recopasec\DireccionController;
 use App\Http\Controllers\Recopasec\EmpresaController;
 use App\Http\Controllers\Recopasec\ProyectoPController;
 use App\Http\Controllers\Recopasec\ProyectoSController;
-use App\Http\Controllers\Recopasec\TutorCController;
 use App\Http\Controllers\Recopasec\TutorController;
-use App\Http\Controllers\Recopasec\TutorIController;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Filter\DirectoryCollectionIterator;
 
@@ -62,15 +60,7 @@ Route::get('/docs/pass/{docs_id}', [App\Http\Controllers\AdminController::class,
 Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_message'])->name('send_message');
 
 //RECOPASEC
-    //Rutas del Tutor_comunitario
-        Route::get('tutorcoms', [TutorCController::class, 'index'])->name('tutorcoms.index');
-        Route::get('tutorcoms/create', [TutorCController::class, 'create'])->name('tutorcoms.create');
-        Route::post('tutorcoms', [TutorCController::class, 'store'])->name('tutorcoms.store');
-        Route::get('tutorcoms/{tutorcom}', [TutorCController::class, 'show'])->name('tutorcoms.show');
-        Route::get('tutorcoms/{tutorcom}/edit', [TutorCController::class, 'edit'])->name('tutorcoms.edit');
-        Route::put('tutorcoms/{tutorcom}', [TutorCController::class, 'update'])->name('tutorcoms.update');
-        Route::delete('tutorcoms/{tutorcom}', [TutorCController::class, 'destroy'])->name('tutorcoms.destroy');
-    //Rutas del Tutor_academico
+    //Rutas de los tutores
         Route::get('tutors', [TutorController::class, 'index'])->name('tutors.index');
         Route::get('tutors/create', [TutorController::class, 'create'])->name('tutors.create');
         Route::post('tutors', [TutorController::class, 'store'])->name('tutors.store');
@@ -78,14 +68,6 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::get('tutors/{tutor}/edit', [TutorController::class, 'edit'])->name('tutors.edit');
         Route::put('tutors/{tutor}', [TutorController::class, 'update'])->name('tutors.update');
         Route::delete('tutors/{tutor}', [TutorController::class, 'destroy'])->name('tutors.destroy');
-    //Rutas del Tutor_academico
-        Route::get('tutoris', [TutorIController::class, 'index'])->name('tutoris.index');
-        Route::get('tutoris/create', [TutorIController::class, 'create'])->name('tutoris.create');
-        Route::post('tutoris', [TutorIController::class, 'store'])->name('tutoris.store');
-        Route::get('tutoris/{tutori}', [TutorIController::class, 'show'])->name('tutoris.show');
-        Route::get('tutoris/{tutori}/edit', [TutorIController::class, 'edit'])->name('tutoris.edit');
-        Route::put('tutoris/{tutori}', [TutorIController::class, 'update'])->name('tutoris.update');
-        Route::delete('tutoris/{tutori}', [TutorIController::class, 'destroy'])->name('tutoris.destroy');
     //Rutas para el proyecto de pasantias
         Route::get('pasantias', [ProyectoPController::class, 'index'])->name('pasantias.index');
         Route::get('pasantias/create', [ProyectoPController::class, 'create'])->name('pasantias.create');
@@ -110,10 +92,4 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
         Route::put('empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update');
         Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy');
-    //Rutas para la direccion de la comunidad y la empresa
-        Route::get('direcciones', [DireccionController::class, 'index'])->name('direcciones.index');
-        Route::get('direcciones', [DireccionController::class, 'create'])->name('direcciones.create');
-        Route::post('direcciones', [DireccionController::class, 'store'])->name('direcciones.store');
-        Route::get('direcciones/{direccion}', [DireccionController::class, 'show'])->name('direcciones.show');
-        Route::put('direcciones/{direccion}', [DireccionController::class, 'update'])->name('direcciones.update');
-        Route::delete('direcciones/{direccion}', [DireccionController::class, 'destroy'])->name('direcciones.destroy');
+   

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Recopasec;
 use App\Models\Recopasec\Tutor_Comunitario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Recopasec\Direccione;
 
 class TutorCController extends Controller
 {
@@ -21,7 +22,9 @@ class TutorCController extends Controller
             'cedula'=> 'required|max:10',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
-
+            'estado'=> 'required',
+            'municipio'=> 'required|max:100',
+            'parroquia'=> 'required|max:100'
         ]);
         $tutorcom = new Tutor_Comunitario();
         $tutorcom->nombres = $request->nombres;
@@ -32,6 +35,12 @@ class TutorCController extends Controller
 
         $tutorcom->save();
         return redirect()->route('tutorcoms.show', $tutorcom);
+        $direccion = new Direccione();
+        $direccion->estado = $request->estado;
+        $direccion->municipio = $request->municipio;
+        $direccion->parroquia = $request->parroquia;
+        $direccion -> save();
+        
         
     }
     public function show(Tutor_Comunitario $tutorcom){

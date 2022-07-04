@@ -28,7 +28,7 @@ class ProyectoPController extends Controller
         $pasantia->fecha_inico = $request->fecha_inicio;
         $pasantia->fecha_final = $request->fecha_final;
         $pasantia->save();
-        return redirect()->route('pasantias.show', $pasantia);
+        return redirect()->route('', $pasantia);
         
     }
     public function show(Proyecto_Pasantia $pasantia){
