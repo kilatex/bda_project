@@ -1,0 +1,119 @@
+<?php
+
+namespace App\Http\Controllers\Sirecob;
+use App\Models\Sirecob\Libro;
+
+use App\Models\Sirecob\Datos_libros;
+
+use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
+use App\Http\Controllers\Controller;
+
+
+class LibroController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+     $libros = Libro::get();
+     
+       return view('sirecob/RegistroLibros',compact('libros'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        
+
+        $DatosLibro = new Datos_libros;
+        $registro=$DatosLibro->create($request->all());
+        
+        
+        Libro::create([
+            'titulo' =>$request->titulo,
+            'datos_libros_id' => $registro->id, 
+            
+        ]);
+        $libros = Libro::get();
+     
+        //return view('RegistroLibros',compact('libros'));
+        return redirect('/Registro_libros');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Libro  $libro
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Libro $libro)
+    {
+       return $libro;
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Libro  $libro
+     * @return \Illuminate\Http\Response
+     */
+    //Controller see data edit book
+    public function EditBook($id)
+    {
+        $editar = Libro::findOrfail($id);
+        return view('sirecob/libros/EditarLibros',compact('editar'));
+    }
+    public function update(Request $request, $libro)
+    {
+        //$DatosLibro = new Datos_libros;
+        $actualizar=Datos_libros::findOrfail($libro);
+        $actualizar ->categoria =$request->categoria;
+        $actualizar ->cantidad =$request->cantidad;
+        $actualizar ->editorial =$request->editorial;
+        $actualizar ->year=$request->año;
+        $actualizar ->pais=$request->pais;
+        $actualizar ->edicion =$request->edicion;
+        $actualizar ->categoria =$request->categoria;
+        $actualizar ->autor =$request->autor;
+        $actualizar->save();
+        $actualiza2=Libro::findOrfail($libro);
+        $actualiza2 ->titulo =$request->titulo;
+        $actualiza2->save();
+        /*
+        Libro::create([
+            'titulo' =>$request->titulo,
+            'id_Datos_Libros' => $registro->id, 
+            
+        ]);
+*/
+//
+         
+         /*$actualizar ->nombre =$request->nombre;
+         $actualizar ->correo =$request->correo;
+         $actualizar ->edad =$request->edad;
+         $actualizar->save();
+         return back()->with('update','datos actualizados');*/
+        
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Libro  $libro
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Libro $libro)
+    {
+        $libro->delete();
+    }
+}

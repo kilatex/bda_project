@@ -17,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+//#########################################
+//                  SIRECOB
+//#########################################
+
+Route::apiResource('libros', App\Http\Controllers\sirecob\LibroController::class)->only('index', 'show', 'destroy', 'store');
+Route::apiResource('Estudiante', App\Http\Controllers\sirecob\EstudanteController::class)->only('index', 'show', 'destroy', 'store', 'update');
+//Route::apiResource('Docente', App\Http\Controllers\DocenteController::class)->only('index', 'show', 'destroy', 'store', 'update');
+//Route::apiResource('Tutor', App\Http\Controllers\TutorController::class)->only('index', 'show', 'destroy', 'store', 'update');
+//Route::apiResource('Prestamo_Libros', App\Http\Controllers\PestamolibrosController::class)->only('index', 'show', 'destroy', 'store', 'update');
+Route::apiResource('Proyectos_Grado', App\Http\Controllers\sirecob\ProyectoGradoController::class)->only('index', 'show', 'destroy', 'store', 'update');

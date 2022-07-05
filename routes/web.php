@@ -117,3 +117,51 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::get('direcciones/{direccion}', [DireccionController::class, 'show'])->name('direcciones.show');
         Route::put('direcciones/{direccion}', [DireccionController::class, 'update'])->name('direcciones.update');
         Route::delete('direcciones/{direccion}', [DireccionController::class, 'destroy'])->name('direcciones.destroy');
+
+
+//#########################################
+//                  SIRECOB
+//#########################################
+
+//Ruta principal de biblioteca
+Route::get('/biblioteca', function () {
+    return view('sirecob/home');
+});
+
+//  REGISTRO TENTATIVO DE PERSONAL
+Route::get('/Registro_DET', function () {
+    return view('RegistroPersonas');
+});
+
+route::get('/Registro_Docente', function () {
+    return view('registroDocente');
+});
+route::get('/Registro_tutor', function () {
+    return view('registroTutor');
+});
+// MODULO DE LIBROS
+Route::get('/Modulo_libros', function () {
+    return view('sirecob/ModuloLibros');
+});
+
+Route::get('/Registro_libros', [App\Http\Controllers\sirecob\LibroController::class, 'index'])->name('registroLibros');
+Route::get('/Modulo_Estudiante', function () {
+    return view('sirecob/estudiante');
+});
+route::get('/prestamo', function () {
+    return view('sirecob/PrestamosLibros');
+});
+
+route::get('/RegistroLibro', function () {
+    return view('sirecob/libros\registroLibros');
+});
+
+Route::get('/editarlibro/{id}', [App\Http\Controllers\sirecob\LibroController::class, 'EditBook'])->name('editarlibro');
+Route::get('/libro/{libro}', [App\Http\Controllers\sirecob\LibroController::class, 'update'])->name('update');
+Route::get('/deletelibro/{libro}', [App\Http\Controllers\sirecob\LibroController::class, 'destroy'])->name('deletebook');
+//Prestamo de Libros
+route::get('/Registro_Prestamo',  [App\Http\Controllers\sirecob\Controladores::class, 'prestamo']);
+Route::get('/Prestamos', [App\Http\Controllers\sirecob\PestamolibrosController::class, 'index']);
+//#############
+//Moduo de proyecto de grados
+Route::get('11111111111111111111111', [App\Http\Controllers\sirecob\ProyectoGradoController::class, 'vista_registro']);        

@@ -268,6 +268,8 @@ CREATE TABLE IF NOT EXISTS libros(
     id int(255) auto_increment not null,
     titulo varchar(255),
     datos_libros_id int(255),
+    created_at datetime,
+    updated_at datetime,
     CONSTRAINT pk_libros PRIMARY KEY(id),
     CONSTRAINT fk_libros_datos_libros FOREIGN KEY(datos_libros_id) REFERENCES datos_libros(id)
 )ENGINE=InnoDb;
