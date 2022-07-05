@@ -29,12 +29,11 @@
                     @csrf
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
+                            <label for="nombre" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  required autocomplete="nombre" autofocus>
-        
-                                @error('nombre')
+                                <input id="nombre_empresa" type="text" class="form-control @error('nombre_empresa') is-invalid @enderror" name="nombre_empresa"  required autocomplete="nombre_empresa" autofocus>        
+                                @error('nombre_empresa')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -46,9 +45,9 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electronico') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"  required autocomplete="email" autofocus>
+                                <input id="email_empresa" type="email_empresa" class="form-control @error('email_empresa') is-invalid @enderror" name="email_empresa"  required autocomplete="email" autofocus>
 
-                                @error('email')
+                                @error('email_empresa')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -63,9 +62,9 @@
 
                             
                             <div class="col-md-6">
-                                <input id="telefono" name="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror"   autofocus>
+                                <input id="telefono_empresa" name="telefono_empresa" type="text" class="form-control @error('telefono_empresa') is-invalid @enderror"   autofocus>
 
-                                @error('telefono')
+                                @error('telefono_empresa')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

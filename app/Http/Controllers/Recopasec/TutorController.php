@@ -130,4 +130,18 @@ class TutorController extends Controller
         $tutori->delete();
         return redirect()->route('tutoris.index');
     }
+    public function create_empresa(){
+        return view('proyectos.pasantias.empresa');
+    }
+    public function edit_empresa(Empresa $empresa){
+        return view('proyectos.pasantias.edit', compact('empresa'));
+    }
+    public function update_empresa(Request $request, Empresa $empresa){
+        $empresa->update($request->all());
+        return view('empresa.show', compact('empresa'));
+    } 
+    public function destroy_empresa(Empresa $empresa){
+        $empresa->delete();
+        return redirect()->route('/estudiantes');
+    }
 }
