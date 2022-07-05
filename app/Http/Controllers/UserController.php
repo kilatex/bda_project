@@ -49,20 +49,20 @@ class UserController extends Controller
         ]);
 
         //Recoger Datos del Usuario
-        $name = $request->input('nombres');
-        $surname = $request->input('apellidos');
-        $dni = $request->input('dni');
+        $nombres = $request->input('nombres');
+        $apellidos = $request->input('apellidos');
+        $cedula = $request->input('dni');
         $email = $request->input('email');
         $pass = $request->input('password');
-        $role = "ADMIN";
+        $rol = "ADMIN";
         $confirm_pass = $request->input('password_confirmation');
 
         if($pass == $confirm_pass){
-            $user->name = $name;
-            $user->surname = $surname;
-            $user->dni = $dni;
+            $user->nombres = $nombres;
+            $user->apellidos = $apellidos;
+            $user->cedula = $cedula;
             $user->email = $email;
-            $user->role = $role;
+            $user->rol = $rol;
             $user->password = hash::make($pass);
             $user->save();
             return redirect()->route('home');
@@ -83,11 +83,11 @@ class UserController extends Controller
 
     public function users_list(){
         $user = \Auth::user();
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 
-        $users = User::Where('role','USER')
+        $users = User::Where('rol','USER')
                     ->orderBy('id','desc')->paginate(12);
         $flag = false;
         foreach($users as $user){
@@ -124,7 +124,7 @@ class UserController extends Controller
 
         $user = \Auth::user();
 
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 
@@ -145,7 +145,7 @@ class UserController extends Controller
 
         $user = \Auth::user();
 
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
         
@@ -201,7 +201,7 @@ class UserController extends Controller
     public function category_users(){
         $user = \Auth::user();
 
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 
@@ -215,7 +215,7 @@ class UserController extends Controller
     
     public function searchByCarreer($id){
         $user = \Auth::user();
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 
@@ -230,7 +230,7 @@ class UserController extends Controller
         $type = $request->input('type');
 
      
-        if($user == null || $user->role != "USER"){
+        if($user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 
@@ -288,7 +288,7 @@ class UserController extends Controller
     public function search(Request $request){
 
         $user = \Auth::user();
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 
@@ -315,11 +315,11 @@ class UserController extends Controller
 
     public function expedientes(){
         $user = \Auth::user();
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 
-        $users = User::Where('role','USER')
+        $users = User::Where('rol','USER')
                     ->Where('status','PENDING')
                     ->join('documents','users.id', '=' , 'documents.user_id')
 
@@ -353,7 +353,4 @@ class UserController extends Controller
             'type' => $type
         ]);
     }
-
-
-
 }

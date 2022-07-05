@@ -9,8 +9,7 @@ use App\Models\Recopasec\Empresa;
 class ProyectoPController extends Controller
 {
     public function index(){
-        $pasantias = Proyecto_Pasantia::orderBy('id')->paginate();
-        return view('Pasantias.index', compact('pasantias'));
+        return view('proyectos.pasantias.index');
     }
     public function create(){
         return view('Pasantias.create');
@@ -44,20 +43,5 @@ class ProyectoPController extends Controller
     public function destroy(Proyecto_Pasantia $pasantia){
         $pasantia->delete();
         return redirect()->route('pasantias.index');
-    }
-    //Datos de la empresa
-    public function create_empresa(){
-        return view('proyectos.pasantias.empresa');
-    }
-    public function edit_empresa(Empresa $empresa){
-        return view('proyectos.pasantias.edit', compact('empresa'));
-    }
-    public function update_empresa(Request $request, Empresa $empresa){
-        $empresa->update($request->all());
-        return view('empresa.show', compact('empresa'));
-    } 
-    public function destroy_empresa(Empresa $empresa){
-        $empresa->delete();
-        return redirect()->route('/estudiantes');
     }
 }

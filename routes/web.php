@@ -91,7 +91,7 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::put('comunitarios/{comunitario}', [ProyectoSController::class, 'update'])->name('comunitarios.update');
         Route::delete('comunitarios/{comunitario}', [ProyectoSController::class, 'destroy'])->name('comunitarios.destroy');
     //Rutas para las empresas de pasantias
-        Route::post('empresas', [EmpresaController::class, 'store_empresa'])->name('empresas.store');
+        Route::post('/empresas-crear', [EmpresaController::class, 'store_empresa'])->name('store_empresa');
         Route::get('empresas/create', [EmpresaController::class, 'create_empresa'])->name('empresas.create');
         //Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
         Route::put('empresas/{empresa}', [EmpresaController::class, 'update_empresa'])->name('empresas.update');

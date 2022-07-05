@@ -12,6 +12,7 @@ class EmpresaController extends Controller
         return view('proyectos.pasantias.empresa');
     }
     public function store_empresa(Request $request){
+
         $request->validate([
             'nombre'=> 'required|max:50',
             'email'=> 'required|max:100',
@@ -20,17 +21,20 @@ class EmpresaController extends Controller
             'municipio'=>'required|max:20',
             'parroquia'=>'required|max:50'
         ]);
-        $empresa = new Empresa();
-        $empresa->nombre = $request->nombre;
-        $empresa->email = $request->email;
-        $empresa->telefon = $request->telefono;
-        $empresa->save();
         $direccion = new Direccione();
         $direccion->estado = $request->estado;
         $direccion->municipio = $request->municipio;
         $direccion->parroquia = $request->parroquia;
         $direccion->save();
-        return redirect()->route('pasantias');
+        $empresa = new Empresa();
+        $empresa->nombre = $request->nombre;
+        $empresa->email = $request->email;
+        $empresa->telefono = $request->telefono;
+        $empresa->departamento = $request->departamento;
+        $empresa->direccion_id = $direccion->id;
+        $empresa->save();
+        
+        return redirect()->route('/pasantias');
         
     }
     public function edit_empresa(Empresa $empresa){
