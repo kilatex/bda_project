@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Recopasec;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Recopasec\Proyecto_Pasantia;
+use App\Models\Recopasec\Empresa;
 
 class ProyectoPController extends Controller
 {
@@ -20,7 +21,6 @@ class ProyectoPController extends Controller
             'titulo'=> 'required|max:255',
             'fecha_inicio'=> 'required|max:12',
             'fecha_final'=> 'required|max:12',
-
         ]);
         $pasantia = new Proyecto_Pasantia();
         $pasantia->codigo = $request->codigo;
@@ -44,5 +44,20 @@ class ProyectoPController extends Controller
     public function destroy(Proyecto_Pasantia $pasantia){
         $pasantia->delete();
         return redirect()->route('pasantias.index');
+    }
+    //Datos de la empresa
+    public function create_empresa(){
+        return view('proyectos.pasantias.empresa');
+    }
+    public function edit_empresa(Empresa $empresa){
+        return view('proyectos.pasantias.edit', compact('empresa'));
+    }
+    public function update_empresa(Request $request, Empresa $empresa){
+        $empresa->update($request->all());
+        return view('empresa.show', compact('empresa'));
+    } 
+    public function destroy_empresa(Empresa $empresa){
+        $empresa->delete();
+        return redirect()->route('/estudiantes');
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Recopasec\EmpresaController;
 use App\Http\Controllers\Recopasec\ProyectoPController;
 use App\Http\Controllers\Recopasec\ProyectoSController;
 use App\Http\Controllers\Recopasec\TutorController;
+use App\Models\Recopasec\Empresa;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Filter\DirectoryCollectionIterator;
 
@@ -82,18 +83,17 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::delete('pasantias/{pasantia}', [ProyectoPController::class, 'destroy'])->name('pasantias.destroy');
     //Rutas para el proyecto comunitario
         Route::get('comunitarios', [ProyectoSController::class, 'index'])->name('comunitarios.index');
+        Route::get('direccion/create', [ProyectoSController::class, 'create_direccion'])->name('direccion.create');
         Route::get('comunitarios/create', [ProyectoSController::class, 'create'])->name('comunitarios.create');
         Route::post('comunitarios', [ProyectoSController::class, 'store'])->name('comunitarios.store');
-        Route::get('comunitarios/{pasantia}', [ProyectoSController::class, 'show'])->name('comunitarios.show');
-        Route::get('comunitarios/{pasantia}/edit', [ProyectoSController::class, 'edit'])->name('comunitarios.edit');
-        Route::put('comunitarios/{pasantia}', [ProyectoSController::class, 'update'])->name('comunitarios.update');
-        Route::delete('comunitarios/{pasantia}', [ProyectoSController::class, 'destroy'])->name('comunitarios.destroy');
+        Route::get('comunitarios/{comunitario}', [ProyectoSController::class, 'show'])->name('comunitarios.show');
+        Route::get('comunitarios/{comunitario}/edit', [ProyectoSController::class, 'edit'])->name('comunitarios.edit');
+        Route::put('comunitarios/{comunitario}', [ProyectoSController::class, 'update'])->name('comunitarios.update');
+        Route::delete('comunitarios/{comunitario}', [ProyectoSController::class, 'destroy'])->name('comunitarios.destroy');
     //Rutas para las empresas de pasantias
-        Route::get('empresas', [EmpresaController::class, 'index'])->name('empresas.index');
-        Route::get('empresas/create', [EmpresaController::class, 'create'])->name('empresas.create');
-        Route::post('empresas', [EmpresaController::class, 'store'])->name('empresas.store');
-        Route::get('empresas/{empresa}', [EmpresaController::class, 'show'])->name('empresas.show');
+        Route::post('empresas', [EmpresaController::class, 'store_empresa'])->name('empresas.store');
+        Route::get('empresas/create', [EmpresaController::class, 'create_empresa'])->name('empresas.create');
         //Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
-        Route::put('empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update');
-        Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy');
+        Route::put('empresas/{empresa}', [EmpresaController::class, 'update_empresa'])->name('empresas.update');
+        Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy_empresa'])->name('empresas.destroy');
    

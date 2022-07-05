@@ -5,8 +5,8 @@ use App\Models\Recopasec\Tutor_Academico;
 use App\Models\Recopasec\Tutor_Comunitario;
 use App\Models\Recopasec\Tutor_Institucional;
 use App\Models\Recopasec\Direccione;
-use App\Models\Recopasec\Empresa;
 use App\Models\Recopasec\Especialidade;
+use App\Models\Recopasec\Cargo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -62,7 +62,8 @@ class TutorController extends Controller
             'telefono'=> 'required|max:12',
             'estado'=> 'required',
             'municipio'=> 'required|max:100',
-            'parroquia'=> 'required|max:100'
+            'parroquia'=> 'required|max:100',
+            'nombre_cargo' => 'required|max:100'
         ]);
         $tutorcom = new Tutor_Comunitario();
         $tutorcom->nombres = $request->nombres;
@@ -76,6 +77,8 @@ class TutorController extends Controller
         $direccion->municipio = $request->municipio;
         $direccion->parroquia = $request->parroquia;
         $direccion -> save();
+        $cargo = new Cargo();
+        $cargo->nombre = $request->nombre_cargo;
         return redirect()->route('/estudiantes');
         
     }
@@ -102,24 +105,9 @@ class TutorController extends Controller
             'cedula'=> 'required|max:10',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
-            'nombre_empresa'=> 'required|max:50',
-            'email_empresa'=> 'required|max:100',
-            'telefono_empresa'=> 'required|max:12',
-            'estado'=>'required',
-            'municipio'=>'required|max:20',
-            'parroquia'=>'required|max:50',
             'nombre_especialidad' => 'required|max:20'
         ]);
-        $empresa = new Empresa();
-        $empresa->nombre = $request->nombre_empresa;
-        $empresa->email = $request->email_empresa;
-        $empresa->telefon = $request->telefono_empresa;
-        $empresa->save();
-        $direccion = new Direccione();
-        $direccion->estado = $request->estado;
-        $direccion->municipio = $request->municipio;
-        $direccion->parroquia = $request->parroquia;
-        $direccion->save();
+
         $tutori= new Tutor_Institucional();
         $tutori->nombres = $request->nombres;
         $tutori->apellidos = $request->apellidos;
@@ -141,20 +129,6 @@ class TutorController extends Controller
     } 
     public function destroy_tutorin(Tutor_Institucional $tutori){
         $tutori->delete();
-        return redirect()->route('tutoris.index');
-    }
-    public function create_empresa(){
-        return view('proyectos.pasantias.empresa');
-    }
-    public function edit_empresa(Empresa $empresa){
-        return view('proyectos.pasantias.edit', compact('empresa'));
-    }
-    public function update_empresa(Request $request, Empresa $empresa){
-        $empresa->update($request->all());
-        return view('empresa.show', compact('empresa'));
-    } 
-    public function destroy_empresa(Empresa $empresa){
-        $empresa->delete();
-        return redirect()->route('/estudiantes');
+        return redirect()->route('tutorin.index');
     }
 }

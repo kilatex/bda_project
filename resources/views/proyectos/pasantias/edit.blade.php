@@ -198,7 +198,7 @@
                                             <option value="vargas">Vargas</option>
                                             <option value="yaracuy">Yaracuy</option>
                                             <option value="zulia">Zulia</option>
-                                          </select>
+                                        </select>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="municipio" class="col-md-4 col-form-label text-md-end">{{ __('Municipio') }}</label>

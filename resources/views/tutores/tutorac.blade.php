@@ -2,22 +2,6 @@
 
 @section('content')
 <div class="container">
-        @if ($message)
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Notificación') }}</div>
-
-                    <div class="card-body">
-                            <div class="alert alert-danger" role="alert">
-                                Registro Incorrecto, vuelve a intentarlo
-                            </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    @endif
 
     <div class="row justify-content-center">
         <div class="col-md-8">
