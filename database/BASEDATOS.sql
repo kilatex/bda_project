@@ -52,7 +52,6 @@ CREATE TABLE IF NOT EXISTS direcciones(
     CONSTRAINT pk_direcciones PRIMARY KEY(id)
 )ENGINE=InnoDb;
 
-
 CREATE TABLE IF NOT EXISTS empresas(
     id int(255) auto_increment not null,
     nombre varchar(100),
@@ -63,7 +62,6 @@ CREATE TABLE IF NOT EXISTS empresas(
     CONSTRAINT pk_empresas PRIMARY KEY(id),
     CONSTRAINT fk_empresas_direcciones FOREIGN KEY(direccion_id) REFERENCES direcciones(id)
 )ENGINE=InnoDb;
-
 
 CREATE TABLE IF NOT EXISTS cargos(
     id int(255) auto_increment not null,
@@ -88,7 +86,6 @@ CREATE TABLE IF NOT EXISTS expedientes(
     CONSTRAINT fk_expedientes_users FOREIGN KEY(usuario_id) REFERENCES users(id)
 )ENGINE=InnoDb;
 
-
 CREATE TABLE IF NOT EXISTS documentos(
     id int(255) auto_increment not null,
     expediente_id int(255) not null,
@@ -100,7 +97,6 @@ CREATE TABLE IF NOT EXISTS documentos(
     CONSTRAINT fk_documento_expedientes FOREIGN KEY(expediente_id) REFERENCES expedientes(id)
 )ENGINE=InnoDb;
 
-
 CREATE TABLE IF NOT EXISTS notificaciones(
     id int(255) auto_increment not null,
     documento_id int(255) not null,
@@ -110,7 +106,6 @@ CREATE TABLE IF NOT EXISTS notificaciones(
     CONSTRAINT pk_notificaciones PRIMARY KEY(id),
     CONSTRAINT fk_notificaciones_documentos FOREIGN KEY(documento_id) REFERENCES documentos(id)
 )ENGINE=InnoDb;
-
 
 CREATE TABLE IF NOT EXISTS cargos(
     id int(255) auto_increment not null,
@@ -132,8 +127,6 @@ CREATE TABLE IF NOT EXISTS tutor_comunitarios(
     CONSTRAINT fk_tutor_comunitarios_cargos FOREIGN KEY(cargo_id) REFERENCES cargos(id)
 )ENGINE=InnoDb;
 
-
-
 CREATE TABLE IF NOT EXISTS tutor_institucionals(
     id int(255) auto_increment not null,
     nombres varchar(255),
@@ -148,7 +141,6 @@ CREATE TABLE IF NOT EXISTS tutor_institucionals(
     CONSTRAINT fk_tutor_institucional_especialidades FOREIGN KEY(especialidad_id) REFERENCES especialidades(id)
 )ENGINE=InnoDb;
 
-
 CREATE TABLE IF NOT EXISTS tutor_academicos(
     id int(255) auto_increment not null,
     nombres varchar(255),
@@ -156,12 +148,11 @@ CREATE TABLE IF NOT EXISTS tutor_academicos(
     cedula varchar(255),
     email varchar(255),
     telefono varchar(255),
-    condicion varchar(100),
+    condicion varchar(50),
     especialidad_id int(255),
     CONSTRAINT pk_tutor_academicos PRIMARY KEY(id),
-    CONSTRAINT fk_tutor_academicos_especialidad FOREIGN KEY(especialidad_id) REFERENCES especialidades(id)
+    CONSTRAINT fk_tutor_academicos_especialidades FOREIGN KEY(especialidad_id) REFERENCES especialidades(id)
 )ENGINE=InnoDb;
-
 
 CREATE TABLE IF NOT EXISTS proyecto_comunitarios(
     id int(255) auto_increment not null,
@@ -200,7 +191,6 @@ CREATE TABLE IF NOT EXISTS calificacion_proyecto_comunitarios(
     CONSTRAINT fk_proyecto_pasantias_estudiantes FOREIGN KEY(estudiante_id) REFERENCES estudiantes(id)
 )ENGINE=InnoDb;
 
-
 CREATE TABLE IF NOT EXISTS calificacion_pasantias(
     id int(255) auto_increment not null,
     estudiante_id int(255),
@@ -222,7 +212,6 @@ CREATE TABLE IF NOT EXISTS docentes(
     updated_at datetime,
     CONSTRAINT pk_docentes PRIMARY KEY(id),
     CONSTRAINT fk_docentes_users FOREIGN KEY(user_id) REFERENCES users(id)
-
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS datos_proyectos(
@@ -247,7 +236,6 @@ CREATE TABLE IF NOT EXISTS proyectos_grados(
     CONSTRAINT fk_proyectos_grados_estudiantes FOREIGN KEY(autor_id) REFERENCES estudiantes(id),
     CONSTRAINT fk_proyectos_grados_datos_proyectos FOREIGN KEY(datos_proyectos_id) REFERENCES datos_proyectos(id)
 )ENGINE=InnoDb;
-
 
 CREATE TABLE IF NOT EXISTS datos_libros(
     id int(255) auto_increment not null,

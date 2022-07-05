@@ -6,13 +6,15 @@ use App\Models\Recopasec\Tutor_Comunitario;
 use App\Models\Recopasec\Tutor_Institucional;
 use App\Models\Recopasec\Direccione;
 use App\Models\Recopasec\Empresa;
+use App\Models\Recopasec\Especialidade;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class TutorController extends Controller
 {
+    // Tutor Academico
     public function create_tutorac(){
-        return view('Pasantias.create');
+        return view('tutores.tutorac');
     }
     public function store_tutorac(Request $request){
         $request->validate([
@@ -21,6 +23,7 @@ class TutorController extends Controller
             'cedula'=> 'required|max:10',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
+            'nombre_especialidad' => 'required|max:20'
         ]);
         $tutorac = new Tutor_Academico();
         $tutorac->nombres = $request->nombres;
@@ -28,8 +31,10 @@ class TutorController extends Controller
         $tutorac->cedula = $request->cedula;
         $tutorac->email = $request->email;
         $tutorac->telefono = $request->telefono;
-
         $tutorac->save();
+        $especialidad= new Especialidade();
+        $especialidad->nombre = $request->nombre_especialidad;
+        $especialidad->save();
         return redirect()->route('/estudiantes');
     }
     public function edit_tutorac(Tutor_Academico $tutorcom){
@@ -43,8 +48,10 @@ class TutorController extends Controller
         $tutor->delete();
         return redirect()->route('pasantias.index');
     }
+
+    //Tutor Comunitario
     public function create_tutorcom(){
-        return view('Pasantias.create');
+        return view('tutores.tutorcom');
     }
     public function store_tutorcom(Request $request){
         $request->validate([
@@ -83,8 +90,10 @@ class TutorController extends Controller
         $tutorcom->delete();
         return redirect()->route('tutorcoms.index');
     }
+
+    //Tutor Institucional
     public function create_tutorin(){
-        return view('Pasantias.create');
+        return view('tutores.tutorin');
     }
     public function store_tutorin(Request $request){
         $request->validate([
@@ -98,7 +107,8 @@ class TutorController extends Controller
             'telefono_empresa'=> 'required|max:12',
             'estado'=>'required',
             'municipio'=>'required|max:20',
-            'parroquia'=>'required|max:50'
+            'parroquia'=>'required|max:50',
+            'nombre_especialidad' => 'required|max:20'
         ]);
         $empresa = new Empresa();
         $empresa->nombre = $request->nombre_empresa;
@@ -117,6 +127,9 @@ class TutorController extends Controller
         $tutori->email = $request->email;
         $tutori->telefono = $request->telefono;
         $tutori->save();
+        $especialidad= new Especialidade();
+        $especialidad->nombre = $request->nombre_especialidad;
+        $especialidad->save();
         return redirect()->route('/estudiantes', $tutori);
     }
     public function edit_tutorin(Tutor_Institucional $tutori){

@@ -22,10 +22,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registrar proyecto de pasantias') }}</div>
+                <div class="card-header">{{ __('Registrar Tutor Acádemico') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('pasantias.create') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('tutorac.create') }}" enctype="multipart/form-data" >
                     @csrf
 
                         <h3>Tutor Intitucional</h3>
@@ -100,21 +100,29 @@
                             <div class="col-md-6">
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>Seleccione una condición</option>
-                                    <option value="amazonas">Amazonas</option>
-                                    <option value="anzoategui">Anzoátegui</option>
-                                    <option value="apure">Apure</option>
-                                    <option value="aragua">Aragua</option>
-                                    <option value="barinas">Barinas</option>
-                                    <option value="bolivar">Bolivar</option>
-                                    <option value="carabobo">Carabobo</option>
-                                    <option value="cojedes">Cojedes</option>
+                                    <option value="tiempo_variable">Tiempo Variable (TV)</option>
+                                    <option value="medio_tiempo">Medio Tiempo (MT)</option>
+                                    <option value="tiempo_completo">Tiempo Completo (TC)</option>
+                                    <option value="dedicacion_exclusiva">Dedicación Exclusiva (DE)</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="especialidad" class="col-md-4 col-form-label text-md-end">{{ __('Especialidad') }}</label>
+                            <div class="col-md-6">
+                                <input id="nombre_especialidad" name="nombre_especialidad" type="text" class="form-control @error('nombre_especialidad') is-invalid @enderror"   autofocus>
+
+                                @error('nombre_especialidad')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
                             </div>
                         </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Agregar proyecto') }}
+                                        {{ __('Agregar Tutor') }}
                                     </button>
                                 </div>
                         </div>  

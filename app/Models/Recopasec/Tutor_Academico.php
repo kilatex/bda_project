@@ -17,7 +17,6 @@ class Tutor_Academico extends Model
         'telefono',
         'condicion',
         'especialidad_id',
-        'password',
 
     ];
     public function especialidad(){

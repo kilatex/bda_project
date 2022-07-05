@@ -62,7 +62,9 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
 //RECOPASEC
     //Rutas de los tutores
         Route::get('tutors', [TutorController::class, 'index'])->name('tutors.index');
-        Route::get('tutors/create', [TutorController::class, 'create'])->name('tutors.create');
+        Route::get('tutorac/create', [TutorController::class, 'create_tutorac'])->name('tutorac.create');
+        Route::get('tutorcom/create', [TutorController::class, 'create_tutorcom'])->name('tutorcom.create');
+        Route::get('tutorin/create', [TutorController::class, 'create_tutorin'])->name('tutorin.create');
         Route::post('tutorac', [TutorController::class, 'store_tutorac'])->name('tutorac.store');
         Route::post('tutorcom', [TutorController::class, 'store_tutorcom'])->name('tutorcom.store');
         Route::post('tutorin', [TutorController::class, 'store_tutorin'])->name('tutorin.store');
