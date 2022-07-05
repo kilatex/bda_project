@@ -39,7 +39,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror 
-                            </div>
+                            </div> 
                         </div>
                         <div class="row mb-3">
                             <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cedula') }}</label>
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="condicion" class="col-md-4 col-form-label text-md-end">{{ __('Condicion') }}</label>
+                            <label for="condicion" name= 'nombre_especialidad' class="col-md-4 col-form-label text-md-end">{{ __('Condicion') }}</label>
                             <div class="col-md-6">
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>Seleccione una condición</option>

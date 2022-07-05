@@ -6,14 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Recopasec\Proyecto_Comunitario;
 class ProyectoSController extends Controller
 {
-    public function index(){
+    public function index_comunitario(){
         $pasantias = Proyecto_Comunitario::orderBy('id')->paginate();
-        return view('Pasantias.index', compact('pasantias'));
+        return view('comunitarios.index');
     }
-    public function create(){
-        return view('Pasantias.create');
+    public function create_comunitario(){
+        return view('comunitarios.create');
     }
-    public function store(Request $request){
+    public function store_comunitario(Request $request){
         $request->validate([
             'codigo'=> 'required|max:50',
             'titulo'=> 'required|max:255',
@@ -30,17 +30,17 @@ class ProyectoSController extends Controller
         return redirect()->route('comunitarios.show', $comunitario);
         
     }
-    public function show(Proyecto_Comunitario $comunitario){
+    public function show_comunitario(Proyecto_Comunitario $comunitario){
         return view('Pasantias.show', compact('comunitario'));
     }
-    public function edit(Proyecto_Comunitario $comunitario){
+    public function edit_comunitario(Proyecto_Comunitario $comunitario){
         return view('Pasantias.edit', compact('comunitario'));
     }
-    public function update(Request $request, Proyecto_Comunitario $comunitario){
+    public function update_comunitario(Request $request, Proyecto_Comunitario $comunitario){
         $comunitario->update($request->all());
         return view('Pasantias.show', compact('comunitario'));
     } 
-    public function destroy(Proyecto_Comunitario $comunitario){
+    public function destroy_comunitario(Proyecto_Comunitario $comunitario){
         $comunitario->delete();
         return redirect()->route('comunitarios.index');
     }

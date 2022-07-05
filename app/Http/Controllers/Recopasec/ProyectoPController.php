@@ -8,13 +8,13 @@ use App\Models\Recopasec\Empresa;
 
 class ProyectoPController extends Controller
 {
-    public function index(){
+    public function index_pasantias(){
         return view('proyectos.pasantias.index');
     }
-    public function create(){
+    public function create_pasantias(){
         return view('Pasantias.create');
     }
-    public function store(Request $request){
+    public function store_pasantias(Request $request){
         $request->validate([
             'codigo'=> 'required|max:50',
             'titulo'=> 'required|max:255',
@@ -30,17 +30,17 @@ class ProyectoPController extends Controller
         return redirect()->route('tutors.create', $pasantia);
         
     }
-    public function show(Proyecto_Pasantia $pasantia){
+    public function show_pasantias(Proyecto_Pasantia $pasantia){
         return view('Pasantias.show', compact('pasantia'));
     }
-    public function edit(Proyecto_Pasantia $pasantia){
+    public function edit_pasantias(Proyecto_Pasantia $pasantia){
         return view('Pasantias.edit', compact('pasantia'));
     }
-    public function update(Request $request, Proyecto_Pasantia $pasantia){
+    public function update_pasantias(Request $request, Proyecto_Pasantia $pasantia){
         $pasantia->update($request->all());
         return view('Pasantias.show', compact('pasantia'));
     } 
-    public function destroy(Proyecto_Pasantia $pasantia){
+    public function destroy_pasantias(Proyecto_Pasantia $pasantia){
         $pasantia->delete();
         return redirect()->route('pasantias.index');
     }

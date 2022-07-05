@@ -25,13 +25,13 @@ class TutorController extends Controller
             'telefono'=> 'required|max:12',
             'nombre_especialidad' => 'required|max:20'
         ]);
-        $tutorac = new Tutor_Academico();
-        $tutorac->nombres = $request->nombres;
-        $tutorac->apellidos = $request->apellidos;
-        $tutorac->cedula = $request->cedula;
-        $tutorac->email = $request->email;
-        $tutorac->telefono = $request->telefono;
-        $tutorac->save();
+        $tutor = new Tutor_Academico();
+        $tutor->nombres = $request->nombres;
+        $tutor->apellidos = $request->apellidos;
+        $tutor->cedula = $request->cedula;
+        $tutor->email = $request->email;
+        $tutor->telefono = $request->telefono;
+        $tutor->save();
         $especialidad= new Especialidade();
         $especialidad->nombre = $request->nombre_especialidad;
         $especialidad->save();
@@ -46,7 +46,7 @@ class TutorController extends Controller
     } 
     public function destroy_tutorac(Tutor_Academico $tutor){
         $tutor->delete();
-        return redirect()->route('pasantias.index');
+        return redirect()->route('/estudiantes');
     }
 
     //Tutor Comunitario
@@ -65,13 +65,13 @@ class TutorController extends Controller
             'parroquia'=> 'required|max:100',
             'nombre_cargo' => 'required|max:100'
         ]);
-        $tutorcom = new Tutor_Comunitario();
-        $tutorcom->nombres = $request->nombres;
-        $tutorcom->apellidos = $request->apellidos;
-        $tutorcom->cedula = $request->cedula;
-        $tutorcom->email = $request->email;
-        $tutorcom->telefono = $request->telefono;
-        $tutorcom->save();
+        $tutorco = new Tutor_Comunitario();
+        $tutorco->nombres = $request->nombres;
+        $tutorco->apellidos = $request->apellidos;
+        $tutorco->cedula = $request->cedula;
+        $tutorco->email = $request->email;
+        $tutorco->telefono = $request->telefono;
+        $tutorco->save();
         $direccion = new Direccione();
         $direccion->estado = $request->estado;
         $direccion->municipio = $request->municipio;
@@ -79,19 +79,19 @@ class TutorController extends Controller
         $direccion -> save();
         $cargo = new Cargo();
         $cargo->nombre = $request->nombre_cargo;
-        return redirect()->route('/estudiantes');
+        return redirect()->route('comunitarios');
         
     }
     public function edit_tutorcom(Tutor_Comunitario $tutorcom){
-        return view('Pasantias.edit', compact('tutorcom'));
+        return view('Pasantias.edit', compact('tutorco'));
     }
     public function update_tutorcom(Request $request, Tutor_Comunitario $tutorcom){
         $tutorcom->update($request->all());
-        return view('Pasantias.show', compact('tutorcom'));
+        return view('Pasantias.show', compact('tutorco'));
     } 
     public function destroy_tutorcom(Tutor_Comunitario $tutorcom){
         $tutorcom->delete();
-        return redirect()->route('tutorcoms.index');
+        return redirect()->route('comunitarios');
     }
 
     //Tutor Institucional
@@ -118,7 +118,7 @@ class TutorController extends Controller
         $especialidad= new Especialidade();
         $especialidad->nombre = $request->nombre_especialidad;
         $especialidad->save();
-        return redirect()->route('/estudiantes', $tutori);
+        return redirect()->route('pasantias');
     }
     public function edit_tutorin(Tutor_Institucional $tutori){
         return view('Pasantias.edit', compact('tutori'));
@@ -129,6 +129,6 @@ class TutorController extends Controller
     } 
     public function destroy_tutorin(Tutor_Institucional $tutori){
         $tutori->delete();
-        return redirect()->route('tutorin.index');
+        return redirect()->route('pasantias');
     }
 }

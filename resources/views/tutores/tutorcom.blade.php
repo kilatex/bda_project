@@ -9,7 +9,7 @@
                 <div class="card-header">{{ __('Registrar proyecto de pasantias') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('tutorcom.create') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('tutorcom.store') }}" enctype="multipart/form-data" >
                     @csrf
 
                         <h3>Tutor Comunitario</h3>
@@ -80,9 +80,9 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="condicion" class="col-md-4 col-form-label text-md-end">{{ __('Condicion') }}</label>
+                            <label for="estado" class="col-md-4 col-form-label text-md-end">{{ __('Estado') }}</label>
                             <div class="col-md-6">
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" name="estado" aria-label="Default select example">
                                     <option selected>Seleccione un estado</option>
                                     <option value="amazonas">Amazonas</option>
                                     <option value="anzoategui">Anzoátegui</option>
