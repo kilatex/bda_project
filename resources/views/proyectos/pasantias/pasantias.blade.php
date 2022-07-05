@@ -46,7 +46,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Titulo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="titulo" type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo"  required autocomplete="apillidos" autofocus>
+                                <input id="titulo" type="text" class="form-control @error('titulo') is-invalid @enderror" name="titulo"  required autocomplete="titulo" autofocus>
 
                                 @error('titulo')
                                     <span class="invalid-feedback" role="alert">
@@ -63,7 +63,7 @@
 
                             
                             <div class="col-md-6">
-                                <input id="fecha_inicio" name="fecha_inicio" type="text" class="form-control @error('fecha_inicio') is-invalid @enderror"   autofocus>
+                                <input id="fecha_inicio" name="fecha_inicio" type="text" class="form-control @error('fecha_inicio') is-invalid @enderror" required autocomplete="fecha_inicio" autofocus>
 
                                 @error('fecha_inicio')
                                     <span class="invalid-feedback" role="alert">
@@ -77,7 +77,7 @@
                             <label for="fecha_final" class="col-md-4 col-form-label text-md-end">{{ __('Fecha Final') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fecha_final" type="text" class="form-control @error('fecha_final') is-invalid @enderror" name="fecha_final"  required autocomplete="email">
+                                <input id="fecha_final" type="text" class="form-control @error('fecha_final') is-invalid @enderror" name="fecha_final"  required autocomplete="fecha_final">
 
                                 @error('fecha_final')
                                     <span class="invalid-feedback" role="alert">
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         <br>
-                        <h3>Tutor Intitucional</h3>
+                        {{-- <h3>Tutor Intitucional</h3>
                         <div class="row mb-3">
                             <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
 
@@ -153,7 +153,7 @@
                                     </span>
                                 @enderror 
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

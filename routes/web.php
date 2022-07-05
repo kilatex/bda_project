@@ -63,9 +63,11 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
     //Rutas de los tutores
         Route::get('tutors', [TutorController::class, 'index'])->name('tutors.index');
         Route::get('tutors/create', [TutorController::class, 'create'])->name('tutors.create');
-        Route::post('tutors', [TutorController::class, 'store'])->name('tutors.store');
+        Route::post('tutorac', [TutorController::class, 'store_tutorac'])->name('tutorac.store');
+        Route::post('tutorcom', [TutorController::class, 'store_tutorcom'])->name('tutorcom.store');
+        Route::post('tutorin', [TutorController::class, 'store_tutorin'])->name('tutorin.store');
         Route::get('tutors/{tutor}', [TutorController::class, 'show'])->name('tutors.show');
-        Route::get('tutors/{tutor}/edit', [TutorController::class, 'edit'])->name('tutors.edit');
+        //Route::get('tutors/{tutor}/edit', [TutorController::class, 'edit'])->name('tutors.edit');
         Route::put('tutors/{tutor}', [TutorController::class, 'update'])->name('tutors.update');
         Route::delete('tutors/{tutor}', [TutorController::class, 'destroy'])->name('tutors.destroy');
     //Rutas para el proyecto de pasantias
@@ -89,7 +91,7 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::get('empresas/create', [EmpresaController::class, 'create'])->name('empresas.create');
         Route::post('empresas', [EmpresaController::class, 'store'])->name('empresas.store');
         Route::get('empresas/{empresa}', [EmpresaController::class, 'show'])->name('empresas.show');
-        Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
+        //Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
         Route::put('empresas/{empresa}', [EmpresaController::class, 'update'])->name('empresas.update');
         Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.destroy');
    

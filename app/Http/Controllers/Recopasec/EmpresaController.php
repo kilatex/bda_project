@@ -3,46 +3,52 @@
 namespace App\Http\Controllers\Recopasec;
 use App\Http\Controllers\Controller;
 use App\Models\Recopasec\Empresa;
+use App\Models\Recopasec\Direccione;
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
 {
     public function index(){
         $pasantias = Empresa::orderBy('id')->paginate();
-        return view('Pasantias.index', compact('empresas'));
+        return view('proyectos.pasantias.empresa', compact('empresas'));
     }
     public function create(){
-        return view('Pasantias.create');
+        return view('proyectos.pasantias.empresa');
     }
     public function store(Request $request){
         $request->validate([
             'nombre'=> 'required|max:50',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
-            'departamento'=> 'required|max:20',
-
+            'estado'=>'required',
+            'municipio'=>'required|max:20',
+            'parroquia'=>'required|max:50'
         ]);
         $empresa = new Empresa();
-        $empresa->codigo = $request->codigo;
-        $empresa->titulo = $request->titulo;
-        $empresa->fecha_inico = $request->fecha_inicio;
-        $empresa->fecha_final = $request->fecha_final;
+        $empresa->nombre = $request->nombre;
+        $empresa->email = $request->email;
+        $empresa->telefon = $request->telefono;
         $empresa->save();
-        return redirect()->route('pasantias.show', $empresa);
+        $direccion = new Direccione();
+        $direccion->estado = $request->estado;
+        $direccion->municipio = $request->municipio;
+        $direccion->parroquia = $request->parroquia;
+        $direccion->save();
+        return redirect()->route('/estudiantes');
         
     }
     public function show(Empresa $empresa){
-        return view('Pasantias.show', compact('empresa'));
+        return view('empresas.show', compact('empresa'));
     }
     public function edit(Empresa $empresa){
-        return view('Pasantias.edit', compact('empresa'));
+        return view('proyectos.pasantias.edit', compact('empresa'));
     }
     public function update(Request $request, Empresa $empresa){
         $empresa->update($request->all());
-        return view('Pasantias.show', compact('empresa'));
+        return view('empresa.show', compact('empresa'));
     } 
     public function destroy(Empresa $empresa){
         $empresa->delete();
-        return redirect()->route('pasantias.index');
+        return redirect()->route('/estudiantes');
     }
 }
