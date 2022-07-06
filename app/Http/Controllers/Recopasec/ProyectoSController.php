@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Recopasec\Proyecto_Comunitario;
 use App\Models\Recopasec\Direccione;
+use Directory;
+
 class ProyectoSController extends Controller
 {
     public function index_comunitario(){
@@ -37,9 +39,14 @@ class ProyectoSController extends Controller
         return view('proyecto.serviciocom.edit', compact('comunitario'));
     }
     public function update_comunitario(Request $request, Proyecto_Comunitario $comunitario){
+        $request->validate([
+            'codigo'=> 'required|max:50',
+            'titulo'=> 'required|max:255',
+            'fecha_inicio'=> 'required|max:12',
+            'fecha_final'=> 'required|max:12',
+        ]);
         $comunitario->update($request->all());
-        return view('Pasantias.show', compact('comunitario'));
-    } 
+        return redirect()->route('comunitarios.show', $comunitario);    } 
     public function destroy_comunitario(Proyecto_Comunitario $comunitario){
         $comunitario->delete();
         return redirect()->route('comunitarios.index');
@@ -54,7 +61,6 @@ class ProyectoSController extends Controller
             'parroquia'=> 'required|max:50',
             'comunidad'=> 'required|max:50',
             'consejo_comunal'=> 'required|max:50'
-
         ]);
         $direccion = new Direccione();
         $direccion->estado = $request->estado;
@@ -64,5 +70,23 @@ class ProyectoSController extends Controller
         $direccion->consejo_comunal = $request->consejo_comunal;
         $direccion->save();
         return redirect()->route('comunitarios.show', $direccion);
+    }
+    public function edit_direccion(Direccione $direccion){
+        return view('proyecto.serviciocom.edit', compact('direccion'));
+    }
+    public function update_direccion(Request $request, Direccione $direccion){
+        $request->validate([
+            'estado'=> 'required',
+            'municipio'=> 'required|max:50',
+            'parroquia'=> 'required|max:50',
+            'comunidad'=> 'required|max:50',
+            'consejo_comunal'=> 'required|max:50'
+        ]);
+        $direccion->update($request->all());
+        return redirect()->route('comunitarios.show', $direccion);
+    }
+    public function destroy_direccion(Direccione $direccion){
+        $direccion->delete();
+        return redirect()->route('comunitarios.index');
     }
 }

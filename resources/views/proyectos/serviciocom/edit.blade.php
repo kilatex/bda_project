@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
@@ -12,7 +12,7 @@
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('pasantias.update') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('comunitarios.update') }}" enctype="multipart/form-data" >
                     @csrf
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Codigo del proyecto') }}</label>
@@ -84,7 +84,7 @@
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingTwo">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Empresa
+              Comunidad
             </button>
           </h2>
           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
@@ -92,7 +92,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <div class="card">
-                            <div class="card-header">{{ __('Datos de la Empresa') }}</div>
+                            <div class="card-header">{{ __('Actualizar datos de la comunidad') }}</div>
                             <div class="card-body">
                                 <form method="POST" action="{{ route('empresas.update') }}" enctype="multipart/form-data" >
                                 @csrf

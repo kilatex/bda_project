@@ -90,7 +90,10 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
         Route::delete('pasantias/{pasantia}', [ProyectoPController::class, 'destroy_pasantias'])->name('pasantias.destroy');
     //Rutas para el proyecto comunitario
         Route::get('comunitarios', [ProyectoSController::class, 'index_comunitario'])->name('comunitarios.index');
-        Route::get('direccion/create', [ProyectoSController::class, 'create_direccion'])->name('direccion.create');
+        Route::get('direcciones/create', [ProyectoSController::class, 'create_direccion'])->name('direccion.create');
+        Route::post('direcciones', [ProyectoSController::class, 'store_direccion'])->name('direccion.store');
+        Route::put('direcciones/{direccion}', [ProyectoSController::class, 'update_direccion'])->name('direccion.update');
+        Route::delete('direcciones/{direccion}', [ProyectoSController::class, 'destroy_direccion'])->name('direccion.destroy');
         Route::get('comunitarios/create', [ProyectoSController::class, 'create_comunitario'])->name('comunitarios.create');
         Route::post('comunitarios', [ProyectoSController::class, 'store_comunitario'])->name('comunitarios.store');
         Route::get('comunitarios/{comunitario}', [ProyectoSController::class, 'show_comunitario'])->name('comunitarios.show');
