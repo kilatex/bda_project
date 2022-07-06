@@ -94,65 +94,8 @@
                         <div class="card">
                             <div class="card-header">{{ __('Actualizar datos de la comunidad') }}</div>
                             <div class="card-body">
-                                <form method="POST" action="{{ route('empresas.update') }}" enctype="multipart/form-data" >
+                                <form method="POST" action="{{ route('update_direccion') }}" enctype="multipart/form-data" >
                                 @csrf
-                                    <div class="row mb-3">
-                                        <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
-            
-                                        <div class="col-md-6">
-                                            <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  value="{{old('nombre', $empresa->nombre)}}" autofocus>
-                    
-                                            @error('nombre')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-            
-                                    <div class="row mb-3">
-                                        <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electronico') }}</label>
-            
-                                        <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"  value="{{old('email', $empresa->email)}}" autofocus>
-            
-                                            @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="telefono" class="col-md-4 col-form-label text-md-end">{{ __('Telefono') }}</label>
-            
-                                        
-                                        <div class="col-md-6">
-                                            <input id="telefono" name="telefono" value="{{old('telefono', $empresa->telefono)}}" type="text" class="form-control @error('telefono') is-invalid @enderror"   autofocus>
-            
-                                            @error('telefono')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-            
-                                    <div class="row mb-3">
-                                        <label for="departamento" class="col-md-4 col-form-label text-md-end">{{ __('Departamento') }}</label>
-            
-                                        <div class="col-md-6">
-                                            <input id="departamento" type="text" class="form-control @error('departamento') is-invalid @enderror" name="departamento" value="{{old('departamento', $empresa->departamento)}}">
-            
-                                            @error('departamento')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <h3>Ubicación</h3>
                                     <div class="row mb-3">
                                         <label for="estado" class="col-md-4 col-form-label text-md-end">{{ __('Estados') }}</label>
                                         <select class="form-select" aria-label="Default select example">
@@ -211,10 +154,38 @@
                                             @enderror 
                                         </div>
                                     </div>
+                                    <div class="row mb-3">
+                                        <label for="comunidad" class="col-md-4 col-form-label text-md-end">{{ __('Comunidad') }}</label>
+            
+                                        
+                                        <div class="col-md-6">
+                                            <input id="comunidad" name="comunidad" value="{{old('comunidad', $direccion->comunidad)}}" type="text" class="form-control @error('comunidad') is-invalid @enderror"   autofocus>
+            
+                                            @error('comunidad')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="consejo_comunal" class="col-md-4 col-form-label text-md-end">{{ __('Consejo Comunal') }}</label>
+            
+                                        
+                                        <div class="col-md-6">
+                                            <input id="consejo_comunal" name="consejo_comunal" value="{{old('consejo_comunal', $direccion->consejo_comunal)}}" type="text" class="form-control @error('consejo_comunal') is-invalid @enderror"   autofocus>
+            
+                                            @error('consejo_comunal')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror 
+                                        </div>
+                                    </div>
                                     <div class="row mb-0">
                                             <div class="col-md-6 offset-md-4">
                                                 <button type="submit" class="btn btn-primary">
-                                                    {{ __('Actualizar Empresa') }}
+                                                    {{ __('Actualizar Ubicación') }}
                                                 </button>
                                             </div>
                                     </div>  
@@ -242,7 +213,7 @@
                                 <div class="card-header">{{ __('Actualizar Tutor Acádemico') }}</div>
                 
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('tutorac.update') }}" enctype="multipart/form-data" >
+                                    <form method="POST" action="{{ route('update_tutorac') }}" enctype="multipart/form-data" >
                                     @csrf
                                         <div class="row mb-3">
                                             <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
@@ -337,7 +308,7 @@
                                         <div class="row mb-0">
                                             <div class="col-md-6 offset-md-4">
                                                     <button type="submit" class="btn btn-primary">
-                                                        {{ __('Agregar Tutor') }}
+                                                        {{ __('Actualizar Tutor') }}
                                                     </button>
                                                 </div>
                                         </div>  
@@ -347,13 +318,14 @@
                         </div>
                     </div>
                     
-                </div>            </div>
+                </div>            
+            </div>
           </div>
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Tutor Institucional
+              Tutor Comunitario
             </button>
           </h2>
           <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
@@ -363,10 +335,10 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="card">
-                                <div class="card-header">{{ __('Actualizar Tutor Institucional') }}</div>
+                                <div class="card-header">{{ __('Actualizar Tutor Comunitario') }}</div>
                 
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('tutorin.update') }}" enctype="multipart/form-data" >
+                                    <form method="POST" action="{{ route('update_tutorcom') }}" enctype="multipart/form-data" >
                                     @csrf
                 
                                         <div class="row mb-3">
@@ -452,7 +424,7 @@
                                         <div class="row mb-0">
                                             <div class="col-md-6 offset-md-4">
                                                     <button type="submit" class="btn btn-primary">
-                                                        {{ __('Actualizar Tutor Institucional') }}
+                                                        {{ __('Actualizar Tutor Comunitario') }}
                                                     </button>
                                                 </div>
                                         </div>  
@@ -461,8 +433,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                </div>            </div>
+                </div>            
+            </div>
           </div>
         </div>
       </div>

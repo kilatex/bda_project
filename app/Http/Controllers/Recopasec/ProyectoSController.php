@@ -29,7 +29,7 @@ class ProyectoSController extends Controller
         $comunitario->fecha_inico = $request->fecha_inicio;
         $comunitario->fecha_final = $request->fecha_final;
         $comunitario->save();
-        return redirect()->route('comunitarios.index');
+        return redirect()->route('index_comunitario');
         
     }
     public function edit_comunitario(Proyecto_Comunitario $comunitario){
@@ -46,7 +46,7 @@ class ProyectoSController extends Controller
         return redirect()->route('comunitarios.show', $comunitario);    } 
     public function destroy_comunitario(Proyecto_Comunitario $comunitario){
         $comunitario->delete();
-        return redirect()->route('comunitarios.index');
+        return redirect()->route('index_comunitario');
     }
     public function create_direccion(){
         return view('proyectos.serviciocom.comunidad');
@@ -66,7 +66,7 @@ class ProyectoSController extends Controller
         $direccion->comunidad = $request->comunidad;
         $direccion->consejo_comunal = $request->consejo_comunal;
         $direccion->save();
-        return redirect()->route('comunitarios.show', $direccion);
+        return redirect()->route('index_comunitario', $direccion);
     }
     public function edit_direccion(Direccione $direccion){
         return view('proyecto.serviciocom.edit', compact('direccion'));
@@ -80,10 +80,10 @@ class ProyectoSController extends Controller
             'consejo_comunal'=> 'required|max:50'
         ]);
         $direccion->update($request->all());
-        return redirect()->route('comunitarios.show', $direccion);
+        return redirect()->route('index_comunitario', $direccion);
     }
     public function destroy_direccion(Direccione $direccion){
         $direccion->delete();
-        return redirect()->route('comunitarios.index');
+        return redirect()->route('index_comunitario');
     }
 }

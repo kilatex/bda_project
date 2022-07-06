@@ -27,7 +27,7 @@ class ProyectoPController extends Controller
         $pasantia->fecha_inico = $request->fecha_inicio;
         $pasantia->fecha_final = $request->fecha_final;
         $pasantia->save();
-        return redirect()->route('pasantias.index');
+        return redirect()->route('index_pasantias');
         
     }
     public function edit_pasantias(Proyecto_Pasantia $pasantia){
@@ -41,10 +41,10 @@ class ProyectoPController extends Controller
             'fecha_final'=> 'required|max:12',
         ]);
         $pasantia->update($request->all());
-        return redirect()->route('pasantias.index');
+        return redirect()->route('index_pasantias');
     } 
     public function destroy_pasantias(Proyecto_Pasantia $pasantia){
         $pasantia->delete();
-        return redirect()->route('pasantias.index');
+        return redirect()->route('index_pasantias');
     }
 }

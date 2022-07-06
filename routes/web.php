@@ -63,47 +63,47 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
 //RECOPASEC
     //Rutas de los tutores
         //Tutor academico
-        Route::get('tutorac/create', [TutorController::class, 'create_tutorac'])->name('tutorac.create');
-        Route::post('tutorac', [TutorController::class, 'store_tutorac'])->name('tutorac.store');
-        Route::get('tutorac/{tutor}/edit', [TutorController::class, 'edit_tutorac'])->name('tutorac.edit');
-        Route::put('tutorac/{tutor}', [TutorController::class, 'update_tutorac'])->name('tutorac.update');
-        Route::delete('tutorac/{tutor}', [TutorController::class, 'destroy_tutorac'])->name('tutorac.destroy');
+        Route::get('tutorac/create', [TutorController::class, 'create_tutorac'])->name('create_tutorac');
+        Route::post('tutorac', [TutorController::class, 'store_tutorac'])->name('store_tutorac');
+        Route::get('tutorac/{tutor}/edit', [TutorController::class, 'edit_tutorac'])->name('edit_tutorac');
+        Route::put('tutorac/{tutor}', [TutorController::class, 'update_tutorac'])->name('update_tutorac');
+        Route::delete('tutorac/{tutor}', [TutorController::class, 'destroy_tutorac'])->name('destroy_tutoracy');
         //Tutor comunitario
-        Route::get('tutorcom/create', [TutorController::class, 'create_tutorcom'])->name('tutorcom.create');
-        Route::post('tutorcom', [TutorController::class, 'store_tutorcom'])->name('tutorcom.store');
-        Route::get('tutorcom/{tutorco}/edit', [TutorController::class, 'edit_tutorcom'])->name('tutorcom.edit');
-        Route::put('tutorcom/{tutorco}', [TutorController::class, 'update_tutorcom'])->name('tutorcom.update');
-        Route::delete('tutorcom/{tutorco}', [TutorController::class, 'destroy_tutorcom'])->name('tutorcom.destroy');
+        Route::get('tutorcom/create', [TutorController::class, 'create_tutorcom'])->name('create_tutorcom');
+        Route::post('tutorcom', [TutorController::class, 'store_tutorcom'])->name('store_tutorcom');
+        Route::get('tutorcom/{tutorco}/edit', [TutorController::class, 'edit_tutorcom'])->name('edit_tutorcomt');
+        Route::put('tutorcom/{tutorco}', [TutorController::class, 'update_tutorcom'])->name('update_tutorcom');
+        Route::delete('tutorcom/{tutorco}', [TutorController::class, 'destroy_tutorcom'])->name('destroy_tutorcom');
         //Tutor institucional
-        Route::get('tutorin/create', [TutorController::class, 'create_tutorin'])->name('tutorin.create');
-        Route::post('tutorin', [TutorController::class, 'store_tutorin'])->name('tutorin.store');
-        Route::get('tutorin/{tutori}/edit', [TutorController::class, 'edit_tutorin'])->name('tutorin.edit');
-        Route::put('tutorin/{tutori}', [TutorController::class, 'update_tutorin'])->name('tutorin.update');
-        Route::delete('tutorin/{tutori}', [TutorController::class, 'destroy_tutorin'])->name('tutorin.destroy');
+        Route::get('tutorin/create', [TutorController::class, 'create_tutorin'])->name('create_tutorin');
+        Route::post('tutorin', [TutorController::class, 'store_tutorin'])->name('store_tutorin');
+        Route::get('tutorin/{tutori}/edit', [TutorController::class, 'edit_tutorin'])->name('edit_tutorin');
+        Route::put('tutorin/{tutori}', [TutorController::class, 'update_tutorin'])->name('update_tutorin');
+        Route::delete('tutorin/{tutori}', [TutorController::class, 'destroy_tutorin'])->name('destroy_tutorin');
     //Rutas para el proyecto de pasantias
-        Route::get('pasantias', [ProyectoPController::class, 'index_pasantias'])->name('pasantias.index');
-        Route::get('pasantias/create', [ProyectoPController::class, 'create_pasantias'])->name('pasantias.create');
-        Route::post('pasantias', [ProyectoPController::class, 'store_pasantias'])->name('pasantias.store');
-        Route::get('pasantias/{pasantia}', [ProyectoPController::class, 'show_pasantias'])->name('pasantias.show');
-        Route::get('pasantias/{pasantia}/edit', [ProyectoPController::class, 'edit_pasantias'])->name('pasantias.edit');
-        Route::put('pasantias/{pasantia}', [ProyectoPController::class, 'update_pasantias'])->name('pasantias.update');
-        Route::delete('pasantias/{pasantia}', [ProyectoPController::class, 'destroy_pasantias'])->name('pasantias.destroy');
+        Route::get('pasantias', [ProyectoPController::class, 'index_pasantias'])->name('index_pasantias');
+        Route::get('pasantias/create', [ProyectoPController::class, 'create_pasantias'])->name('create_pasantias');
+        Route::post('pasantias', [ProyectoPController::class, 'store_pasantias'])->name('store_pasantias');
+        Route::get('pasantias/{pasantia}', [ProyectoPController::class, 'show_pasantias'])->name('show_pasantias');
+        Route::get('pasantias/{pasantia}/edit', [ProyectoPController::class, 'edit_pasantias'])->name('edit_pasantias');
+        Route::put('pasantias/{pasantia}', [ProyectoPController::class, 'update_pasantias'])->name('update_pasantias');
+        Route::delete('pasantias/{pasantia}', [ProyectoPController::class, 'destroy_pasantias'])->name('destroy_pasantias');
     //Rutas para el proyecto comunitario
-        Route::get('comunitarios', [ProyectoSController::class, 'index_comunitario'])->name('comunitarios.index');
-        Route::get('direcciones/create', [ProyectoSController::class, 'create_direccion'])->name('direccion.create');
-        Route::post('direcciones', [ProyectoSController::class, 'store_direccion'])->name('direccion.store');
-        Route::put('direcciones/{direccion}', [ProyectoSController::class, 'update_direccion'])->name('direccion.update');
-        Route::delete('direcciones/{direccion}', [ProyectoSController::class, 'destroy_direccion'])->name('direccion.destroy');
-        Route::get('comunitarios/create', [ProyectoSController::class, 'create_comunitario'])->name('comunitarios.create');
-        Route::post('comunitarios', [ProyectoSController::class, 'store_comunitario'])->name('comunitarios.store');
-        Route::get('comunitarios/{comunitario}', [ProyectoSController::class, 'show_comunitario'])->name('comunitarios.show');
-        Route::get('comunitarios/{comunitario}/edit', [ProyectoSController::class, 'edit_comunitario'])->name('comunitarios.edit');
-        Route::put('comunitarios/{comunitario}', [ProyectoSController::class, 'update_comunitario'])->name('comunitarios.update');
-        Route::delete('comunitarios/{comunitario}', [ProyectoSController::class, 'destroy_comunitario'])->name('comunitarios.destroy');
+        Route::get('comunitarios', [ProyectoSController::class, 'index_comunitario'])->name('index_comunitario');
+        Route::get('direcciones/create', [ProyectoSController::class, 'create_direccion'])->name('create_direccion');
+        Route::post('direcciones', [ProyectoSController::class, 'store_direccion'])->name('store_direccion');
+        Route::put('direcciones/{direccion}', [ProyectoSController::class, 'update_direccion'])->name('update_direccion');
+        Route::delete('direcciones/{direccion}', [ProyectoSController::class, 'destroy_direccion'])->name('destroy_direccion');
+        Route::get('comunitarios/create', [ProyectoSController::class, 'create_comunitario'])->name('create_comunitario');
+        Route::post('comunitarios', [ProyectoSController::class, 'store_comunitario'])->name('store_comunitario');
+        Route::get('comunitarios/{comunitario}', [ProyectoSController::class, 'show_comunitario'])->name('show_comunitario');
+        Route::get('comunitarios/{comunitario}/edit', [ProyectoSController::class, 'edit_comunitario'])->name('edit_comunitario');
+        Route::put('comunitarios/{comunitario}', [ProyectoSController::class, 'update_comunitario'])->name('update_comunitario');
+        Route::delete('comunitarios/{comunitario}', [ProyectoSController::class, 'destroy_comunitario'])->name('destroy_comunitario');
     //Rutas para las empresas de pasantias
         Route::post('/empresas-crear', [EmpresaController::class, 'store_empresa'])->name('store_empresa');
-        Route::get('empresas/create', [EmpresaController::class, 'create_empresa'])->name('empresas.create');
-        Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit_empresa'])->name('empresas.edit');
-        Route::put('empresas/{empresa}', [EmpresaController::class, 'update_empresa'])->name('empresas.update');
-        Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy_empresa'])->name('empresas.destroy');
+        Route::get('empresas/create', [EmpresaController::class, 'create_empresa'])->name('create_empresa');
+        Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit_empresa'])->name('edit_empresa');
+        Route::put('empresas/{empresa}', [EmpresaController::class, 'update_empresa'])->name('update_empresa');
+        Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy_empresa'])->name('destroy_empresa');
    

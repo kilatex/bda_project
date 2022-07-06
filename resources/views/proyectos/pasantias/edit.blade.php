@@ -12,7 +12,7 @@
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('pasantias.update') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('update_pasantias') }}" enctype="multipart/form-data" >
                     @csrf
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Codigo del proyecto') }}</label>
@@ -94,7 +94,7 @@
                         <div class="card">
                             <div class="card-header">{{ __('Datos de la Empresa') }}</div>
                             <div class="card-body">
-                                <form method="POST" action="{{ route('empresas.update') }}" enctype="multipart/form-data" >
+                                <form method="POST" action="{{ route('update_empresas') }}" enctype="multipart/form-data" >
                                 @csrf
                                     <div class="row mb-3">
                                         <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
@@ -242,7 +242,7 @@
                                 <div class="card-header">{{ __('Actualizar Tutor Acádemico') }}</div>
                 
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('tutorac.update') }}" enctype="multipart/form-data" >
+                                    <form method="POST" action="{{ route('update_tutorac') }}" enctype="multipart/form-data" >
                                     @csrf
                                         <div class="row mb-3">
                                             <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
@@ -337,7 +337,7 @@
                                         <div class="row mb-0">
                                             <div class="col-md-6 offset-md-4">
                                                     <button type="submit" class="btn btn-primary">
-                                                        {{ __('Agregar Tutor') }}
+                                                        {{ __('Actualizar Tutor') }}
                                                     </button>
                                                 </div>
                                         </div>  
@@ -346,8 +346,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                </div>            </div>
+                </div>            
+            </div>
           </div>
         </div>
         <div class="accordion-item">
@@ -366,7 +366,7 @@
                                 <div class="card-header">{{ __('Actualizar Tutor Institucional') }}</div>
                 
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('tutorin.update') }}" enctype="multipart/form-data" >
+                                    <form method="POST" action="{{ route('update_tutorin') }}" enctype="multipart/form-data" >
                                     @csrf
                 
                                         <div class="row mb-3">
@@ -461,8 +461,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                </div>            </div>
+                </div>            
+            </div>
           </div>
         </div>
       </div>

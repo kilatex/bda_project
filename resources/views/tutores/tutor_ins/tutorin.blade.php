@@ -9,7 +9,7 @@
                 <div class="card-header">{{ __('Registrar Tutor Institucional') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('tutorin.store') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('store_tutorin') }}" enctype="multipart/form-data" >
                     @csrf
 
                         <div class="row mb-3">

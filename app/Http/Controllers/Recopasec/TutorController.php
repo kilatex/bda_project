@@ -18,25 +18,48 @@ class TutorController extends Controller
         return view('tutores.tutor_ac.tutorac');
     }
     public function store_tutorac(Request $request){
-        $request->validate([
-            'nombres'=> 'required|max:50',
-            'apellidos'=> 'required|max:50',
-            'cedula'=> 'required|max:10',
-            'email'=> 'required|max:100',
-            'telefono'=> 'required|max:12',
-            'nombre_especialidad' => 'required|max:20'
-        ]);
-        $tutor = new Tutor_Academico();
-        $tutor->nombres = $request->nombres;
-        $tutor->apellidos = $request->apellidos;
-        $tutor->cedula = $request->cedula;
-        $tutor->email = $request->email;
-        $tutor->telefono = $request->telefono;
-        $tutor->save();
-        $especialidad= new Especialidade();
-        $especialidad->nombre = $request->nombre_especialidad;
-        $especialidad->save();
-        return redirect()->route('pasantias');
+        $user = \Auth::user();
+        if($user->rol == 'USER_pasantias'){
+            $request->validate([
+                'nombres'=> 'required|max:50',
+                'apellidos'=> 'required|max:50',
+                'cedula'=> 'required|max:10',
+                'email'=> 'required|max:100',
+                'telefono'=> 'required|max:12',
+                'nombre_especialidad' => 'required|max:20'
+            ]);
+            $tutor = new Tutor_Academico();
+            $tutor->nombres = $request->nombres;
+            $tutor->apellidos = $request->apellidos;
+            $tutor->cedula = $request->cedula;
+            $tutor->email = $request->email;
+            $tutor->telefono = $request->telefono;
+            $tutor->save();
+            $especialidad= new Especialidade();
+            $especialidad->nombre = $request->nombre_especialidad;
+            $especialidad->save();
+            return redirect()->route('index_pasantias');        
+        }else if($user->rol == 'USER_serviciocom'){ 
+            $request->validate([
+                'nombres'=> 'required|max:50',
+                'apellidos'=> 'required|max:50',
+                'cedula'=> 'required|max:10',
+                'email'=> 'required|max:100',
+                'telefono'=> 'required|max:12',
+                'nombre_especialidad' => 'required|max:20'
+            ]);
+            $tutor = new Tutor_Academico();
+            $tutor->nombres = $request->nombres;
+            $tutor->apellidos = $request->apellidos;
+            $tutor->cedula = $request->cedula;
+            $tutor->email = $request->email;
+            $tutor->telefono = $request->telefono;
+            $tutor->save();
+            $especialidad= new Especialidade();
+            $especialidad->nombre = $request->nombre_especialidad;
+            $especialidad->save();
+            return redirect()->route('index_comunitario');          
+        }
     }
     public function edit_tutorac(Tutor_Academico $tutorcom, Especialidade $especialidad){
         $user = \Auth::user();
@@ -58,15 +81,15 @@ class TutorController extends Controller
         $tutor->update($request->all());
         $user = \Auth::user();
         if($user->rol == 'USER_pasantias'){
-            return redirect()->route('pasantias');
+            return redirect()->route('index_pasantias');
         }else if($user->rol == 'USER_serviciocom'){ 
-            return redirect()->route('comunitarios');
+            return redirect()->route('index_comunitario');
         }    
     } 
     public function destroy_tutorac(Tutor_Academico $tutor, Especialidade $especialidad){
         $tutor->delete();
         $especialidad->delete();
-        return redirect()->route('pasantias');
+        return redirect()->route('index_pasantias');
     }
 
     //Tutor Comunitario
@@ -99,7 +122,7 @@ class TutorController extends Controller
         $direccion -> save();
         $cargo = new Cargo();
         $cargo->nombre = $request->nombre_cargo;
-        return redirect()->route('comunitarios');
+        return redirect()->route('index_comunitario');
         
     }
     public function edit_tutorcom(Tutor_Comunitario $tutorcom, Direccione $direccion, Cargo $cargo){
@@ -120,13 +143,13 @@ class TutorController extends Controller
         $tutorcom->update($request->all());
         $direccion->update($request->all());
         $cargo->update($request->all());
-        return redirect()->route('comunitarios');
+        return redirect()->route('index_comunitario');
     } 
     public function destroy_tutorcom(Tutor_Comunitario $tutorcom, Direccione $direccion, Cargo $cargo){
         $tutorcom->delete();
         $direccion->delete();
         $cargo->delete();
-        return redirect()->route('comunitarios');
+        return redirect()->route('index_comunitario');
     }
 
     //Tutor Institucional
@@ -153,7 +176,7 @@ class TutorController extends Controller
         $especialidad= new Especialidade();
         $especialidad->nombre = $request->nombre_especialidad;
         $especialidad->save();
-        return redirect()->route('pasantias');
+        return redirect()->route('index_pasantias');
     }
     public function edit_tutorin(Tutor_Institucional $tutori, Especialidade $especialidad){
         return view('proyecto.pasantias.edit', compact('tutori'), compact('especialidad'));
@@ -169,11 +192,11 @@ class TutorController extends Controller
         ]);
         $tutori->update($request->all());
         $especialidad->update($request->all());
-        return redirect()->route('pasantias');
+        return redirect()->route('index_pasantias');
     } 
     public function destroy_tutorin(Tutor_Institucional $tutori, Especialidade $especialidad){
         $tutori->delete();
         $especialidad->delete();
-        return redirect()->route('pasantias');
+        return redirect()->route('index_pasantias');
     }
 }

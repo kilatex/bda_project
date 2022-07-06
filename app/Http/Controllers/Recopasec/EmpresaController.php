@@ -33,8 +33,7 @@ class EmpresaController extends Controller
         $empresa->departamento = $request->departamento;
         $empresa->direccion_id = $direccion->id;
         $empresa->save();
-        
-        return redirect()->route('/pasantias');
+        return redirect()->route('index_pasantias');
         
     }
     public function edit_empresa(Empresa $empresa){
@@ -42,7 +41,7 @@ class EmpresaController extends Controller
     }
     public function update_empresa(Request $request, Empresa $empresa){
         $empresa->update($request->all());
-        return view('empresa.show', compact('empresa'));
+        return redirect()->route('index_pasantias');
     } 
     public function destroy_empresa(Empresa $empresa){
         $empresa->delete();
