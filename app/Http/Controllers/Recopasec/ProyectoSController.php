@@ -13,7 +13,7 @@ class ProyectoSController extends Controller
         return view('proyectos.serviciocom.index');
     }
     public function create_comunitario(){
-        return view('comunitarios.create');
+        return view('proyectos.serviciocom.serviciocomcreate');
     }
     public function store_comunitario(Request $request){
         $request->validate([
@@ -29,7 +29,7 @@ class ProyectoSController extends Controller
         $comunitario->fecha_inico = $request->fecha_inicio;
         $comunitario->fecha_final = $request->fecha_final;
         $comunitario->save();
-        return redirect()->route('comunitarios.show', $comunitario);
+        return redirect()->route('comunitarios.index');
         
     }
     public function edit_comunitario(Proyecto_Comunitario $comunitario){
