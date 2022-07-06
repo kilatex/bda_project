@@ -11,20 +11,20 @@
         <div class="menu-unefa flex">
             <div class="item-menu flex mt-3 ">
                 <div class="img-item">
-                <img src="{{ asset('images/home/archivo.png') }}" alt="">
-                </div>
-                <div class="title">
-                <h4>Proyectos</h4>
-                <a class="btn btn-primary" href="{{route('pasantias')}}" role="button">Agregar</a>
-                </div>
-            </div>
-            <div class="item-menu flex mt-3 ">
-                <div class="img-item">
                 <img src="{{ asset('images/home/biblioteca.png') }}" alt="">
                 </div>
                 <div class="title">
                 <h4>Estudiantes</h4>
-                <a class="btn btn-primary" href="{{route('/estudiantes')}}" role="button">Ver</a>
+                <a class="btn btn-primary" href="{{route('students_list')}}" role="button">Ver</a>
+                </div>
+            </div>
+            <div class="item-menu flex mt-3 ">
+                <div class="img-item">
+                <img src="{{ asset('images/home/archivo.png') }}" alt="">
+                </div>
+                <div class="title">
+                <h4>Carreras</h4>
+                <a class="btn btn-primary" href="{{route('category_users')}}" role="button">ver</a>
                 </div>
             </div>
         </div>
