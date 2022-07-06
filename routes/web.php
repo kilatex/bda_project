@@ -100,7 +100,7 @@ Route::post('/message', [App\Http\Controllers\AdminController::class, 'send_mess
     //Rutas para las empresas de pasantias
         Route::post('/empresas-crear', [EmpresaController::class, 'store_empresa'])->name('store_empresa');
         Route::get('empresas/create', [EmpresaController::class, 'create_empresa'])->name('empresas.create');
-        //Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
+        Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit_empresa'])->name('empresas.edit');
         Route::put('empresas/{empresa}', [EmpresaController::class, 'update_empresa'])->name('empresas.update');
         Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy_empresa'])->name('empresas.destroy');
    

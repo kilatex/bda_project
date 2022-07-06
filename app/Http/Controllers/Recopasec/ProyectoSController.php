@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Recopasec;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Recopasec\Proyecto_Comunitario;
+use App\Models\Recopasec\Direccione;
 class ProyectoSController extends Controller
 {
     public function index_comunitario(){
-        $pasantias = Proyecto_Comunitario::orderBy('id')->paginate();
-        return view('comunitarios.index');
+        return view('proyectos.serviciocom.index');
     }
     public function create_comunitario(){
         return view('comunitarios.create');
@@ -43,5 +43,26 @@ class ProyectoSController extends Controller
     public function destroy_comunitario(Proyecto_Comunitario $comunitario){
         $comunitario->delete();
         return redirect()->route('comunitarios.index');
+    }
+    public function create_direccion(){
+        return view('proyectos.serviciocom.comunidad');
+    }
+    public function store_direccion(Request $request){
+        $request->validate([
+            'estado'=> 'required',
+            'municipio'=> 'required|max:50',
+            'parroquia'=> 'required|max:50',
+            'comunidad'=> 'required|max:50',
+            'consejo_comunal'=> 'required|max:50'
+
+        ]);
+        $direccion = new Direccione();
+        $direccion->estado = $request->estado;
+        $direccion->municipio = $request->municipio;
+        $direccion->parroquia = $request->parroquia;
+        $direccion->comunidad = $request->comunidad;
+        $direccion->consejo_comunal = $request->consejo_comunal;
+        $direccion->save();
+        return redirect()->route('comunitarios.show', $direccion);
     }
 }

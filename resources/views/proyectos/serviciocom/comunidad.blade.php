@@ -9,12 +9,12 @@
                 <div class="card-header">{{ __('Ubicación de la Comunidad') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('empresas.create') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('direccion.create') }}" enctype="multipart/form-data" >
                     @csrf
                     <div class="row mb-3">
                         <label for="estado" class="col-md-4 col-form-label text-md-end">{{ __('Estados') }}</label>
                         <div class="col-md-6">
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select"  name='estado' aria-label="Default select example">
                                 <option selected>Seleccione un estado</option>
                                 <option value="amazonas">Amazonas</option>
                                 <option value="anzoategui">Anzoátegui</option>
@@ -74,7 +74,7 @@
                         <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Agregar Empresa') }}
+                                        {{ __('Agregar Ubicación') }}
                                     </button>
                                 </div>
                         </div>  

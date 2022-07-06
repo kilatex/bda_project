@@ -9,10 +9,10 @@
                 <div class="card-header">{{ __('Registrar proyecto de pasantias') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('tutorcom.create') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('tutorin.store') }}" enctype="multipart/form-data" >
                     @csrf
 
-                        <h3>Tutor Comunitario</h3>
+                        <h3>Tutor Institucional</h3>
                         <div class="row mb-3">
                             <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
 

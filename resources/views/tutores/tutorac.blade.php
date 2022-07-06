@@ -9,7 +9,7 @@
                 <div class="card-header">{{ __('Registrar Tutor Acádemico') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('tutorac.create') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('tutorac.store') }}" enctype="multipart/form-data" >
                     @csrf
 
                         <h3>Tutor Intitucional</h3>
