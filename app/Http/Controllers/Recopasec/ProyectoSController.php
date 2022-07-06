@@ -32,9 +32,6 @@ class ProyectoSController extends Controller
         return redirect()->route('comunitarios.show', $comunitario);
         
     }
-    public function show_comunitario(Proyecto_Comunitario $comunitario){
-        return view('Pasantias.show', compact('comunitario'));
-    }
     public function edit_comunitario(Proyecto_Comunitario $comunitario){
         return view('proyecto.serviciocom.edit', compact('comunitario'));
     }

@@ -36,23 +36,37 @@ class TutorController extends Controller
         $especialidad= new Especialidade();
         $especialidad->nombre = $request->nombre_especialidad;
         $especialidad->save();
-        return redirect()->route('/estudiantes');
+        return redirect()->route('pasantias');
     }
-    public function edit_tutorac(Tutor_Academico $tutorcom){
+    public function edit_tutorac(Tutor_Academico $tutorcom, Especialidade $especialidad){
         $user = \Auth::user();
         if($user->rol == 'USER_pasantias'){
-            return view('proyecto.pasantias.edit', compact('tutor'));
-        }else{
-            return view('proyecto.serviciocom.edit', compact('tutor'));
+            return view('proyecto.pasantias.edit', compact('tutor'), compact('especialidad'));
+        }else if($user->rol == 'USER_serviciocom'){ 
+            return view('proyecto.serviciocom.edit', compact('tutor'), compact('especialidad'));
         }
     }
     public function update_tutorac(Request $request, Tutor_Academico $tutor){
+        $request->validate([
+            'nombres'=> 'required|max:50',
+            'apellidos'=> 'required|max:50',
+            'cedula'=> 'required|max:10',
+            'email'=> 'required|max:100',
+            'telefono'=> 'required|max:12',
+            'nombre_especialidad' => 'required|max:20'
+        ]);
         $tutor->update($request->all());
-        return view('Pasantias.show', compact('tutor'));
+        $user = \Auth::user();
+        if($user->rol == 'USER_pasantias'){
+            return redirect()->route('pasantias');
+        }else if($user->rol == 'USER_serviciocom'){ 
+            return redirect()->route('comunitarios');
+        }    
     } 
-    public function destroy_tutorac(Tutor_Academico $tutor){
+    public function destroy_tutorac(Tutor_Academico $tutor, Especialidade $especialidad){
         $tutor->delete();
-        return redirect()->route('/estudiantes');
+        $especialidad->delete();
+        return redirect()->route('pasantias');
     }
 
     //Tutor Comunitario
@@ -88,15 +102,30 @@ class TutorController extends Controller
         return redirect()->route('comunitarios');
         
     }
-    public function edit_tutorcom(Tutor_Comunitario $tutorcom){
-        return view('Pasantias.edit', compact('tutorco'));
+    public function edit_tutorcom(Tutor_Comunitario $tutorcom, Direccione $direccion, Cargo $cargo){
+        return view('Pasantias.edit', compact('tutorco'), compact('direccion'), compact('cargo'));
     }
-    public function update_tutorcom(Request $request, Tutor_Comunitario $tutorcom){
+    public function update_tutorcom(Request $request, Tutor_Comunitario $tutorcom, Direccione $direccion, Cargo $cargo){
+        $request->validate([
+            'nombres'=> 'required|max:50',
+            'apellidos'=> 'required|max:50',
+            'cedula'=> 'required|max:10',
+            'email'=> 'required|max:100',
+            'telefono'=> 'required|max:12',
+            'estado'=> 'required',
+            'municipio'=> 'required|max:100',
+            'parroquia'=> 'required|max:100',
+            'nombre_cargo' => 'required|max:100'
+        ]);
         $tutorcom->update($request->all());
-        return view('Pasantias.show', compact('tutorco'));
+        $direccion->update($request->all());
+        $cargo->update($request->all());
+        return redirect()->route('comunitarios');
     } 
-    public function destroy_tutorcom(Tutor_Comunitario $tutorcom){
+    public function destroy_tutorcom(Tutor_Comunitario $tutorcom, Direccione $direccion, Cargo $cargo){
         $tutorcom->delete();
+        $direccion->delete();
+        $cargo->delete();
         return redirect()->route('comunitarios');
     }
 
@@ -126,15 +155,25 @@ class TutorController extends Controller
         $especialidad->save();
         return redirect()->route('pasantias');
     }
-    public function edit_tutorin(Tutor_Institucional $tutori){
-        return view('proyecto.pasantias.edit', compact('tutori'));
+    public function edit_tutorin(Tutor_Institucional $tutori, Especialidade $especialidad){
+        return view('proyecto.pasantias.edit', compact('tutori'), compact('especialidad'));
     }
-    public function update_tutorin(Request $request, Tutor_Institucional $tutori){
+    public function update_tutorin(Request $request, Tutor_Institucional $tutori, Especialidade $especialidad){
+        $request->validate([
+            'nombres'=> 'required|max:50',
+            'apellidos'=> 'required|max:50',
+            'cedula'=> 'required|max:10',
+            'email'=> 'required|max:100',
+            'telefono'=> 'required|max:12',
+            'nombre_especialidad' => 'required|max:20'
+        ]);
         $tutori->update($request->all());
-        return view('Pasantias.show', compact('tutori'));
+        $especialidad->update($request->all());
+        return redirect()->route('pasantias');
     } 
-    public function destroy_tutorin(Tutor_Institucional $tutori){
+    public function destroy_tutorin(Tutor_Institucional $tutori, Especialidade $especialidad){
         $tutori->delete();
+        $especialidad->delete();
         return redirect()->route('pasantias');
     }
 }
