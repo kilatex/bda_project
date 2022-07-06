@@ -34,7 +34,7 @@ class ProyectoSController extends Controller
         return view('Pasantias.show', compact('comunitario'));
     }
     public function edit_comunitario(Proyecto_Comunitario $comunitario){
-        return view('Pasantias.edit', compact('comunitario'));
+        return view('proyecto.serviciocom.edit', compact('comunitario'));
     }
     public function update_comunitario(Request $request, Proyecto_Comunitario $comunitario){
         $comunitario->update($request->all());

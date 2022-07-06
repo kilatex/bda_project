@@ -34,7 +34,7 @@ class ProyectoPController extends Controller
         return view('Pasantias.show', compact('pasantia'));
     }
     public function edit_pasantias(Proyecto_Pasantia $pasantia){
-        return view('Pasantias.edit', compact('pasantia'));
+        return view('proyecto.pasantias.edit', compact('pasantia'));
     }
     public function update_pasantias(Request $request, Proyecto_Pasantia $pasantia){
         $pasantia->update($request->all());

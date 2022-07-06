@@ -7,6 +7,7 @@ use App\Models\Recopasec\Tutor_Institucional;
 use App\Models\Recopasec\Direccione;
 use App\Models\Recopasec\Especialidade;
 use App\Models\Recopasec\Cargo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -38,7 +39,12 @@ class TutorController extends Controller
         return redirect()->route('/estudiantes');
     }
     public function edit_tutorac(Tutor_Academico $tutorcom){
-        return view('Pasantias.edit', compact('tutor'));
+        $user = \Auth::user();
+        if($user->rol == 'USER_pasantias'){
+            return view('proyecto.pasantias.edit', compact('tutor'));
+        }else{
+            return view('proyecto.serviciocom.edit', compact('tutor'));
+        }
     }
     public function update_tutorac(Request $request, Tutor_Academico $tutor){
         $tutor->update($request->all());
@@ -121,7 +127,7 @@ class TutorController extends Controller
         return redirect()->route('pasantias');
     }
     public function edit_tutorin(Tutor_Institucional $tutori){
-        return view('Pasantias.edit', compact('tutori'));
+        return view('proyecto.pasantias.edit', compact('tutori'));
     }
     public function update_tutorin(Request $request, Tutor_Institucional $tutori){
         $tutori->update($request->all());
