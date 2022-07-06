@@ -6,19 +6,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registrar proyecto de pasantias') }}</div>
+                <div class="card-header">{{ __('Registrar Tutor Institucional') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('tutorin.store') }}" enctype="multipart/form-data" >
                     @csrf
 
-                        <h3>Tutor Institucional</h3>
                         <div class="row mb-3">
                             <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
 
                             
                             <div class="col-md-6">
-                                <input id="nombres" name="nombres" type="text" class="form-control @error('nombres') is-invalid @enderror"   autofocus>
+                                <input id="nombres" name="nombres" value= "{{old('nombres')}}" type="text" class="form-control @error('nombres') is-invalid @enderror"   autofocus>
 
                                 @error('nombres')
                                     <span class="invalid-feedback" role="alert">
@@ -32,7 +31,7 @@
 
                             
                             <div class="col-md-6">
-                                <input id="apellidos" name="apellidos" type="text" class="form-control @error('apellidos') is-invalid @enderror"   autofocus>
+                                <input id="apellidos" name="apellidos" value= "{{old('apellidos')}}" type="text" class="form-control @error('apellidos') is-invalid @enderror"   autofocus>
 
                                 @error('apellidos')
                                     <span class="invalid-feedback" role="alert">
@@ -46,7 +45,7 @@
 
                             
                             <div class="col-md-6">
-                                <input id="cedula" name="cedula" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
+                                <input id="cedula" name="cedula" value= "{{old('cedula')}}" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
 
                                 @error('cedula')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +57,7 @@
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electronico') }}</label>
                             <div class="col-md-6">
-                                <input id="email" name="email" type="email" class="form-control @error('email') is-invalid @enderror"   autofocus>
+                                <input id="email" name="email" value= "{{old('email')}}" type="email" class="form-control @error('email') is-invalid @enderror"   autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -70,7 +69,7 @@
                         <div class="row mb-3">
                             <label for="telefono" class="col-md-4 col-form-label text-md-end">{{ __('Telefono') }}</label>
                             <div class="col-md-6">
-                                <input id="telefono" name="telefono" type="text" class="form-control @error('telefono') is-invalid @enderror"   autofocus>
+                                <input id="telefono" name="telefono" value= "{{old('telefono')}}" type="text" class="form-control @error('telefono') is-invalid @enderror"   autofocus>
 
                                 @error('telefono')
                                     <span class="invalid-feedback" role="alert">
@@ -84,7 +83,7 @@
 
                             
                             <div class="col-md-6">
-                                <input id="nombre_especialidad" name="nombre_especialidad" type="text" class="form-control @error('nombre_especialidad') is-invalid @enderror"   autofocus>
+                                <input id="nombre_especialidad" name="nombre_especialidad" value= "{{old('nombre_especialidad')}}" type="text" class="form-control @error('nombre_especialidad') is-invalid @enderror"   autofocus>
 
                                 @error('nombre_especialidad')
                                     <span class="invalid-feedback" role="alert">

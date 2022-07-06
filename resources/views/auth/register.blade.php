@@ -99,8 +99,8 @@
                                     <option selected>Seleccionar departamento</option>
                                     <option value="secretaria">Archivo</option>
                                     <option value="biblioteca">Biblioteca</option>
-                                    <option value="pasantias">Pasantías</option>
-                                    <option value="serviciocom">Servicio Comunitario</option>
+                                    <option value="USER_pasantias">Pasantías</option>
+                                    <option value="USER_serviciocom">Servicio Comunitario</option>
                                 </select>
                             </div>
                         </div>

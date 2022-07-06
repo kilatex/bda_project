@@ -14,7 +14,7 @@ class TutorController extends Controller
 {
     // Tutor Academico
     public function create_tutorac(){
-        return view('tutores.tutorac');
+        return view('tutores.tutor_ac.tutorac');
     }
     public function store_tutorac(Request $request){
         $request->validate([
@@ -51,7 +51,7 @@ class TutorController extends Controller
 
     //Tutor Comunitario
     public function create_tutorcom(){
-        return view('tutores.tutorcom');
+        return view('tutores.tutor_com.tutorcom');
     }
     public function store_tutorcom(Request $request){
         $request->validate([
@@ -96,7 +96,7 @@ class TutorController extends Controller
 
     //Tutor Institucional
     public function create_tutorin(){
-        return view('tutores.tutorin');
+        return view('tutores.tutor_ins.tutorin');
     }
     public function store_tutorin(Request $request){
         $request->validate([
