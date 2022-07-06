@@ -15,6 +15,7 @@
                 </div>
                 <div class="title">
                 <h4>Proyectos</h4>
+                <a class="btn btn-primary" href="{{route('pasantias')}}" role="button">Agregar</a>
                 </div>
             </div>
             <div class="item-menu flex mt-3 ">
@@ -23,6 +24,7 @@
                 </div>
                 <div class="title">
                 <h4>Estudiantes</h4>
+                <a class="btn btn-primary" href="{{route('/estudiantes')}}" role="button">Ver</a>
                 </div>
             </div>
         </div>

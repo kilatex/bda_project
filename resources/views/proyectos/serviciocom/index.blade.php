@@ -11,6 +11,15 @@
         <div class="menu-unefa flex">
             <div class="item-menu flex mt-3 ">
                 <div class="img-item">
+                <img src="{{ asset('images/home/biblioteca.png') }}" alt="">
+                </div>
+                <div class="title">
+                <h4>Dirección</h4>
+                <a class="btn btn-primary" href="{{route('direccion.create')}}" role="button">Agregar</a>
+                </div>
+            </div>
+            <div class="item-menu flex mt-3 ">
+                <div class="img-item">
                 <img src="{{ asset('images/home/archivo.png') }}" alt="">
                 </div>
                 <div class="title">
