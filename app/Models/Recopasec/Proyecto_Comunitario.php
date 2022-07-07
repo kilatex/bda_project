@@ -12,8 +12,7 @@ class Proyecto_comunitario extends Model
         
         'codigo',
         'titulo',
-        'fecha_inicio',
-        'fecha_final',
+        'periodo',
         'tutor_comunitario_id',
         'tutor_academico_id',
 

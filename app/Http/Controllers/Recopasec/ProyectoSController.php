@@ -18,15 +18,13 @@ class ProyectoSController extends Controller
         $request->validate([
             'codigo'=> 'required|max:50',
             'titulo'=> 'required|max:255',
-            'fecha_inicio'=> 'required|max:14',
-            'fecha_final'=> 'required|max:14',
+            'periodo'=> 'required',
 
         ]);
         $comunitario = new Proyecto_comunitario();
         $comunitario->codigo = $request->codigo;
         $comunitario->titulo = $request->titulo;
-        $comunitario->fecha_inicio = $request->fecha_inicio;
-        $comunitario->fecha_final = $request->fecha_final;
+        $comunitario->periodo = $request->periodo;
         $comunitario->save();
         return redirect()->route('index_comunitario');
         
@@ -38,8 +36,7 @@ class ProyectoSController extends Controller
         $request->validate([
             'codigo'=> 'required|max:50',
             'titulo'=> 'required|max:255',
-            'fecha_inicio'=> 'required|max:12',
-            'fecha_final'=> 'required|max:12',
+            'periodo'=> 'required',
         ]);
         $comunitario->update($request->all());
         return redirect()->route('comunitarios.show', $comunitario);    } 

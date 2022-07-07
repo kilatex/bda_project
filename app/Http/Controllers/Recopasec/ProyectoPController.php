@@ -17,14 +17,12 @@ class ProyectoPController extends Controller
         $request->validate([
             'codigo'=> 'required|max:50',
             'titulo'=> 'required|max:255',
-            'fecha_inicio'=> 'required|max:12',
-            'fecha_final'=> 'required|max:12',
+            'periodo'=> 'required',
         ]);
         $pasantia = new Proyecto_pasantia();
         $pasantia->codigo = $request->codigo;
         $pasantia->titulo = $request->titulo;
-        $pasantia->fecha_inicio = $request->fecha_inicio;
-        $pasantia->fecha_final = $request->fecha_final;
+        $pasantia->periodo = $request->periodo;
         $pasantia->save();
         return redirect()->route('index_pasantias');
         
@@ -36,8 +34,7 @@ class ProyectoPController extends Controller
         $request->validate([
             'codigo'=> 'required|max:50',
             'titulo'=> 'required|max:255',
-            'fecha_inicio'=> 'required|max:12',
-            'fecha_final'=> 'required|max:12',
+            'periodo'=> 'required',
         ]);
         $pasantia->update($request->all());
         return redirect()->route('index_pasantias');

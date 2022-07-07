@@ -12,8 +12,7 @@ class Proyecto_pasantia extends Model
         
         'codigo',
         'titulo',
-        'fecha_inicio',
-        'fecha_final',
+        'periodo',
         'tutor_institucional_id',
         'tutor_academico_id',
 

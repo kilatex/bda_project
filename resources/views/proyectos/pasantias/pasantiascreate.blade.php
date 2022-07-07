@@ -39,27 +39,12 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="fecha_inicio" class="col-md-4 col-form-label text-md-end">{{ __('Fecha de inicio') }}</label>
-
-                            
-                            <div class="col-md-6">
-                                <input id="fecha_inicio" name="fecha_inicio" value= "{{old('fecha_inicio')}}" type="text" class="form-control @error('fecha_inicio') is-invalid @enderror" required autocomplete="fecha_inicio" autofocus>
-
-                                @error('fecha_inicio')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="fecha_final" class="col-md-4 col-form-label text-md-end">{{ __('Fecha Final') }}</label>
+                            <label for="periodo" class="col-md-4 col-form-label text-md-end">{{ __('periodo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fecha_final" type="text" value= "{{old('fecha_final')}}" class="form-control @error('fecha_final') is-invalid @enderror" name="fecha_final"  required autocomplete="fecha_final">
+                                <input id="periodo" type="text" value= "{{old('periodo')}}" class="form-control @error('periodo') is-invalid @enderror" name="periodo"  required autocomplete="periodo">
 
-                                @error('fecha_final')
+                                @error('periodo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
