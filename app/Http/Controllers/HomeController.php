@@ -28,18 +28,10 @@ class HomeController extends Controller
     public function index()
     {
 
-        $user =  \Auth::user();
-        // $docs = Document::where('user_id',$user->id)->first();
-        // if($docs){
-        //     $docs_id = $docs->id;
-        // }else{
-        //     $docs_id = null;
-        // }
-        $message = 'messi';
-        
+        $user =  \Auth::user();     
 
         return view('home',[
-            'notification' => $message
+            'notification' => 'hola'
         ]);
     }
 }

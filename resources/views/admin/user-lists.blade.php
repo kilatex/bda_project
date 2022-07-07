@@ -14,7 +14,7 @@
             <div class="container">
 
                     @if($field_name != false )
-                        <h2 class="text-center">Listado de Usuarios por  {{$category}} : {{$field_name}} </h2>
+                        <h2 class="text-center">{{$field_name}} </h2>
                     @endif
 
                 
@@ -43,10 +43,18 @@
                                 <td>Carrera X</td>
                                 <td>Semestre X</td>  
                                 <td>{{$user->email}}</td> 
-                                <td>
+                                <td>   
+                                    @if(isset($crear_expediente))
+                                    <a href="{{ route('upload') }}">
+                                        Crear Expediente
+                                    </a>
+
+                                    @else
                                     <a href="#">
                                         Más Info
                                     </a>
+                                    @endif
+                                   
                                 </td> 
                             
  
@@ -63,11 +71,8 @@
                 
             </div>
             <div class="d-flex justify-content-center">
-                @if($type)
-                {{$users->appends(['field' => $user->$type->id])->appends(['type' => $type])->links()}}
-                @else
+             
                 {{$users->links()}}
-                @endif
             </div>
          
             

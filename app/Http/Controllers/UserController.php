@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use  App\Models\Estudiante;
 use  App\Models\User;
+use  App\Models\Carrera;
 use  App\Models\Message;
 use  App\Models\Document;
 use Illuminate\Support\Facades\DB;
@@ -72,7 +73,8 @@ class UserController extends Controller
             return view('admin.register',[
                 'message' => $message
             ]
-            );  
+            );
+
         }
 
         
@@ -87,8 +89,8 @@ class UserController extends Controller
             return redirect()->route('home');
         }
 
-        $users = User::Where('rol','USER')
-                    ->orderBy('id','desc')->paginate(12);
+        $users = User::Where('role','USER')
+                    ->orderBy('id','desc')->paginate(22);
         $flag = false;
         foreach($users as $user){
             if($user->id){
@@ -205,7 +207,7 @@ class UserController extends Controller
             return redirect()->route('home');
         }
 
-        $pregrado=DB::table('pregrados')->get();
+        $pregrado=DB::table('carreras')->get();
        
 
         return view('admin.category-users', [
@@ -223,6 +225,7 @@ class UserController extends Controller
                     ->orderBy('id','desc')->paginate(12);
     }
 
+
     public function users_by_field( Request $request){
 
         $user = \Auth::user();
@@ -234,40 +237,26 @@ class UserController extends Controller
             return redirect()->route('home');
         }
 
-        $users = User::where($type.'_id',$field)->paginate(4);
+
+        $estudiantes = DB::table('estudiantes')
+        ->join('users','users.id', '=' , 'estudiantes.usuario_id')
+        ->join('carreras','carreras.id', '=' , 'estudiantes.carrera_id')
+        ->where('carreras.id',$field)->paginate(10);
         $flag = 0;
         $field_name = false;
         $category = false;
+        $i = 0;
 
-        foreach($users as $user){
-            if($user->id){
+        foreach($estudiantes as $estudiante){
+            if($estudiante->id){
                 $flag = true;
-                $field_name = $user->$type->name;
-
-                
-
-                if($type == "pregrado"){
-                    $category = "Carrera";
-                }
-
-                if($type == "postgrado"){
-                    $category = "Postgrado";
-                }
-
-                if($type == "promocion"){
-                    $category = "Promoción";
-                }
-                if($type == "periodo"){
-                    $category = "Periodo De Ingreso";
-                }
-
             }else{
                 $flag = false;
             }
+            $i++;
         }
-       
+        
         if($flag == false){
-
             $notification = "No hay usuarios para listar con este campo";
             return redirect()->route('home')->with([
                 'message' => $notification,  
@@ -275,9 +264,8 @@ class UserController extends Controller
         }
         
 
-      
         return view('admin.user-lists',[
-            'users' => $users,
+            'users' => $estudiantes,
             'field_name' => $field_name,
             'category' => $category,
             'type' => $type 
@@ -293,9 +281,9 @@ class UserController extends Controller
         }
 
         $texto = trim($request->get('texto'));
-        $users = User::Where('surname','LIKE', '%'.$texto.'%')
-                ->orWhere('dni','LIKE', '%'.$texto.'%') 
-                ->OrWhere('name','LIKE','%'.$texto.'%')
+        $users = User::Where('nombres','LIKE', '%'.$texto.'%')
+                ->orWhere('cedula','LIKE', '%'.$texto.'%') 
+                ->OrWhere('apellidos','LIKE','%'.$texto.'%')
                 ->OrWhere('email','LIKE','%'.$texto.'%')
                 ->orderBy('id','desc')
                 ->paginate(12);
@@ -322,7 +310,6 @@ class UserController extends Controller
         $users = User::Where('rol','USER')
                     ->Where('status','PENDING')
                     ->join('documents','users.id', '=' , 'documents.user_id')
-
                     ->orderBy('users.id','desc')->paginate(12);
                  
         $flag = false;

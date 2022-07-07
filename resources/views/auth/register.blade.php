@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
+                            <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
                                 <input id="nombres" placeholder="Inserta tu nombre" type="text" class="form-control @error('nombres') is-invalid @enderror" name="nombres" value="{{ old('nombres') }}" required autocomplete="nombres" autofocus>
@@ -26,10 +26,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="napellidos" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
+                            <label for="apellidos" class="col-md-4 col-form-label text-md-end">{{ __('Apellido') }}</label>
 
                             <div class="col-md-6">
-                                <input id="apellidos" placeholder="Inserta tus apellidos" type="text" class="form-control @error('apellidos') is-invalid @enderror" name="apellidos" value="{{ old('apellidos') }}" required autocomplete="apellidos" autofocus>
+                                <input id="apellidos" placeholder="Inserta tu apellido" type="text" class="form-control @error('apellidos') is-invalid @enderror" name="apellidos" value="{{ old('apellidos') }}" required autocomplete="apellidos" autofocus>
 
                                 @error('apellidos')
                                     <span class="invalid-feedback" role="alert">
@@ -47,7 +47,7 @@
                             <div class="col-md-6">
                                 <input id="cedula" placeholder="Inserta tu cédula" type="text" class="form-control @error('cedula') is-invalid @enderror" name="cedula" value="{{ old('cedula') }}" required autocomplete="cedula" autofocus>
 
-                                @error('dni')
+                                @error('cedula')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -68,7 +68,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <input id="rol" type="hidden"  name="rol" value="USER" required autocomplete="USER">
+                        <input id="role" type="hidden"  name="rol" value="USER" required autocomplete="USER">
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>

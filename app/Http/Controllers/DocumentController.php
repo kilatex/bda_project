@@ -29,13 +29,34 @@ class DocumentController extends Controller
         return view('docs.upload');
     }
 
+    public function select_user_to_new_file(){
+        $user = \Auth::user();
+        if ( $user == null || $user->rol != "USER"){
+            return redirect()->route('home');
+        }
 
+        $users = User::Where('rol','USER')
+                    ->orderBy('id','desc')->paginate(12);
+    
+        
+        $field_name = 'Seleccione Estudiante para crearle un expediente';
+        $crear_expediente = true;
+
+        return view('admin.user-lists',[
+            'users' => $users,
+            'field_name' => $field_name,
+            'crear_expediente' => $crear_expediente
+        ]);
+
+    }
     public function subir(Request $request){
+        
         $user =  \Auth::user();
-        $id = $user->id;
-        $docs = Document::where('user_id',$id)->first();
-        $message = session('message');
-       
+        $file = $request->file('file');
+        $doc = $request->input('field');
+        var_dump($doc);
+        var_dump($file); 
+     /*   
          if( $docs == null){
                 //VALIDATE
                 $validate = $this->validate($request,[
@@ -204,7 +225,7 @@ class DocumentController extends Controller
             return redirect()->route('home')->with([
                 'message' => $message
             ]);  
-        } 
+        }  */
         
 
     }

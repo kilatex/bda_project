@@ -45,6 +45,7 @@ Route::get('/img-profile/{filename}', [App\Http\Controllers\StudentController::c
 Route::get('/notification', [App\Http\Controllers\StudentController::class, 'notification'])->name('notification');
 Route::get('/estudiantes', [App\Http\Controllers\StudentController::class, 'students_list'])->name('students_list');
 
+
 // AdminController ROUTES
 Route::get('/create-admin/{code?}', [App\Http\Controllers\UserController::class, 'create_admin'])->name('create_admin');
 Route::get('/user-list', [App\Http\Controllers\UserController::class, 'users_list'])->name('users_list');
@@ -53,6 +54,8 @@ Route::get('/users-by-field', [App\Http\Controllers\UserController::class, 'user
 Route::get('/user-search/{texto?}', [App\Http\Controllers\UserController::class, 'search'])->name('search');
 Route::get('/expedientes', [App\Http\Controllers\UserController::class, 'expedientes'])->name('expedientes');
 Route::get('/estudiantes/{carrera?}', [App\Http\Controllers\UserController::class, 'students_by_carreer'])->name('students_by_carreer');
+Route::get('/registrar/estudiantes', [App\Http\Controllers\UserController::class, 'register_student'])->name('register_student');
+Route::get('/nuevo-expediente', [App\Http\Controllers\DocumentController::class, 'select_user_to_new_file'])->name('select_user_to_new_file');
 
 
 Route::post('/register-admin', [App\Http\Controllers\AdminController::class, 'register_admin'])->name('register_admin');

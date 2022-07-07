@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pregrado extends Model
+class Carrera extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,8 @@ class Pregrado extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'nommbre',
+        'codigo'
      ];
 
 }

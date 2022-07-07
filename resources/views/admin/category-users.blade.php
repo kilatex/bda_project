@@ -18,13 +18,11 @@
                     <select class="form-select" aria-label="Default select example" name="field">
                         <option selected>Seleccione</option>
                         @foreach($pregrados as $carrera)
-
                         <option value="{{$carrera->id}}"> {{$carrera->nombre}}</option>
-
                         @endforeach
                     </select>
                     
-                    <input type="hidden" name="type" value="pregrado">
+                    <input type="hidden" name="type" value="carrera">
                     <input type="submit" value="Listar Estudiantes" class="btn btn-success mt-2 ">
                 </form>
           
