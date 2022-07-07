@@ -5,7 +5,7 @@ namespace App\Models\Recopasec;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tutor_Comunitario extends Model
+class Tutor_comunitario extends Model
 {
     use HasFactory;
     protected $fillable = [

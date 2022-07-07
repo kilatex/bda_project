@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Registrar proyecto de servicio comunitario') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('store_comunitarios') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('store_comunitario') }}" enctype="multipart/form-data" >
                     @csrf
 
                         <div class="row mb-3">

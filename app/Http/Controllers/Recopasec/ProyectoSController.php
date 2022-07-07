@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Recopasec;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Recopasec\Proyecto_Comunitario;
+use App\Models\Recopasec\Proyecto_comunitario;
 use App\Models\Recopasec\Direccione;
-use App\Models\Recopasec\Tutor_Academico;
-use App\Models\Recopasec\Tutor_Institucional;
 
 class ProyectoSController extends Controller
 {
@@ -20,8 +18,8 @@ class ProyectoSController extends Controller
         $request->validate([
             'codigo'=> 'required|max:50',
             'titulo'=> 'required|max:255',
-            'fecha_inicio'=> 'required|max:12',
-            'fecha_final'=> 'required|max:12',
+            'fecha_inicio'=> 'required|max:14',
+            'fecha_final'=> 'required|max:14',
 
         ]);
         $comunitario = new Proyecto_comunitario();
@@ -33,10 +31,10 @@ class ProyectoSController extends Controller
         return redirect()->route('index_comunitario');
         
     }
-    public function edit_comunitario(Proyecto_Comunitario $comunitario){
+    public function edit_comunitario(Proyecto_comunitario $comunitario){
         return view('proyecto.serviciocom.edit', compact('comunitario'));
     }
-    public function update_comunitario(Request $request, Proyecto_Comunitario $comunitario){
+    public function update_comunitario(Request $request, Proyecto_comunitario $comunitario){
         $request->validate([
             'codigo'=> 'required|max:50',
             'titulo'=> 'required|max:255',
@@ -45,7 +43,7 @@ class ProyectoSController extends Controller
         ]);
         $comunitario->update($request->all());
         return redirect()->route('comunitarios.show', $comunitario);    } 
-    public function destroy_comunitario(Proyecto_Comunitario $comunitario){
+    public function destroy_comunitario(Proyecto_comunitario $comunitario){
         $comunitario->delete();
         return redirect()->route('index_comunitario');
     }

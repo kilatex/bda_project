@@ -5,9 +5,8 @@ namespace App\Models\Recopasec;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Proyecto_Comunitario extends Model
+class Proyecto_comunitario extends Model
 {
-    use HasFactory;
     use HasFactory;
     protected $fillable = [
         
@@ -20,9 +19,9 @@ class Proyecto_Comunitario extends Model
 
     ];
     public function tutor_comunitario(){
-        return $this->belongsTo('App\Models\Recopasec\Tutor_Comunitario','tutor_comunitario_id');
+        return $this->belongsTo('App\Models\Recopasec\Tutor_comunitario','tutor_comunitario_id');
     }
     public function tutor_academico(){
-        return $this->belongsTo('App\Models\Recopasec\Tutor_Academico','tutor_academico_id');
+        return $this->belongsTo('App\Models\Recopasec\Tutor_academico','tutor_academico_id');
     }
 }
