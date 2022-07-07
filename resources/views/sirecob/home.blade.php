@@ -30,6 +30,7 @@
 
 	</div>
 	<div class="row mt-3">
+		<!--
 <div class="col-3"></div>
 			<div class="col-5">
 				<div class="card">
@@ -45,6 +46,7 @@
 
 	</div>
 </div>
+-->
 <!--
 <div class="container" id="app">
 

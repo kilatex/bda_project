@@ -27,5 +27,5 @@ Route::apiResource('libros', App\Http\Controllers\sirecob\LibroController::class
 Route::apiResource('Estudiante', App\Http\Controllers\sirecob\EstudanteController::class)->only('index', 'show', 'destroy', 'store', 'update');
 //Route::apiResource('Docente', App\Http\Controllers\DocenteController::class)->only('index', 'show', 'destroy', 'store', 'update');
 //Route::apiResource('Tutor', App\Http\Controllers\TutorController::class)->only('index', 'show', 'destroy', 'store', 'update');
-//Route::apiResource('Prestamo_Libros', App\Http\Controllers\PestamolibrosController::class)->only('index', 'show', 'destroy', 'store', 'update');
+Route::apiResource('Prestamo_Libros', App\Http\Controllers\sirecob\PestamolibrosController::class)->only('index', 'show', 'destroy', 'store', 'update');
 Route::apiResource('Proyectos_Grado', App\Http\Controllers\sirecob\ProyectoGradoController::class)->only('index', 'show', 'destroy', 'store', 'update');

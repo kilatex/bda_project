@@ -38,17 +38,18 @@
     <tbody>
    
       @foreach ($prestamos as $prestamo)
+      @isset($prestamo->Datos_estudiante->user)
       <tr  >
       <th scope="row"># </th>
-      <td>{{$prestamo->Datos_estudiante->nombre}}</td>
-      <td>{{$prestamo->Datos_estudiante->ci}}</td>
+      <td>{{$prestamo->Datos_estudiante->user->nombres}}</td>
+      <td>{{$prestamo->Datos_estudiante->user->cedula}}</td>
       <td>Estudainte</td>
       <td>{{$prestamo->Datos_libros->titulo}}</td>
       
       
       <td>{{$prestamo->fecha_prestamo}}</td>
-      <td>{{$prestamo->fecha_entrega}}</td>
-      <td>{{$prestamo->estado_prestamo}}</td>
+      <td>{{$prestamo->fecha_entrega}}></td>
+      <td>{{$prestamo->estado}}</td>
       
       
       <td>
@@ -61,6 +62,33 @@
           </div>
       </td>
     </tr>
+    @endisset
+    
+    @isset($prestamo->Datos_docente->user)
+      <tr  >
+      <th scope="row"># </th>
+      <td>{{$prestamo->Datos_docente->user->nombres}}</td>
+      <td>{{$prestamo->Datos_docente->user->cedula}}</td>
+      <td>Estudainte</td>
+      <td>{{$prestamo->Datos_libros->titulo}}</td>
+      
+      
+      <td>{{$prestamo->fecha_prestamo}}</td>
+      <td>{{$prestamo->fecha_entrega}}></td>
+      <td>{{$prestamo->estado}}</td>
+      
+      
+      <td>
+          <div class="row">
+            <div class="btn-group">
+              <div class="col-4"> <a href="{{route('editarlibro', 1 )}}"  class="btn btn-primary">editar</a> </div>
+              
+              <div class="col-4"><a href="{{route('deletebook',1 )}}" class=" btn btn-danger">eliminar</a></div>
+              </div>
+          </div>
+      </td>
+    </tr>
+    @endisset
     @endforeach
     
     

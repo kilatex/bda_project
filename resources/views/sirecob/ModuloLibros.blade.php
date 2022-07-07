@@ -19,7 +19,7 @@
 		<div class="col-5">
 			<div class="card">
 					<div class="text-center">
-						<a href="/prestamo">
+						<a href="/Prestamos">
 						<img src="img/menu/prestamo.png" alt="" style=" width: 140px;height: 140px;">
 						<h5 class="text-success"><b>Prestamo de Libros</b></h5>
 					</a>

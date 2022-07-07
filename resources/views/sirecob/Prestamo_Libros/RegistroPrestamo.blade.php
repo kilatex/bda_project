@@ -62,8 +62,8 @@
                                     <select class="mt-3 ml-2 mr-2 mb-3 form-control" name="estudiante" id="a">
 
                                         @foreach ($Estudiante as $estudiante)
-                                        <option value="{{ $estudiante->id }}">{{ $estudiante->ci }} {{
-                                            $estudiante->nombre }}</option>
+                                        <option value="{{$estudiante->id}}">{{ $estudiante->user->cedula }} {{
+                                            $estudiante->user->nombres }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -79,7 +79,7 @@
                                         <select class="mt-3  mb-3 form-control" name="docente" id="a">
 
                                             @foreach ($Docente as $docente)
-                                            <option value="{{ $docente->id }}">{{ $docente->ci }} {{ $docente->nombre }}
+                                            <option value="{{ $docente->id }}">{{ $docente->user->cedula }} {{ $docente->user->nombres }}
                                             </option>
                                             @endforeach
                                         </select>

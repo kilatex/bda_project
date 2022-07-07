@@ -10,10 +10,12 @@ class Docente extends Model
     protected $fillable = [
         'nombre',
         'apellido',
-        'ci',
-        'telefono',
-        'correo',
+        'user_id',
         'especialidad',
         'telefono_residencial'
     ];
+
+public function user(){
+    return $this->belongsTo('App\Models\User','user_id');
+}
 }

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 use App\Http\Controllers\Controller;
 
-
+use Illuminate\Support\Facades\DB;
 class LibroController extends Controller
 {
     /**
@@ -17,10 +17,11 @@ class LibroController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-     $libros = Libro::get();
-     
+        $texto=trim($request->get('texto'));
+       $libros = Libro::get();
+       
        return view('sirecob/RegistroLibros',compact('libros'));
     }
 
