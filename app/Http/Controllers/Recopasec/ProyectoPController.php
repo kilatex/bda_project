@@ -23,7 +23,7 @@ class ProyectoPController extends Controller
         $pasantia = new Proyecto_pasantia();
         $pasantia->codigo = $request->codigo;
         $pasantia->titulo = $request->titulo;
-        $pasantia->fecha_inico = $request->fecha_inicio;
+        $pasantia->fecha_inicio = $request->fecha_inicio;
         $pasantia->fecha_final = $request->fecha_final;
         $pasantia->save();
         return redirect()->route('index_pasantias');

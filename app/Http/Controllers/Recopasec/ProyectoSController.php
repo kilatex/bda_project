@@ -25,7 +25,7 @@ class ProyectoSController extends Controller
         $comunitario = new Proyecto_comunitario();
         $comunitario->codigo = $request->codigo;
         $comunitario->titulo = $request->titulo;
-        $comunitario->fecha_inico = $request->fecha_inicio;
+        $comunitario->fecha_inicio = $request->fecha_inicio;
         $comunitario->fecha_final = $request->fecha_final;
         $comunitario->save();
         return redirect()->route('index_comunitario');
