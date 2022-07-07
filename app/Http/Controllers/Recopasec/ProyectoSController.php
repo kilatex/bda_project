@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Recopasec\Proyecto_Comunitario;
 use App\Models\Recopasec\Direccione;
-use Directory;
+use App\Models\Recopasec\Tutor_Academico;
+use App\Models\Recopasec\Tutor_Institucional;
 
 class ProyectoSController extends Controller
 {

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Recopasec;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Recopasec\Proyecto_Pasantia;
-use App\Models\Recopasec\Empresa;
+use App\Models\Recopasec\Tutor_Academico;
+use App\Models\Recopasec\Tutor_Institucional;
+use App\Models\Recopasec\Especialidade;
 
 class ProyectoPController extends Controller
 {
@@ -20,6 +22,12 @@ class ProyectoPController extends Controller
             'titulo'=> 'required|max:255',
             'fecha_inicio'=> 'required|max:12',
             'fecha_final'=> 'required|max:12',
+            'nombres'=> 'required|max:50',
+            'apellidos'=> 'required|max:50',
+            'cedula'=> 'required|max:10',
+            'email'=> 'required|max:100',
+            'telefono'=> 'required|max:12',
+            'nombre_especialidad' => 'required|max:20'
         ]);
         $pasantia = new Proyecto_Pasantia();
         $pasantia->codigo = $request->codigo;
@@ -27,6 +35,16 @@ class ProyectoPController extends Controller
         $pasantia->fecha_inico = $request->fecha_inicio;
         $pasantia->fecha_final = $request->fecha_final;
         $pasantia->save();
+        $tutor = new Tutor_Academico();
+        $tutor->nombres = $request->nombres;
+        $tutor->apellidos = $request->apellidos;
+        $tutor->cedula = $request->cedula;
+        $tutor->email = $request->email;
+        $tutor->telefono = $request->telefono;
+        $tutor->save();
+        $especialidad= new Especialidade();
+        $especialidad->nombre = $request->nombre_especialidad;
+        $especialidad->save();
         return redirect()->route('index_pasantias');
         
     }
