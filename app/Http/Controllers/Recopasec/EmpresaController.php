@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Recopasec;
 use App\Http\Controllers\Controller;
 use App\Models\Recopasec\Empresa;
-use App\Models\Recopasec\Direccione;
+use App\Models\Recopasec\Estado;
+use App\Models\Recopasec\Municipio;
+use App\Models\Recopasec\Parroquia;
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
@@ -14,24 +16,29 @@ class EmpresaController extends Controller
     public function store_empresa(Request $request){
 
         $request->validate([
+            'rif'=>'required',
             'nombre'=> 'required|max:50',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
-            'estado'=>'required',
-            'municipio'=>'required|max:20',
-            'parroquia'=>'required|max:50'
+            'nombre_estado'=>'required',
+            'nombre_municipio'=>'required',
+            'nombre_parroquia'=>'required'
         ]);
-        $direccion = new Direccione();
-        $direccion->estado = $request->estado;
-        $direccion->municipio = $request->municipio;
-        $direccion->parroquia = $request->parroquia;
-        $direccion->save();
+        $estado = new Estado();
+        $estado->nombre_estado = $request->nombre;
+        $estado->save();        
+        $municipio = new Municipio();
+        $municipio->nombre_municipio = $request->nombre;
+        $municipio->save();
+        $parroquia = new Parroquia();
+        $parroquia->nombre_parroquia = $request->nombre;
+        $parroquia->save();
         $empresa = new Empresa();
         $empresa->nombre = $request->nombre;
         $empresa->email = $request->email;
         $empresa->telefono = $request->telefono;
         $empresa->departamento = $request->departamento;
-        $empresa->direccion_id = $direccion->id;
+        $empresa->parroquia_id = $parroquia->id;
         $empresa->save();
         return redirect()->route('index_pasantias');
         
@@ -40,11 +47,20 @@ class EmpresaController extends Controller
         return view('proyectos.pasantias.edit', compact('empresa'));
     }
     public function update_empresa(Request $request, Empresa $empresa){
+        $request->validate([
+            'rif'=>'required',
+            'nombre'=> 'required|max:50',
+            'email'=> 'required|max:100',
+            'telefono'=> 'required|max:12',
+            'nombre_estado'=>'required',
+            'nombre_municipio'=>'required',
+            'nombre_parroquia'=>'required'
+        ]);
         $empresa->update($request->all());
         return redirect()->route('index_pasantias');
     } 
     public function destroy_empresa(Empresa $empresa){
         $empresa->delete();
-        return redirect()->route('/estudiantes');
+        return redirect()->route('index_pasantias');
     }
 }

@@ -15,7 +15,7 @@ class ProyectoPController extends Controller
     }
     public function store_pasantias(Request $request){
         $request->validate([
-            'codigo'=> 'required|max:50',
+            'codigo'=> 'required|max:06',
             'titulo'=> 'required|max:255',
             'periodo'=> 'required',
         ]);

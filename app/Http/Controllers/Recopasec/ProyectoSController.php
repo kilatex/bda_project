@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Recopasec;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Recopasec\Comunidade;
+use App\Models\Recopasec\Consejo_comunale;
 use App\Models\Recopasec\Proyecto_comunitario;
-use App\Models\Recopasec\Direccione;
+use App\Models\Recopasec\Estado;
+use App\Models\Recopasec\Municipio;
+use App\Models\Recopasec\Parroquia;
 
 class ProyectoSController extends Controller
 {
@@ -21,6 +25,7 @@ class ProyectoSController extends Controller
             'periodo'=> 'required',
 
         ]);
+
         $comunitario = new Proyecto_comunitario();
         $comunitario->codigo = $request->codigo;
         $comunitario->titulo = $request->titulo;
@@ -49,37 +54,54 @@ class ProyectoSController extends Controller
     }
     public function store_direccion(Request $request){
         $request->validate([
-            'estado'=> 'required',
-            'municipio'=> 'required|max:50',
-            'parroquia'=> 'required|max:50',
-            'comunidad'=> 'required|max:50',
-            'consejo_comunal'=> 'required|max:50'
+            'nombre_estado' => 'required',
+            'nombre_municipio' => 'required',
+            'nombre_parroquia' => 'required',
+            'nombre_comunidad' => 'required',
+            'nombre_consejo_comunal' => 'required'
         ]);
-        $direccion = new Direccione();
-        $direccion->estado = $request->estado;
-        $direccion->municipio = $request->municipio;
-        $direccion->parroquia = $request->parroquia;
-        $direccion->comunidad = $request->comunidad;
-        $direccion->consejo_comunal = $request->consejo_comunal;
-        $direccion->save();
-        return redirect()->route('index_comunitario', $direccion);
+        $estado = new Estado();
+        $estado->nombre_estado = $request->nombre;
+        $estado -> save();
+        $municipio = new Municipio();
+        $municipio->nombre_municipio = $request->nombre;
+        $municipio -> save();
+        $parroquia = new Parroquia();
+        $parroquia->nombre_parroquia = $request->nombre;
+        $parroquia -> save();
+        $comunidad = new Comunidade();
+        $comunidad->nombre_comunidad = $request->nombre;
+        $comunidad -> save();
+        $consejo_comunal = new Consejo_comunale();
+        $consejo_comunal->nombre_consejo_comunal = $request->nombre;
+        $consejo_comunal -> save();
+       
+        return redirect()->route('index_comunitario');
     }
-    public function edit_direccion(Direccione $direccion){
-        return view('proyecto.serviciocom.edit', compact('direccion'));
+    public function edit_direccion(Estado $estado, Municipio $municipio, Parroquia $parroquia, Comunidade $comunidad, Consejo_comunale $consejo_comunal){
+        return view('proyecto.serviciocom.edit', compact('estado'), compact('municipio'), compact('parroquia'), compact('comunidad'), compact('consejo_comunal'));
     }
-    public function update_direccion(Request $request, Direccione $direccion){
+    public function update_direccion(Request $request, Estado $estado, Municipio $municipio, Parroquia $parroquia, Comunidade $comunidad, Consejo_comunale $consejo_comunal){
         $request->validate([
-            'estado'=> 'required',
-            'municipio'=> 'required|max:50',
-            'parroquia'=> 'required|max:50',
-            'comunidad'=> 'required|max:50',
-            'consejo_comunal'=> 'required|max:50'
+            'nombre_estado' => 'required',
+            'nombre_municipio' => 'required',
+            'nombre_parroquia' => 'required',
+            'nombre_comunidad' => 'required',
+            'nombre_consejo_comunal' => 'required'
         ]);
-        $direccion->update($request->all());
-        return redirect()->route('index_comunitario', $direccion);
+        $estado->update($request->all());
+        $municipio->update($request->all());
+        $parroquia->update($request->all());
+        $comunidad->update($request->all());
+        $consejo_comunal->update($request->all());
+        return redirect()->route('index_comunitario', $estado, $municipio, $parroquia, $comunidad, $consejo_comunal);
     }
-    public function destroy_direccion(Direccione $direccion){
-        $direccion->delete();
+    public function destroy_direccion(Estado $estado, Municipio $municipio, Parroquia $parroquia, Comunidade $comunidad, Consejo_comunale $consejo_comunal){
+        $estado->delete();
+        $municipio->delete();
+        $parroquia->delete();
+        $comunidad->delete();
+        $consejo_comunal->delete();
         return redirect()->route('index_comunitario');
     }
 }
