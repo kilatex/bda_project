@@ -43,6 +43,8 @@ CREATE TABLE IF NOT EXISTS empleados(
     usuario_id int(255),
     cargo varchar(255),
     acceso varchar(255),
+    created_at datetime,
+    updated_at datetime,
     CONSTRAINT pk_empleados PRIMARY KEY(id),
     CONSTRAINT fk_empleados_users FOREIGN KEY(usuario_id) REFERENCES users(id)
 )ENGINE=InnoDb;
@@ -84,13 +86,13 @@ CREATE TABLE IF NOT EXISTS especialidades(
 
 CREATE TABLE IF NOT EXISTS expedientes(
     id int(255) auto_increment not null,
-    usuario_id int(255) not null,
+    estudiante_id int(255) not null,
     estado varchar(100),
-    created_at varchar(100),
-    updated_at varchar(100),
-    deleted_at varchar(100),
+    created_at datetime,
+    updated_at datetime,
+    deleted_at datetime,
     CONSTRAINT pk_expedientes PRIMARY KEY(id),
-    CONSTRAINT fk_expedientes_users FOREIGN KEY(usuario_id) REFERENCES users(id)
+    CONSTRAINT fk_expedientes_estudiantes FOREIGN KEY(estudiante_id) REFERENCES estudiantes(id)
 )ENGINE=InnoDb;
 
 

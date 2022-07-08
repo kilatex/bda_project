@@ -1,15 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Sigecop;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
 use  App\Models\Message;
+use  App\Models\Estudiante;
 use  App\Models\User;
-use  App\Models\Document;
+use  App\Models\Documento;
+use  App\Models\Expediente;
 use Illuminate\Support\Facades\DB;
 class DocumentController extends Controller
 {
@@ -24,9 +27,30 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function upload()
-    {
-        return view('docs.upload');
+    public function upload(Request $request)
+    {   
+        $id = $request->user;
+        $estudiante = Estudiante::find($id)
+                ->first();
+            
+        $expediente = Expediente::where('estudiante_id', $id)->first();
+
+        if(!$expediente){
+            $expediente = null;
+            $documentos = null;
+        }else{
+            $documentos = Documento::where('expediente_id', $expediente->id)->get();
+        }
+
+        $message = null;
+        return view('recopasec.user.upload', [
+            'estudiante' => $estudiante,
+            'estudiante_id'  => $id,
+            'expediente' => $expediente,
+            'message' => $message,
+            'documentos' => $documentos,
+        ]);
+        
     }
 
     public function select_user_to_new_file(){
@@ -35,28 +59,63 @@ class DocumentController extends Controller
             return redirect()->route('home');
         }
 
-        $users = User::Where('rol','USER')
-                    ->orderBy('id','desc')->paginate(12);
-    
-        
-        $field_name = 'Seleccione Estudiante para crearle un expediente';
-        $crear_expediente = true;
+        $users = Estudiante::orderBy('id','DESC')->paginate(2);
+                $field_name = 'Seleccione Estudiante para crearle un expediente';
 
-        return view('admin.user-lists',[
+
+
+        return view('recopasec.user.user-lists',[
             'users' => $users,
             'field_name' => $field_name,
-            'crear_expediente' => $crear_expediente
+            'crear_expediente' => 'null'
         ]);
 
     }
     public function subir(Request $request){
         
         $user =  \Auth::user();
+        // VALIDATE NEW DOCUMENT
+        $validate = $this->validate($request,[
+            'file' => 'image',
+            'estudiante_id'  => 'required'
+        ]);
         $file = $request->file('file');
         $doc = $request->input('field');
-        var_dump($doc);
-        var_dump($file); 
-     /*   
+        $estudiante_id = $request->input('estudiante_id');
+
+
+        $expediente = Expediente::where('estudiante_id',$estudiante_id)->first();
+        
+        
+       if(!$expediente){
+            $expediente =  new Expediente();
+            $expediente->estudiante_id = $estudiante_id;
+            $expediente->estado = 'En Progreso';
+            $expediente->save();
+       }
+
+       $documento = Documento::Where('expediente_id', $expediente->id)
+            ->where('nombre',$doc)->first();
+ 
+       if($documento){
+        $message = 'Archivo repetido';
+        return redirect()->route('upload', ['user' => $estudiante_id])->with([
+            'message' => $message ]);
+       }
+
+       $documento = new Documento();
+       $documento->expediente_id = $expediente->id;
+       $documento->estado = 'En Progreso';
+       $documento->nombre =  $request->input('field');
+        //SAVE
+        $image_path_name = time().'-'.$request->input('estudiante_id').'-'.$file->getClientOriginalName();
+        Storage::putFileAs('/documents/',$file, $image_path_name);
+        $documento->archivo = $image_path_name;
+        
+        $documento->save();
+        return redirect()->route('upload', ['user' => $estudiante_id]);
+
+         /*   
          if( $docs == null){
                 //VALIDATE
                 $validate = $this->validate($request,[
@@ -226,7 +285,7 @@ class DocumentController extends Controller
                 'message' => $message
             ]);  
         }  */
-        
+
 
     }
  
@@ -240,20 +299,18 @@ class DocumentController extends Controller
         return new Response($file,200);
 
     }   
-
-    public function my_docs(){
+    public function show_expediente($expediente_id){
 
         $user =  \Auth::user();
-        $id = $user->id;
-        $docs = Document::where('user_id',$id)->first();
-       
+        $docs = Documento::where('expediente_id',$expediente_id)->get();
+        $expediente = Expediente::find($expediente_id);
 
         return view('docs.mydocs',[
-            'docs' => $docs
+            'docs' => $docs,
+            'expediente' => $expediente,
         ]);
 
     }
-
     public function modify(){
 
         return view('docs.modify');
@@ -306,6 +363,16 @@ class DocumentController extends Controller
         ]);  
     
      
+    }
+
+    public function delete_expediente($expediente_id){
+        
+       
+        $expediente = Expediente::where('id',$expediente_id)->first();
+        $expediente->estado = 'REMOVED';
+        $expediente->save();
+
+        return redirect()->route('expedientes_list');
     }
     
     
