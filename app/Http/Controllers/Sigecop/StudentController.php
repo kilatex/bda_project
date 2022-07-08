@@ -86,11 +86,7 @@ class StudentController extends Controller
                 'postgrados' => $postgrados,
                 'promociones' => $promociones
             ]);
-        
-            
     }
-
-
 
     public function update_profile(Request $request){
 
@@ -110,49 +106,19 @@ class StudentController extends Controller
 
                
         //Recoger Datos del Usuario
-        $name = $request->input('name');
-        $surname = $request->input('surname');
-        $dni = $request->input('dni');
+        $nombres = $request->input('nombres');
+        $apellidos = $request->input('apellidos');
+        $cedula = $request->input('cedula');
         $email = $request->input('email');
-        $periodo_ingreso = $request->input('periodo');
-        $periodo_grado = $request->input('periodo_grado');
-        $pregrado = $request->input('pregrado');
-
-        $promocion = $request->input('promocion');
-
-        $postgrado = $request->input('postgrado');
-        $role = "USER";
+        $rol = "USER";
 
         // Asignar nuevos valores al objeto del usuario
-        $user->name = $name;
-        $user->surname = $surname;
-        $user->dni = $dni;
+        $user->cedula = $cedula;
+        $user->nombres = $nombres;
+        $user->apellidos = $apellidos;
         $user->email = $email;
         
-
-        if($periodo_ingreso != "Seleccione" && $periodo_ingreso != null){
-            $user->periodo_id = $periodo_ingreso;
-        }
-
-        if($postgrado != "Seleccione" && $postgrado != null){
-            $user->postgrado_id = $postgrado;
-        }
-
-        if($pregrado != "Seleccione" && $pregrado != null){
-            $user->pregrado_id = $pregrado;
-        }
-
-        if($periodo_grado != "Seleccione" && $periodo_grado != null){
-            $user->periodoGrado_id = $periodo_grado;
-        }
-
-        if($promocion != "Seleccione" && $promocion != null){
-            $user->promocion_id = $promocion;
-        }
-
-
-
-        $user->role = $role;
+        $user->rol = $rol;
 
         $user->update();
 

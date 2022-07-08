@@ -58,29 +58,29 @@ class UserController extends Controller
         $user = new User();
         // Validar Formulario
         $validate = $this->validate($request,[
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
+            'cedula' => 'required|integer|unique:users,dni',
+            'nombres' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
-            'dni' => 'required|integer|unique:users,dni',
             'password' => 'required|string',
             'password_confirmation' => 'required|string',
         ]);
 
         //Recoger Datos del Usuario
-        $name = $request->input('name');
-        $surname = $request->input('surname');
-        $dni = $request->input('dni');
+        $nombres = $request->input('nombres');
+        $apellidos = $request->input('apellidos');
+        $cedula = $request->input('dni');
         $email = $request->input('email');
         $pass = $request->input('password');
-        $role = "ADMIN";
+        $rol = "ADMIN";
         $confirm_pass = $request->input('password_confirmation');
 
         if($pass == $confirm_pass){
-            $user->name = $name;
-            $user->surname = $surname;
-            $user->dni = $dni;
+            $user->nombres = $nombres;
+            $user->apellidos = $apellidos;
+            $user->cedula = $cedula;
             $user->email = $email;
-            $user->role = $role;
+            $user->rol = $rol;
             $user->password = hash::make($pass);
             $user->save();
             return redirect()->route('home');
@@ -146,7 +146,7 @@ class UserController extends Controller
     }
     public function users_list(){
         $user = \Auth::user();
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 
@@ -187,7 +187,7 @@ class UserController extends Controller
 
         $user = \Auth::user();
 
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 
@@ -208,7 +208,7 @@ class UserController extends Controller
 
         $user = \Auth::user();
 
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
         
@@ -278,7 +278,7 @@ class UserController extends Controller
     
     public function searchByCarreer($id){
         $user = \Auth::user();
-        if ( $user == null || $user->role != "USER"){
+        if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
 

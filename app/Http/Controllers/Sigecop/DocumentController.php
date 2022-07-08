@@ -305,7 +305,7 @@ class DocumentController extends Controller
         $docs = Documento::where('expediente_id',$expediente_id)->get();
         $expediente = Expediente::find($expediente_id);
 
-        return view('docs.mydocs',[
+        return view('recopasec.docs.mydocs',[
             'docs' => $docs,
             'expediente' => $expediente,
         ]);
@@ -313,7 +313,7 @@ class DocumentController extends Controller
     }
     public function modify(){
 
-        return view('docs.modify');
+        return view('recopasec.docs.modify');
     }
 
     public function update_docs(Request $request){
