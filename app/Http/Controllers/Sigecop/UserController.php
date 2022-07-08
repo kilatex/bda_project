@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use  App\Models\Estudiante;
 use  App\Models\User;
-use  App\Models\Expediente;
+use  App\Models\Sigecop\Expediente;
 use  App\Models\Carrera;
 use  App\Models\Message;
 use  App\Models\Document;

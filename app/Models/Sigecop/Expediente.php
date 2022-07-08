@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Sigecop;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Documento extends Model
+class Expediente extends Model
 {
     protected $fillable = [
-        'expediente_id', 
-        'archivo',
+        'usuario_id', 
         'estado', 
         'created_at',
         'uptated_at',
+        'deleted_at',
     ];
 
-    public function expediente(){
-        return $this->belongsTo('App\Expediente','expediente_id');
+    public function estudiante(){
+        return $this->belongsTo('App\Models\Estudiante','estudiante_id');
     }
 
     use HasFactory;

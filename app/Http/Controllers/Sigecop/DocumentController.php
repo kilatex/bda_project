@@ -8,11 +8,11 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-use  App\Models\Message;
+use  App\Models\Sigecop\Message;
 use  App\Models\Estudiante;
 use  App\Models\User;
-use  App\Models\Documento;
-use  App\Models\Expediente;
+use  App\Models\Sigecop\Documento;
+use  App\Models\Sigecop\Expediente;
 use Illuminate\Support\Facades\DB;
 class DocumentController extends Controller
 {
