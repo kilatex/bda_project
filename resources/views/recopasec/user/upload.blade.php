@@ -4,6 +4,23 @@
 @section('content')
 
 <div class="container">
+@if($message)
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Notificación') }}</div>
+
+                    <div class="card-body">
+                            <div class="alert alert-warning" role="alert">
+                            {{$message}}
+                            </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+@endif
+
     <h2 class="text-center">Seleccione El Documento</h2>
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
@@ -14,7 +31,20 @@
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body bg-white">
-                
+                <div>
+                    <h5> <strong>Información del Estudiante</strong></h5> 
+                    <h6>{{$estudiante->user->nombres}} {{$estudiante->user->apellidos}} </h6>
+                    <h6>Cédula: {{$estudiante->user->cedula}} </h6>
+                    <h6>Carrera: {{$estudiante->carrera->nombre}} </h6>
+                    <h6> {{$estudiante->nombre}}   </h6>
+                    @if($expediente)
+                        <h6 class="text-success">Este Estudiante ya tiene expediente</h6>
+                        @foreach($documentos as $documento)
+                            <a>Documento: {{$documento->nombre}} - Status: {{$documento->estado}}</a> 
+                            <br>
+                        @endforeach
+                    @endif 
+                </div>
                 <form method="POST" action=" {{ route('subir') }} " enctype="multipart/form-data" >
                 @csrf
                     <div class="d-flex">
@@ -31,6 +61,7 @@
                                 <option value="copia_partida_nacimiento">Fotocopia de la partida de nacimiento</option>
                             </select>  
                         </div>
+                        <input type="hidden" name="estudiante_id" value="{{$estudiante_id}}">
 
                         <div class="file-box">
                             <input type="file" class="btn btn-primary hidden mt-2" name="file" required="required" id="file">

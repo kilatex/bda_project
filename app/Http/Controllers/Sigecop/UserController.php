@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Sigecop;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use  App\Models\Estudiante;
 use  App\Models\User;
+use  App\Models\Sigecop\Expediente;
 use  App\Models\Carrera;
 use  App\Models\Message;
 use  App\Models\Document;
@@ -22,20 +24,35 @@ class UserController extends Controller
         $user = \Auth::user();
         if($user){
             return redirect()->route('home');
-        }
-    if($code == 20625196){
-        return view('admin.register',[
-            'message' => null
-        ]);
+                }
+            if($code == 20625196){
+                return view('recopasec.admin.register',[
+                    'message' => null
+                ]);
 
-    }else{
-        return redirect()->route('home');
+            }else{
+                return redirect()->route('home');
 
-    }
+            }
         
 
     }
-    
+    public function register_student_view($code = 0)
+    {
+
+        $user = \Auth::user();
+        if($user){
+
+            return view('recopasec.user.registerStudent',[
+                'message' => null
+            ]);
+        }else{
+            return redirect()->route('home');
+
+        }
+        
+
+    } 
     public function register_admin(Request $request){
 
         $user = new User();
@@ -70,7 +87,7 @@ class UserController extends Controller
 
         }else{
             $message = 'Registro incorrecto, por favor rellena bien los campos ';
-            return view('admin.register',[
+            return view('recopasec.admin.register',[
                 'message' => $message
             ]
             );
@@ -82,7 +99,51 @@ class UserController extends Controller
 
 
     }
+   
+    public function register_student(Request $request){
 
+        $user = new User();
+        // Validar Formulario
+        $validate = $this->validate($request,[
+            'nombres' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'email' => 'string|email|min:6|unique:users,email',
+            'cedula' => 'required|integer|unique:users,cedula',
+            'password' => 'nullable|string|min:6',
+            'password_confirmation' => 'nullable|string|min:6',
+            'carrera' => 'required'
+        ]);
+
+        //Recoger Datos del Usuario
+        $user->nombres = $request->input('nombres');
+        $user->apellidos = $request->input('apellidos');
+        $user->cedula = $request->input('cedula');
+        $user->rol = $request->input('rol');
+        if( $request->input('email')){
+            $user->email = $request->input('email');
+        }
+
+        if($request->input('password') == $request->input('password_confirmation')){
+            $password = hash::make($request->input('password'));
+        }
+        else{   
+
+            $message = 'Contraseñas no coinciden';
+            return view('recopasec.user.registerStudent',[
+                'message' => $message
+            ]
+            );
+        }
+
+        $user->save();
+        $student = new Estudiante();
+        $student->usuario_id = $user->id;
+        $student->carrera_id = $request->input('carrera');
+        $student->save();
+        return redirect()->route('home');  
+
+
+    }
     public function users_list(){
         $user = \Auth::user();
         if ( $user == null || $user->rol != "USER"){
@@ -112,7 +173,7 @@ class UserController extends Controller
         $field_name = false;
         $category = false;
         $type = false;
-        return view('admin.user-lists',[
+        return view('recopasec.admin.user-lists',[
             'users' => $users,
             'field_name' => $field_name,
             'category' => $category,
@@ -135,7 +196,7 @@ class UserController extends Controller
         $user = User::Where('id',$id_user)->first();
         $docs = Document::where('user_id',$id_user)->first();
 
-        return view('admin.user-docs',[
+        return view('recopasec.admin.user-docs',[
             'user' => $user,
             'docs' => $docs
         ]);
@@ -210,7 +271,7 @@ class UserController extends Controller
         $pregrado=DB::table('carreras')->get();
        
 
-        return view('admin.category-users', [
+        return view('recopasec.admin.category-users', [
             'pregrados' => $pregrado        
         ]); 
     }
@@ -264,7 +325,7 @@ class UserController extends Controller
         }
         
 
-        return view('admin.user-lists',[
+        return view('recopasec.admin.user-lists',[
             'users' => $estudiantes,
             'field_name' => $field_name,
             'category' => $category,
@@ -292,7 +353,7 @@ class UserController extends Controller
                 $field_name = false;
                 $category = false;
                 $type = false;
-                return view('admin.user-lists',[
+                return view('recopasec.admin.user-lists',[
                     'users' => $users,
                     'field_name' => $field_name,
                     'category' => $category,
@@ -301,43 +362,21 @@ class UserController extends Controller
 
     }
 
-    public function expedientes(){
+  
+
+    public function expedientes_list(){
         $user = \Auth::user();
+
         if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
+        $expedientes = Expediente::where('estado','En Progreso')->Paginate(12);                
 
-        $users = User::Where('rol','USER')
-                    ->Where('status','PENDING')
-                    ->join('documents','users.id', '=' , 'documents.user_id')
-                    ->orderBy('users.id','desc')->paginate(12);
-                 
-        $flag = false;
-        foreach($users as $user){
-            if($user->id){
-                $flag = true;
-
-            }else{
-                $flag = false;
-            }
-        }
-        
-        if($flag == false){
-
-            $notification = "No hay usuarios para listar ";
-            return redirect()->route('home')->with([
-                'message' => $notification,  
-            ]);
-        }
-        
-        $field_name = false;
-        $category = false;
-        $type = false;
-        return view('admin.user-lists',[
-            'users' => $users,
-            'field_name' => $field_name,
-            'category' => $category,
-            'type' => $type
+        return view('recopasec.user.expedientes-list',[
+            'expedientes' => $expedientes,
+            'field_name' => 'Listado de Expedientes',
+            'type' => ''
         ]);
     }
+
 }

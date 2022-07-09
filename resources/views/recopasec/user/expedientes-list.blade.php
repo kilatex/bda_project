@@ -19,49 +19,37 @@
 
                 
 
-                    @if(count($users) >=1)
+                    @if(count($expedientes) >=1)
                     <table class="table">
                         <thead>
                             <tr>
                             <th scope="col">Cédula</th>
                             <th scope="col">Nombres y Apellidos</th>
                             <th scope="col">Carrera</th>
-                            <th scope="col">Semestre</th>
-                            <th scope="col">Correo</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Más Info</th>
 
                             </tr>
                         </thead>
                
-                        @foreach($users as $user)
-            
+                        @foreach($expedientes as $expediente)
+
                         <tbody class="table-group-divider">
                             <tr>
                           
-                                <th scope="row">{{$user->cedula}}</th>
-                                <td>{{$user->nombres}} {{$user->apellidos}}</td>
-                                <td>Carrera X</td>
-                                <td>Semestre X</td>  
-                                <td>{{$user->email}}</td> 
-                                <td>   
-                                    @if(isset($crear_expediente))
-                                    <a href="{{ route('upload') }}">
-                                        Crear Expediente
-                                    </a>
-
-                                    @else
-                                    <a href="#">
-                                        Más Info
-                                    </a>
-                                    @endif
-                                   
-                                </td> 
-                            
+                                <th scope="row">{{$expediente->estudiante_id}}</th>
+                                <td>{{$expediente->estudiante->user->nombres}} {{$expediente->estudiante->user->apellidos}}</td>
+                                <td>{{$expediente->estudiante->carrera->nombre}}</td>
+                                <td> {{$expediente->estado}}</td> 
+                                <td>
+                                    <a  href="{{route('show_expediente',['expediente_id'=> $expediente->id])}}" class="text-success"> <strong>Observar</strong> </a>
+                                    <a href="#" class="text-primary"> <strong>Editar</strong> </a>
+                                    <a  href="{{route('delete_expediente',['expediente_id'=> $expediente->id])}}" class="text-danger"> <strong>Eliminar</strong> </a>
+                                </td>
  
 
                             </tr>
                         </tbody>
-                    
                     @endforeach
                     </table>
                     @else
@@ -72,7 +60,7 @@
             </div>
             <div class="d-flex justify-content-center">
              
-                {{$users->links()}}
+                {{$expedientes->links()}}
             </div>
          
             

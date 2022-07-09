@@ -11,19 +11,30 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('store_empresa') }}" method="POST" enctype="multipart/form-data" >
                     @csrf
+                    <div class="row mb-3">
+                        <label for="rif" class="col-md-4 col-form-label text-md-end">{{ __('Rif') }}</label>
 
-                        <div class="row mb-3">
-                            <label for="nombre" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  required autocomplete="nombre" autofocus>        
-                                @error('nombrea')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="col-md-6">
+                            <input id="rif" type="text" class="form-control @error('rif') is-invalid @enderror" name="rif"  required autocomplete="rif" autofocus pattern="[0-9]+">        
+                            @error('rif')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="nombre" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre"  required autocomplete="nombre" autofocus>        
+                            @error('nombre')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electronico') }}</label>
@@ -72,51 +83,31 @@
                         <br>
                         <center><h5>Ubicación</h5></center>
                         <div class="row mb-3">
-                            <label for="estado" class="col-md-4 col-form-label text-md-end">{{ __('Estados') }}</label>
+                            <label for="nombre_estado" class="col-md-4 col-form-label text-md-end">{{ __('Estados') }}</label>
                             <div class="col-md-6">
-                                <select class="form-select" name="estado" aria-label="Default select example">
-                                    <option selected>Seleccione un estado</option>
-                                    <option value="amazonas">Amazonas</option>
-                                    <option value="anzoategui">Anzoátegui</option>
-                                    <option value="apure">Apure</option>
-                                    <option value="aragua">Aragua</option>
-                                    <option value="barinas">Barinas</option>
-                                    <option value="bolivar">Bolivar</option>
-                                    <option value="carabobo">Carabobo</option>
-                                    <option value="cojedes">Cojedes</option>
-                                    <option value="delta_amacuro">Delta Amacuro</option>
-                                    <option value="distrito_capital">Distrito Capital</option>
-                                    <option value="falcon">Falcón</option>
-                                    <option value="guarico">Guárico</option>
-                                    <option value="lara">Lara</option>
-                                    <option value="merida">Mérida</option>
-                                    <option value="miranda">Miranda</option>
-                                    <option value="monagas">Monagas</option>
-                                    <option value="nueva_esparta">Nueva Esparta</option>
-                                    <option value="portuguesa">Portuguesa</option>
-                                    <option value="sucre">Sucre</option>
-                                    <option value="tachira">Táchira</option>
-                                    <option value="trujillo">Trujillo</option>
-                                    <option value="vargas">Vargas</option>
-                                    <option value="yaracuy">Yaracuy</option>
-                                    <option value="zulia">Zulia</option>
+                                <select class="form-select" name="nombre_estado" id="" aria-label="Default select example">
+                                    <option value="">Seleccione un estado</option>
+                                    @foreach ($estados as $estado)
+                                        <option value="{{$estado['id']}}">{{$estado['nombre']}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label for="municipio" class="col-md-4 col-form-label text-md-end">{{ __('Municipio') }}</label>
-
-                            
-                            <div class="col-md-6">
-                                <input id="municipio" name="municipio" type="text" class="form-control @error('municipio') is-invalid @enderror"   autofocus>
-
-                                @error('municipio')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror 
+                        @if ()
+                            <div class="row mb-3">
+                                <label for="nombre_municipio" class="col-md-4 col-form-label text-md-end">{{ __('Municipios') }}</label>
+                                <div class="col-md-6">
+                                    <select class="form-select" name="nombre_municipio" id="" aria-label="Default select example">
+                                        <option value="">Seleccione un municipio</option>
+                                        @foreach ($municipios as $municipio)
+                                            <option value="{{$municipio['id']}}">{{$municipio['nombre']}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            
+                        @endif
                         <div class="row mb-3">
                             <label for="parroquia" class="col-md-4 col-form-label text-md-end">{{ __('Parroquia') }}</label>
 

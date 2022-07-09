@@ -32,7 +32,7 @@ class ProyectoPController extends Controller
     }
     public function update_pasantias(Request $request, Proyecto_pasantia $pasantia){
         $request->validate([
-            'codigo'=> 'required|max:50',
+            'codigo'=> 'required|max:06',
             'titulo'=> 'required|max:255',
             'periodo'=> 'required',
         ]);

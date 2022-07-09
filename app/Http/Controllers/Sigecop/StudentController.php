@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Sigecop;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use App\Http\Controllers\Controller;
+use  App\Models\Estudiante;
 use  App\Models\User;
 use  App\Models\Document;
 use  App\Models\Message;
@@ -41,13 +42,13 @@ class StudentController extends Controller
         if($user == null){
 
            
-            return view('user.user',[
+            return view('recopasec.user.user',[
                 'user' => $user_auth
             ]);
 
         }elseif ($user != null ){
                    
-            return view('user.user',[
+            return view('recopasec.user.user',[
                 'user' => $user
             ]);
         }else{
@@ -77,7 +78,7 @@ class StudentController extends Controller
             $promociones=DB::table('promocions')->get();
     
       
-            return view('user.edit',[
+            return view('recopasec.user.edit',[
                 'user' => $user,
                 'periodos' => $periodos,
                 'periodos_grado' => $periodos_grado,
@@ -147,7 +148,7 @@ class StudentController extends Controller
 
         $message = Message::where('document_id',$document_id)->first();
  
-        return view('user.notification',[
+        return view('recopasec.user.notification',[
             'notification' => $message
         ]);
     }
@@ -158,10 +159,10 @@ class StudentController extends Controller
         if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
-
-        $users = User::Where('rol','USER')
-                    ->orderBy('id','desc')->paginate(2);
-                 
+        $users = Estudiante::Join('users','users.id', '=' , 'estudiantes.usuario_id')
+                ->join('carreras','carreras.id', '=' , 'estudiantes.carrera_id')->paginate(12);
+                
+                $field_name = 'Seleccione Estudiante para crearle un expediente';                 
         $flag = false;
         foreach($users as $user){
             if($user->id){
@@ -182,7 +183,7 @@ class StudentController extends Controller
         $field_name = false;
         $category = false;
         $type = false;
-        return view('admin.user-lists',[
+        return view('recopasec.user.user-lists',[
             'users' => $users,
             'field_name' => $field_name,
             'type' => $type

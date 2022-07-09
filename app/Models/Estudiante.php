@@ -25,7 +25,7 @@ class Estudiante extends Model
     }
 
     public function carrera(){
-        return $this->belongsTo('App\Models\Carrera','carrerra_id');
+        return $this->belongsTo('App\Models\Carrera','carrera_id');
     }
 
 }

@@ -20,7 +20,7 @@ class ProyectoSController extends Controller
     }
     public function store_comunitario(Request $request){
         $request->validate([
-            'codigo'=> 'required|max:50',
+            'codigo'=> 'required|max:06',
             'titulo'=> 'required|max:255',
             'periodo'=> 'required',
 
@@ -39,7 +39,7 @@ class ProyectoSController extends Controller
     }
     public function update_comunitario(Request $request, Proyecto_comunitario $comunitario){
         $request->validate([
-            'codigo'=> 'required|max:50',
+            'codigo'=> 'required|max:06',
             'titulo'=> 'required|max:255',
             'periodo'=> 'required',
         ]);

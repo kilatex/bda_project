@@ -11,12 +11,15 @@ use Illuminate\Http\Request;
 class EmpresaController extends Controller
 {
     public function create_empresa(){
-        return view('proyectos.pasantias.empresa');
+        $estados = Estado::all();
+        $municipios = Municipio::all();
+        $parroquias = Parroquia::all();
+        return view('proyectos.pasantias.empresa', compact('estados'), compact('municipios'), compact('parroquias'));
     }
     public function store_empresa(Request $request){
 
         $request->validate([
-            'rif'=>'required',
+            'rif'=>'required|max:09',
             'nombre'=> 'required|max:50',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',

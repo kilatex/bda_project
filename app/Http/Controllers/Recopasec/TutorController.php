@@ -23,7 +23,7 @@ class TutorController extends Controller
             $request->validate([
                 'nombres'=> 'required|max:50',
                 'apellidos'=> 'required|max:50',
-                'cedula'=> 'required|max:10',
+                'cedula'=> 'required|max:08',
                 'email'=> 'required|max:100',
                 'telefono'=> 'required|max:12',
                 'nombre_especialidad' => 'required|max:20'
@@ -43,7 +43,7 @@ class TutorController extends Controller
             $request->validate([
                 'nombres'=> 'required|max:50',
                 'apellidos'=> 'required|max:50',
-                'cedula'=> 'required|max:10',
+                'cedula'=> 'required|max:08',
                 'email'=> 'required|max:100',
                 'telefono'=> 'required|max:12',
                 'nombre_especialidad' => 'required|max:20'
@@ -73,7 +73,7 @@ class TutorController extends Controller
         $request->validate([
             'nombres'=> 'required|max:50',
             'apellidos'=> 'required|max:50',
-            'cedula'=> 'required|max:10',
+            'cedula'=> 'required|max:08',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
             'nombre_especialidad' => 'required|max:20'
@@ -100,12 +100,9 @@ class TutorController extends Controller
         $request->validate([
             'nombres'=> 'required|max:50',
             'apellidos'=> 'required|max:50',
-            'cedula'=> 'required|max:10',
+            'cedula'=> 'required|max:08',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
-            'estado'=> 'required',
-            'municipio'=> 'required|max:100',
-            'parroquia'=> 'required|max:100',
             'nombre_cargo' => 'required|max:100'
         ]);
         $tutorco = new Tutor_comunitario();
@@ -115,39 +112,29 @@ class TutorController extends Controller
         $tutorco->email = $request->email;
         $tutorco->telefono = $request->telefono;
         $tutorco->save();
-        $direccion = new Direccione();
-        $direccion->estado = $request->estado;
-        $direccion->municipio = $request->municipio;
-        $direccion->parroquia = $request->parroquia;
-        $direccion -> save();
         $cargo = new Cargo();
         $cargo->nombre = $request->nombre_cargo;
         return redirect()->route('index_comunitario');
         
     }
-    public function edit_tutorcom(Tutor_comunitario $tutorcom, Direccione $direccion, Cargo $cargo){
+    public function edit_tutorcom(Tutor_comunitario $tutorcom, Cargo $cargo){
         return view('Pasantias.edit', compact('tutorco'), compact('direccion'), compact('cargo'));
     }
-    public function update_tutorcom(Request $request, Tutor_comunitario $tutorcom, Direccione $direccion, Cargo $cargo){
+    public function update_tutorcom(Request $request, Tutor_comunitario $tutorcom, Cargo $cargo){
         $request->validate([
             'nombres'=> 'required|max:50',
             'apellidos'=> 'required|max:50',
             'cedula'=> 'required|max:10',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
-            'estado'=> 'required',
-            'municipio'=> 'required|max:100',
-            'parroquia'=> 'required|max:100',
             'nombre_cargo' => 'required|max:100'
         ]);
         $tutorcom->update($request->all());
-        $direccion->update($request->all());
         $cargo->update($request->all());
         return redirect()->route('index_comunitario');
     } 
-    public function destroy_tutorcom(Tutor_comunitario $tutorcom, Direccione $direccion, Cargo $cargo){
+    public function destroy_tutorcom(Tutor_comunitario $tutorcom, Cargo $cargo){
         $tutorcom->delete();
-        $direccion->delete();
         $cargo->delete();
         return redirect()->route('index_comunitario');
     }
@@ -160,7 +147,7 @@ class TutorController extends Controller
         $request->validate([
             'nombres'=> 'required|max:50',
             'apellidos'=> 'required|max:50',
-            'cedula'=> 'required|max:10',
+            'cedula'=> 'required|max:08',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
             'nombre_especialidad' => 'required|max:20'
@@ -185,9 +172,9 @@ class TutorController extends Controller
         $request->validate([
             'nombres'=> 'required|max:50',
             'apellidos'=> 'required|max:50',
-            'cedula'=> 'required|max:10',
+            'cedula'=> 'required|max:08',
             'email'=> 'required|max:100',
-            'telefono'=> 'required|max:12',
+            'telefono'=> 'required|max:11',
             'nombre_especialidad' => 'required|max:20'
         ]);
         $tutori->update($request->all());

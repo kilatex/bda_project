@@ -179,7 +179,7 @@
                                 </li>
 
                                 <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('expedientes') }}" >
+                                    <a id="" class="nav-link "  href="{{ route('expedientes_list') }}" >
                                     Expedientes
                                     </a>
                                 </li>
@@ -189,7 +189,11 @@
                                     </a>
                                 </li>
                             
-                                
+                                <li class="nav-item ">
+                                    <a id="" class="nav-link "  href="{{ route('register_student_view') }}" >
+                                    Registrar Estudiante
+                                    </a>
+                                </li>
                             @endif
                             <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
