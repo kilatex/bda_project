@@ -111,12 +111,12 @@
                                 </li>
 
                                 <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('pasantias.index') }}" >
+                                    <a id="" class="nav-link "  href="{{ route('index_pasantias') }}" >
                                         Proyectos
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('pasantias.create') }}" >
+                                    <a id="" class="nav-link "  href="{{ route('create_pasantias') }}" >
                                     Nuevo Proyecto
                                     </a>
                                 </li>
@@ -191,7 +191,7 @@
                                 </li>
                             
                                 <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('register_student_view') }}" >
+                                    <a id="" class="nav-link "  href="{{ route('verificar_cedula') }}" >
                                     Registrar Estudiante
                                     </a>
                                 </li>

@@ -54,11 +54,10 @@ class UserController extends Controller
 
     } 
     public function register_admin(Request $request){
-
         $user = new User();
         // Validar Formulario
         $validate = $this->validate($request,[
-            'cedula' => 'required|integer|unique:users,dni',
+            'cedula' => 'required|integer|max:8|unique:users,cedula',
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
@@ -91,8 +90,10 @@ class UserController extends Controller
                 'message' => $message
             ]
             );
-
         }
+    
+
+
     }
    
     public function register_student(Request $request){
@@ -145,7 +146,7 @@ class UserController extends Controller
             return redirect()->route('home');
         }
 
-        $users = User::Where('role','USER')
+        $users = User::Where('rol','USER')
                     ->orderBy('id','desc')->paginate(22);
         $flag = false;
         foreach($users as $user){
@@ -372,6 +373,45 @@ class UserController extends Controller
             'field_name' => 'Listado de Expedientes',
             'type' => ''
         ]);
+    }
+
+    public function verificar_cedula(){
+        $user = \Auth::user();
+
+        if ( $user == null || $user->rol != "USER"){
+            return redirect()->route('home');
+        }
+        return view('recopasec.user.searchCedula',[
+            'userByCedula' => false,
+            'userByEmail' => false,   
+        ]);
+    }
+
+    public function verificar_usuario(Request $request){
+        // Validar Formulario
+        $validate = $this->validate($request,[
+            'tipo_cedula'  => 'required',
+            'email' => 'string|email|',
+            'cedula' => 'required|min:7|max:9',
+        ]);
+        $cedula = $request->input('tipo_cedula').$request->input('cedula');
+        $email = $request->input('email');
+        $userByCedula = User::where('cedula', $cedula)->first();
+        $userByEmail = User::where('email', $email)->first();
+
+        if($userByCedula ||  $userByEmail){
+            return view('recopasec.user.searchCedula',[
+                'userByCedula' => $userByCedula,
+                'userByEmail' => $userByEmail,                
+            ]);
+        }
+
+        return view('recopasec.user.registerStudent',[
+            'cedula' => $cedula,
+            'email' => $email,
+            'message' => false,              
+        ]);
+              
     }
 
 }
