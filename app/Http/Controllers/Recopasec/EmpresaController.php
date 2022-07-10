@@ -48,7 +48,12 @@ class EmpresaController extends Controller
         
     }
     public function edit_empresa(Empresa $empresa){
-        return view('proyectos.pasantias.edit', compact('empresa'));
+        return view('proyectos.pasantias.edit', 
+        compact('empresa'),
+        compact('estado'),
+        compact('municipio'),
+        compact('parroquia')
+    );
     }
     public function update_empresa(Request $request, Empresa $empresa){
         $request->validate([
@@ -82,7 +87,7 @@ class EmpresaController extends Controller
     public function verificar_empresa(Request $request){
         // Validar Formulario
         $validate = $this->validate($request,[
-            'email' => 'string|email',
+            'email' => 'required',
             'rif' => 'required|min:7|max:9',
         ]);
         $rif = 'J'.$request->input('rif');
@@ -108,7 +113,7 @@ class EmpresaController extends Controller
             [
             // 'rif' => $rif,
             // 'email' => $email,
-            'message' => false,              
+            // 'message' => false,              
         ]);
               
     }

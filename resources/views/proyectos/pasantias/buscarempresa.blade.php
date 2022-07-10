@@ -73,7 +73,7 @@
                 @if($empresaByEmail)
                 <div class="empresaByEmail">                   
                     <div class="text-primary"> <strong>EMPRESA ENCONTRADO POR EMAIL</strong> </div>
-                    <div> <strong>Nombre: </strong> {{$empresaByEmail->nombrs}} </div>
+                    <div> <strong>Nombre: </strong> {{$empresaByEmail->nombre}} </div>
                     <div><strong>Rif: </strong>  {{$empresaByEmail->rif}} </div>
                     <div><strong>Email: </strong>  {{$empresaByEmail->email}} </div>
                     </div>

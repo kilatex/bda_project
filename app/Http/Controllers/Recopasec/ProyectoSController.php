@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Recopasec;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Estudiante;
 use App\Models\Recopasec\Comunidade;
 use App\Models\Recopasec\Consejo_comunale;
 use App\Models\Recopasec\Proyecto_comunitario;
 use App\Models\Recopasec\Estado;
 use App\Models\Recopasec\Municipio;
 use App\Models\Recopasec\Parroquia;
+use PDF;
 
 class ProyectoSController extends Controller
 {
@@ -54,7 +56,7 @@ class ProyectoSController extends Controller
         $parroquias = Parroquia::all();
         $comunidades = Comunidade::all();
         $consejo_comunales = Consejo_comunale::all();
-        return view('proyectos.serviciocom.comunidad', compact('estados'), compact('municipios'), compact('parroquias'), compact('comunidades'), compact('consejo_comunales'));
+        return view('proyectos.serviciocom.comunidad', compact('estados'), compact('municipios'), compact('parroquias'), compact('comunidades'), compact('Consejo_comunales'));
     }
     public function store_direccion(Request $request){
         $request->validate([
@@ -110,5 +112,15 @@ class ProyectoSController extends Controller
     }
     public function agregar_estudiante(){
 
+    }
+    public function documento(){
+        $estudiantes = Estudiante::all();
+        return view('proyectos.serviciocom.download', compact('estudiantes'));
+    }
+    public function descargar_pdf(){
+        $estudiantes = Estudiante::all();
+        view()->share('estudiantes', $estudiantes);
+        $pdf = PDF::loadView('proyectos.serviciocom.download', compact('estudiantes'));
+        return $pdf->download('certificado.pdf');
     }
 }

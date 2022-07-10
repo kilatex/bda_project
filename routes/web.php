@@ -106,6 +106,9 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::put('comunitarios/{comunitario}', [ProyectoSController::class, 'update_comunitario'])->name('update_comunitario');
         Route::delete('comunitarios/{comunitario}', [ProyectoSController::class, 'destroy_comunitario'])->name('destroy_comunitario');
         Route::get('estudiantes/{comunitario}', [ProyectoSController::class, 'agregar_estudiante'])->name('agregar');
+        //Descargar comprobante
+        Route::get('documento', [ProyectoSController::class, 'documento'])->name('documento');
+        Route::get('download-pdf', [ProyectoSController::class, 'descargar_pdf'])->name('descargar_pdf');
     //Rutas para las empresas de pasantias
         Route::post('/empresas-crear', [EmpresaController::class, 'store_empresa'])->name('store_empresa');
         Route::get('empresas/create', [EmpresaController::class, 'create_empresa'])->name('create_empresa');
