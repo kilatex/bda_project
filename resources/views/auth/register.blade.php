@@ -12,6 +12,24 @@
                         @csrf
 
                         <div class="row mb-3">
+                            <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
+
+                            <select class="form-select select-cedula mr-2" required style="width: 60px;" name="tipo_cedula" aria-label="Default select example">
+                                <option selected value="V">V</option>
+                                <option value="E">E</option>
+                            </select>
+                            <div class="col-md-6">
+                                <input id="cedula" placeholder="Inserta tu cédula" type="text" class="form-control @error('cedula') is-invalid @enderror" name="cedula" value="{{ old('cedula') }}" required autocomplete="cedula" autofocus>
+
+                                @error('cedula')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mb-3">
                             <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
@@ -40,20 +58,7 @@
                         </div>
 
 
-                        <div class="row mb-3">
-                            <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cedula') }}</label>
-
-
-                            <div class="col-md-6">
-                                <input id="cedula" placeholder="Inserta tu cédula" type="text" class="form-control @error('cedula') is-invalid @enderror" name="cedula" value="{{ old('cedula') }}" required autocomplete="cedula" autofocus>
-
-                                @error('cedula')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        
 
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electrónico') }}</label>

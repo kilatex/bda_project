@@ -45,7 +45,6 @@ Route::get('/sigecop/img-profile/{filename}', [App\Http\Controllers\Sigecop\Stud
 Route::get('/sigecop/notification', [App\Http\Controllers\Sigecop\StudentController::class, 'notification'])->name('notification');
 Route::get('/sigecop/estudiantes', [App\Http\Controllers\Sigecop\StudentController::class, 'students_list'])->name('students_list');
 
-
 // AdminController ROUTES
 Route::get('/sigecop/create-admin/{code?}', [App\Http\Controllers\Sigecop\UserController::class, 'create_admin'])->name('create_admin');
 Route::get('/sigecop/user-list', [App\Http\Controllers\Sigecop\UserController::class, 'users_list'])->name('users_list');
@@ -56,6 +55,8 @@ Route::get('/sigecop/expedientes', [App\Http\Controllers\Sigecop\UserController:
 Route::get('/sigecop/estudiantes/{carrera?}', [App\Http\Controllers\Sigecop\UserController::class, 'students_by_carreer'])->name('students_by_carreer');
 Route::get('/sigecop/registrar-estudiante', [App\Http\Controllers\Sigecop\UserController::class, 'register_student_view'])->name('register_student_view');
 Route::post('/sigecop/registrar/estudiantes', [App\Http\Controllers\Sigecop\UserController::class, 'register_student'])->name('register_student');
+Route::get('/sigecop/verificar-cedula', [App\Http\Controllers\Sigecop\UserController::class, 'verificar_cedula'])->name('verificar_cedula');
+Route::post('/verificar-usuario', [App\Http\Controllers\Sigecop\UserController::class, 'verificar_usuario'])->name('verificar_usuario');
 
 Route::get('/nuevo-expediente', [App\Http\Controllers\Sigecop\DocumentController::class, 'select_user_to_new_file'])->name('select_user_to_new_file');
 Route::get('/eliminar-expediente/{expediente_id} ', [App\Http\Controllers\Sigecop\DocumentController::class, 'delete_expediente'])->name('delete_expediente');
