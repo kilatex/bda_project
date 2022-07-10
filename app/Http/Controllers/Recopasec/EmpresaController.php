@@ -14,8 +14,9 @@ class EmpresaController extends Controller
         $estados = Estado::all();
         $municipios = Municipio::all();
         $parroquias = Parroquia::all();
-        return view('proyectos.pasantias.empresa', compact('estados'), compact('municipios'), compact('parroquias'));
+        return view('proyectos.pasantias.empresa', compact('estados'), compact('municipios'));
     }
+    
     public function store_empresa(Request $request){
 
         $request->validate([
@@ -23,25 +24,12 @@ class EmpresaController extends Controller
             'nombre'=> 'required|max:50',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
-            'nombre_estado'=>'required',
-            'nombre_municipio'=>'required',
-            'nombre_parroquia'=>'required'
         ]);
-        $estado = new Estado();
-        $estado->nombre_estado = $request->nombre;
-        $estado->save();        
-        $municipio = new Municipio();
-        $municipio->nombre_municipio = $request->nombre;
-        $municipio->save();
-        $parroquia = new Parroquia();
-        $parroquia->nombre_parroquia = $request->nombre;
-        $parroquia->save();
         $empresa = new Empresa();
         $empresa->nombre = $request->nombre;
         $empresa->email = $request->email;
         $empresa->telefono = $request->telefono;
         $empresa->departamento = $request->departamento;
-        $empresa->parroquia_id = $parroquia->id;
         $empresa->save();
         return redirect()->route('index_pasantias');
         

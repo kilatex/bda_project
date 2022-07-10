@@ -346,4 +346,13 @@ CREATE TABLE IF NOT EXISTS prestamo_libros(
     CONSTRAINT fk_prestamo_libros_prestamista_est FOREIGN KEY(prestamista_est_id) REFERENCES estudiantes(id),
     CONSTRAINT fk_prestamo_libros_prestamista_doc FOREIGN KEY(prestamista_doc_id) REFERENCES docentes(id)
 )ENGINE=InnoDb;
-
+CREATE TABLE IF NOT EXISTS direcciones(
+    id int(255) auto_increment not null,
+    consejo_comunal_id int(100),
+    estudiante_id int(100),
+    created_at datetime,
+    updated_at datetime,
+    CONSTRAINT pk_direcciones PRIMARY KEY(id),
+    CONSTRAINT fk_direcciones_consejo_comunales FOREIGN KEY(consejo_comunal_id) REFERENCES consejo_comunales(id),
+    CONSTRAINT fk_direcciones_estudiantes FOREIGN KEY(estudiante_id) REFERENCES estudiantes(id)
+)ENGINE=InnoDb;

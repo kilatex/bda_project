@@ -1,3 +1,6 @@
+<?php 
+use  App\Http\Controllers\Recopasec\EmpresaController;
+?>
 @extends('layouts.app')
 
 @section('content')
@@ -83,44 +86,7 @@
                         <br>
                         <center><h5>Ubicación</h5></center>
                         <div class="row mb-3">
-                            <label for="nombre_estado" class="col-md-4 col-form-label text-md-end">{{ __('Estados') }}</label>
-                            <div class="col-md-6">
-                                <select class="form-select" name="nombre_estado" id="" aria-label="Default select example">
-                                    <option value="">Seleccione un estado</option>
-                                    @foreach ($estados as $estado)
-                                        <option value="{{$estado['id']}}">{{$estado['nombre']}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        @if ()
-                            <div class="row mb-3">
-                                <label for="nombre_municipio" class="col-md-4 col-form-label text-md-end">{{ __('Municipios') }}</label>
-                                <div class="col-md-6">
-                                    <select class="form-select" name="nombre_municipio" id="" aria-label="Default select example">
-                                        <option value="">Seleccione un municipio</option>
-                                        @foreach ($municipios as $municipio)
-                                            <option value="{{$municipio['id']}}">{{$municipio['nombre']}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        @else
-                            
-                        @endif
-                        <div class="row mb-3">
-                            <label for="parroquia" class="col-md-4 col-form-label text-md-end">{{ __('Parroquia') }}</label>
-
-                            
-                            <div class="col-md-6">
-                                <input id="parroquia" name="parroquia" type="text" class="form-control @error('parroquia') is-invalid @enderror"   autofocus>
-
-                                @error('parroquia')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror 
-                            </div>
+                            @livewire('select-component', ['estados' => $estados, 'municipios' => $municipios], key($estados->id, $municipios->id))
                         </div>
                         <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
@@ -136,5 +102,69 @@
     </div>
     
 </div>
+{{-- <div class="row mb-3">
+    <label for="nombre_estado" class="col-md-4 col-form-label text-md-end">{{ __('Estados') }}</label>
+    <div class="col-md-6">
+        <select class="form-select" wire:model="selectedEstado" name="nombre_estado" id="estado" aria-label="Default select example">
+            <option value="">Seleccione un estado</option>
+            @foreach ($estados as $estado)
+                <option value="{{$estado['id']}}" class="estado">{{$estado['nombre']}}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+@if(!is_null($municipios))
+<div class="row mb-3">
+    <label for="" class="col-md-4 col-form-label text-md-end">{{ __('Municipios') }}</label>
+    <div class="col-md-6">
+        <select class="form-select"  wire:model="selectedMunicipio" name="municipio" id="municipio" aria-label="Default select example">
+            <option value="">Seleccione un municipio</option>
+            @foreach ($municipios as $municipio)
+            <option value="{{$municipio['id']}}" >{{$municipio['nombre']}}</option>
+        @endforeach
+        </select>
+    </div>
+</div>
+@endif
+<div class="row mb-3">
+    <label for="parroquia" class="col-md-4 col-form-label text-md-end">{{ __('Parroquia') }}</label>
 
+    
+    <div class="col-md-6">
+        <input id="parroquia" name="parroquia" type="text" class="form-control @error('parroquia') is-invalid @enderror"   autofocus>
+
+        @error('parroquia')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror 
+    </div>
+</div> --}}
+<script>
+
+/*             const select  = document.getElementById("estado");
+            select
+            const csrf = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            console.log(csrf)
+            select.addEventListener('change', (e)=>{
+            fetch('municipios',{
+            method: 'POST',
+            body: JSON.stringify({direccion : e.target.value}),
+            headers:{
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+
+            }).then(response => {
+            console.log(response.data);
+
+            return response.json()
+            }).then(data =>{
+            console.log('data');
+
+
+            }).catch(error =>console.error(error));
+}) */
+
+</script>
 @endsection

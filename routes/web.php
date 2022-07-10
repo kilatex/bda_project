@@ -110,7 +110,7 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit_empresa'])->name('edit_empresa');
         Route::put('empresas/{empresa}', [EmpresaController::class, 'update_empresa'])->name('update_empresa');
         Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy_empresa'])->name('destroy_empresa');
-   
+    
 //#########################################
 //                  SIRECOB
 //#########################################

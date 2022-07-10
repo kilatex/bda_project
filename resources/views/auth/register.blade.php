@@ -97,10 +97,10 @@
                             <div class="col-md-6">
                                 <select id='rol' name = 'rol' class="form-select" aria-label="Default select example">
                                     <option selected>Seleccionar departamento</option>
-                                    <option value="secretaria">Archivo</option>
-                                    <option value="biblioteca">Biblioteca</option>
-                                    <option value="USER_pasantias">Pasantías</option>
-                                    <option value="USER_serviciocom">Servicio Comunitario</option>
+                                    <option value="USER">Archivo</option>
+                                    <option value="USER">Biblioteca</option>
+                                    <option value="USER">Pasantías</option>
+                                    <option value="USER">Servicio Comunitario</option>
                                 </select>
                             </div>
                         </div>
@@ -135,3 +135,4 @@
 
 </div>
 @endsection
+

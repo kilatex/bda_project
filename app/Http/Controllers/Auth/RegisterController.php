@@ -59,7 +59,7 @@ class RegisterController extends Controller
             'rol' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'cargo' => ['required'],
+            // 'cargo' => ['required'],
         ]);
     }
 
@@ -72,7 +72,6 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-
         $user =  User::create([
             'rol' => $data['rol'],
             'nombres' => $data['nombres'],
@@ -85,7 +84,7 @@ class RegisterController extends Controller
 
         $empleado =  new Empleado();
         $empleado->usuario_id = $user->id;
-        $empleado->cargo = $data['cargo'];
+        $empleado->cargo = 'cualquier mierda';//$data['cargo'];
 
         $empleado->save();
 
