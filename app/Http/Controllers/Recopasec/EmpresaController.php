@@ -23,7 +23,10 @@ class EmpresaController extends Controller
             'rif'=>'required|max:09',
             'nombre'=> 'required|max:50',
             'email'=> 'required|max:100',
-            'telefono'=> 'required|max:12',
+            'telefono'=> 'required|max:12|integer',
+            'estado'=>'required',
+            'municipio'=>'required',
+            'parroquia'=>'required',
         ]);
         $empresa = new Empresa();
         $empresa->nombre = $request->nombre;
@@ -31,6 +34,15 @@ class EmpresaController extends Controller
         $empresa->telefono = $request->telefono;
         $empresa->departamento = $request->departamento;
         $empresa->save();
+        $estado = new Estado();
+        $estado->estado = $request -> nombre;
+        $estado->save();
+        $municipio = new Municipio();
+        $municipio->municipio = $request->nombre;
+        $municipio->save();
+        $parroquia = new Parroquia();
+        $parroquia->parroquia = $request->nombre;
+        $parroquia->save();
         return redirect()->route('index_pasantias');
         
     }
@@ -43,9 +55,9 @@ class EmpresaController extends Controller
             'nombre'=> 'required|max:50',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
-            'nombre_estado'=>'required',
-            'nombre_municipio'=>'required',
-            'nombre_parroquia'=>'required'
+            'estado'=>'required',
+            'municipio'=>'required',
+            'parroquia'=>'required',
         ]);
         $empresa->update($request->all());
         return redirect()->route('index_pasantias');

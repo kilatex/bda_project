@@ -348,6 +348,7 @@ CREATE TABLE IF NOT EXISTS prestamo_libros(
 )ENGINE=InnoDb;
 CREATE TABLE IF NOT EXISTS direcciones(
     id int(255) auto_increment not null,
+    parroquia_id int(100),
     consejo_comunal_id int(100),
     estudiante_id int(100),
     created_at datetime,

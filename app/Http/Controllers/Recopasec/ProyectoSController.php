@@ -16,6 +16,7 @@ class ProyectoSController extends Controller
         return view('proyectos.serviciocom.index');
     }
     public function create_comunitario(){
+        
         return view('proyectos.serviciocom.serviciocomcreate');
     }
     public function store_comunitario(Request $request){
@@ -23,7 +24,6 @@ class ProyectoSController extends Controller
             'codigo'=> 'required|max:06',
             'titulo'=> 'required|max:255',
             'periodo'=> 'required',
-
         ]);
 
         $comunitario = new Proyecto_comunitario();
@@ -31,8 +31,7 @@ class ProyectoSController extends Controller
         $comunitario->titulo = $request->titulo;
         $comunitario->periodo = $request->periodo;
         $comunitario->save();
-        return redirect()->route('index_comunitario');
-        
+        return view('proyecto.serviciocom.agregar');
     }
     public function edit_comunitario(Proyecto_comunitario $comunitario){
         return view('proyecto.serviciocom.edit', compact('comunitario'));
@@ -50,33 +49,38 @@ class ProyectoSController extends Controller
         return redirect()->route('index_comunitario');
     }
     public function create_direccion(){
-        return view('proyectos.serviciocom.comunidad');
+        $estados = Estado::all();
+        $municipios = Municipio::all();
+        $parroquias = Parroquia::all();
+        $comunidades = Comunidade::all();
+        $consejo_comunales = Consejo_comunale::all();
+        return view('proyectos.serviciocom.comunidad', compact('estados'), compact('municipios'), compact('parroquias'), compact('comunidades'), compact('consejo_comunales'));
     }
     public function store_direccion(Request $request){
         $request->validate([
-            'nombre_estado' => 'required',
-            'nombre_municipio' => 'required',
-            'nombre_parroquia' => 'required',
-            'nombre_comunidad' => 'required',
-            'nombre_consejo_comunal' => 'required'
+            'estado' => 'required',
+            'municipio' => 'required',
+            'parroquia' => 'required',
+            'comunidad' => 'required',
+            'consejo_comunal' => 'required'
         ]);
         $estado = new Estado();
-        $estado->nombre_estado = $request->nombre;
+        $estado->estado = $request->nombre;
         $estado -> save();
         $municipio = new Municipio();
-        $municipio->nombre_municipio = $request->nombre;
+        $municipio->municipio = $request->nombre;
         $municipio -> save();
         $parroquia = new Parroquia();
-        $parroquia->nombre_parroquia = $request->nombre;
+        $parroquia->parroquia = $request->nombre;
         $parroquia -> save();
         $comunidad = new Comunidade();
-        $comunidad->nombre_comunidad = $request->nombre;
+        $comunidad->omunidad = $request->nombre;
         $comunidad -> save();
         $consejo_comunal = new Consejo_comunale();
-        $consejo_comunal->nombre_consejo_comunal = $request->nombre;
+        $consejo_comunal->consejo_comunal = $request->nombre;
         $consejo_comunal -> save();
        
-        return redirect()->route('index_comunitario');
+        return view('proyectos.serviciocom.serviciocomcreate', compact('estado'), compact('municipio'), compact('parroquia'));
     }
     public function edit_direccion(Estado $estado, Municipio $municipio, Parroquia $parroquia, Comunidade $comunidad, Consejo_comunale $consejo_comunal){
         return view('proyecto.serviciocom.edit', compact('estado'), compact('municipio'), compact('parroquia'), compact('comunidad'), compact('consejo_comunal'));
@@ -103,5 +107,8 @@ class ProyectoSController extends Controller
         $comunidad->delete();
         $consejo_comunal->delete();
         return redirect()->route('index_comunitario');
+    }
+    public function agregar_estudiante(){
+
     }
 }

@@ -104,6 +104,7 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::get('comunitarios/{comunitario}/edit', [ProyectoSController::class, 'edit_comunitario'])->name('edit_comunitario');
         Route::put('comunitarios/{comunitario}', [ProyectoSController::class, 'update_comunitario'])->name('update_comunitario');
         Route::delete('comunitarios/{comunitario}', [ProyectoSController::class, 'destroy_comunitario'])->name('destroy_comunitario');
+        Route::get('estudiantes/{comunitario}', [ProyectoSController::class, 'agregar_estudiante'])->name('agregar');
     //Rutas para las empresas de pasantias
         Route::post('/empresas-crear', [EmpresaController::class, 'store_empresa'])->name('store_empresa');
         Route::get('empresas/create', [EmpresaController::class, 'create_empresa'])->name('create_empresa');
