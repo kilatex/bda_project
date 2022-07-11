@@ -99,12 +99,11 @@ class UserController extends Controller
     public function register_student(Request $request){
 
         $user = new User();
+
         // Validar Formulario
         $validate = $this->validate($request,[
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
-            'email' => 'string|email|min:6|unique:users,email',
-            'cedula' => 'required|integer|unique:users,cedula',
             'password' => 'nullable|string|min:6',
             'password_confirmation' => 'nullable|string|min:6',
             'carrera' => 'required'
@@ -125,7 +124,7 @@ class UserController extends Controller
         else{   
 
             $message = 'Contraseñas no coinciden';
-            return view('recopasec.user.registerStudent',[
+            return view('recopasec.student.register',[
                 'message' => $message
             ]
             );
@@ -136,7 +135,11 @@ class UserController extends Controller
         $student->usuario_id = $user->id;
         $student->carrera_id = $request->input('carrera');
         $student->save();
-        return redirect()->route('home');  
+        $message = false;
+        return view('home',[
+            'notification' => $message
+        ]
+        ); 
 
 
     }
@@ -406,7 +409,7 @@ class UserController extends Controller
             ]);
         }
 
-        return view('recopasec.user.registerStudent',[
+        return view('recopasec.student.register',[
             'cedula' => $cedula,
             'email' => $email,
             'message' => false,              

@@ -38,7 +38,7 @@ Route::get('/sigecop/modify', [App\Http\Controllers\Sigecop\DocumentController::
 Route::post('/sigecop/update_docs', [App\Http\Controllers\Sigecop\DocumentController::class, 'update_docs'])->name('update_docs');
 
 // UserController ROUTES
-Route::get('/sigecop/profile/{id?}', [App\Http\Controllers\Sigecop\StudentController::class, 'profile'])->name('profile');
+Route::get('/sigecop/estudiante/{id?}', [App\Http\Controllers\Sigecop\StudentController::class, 'profile'])->name('profile');
 Route::post('/sigecop/update_profile', [App\Http\Controllers\Sigecop\StudentController::class, 'update_profile'])->name('update_profile');
 Route::get('/sigecop/edit-profile', [App\Http\Controllers\Sigecop\StudentController::class, 'edit_profile'])->name('edit_profile');
 Route::get('/sigecop/img-profile/{filename}', [App\Http\Controllers\Sigecop\StudentController::class, 'img_profile'])->name('img_profile');
