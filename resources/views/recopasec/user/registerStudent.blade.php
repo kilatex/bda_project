@@ -31,7 +31,7 @@
                             <label for="dni" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
                             
                             <div class="col-md-6">
-                                <input id="cedula" name="cedula" disabled value="{{$cedula}}" readonly type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
+                                <input id="cedula" name="cedula" value="{{$cedula}}" aria-readonly="true" readonly type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
 
                                 @error('cedula')
                                     <span class="invalid-feedback" role="alert">
@@ -73,7 +73,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electrónico') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" value="{{$email}}" disabled class="form-control @error('email') is-invalid @enderror" name="email"   autocomplete="email">
+                                <input id="email" type="email" value="{{$email}}" aria-readonly="true" readonly class="form-control @error('email') is-invalid @enderror" name="email"   autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

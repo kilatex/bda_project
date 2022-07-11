@@ -22,7 +22,7 @@ class EmpresaController extends Controller
         $request->validate([
             'rif'=>'required|max:09|[0-9]+',
             'nombre'=> 'required|max:50',
-            'email'=> 'required|max:100',
+            'email'=>'required',
             'telefono'=> 'required|max:12|integer',
             'estado'=>'required',
             'municipio'=>'required',
@@ -44,7 +44,7 @@ class EmpresaController extends Controller
         $parroquia = new Parroquia();
         $parroquia->parroquia = $request->nombre;
         $parroquia->save();
-        return redirect()->route('index_pasantias');
+        return redirect()->route('create_pasantias');
         
     }
     public function edit_empresa(Empresa $empresa){
