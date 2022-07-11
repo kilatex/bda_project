@@ -348,12 +348,18 @@ CREATE TABLE IF NOT EXISTS prestamo_libros(
 )ENGINE=InnoDb;
 CREATE TABLE IF NOT EXISTS direcciones(
     id int(255) auto_increment not null,
+    estado_id int(100),
+    municipio_id int(100),
     parroquia_id int(100),
+    comunidad_id int(100),
     consejo_comunal_id int(100),
-    estudiante_id int(100),
     created_at datetime,
     updated_at datetime,
     CONSTRAINT pk_direcciones PRIMARY KEY(id),
-    CONSTRAINT fk_direcciones_consejo_comunales FOREIGN KEY(consejo_comunal_id) REFERENCES consejo_comunales(id),
-    CONSTRAINT fk_direcciones_estudiantes FOREIGN KEY(estudiante_id) REFERENCES estudiantes(id)
+    CONSTRAINT fk_direcciones_estados FOREIGN KEY(estado_id) REFERENCES estados(id),
+    CONSTRAINT fk_direcciones_municipios FOREIGN KEY(municipio_id) REFERENCES municipios(id),
+    CONSTRAINT fk_direcciones_parroquias FOREIGN KEY(parroquia_id) REFERENCES parroquias(id),
+    CONSTRAINT fk_direcciones_comunidades FOREIGN KEY(comunidad_id) REFERENCES comunidades(id),
+    CONSTRAINT fk_direcciones_consejo_comunales FOREIGN KEY(consejo_comunal_id) REFERENCES consejo_comunales(id)
+
 )ENGINE=InnoDb;

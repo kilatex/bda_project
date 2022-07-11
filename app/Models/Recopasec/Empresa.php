@@ -14,9 +14,9 @@ class Empresa extends Model
         'email',
         'telefono',
         'departamento',
-        'parroquia_id'
+        'direccion_id'
     ];
     public function parroquia(){
-        return $this->belongsTo('App\Models\Recopasec\Parroquia','parroquia_id');
+        return $this->belongsTo('App\Models\Recopasec\Direccione','direccion_id');
     }
 }

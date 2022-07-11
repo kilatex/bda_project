@@ -6,29 +6,28 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registrar Tutor Institucional') }}</div>
+                <div class="card-header">{{ __('Registrar Tutor Acádemico') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('store_tutorin') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('store_tutoracom') }}" enctype="multipart/form-data" >
                     @csrf
-                        <div class="row mb-3">
-                            <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
+                    <div class="row mb-3">
+                        <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
 
-                            
-                            <div class="col-md-6">
-                                <select class="form-select select-cedula mr-2" name="tipo_cedula"  style="width: 60px;" aria-label="Default select example">
-                                    <option selected value="V">V</option>
-                                    <option  value="E">E</option>
-                                </select>
-                                <input id="cedula" name="cedula" value= "{{old('cedula')}}" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
+                        <div class="col-md-6">
+                            <select class="form-select select-cedula mr-2" name="tipo_cedula"  style="width: 60px;" aria-label="Default select example">
+                                <option selected value="V">V</option>
+                                <option  value="E">E</option>
+                            </select>
+                            <input id="cedula" name="cedula" value= "{{old('cedula')}}" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
 
-                                @error('cedula')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror 
-                            </div>
+                            @error('cedula')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror 
                         </div>
+                    </div>
                         <div class="row mb-3">
                             <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
 
@@ -55,8 +54,9 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror 
-                            </div>
+                            </div> 
                         </div>
+                        
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electronico') }}</label>
                             <div class="col-md-6">
@@ -82,9 +82,19 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="nombre_especialidad" class="col-md-4 col-form-label text-md-end">{{ __('Especialidad') }}</label>
-
-                            
+                            <label for="condicion" name= 'nombre_especialidad' class="col-md-4 col-form-label text-md-end">{{ __('Condicion') }}</label>
+                            <div class="col-md-6">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccione una condición</option>
+                                    <option value="tiempo_variable">Tiempo Variable (TV)</option>
+                                    <option value="medio_tiempo">Medio Tiempo (MT)</option>
+                                    <option value="tiempo_completo">Tiempo Completo (TC)</option>
+                                    <option value="dedicacion_exclusiva">Dedicación Exclusiva (DE)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="especialidad" class="col-md-4 col-form-label text-md-end">{{ __('Especialidad') }}</label>
                             <div class="col-md-6">
                                 <input id="nombre_especialidad" name="nombre_especialidad" value= "{{old('nombre_especialidad')}}" type="text" class="form-control @error('nombre_especialidad') is-invalid @enderror"   autofocus>
 
@@ -98,7 +108,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Agregar Tutor Institucional') }}
+                                        {{ __('Agregar Tutor') }}
                                     </button>
                                 </div>
                         </div>  
@@ -106,8 +116,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div>    
 </div>
 
 @endsection

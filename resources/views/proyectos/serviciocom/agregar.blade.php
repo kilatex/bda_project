@@ -15,10 +15,10 @@
                             <label for="codigo" class="col-md-4 col-form-label text-md-end">{{ __('Cédula del estudiante') }}</label>
 
                             <div class="col-md-6">
-                                <section>
-                                    <option value="V">V</option>
-                                    <option value="E">E</option>
-                                </section>
+                                <select class="form-select select-cedula mr-2" name="tipo_cedula" disabled style="width: 60px;" aria-label="Default select example">
+                                    <option selected value="V">V</option>
+                                    <option  value="E">E</option>
+                                </select>
                                 <input id="cedula" type="text" value= "{{old('cedula')}}" class="form-control @error('cedula') is-invalid @enderror" name="cedula"  required autocomplete="cedula" autofocus>
         
                                 @error('codigo')

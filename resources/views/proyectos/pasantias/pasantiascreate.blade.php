@@ -13,7 +13,9 @@
 
                         <div class="row mb-3">
                             <label for="codigo" class="col-md-4 col-form-label text-md-end">{{ __('Codigo del proyecto') }}</label>
-
+                            <select class="form-select select-cedula mr-2" disabled style="width: 60px;" aria-label="Default select example">
+                                <option selected value="P">P</option>
+                            </select>
                             <div class="col-md-6">
                                 <input id="codigo" type="text" value= "{{old('codigo')}}" class="form-control @error('codigo') is-invalid @enderror" name="codigo"  required autocomplete="nombres" autofocus>
         
@@ -40,7 +42,11 @@
                         </div>
                         <div class="row mb-3">
                             <label for="periodo" class="col-md-4 col-form-label text-md-end">{{ __('periodo') }}</label>
-
+                            <select class="form-select select-cedula mr-2" name="n-periodo" style="width: 60px;" aria-label="Default select example">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                            
                             <div class="col-md-6">
                                 <input id="periodo" type="text" value= "{{old('periodo')}}" class="form-control @error('periodo') is-invalid @enderror" name="periodo"  required autocomplete="periodo">
 

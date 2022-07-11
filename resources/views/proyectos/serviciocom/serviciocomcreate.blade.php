@@ -12,8 +12,17 @@
                     @csrf
 
                         <div class="row mb-3">
-                            <label for="codigo" class="col-md-4 col-form-label text-md-end">{{ __('Codigo del proyecto') }}</label>
-
+                            <label for="codigo" class="col-md-4 col-form-label text-md-end">{{ __('Código del proyecto') }}</label>
+                            <select class="form-select mr-2" name="n-codigo" style="width: 100px;" aria-label="Default select example">
+                                <option value="">Indique el código de la carrera</option>
+                                <option value="ISS">ISS</option>
+                                <option value="ICV">ICV</option>
+                                <option value="IEL">IEL</option>
+                                <option value="LITUR">LITUR</option>
+                                <option value="LAGM">LAGM</option>
+                                <option value="LES">LES</option>
+                                <option value="MDC">MDC</option>
+                            </select>
                             <div class="col-md-6">
                                 <input id="codigo" type="text" value= "{{old('codigo')}}" class="form-control @error('codigo') is-invalid @enderror" name="codigo"  required autocomplete="nombres" autofocus>
         
@@ -24,7 +33,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <br>
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Titulo') }}</label>
 
@@ -41,9 +50,12 @@
 
                         <div class="row mb-3">
                             <label for="periodo" class="col-md-4 col-form-label text-md-end">{{ __('Periodo Acádemico') }}</label>
-
-                            
                             <div class="col-md-6">
+                                <select class="form-select select-cedula mr-2" name="n-periodo" style="width: 60px;" aria-label="Default select example">
+                                    <option value="">Indique la seccion del periodo</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
                                 <input id="periodo" name="periodo" value= "{{old('periodo')}}" type="text" class="form-control @error('periodo') is-invalid @enderror" required autocomplete="periodo" autofocus>
                                 @error('periodo')
                                     <span class="invalid-feedback" role="alert">

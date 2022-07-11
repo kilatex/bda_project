@@ -14,7 +14,7 @@
                                 <label for="rif" class="col-md-4 col-form-label text-md-end">{{ __('Rif') }}</label>
                                 
                                 <div class="col-md-6">
-                                    <input id="rif" name="rif"  value="{{$rif}}" aria-readonly="true" readonly type="text" class="form-control @error('rif') is-invalid @enderror"   autofocus>
+                                    <input id="rif" name="rif"  value="{{$rif}}" readonly type="text" class="form-control @error('rif') is-invalid @enderror"   autofocus>
 
                                     @error('rif')
                                         <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electrónico') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" value="{{$email}}" aria-readonly="true" readonly class="form-control @error('email') is-invalid @enderror" name="email"   autocomplete="email">
+                                    <input id="email" type="email"  aria-readonly="true" readonly class="form-control @error('email') is-invalid @enderror" name="email"   autocomplete="email">
 
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -79,11 +79,12 @@
                                     @enderror
                                 </div>
                             </div>
-                                <br>
-                                <center><h5>Ubicación</h5></center>
-                                <div class="row mb-3">
-                                    @livewire('select-component', ['estados' => $estados, 'municipios' => $municipios], key($estados->id, $municipios->id))
-                                </div>
+
+                            <br>
+                            <center><h5>Ubicación</h5></center>
+                            <div class="row mb-3">
+                                @livewire('select-component', ['estados' => $estados, 'municipios' => $municipios], key($estados->id, $municipios->id))
+                            </div>
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

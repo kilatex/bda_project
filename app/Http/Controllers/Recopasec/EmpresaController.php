@@ -7,6 +7,7 @@ use App\Models\Recopasec\Estado;
 use App\Models\Recopasec\Municipio;
 use App\Models\Recopasec\Parroquia;
 use Illuminate\Http\Request;
+use App\Models\Recopasec\Direccione;
 
 class EmpresaController extends Controller
 {
@@ -14,7 +15,7 @@ class EmpresaController extends Controller
         $estados = Estado::all();
         $municipios = Municipio::all();
         $parroquias = Parroquia::all();
-        return view('proyectos.pasantias.empresa', compact('estados'), compact('municipios'));
+        return view('proyectos.empresa.empresa', compact('estados'), compact('municipios'), compact('parroquias'));
     }
     
     public function store_empresa(Request $request){
@@ -35,25 +36,16 @@ class EmpresaController extends Controller
         $empresa->telefono = $request->telefono;
         $empresa->departamento = $request->departamento;
         $empresa->save();
-        $estado = new Estado();
-        $estado->estado = $request -> nombre;
-        $estado->save();
-        $municipio = new Municipio();
-        $municipio->municipio = $request->nombre;
-        $municipio->save();
-        $parroquia = new Parroquia();
-        $parroquia->parroquia = $request->nombre;
-        $parroquia->save();
+        $direccion = new Direccione();
+        $direccion->estado_id = $request->estado;
+        $direccion->municipio_id = $request->municipio;
+        $direccion->parroquia_id = $request->parroquia;
+        $direccion->save();
         return redirect()->route('create_pasantias');
         
     }
     public function edit_empresa(Empresa $empresa){
-        return view('proyectos.pasantias.edit', 
-        compact('empresa'),
-        compact('estado'),
-        compact('municipio'),
-        compact('parroquia')
-    );
+        return view('proyectos.pasantias.edit', compact('direccion'));
     }
     public function update_empresa(Request $request, Empresa $empresa){
         $request->validate([
@@ -73,12 +65,7 @@ class EmpresaController extends Controller
         return redirect()->route('index_pasantias');
     }
     public function verificar_rif(){
-        $empresa = \Auth::user();
-
-        if ( $empresa == null || $empresa->rol != "USER"){
-            return redirect()->route('home');
-        }
-        return view('proyectos.pasantias.buscarempresa',[
+        return view('proyectos.empresa.buscarempresa',[
             'empresaByRif' => false,
             'empresaByEmail' => false,   
         ]);
@@ -96,7 +83,7 @@ class EmpresaController extends Controller
         $empresaByEmail = Empresa::where('email', $email)->first();
 
         if($empresaByRif ||  $empresaByEmail){
-            return view('proyectos.pasantias.buscarempresa',[
+            return view('proyectos.empresa.buscarempresa',[
                 'empresaByRif' => $empresaByRif,
                 'empresaByEmail' => $empresaByEmail,                
             ]);
@@ -104,16 +91,15 @@ class EmpresaController extends Controller
         $estados = Estado::all();
         $municipios = Municipio::all();
         $parroquias = Parroquia::all();
-        return view('proyectos.pasantias.empresa', 
+        return view('proyectos.empresa.empresa', 
             compact('estados'), 
-            compact('rif'), 
-            compact('email'), 
+            compact('rif'),  
             compact('municipios'), 
             compact('parroquias'),
+            compact('email'),
             [
-            // 'rif' => $rif,
-            // 'email' => $email,
-            // 'message' => false,              
+            'rif' => $rif,
+            'email' => $email,              
         ]);
               
     }

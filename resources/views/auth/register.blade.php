@@ -104,8 +104,8 @@
                                     <option selected>Seleccionar departamento</option>
                                     <option value="USER">Archivo</option>
                                     <option value="USER">Biblioteca</option>
-                                    <option value="USER">Pasantías</option>
-                                    <option value="USER">Servicio Comunitario</option>
+                                    <option value="USER_pasantias">Pasantías</option>
+                                    <option value="USER_comunitario">Servicio Comunitario</option>
                                 </select>
                             </div>
                         </div>

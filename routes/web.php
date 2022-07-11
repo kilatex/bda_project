@@ -38,7 +38,7 @@ Route::get('/sigecop/modify', [App\Http\Controllers\Sigecop\DocumentController::
 Route::post('/sigecop/update_docs', [App\Http\Controllers\Sigecop\DocumentController::class, 'update_docs'])->name('update_docs');
 
 // UserController ROUTES
-Route::get('/sigecop/profile/{id?}', [App\Http\Controllers\Sigecop\StudentController::class, 'profile'])->name('profile');
+Route::get('/sigecop/estudiante/{id?}', [App\Http\Controllers\Sigecop\StudentController::class, 'profile'])->name('profile');
 Route::post('/sigecop/update_profile', [App\Http\Controllers\Sigecop\StudentController::class, 'update_profile'])->name('update_profile');
 Route::get('/sigecop/edit-profile', [App\Http\Controllers\Sigecop\StudentController::class, 'edit_profile'])->name('edit_profile');
 Route::get('/sigecop/img-profile/{filename}', [App\Http\Controllers\Sigecop\StudentController::class, 'img_profile'])->name('img_profile');
@@ -71,7 +71,9 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
     //Rutas de los tutores
         //Tutor academico
         Route::get('tutorac/create', [TutorController::class, 'create_tutorac'])->name('create_tutorac');
-        Route::post('tutorac', [TutorController::class, 'store_tutorac'])->name('store_tutorac');
+        Route::get('tutoracom/create', [TutorController::class, 'create_tutoracom'])->name('create_tutoracom');
+        Route::post('tutorac', [TutorController::class, 'store_tutorac'])->name('store_tutorac');        
+        Route::post('tutoracom', [TutorController::class, 'store_tutoracom'])->name('store_tutoracom');
         Route::get('tutorac/{tutor}/edit', [TutorController::class, 'edit_tutorac'])->name('edit_tutorac');
         Route::put('tutorac/{tutor}', [TutorController::class, 'update_tutorac'])->name('update_tutorac');
         Route::delete('tutorac/{tutor}', [TutorController::class, 'destroy_tutorac'])->name('destroy_tutoracy');
@@ -94,7 +96,10 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::get('pasantias/{pasantia}', [ProyectoPController::class, 'show_pasantias'])->name('show_pasantias');
         Route::get('pasantias/{pasantia}/edit', [ProyectoPController::class, 'edit_pasantias'])->name('edit_pasantias');
         Route::put('pasantias/{pasantia}', [ProyectoPController::class, 'update_pasantias'])->name('update_pasantias');
+        Route::get('/recopasec/proyectosp', [ProyectoPController::class, 'proyecto_listp'])->name('proyecto_listp');
+        Route::get('/recopasec/proyecto-searchp/{texto?}', [ProyectoSController::class, 'searchp'])->name('searchp');
         Route::delete('pasantias/{pasantia}', [ProyectoPController::class, 'destroy_pasantias'])->name('destroy_pasantias');
+        Route::get('/recopasec/proyectopas/{proyecto_id}', [ProyectoPController::class, 'show_proyectopa'])->name('show_proyectopa');
     //Rutas para el proyecto comunitario
         Route::get('comunitarios', [ProyectoSController::class, 'index_comunitario'])->name('index_comunitario');
         Route::get('direcciones/create', [ProyectoSController::class, 'create_direccion'])->name('create_direccion');
@@ -105,8 +110,11 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::get('comunitarios/{comunitario}/edit', [ProyectoSController::class, 'edit_comunitario'])->name('edit_comunitario');
         Route::put('comunitarios/{comunitario}', [ProyectoSController::class, 'update_comunitario'])->name('update_comunitario');
         Route::delete('comunitarios/{comunitario}', [ProyectoSController::class, 'destroy_comunitario'])->name('destroy_comunitario');
-        Route::get('estudiantes/{comunitario}', [ProyectoSController::class, 'agregar_estudiante'])->name('agregar');
-        //Descargar comprobante
+        Route::get('estudiantes/{comunitario}', [ProyectoSController::class, 'agregar_estudiante'])->name('agregar_estudiante');
+        Route::get('/recopasec/proyectos', [ProyectoSController::class, 'proyecto_list'])->name('proyecto_list');
+        Route::get('/recopasec/proyecto-search/{texto?}', [ProyectoSController::class, 'search'])->name('search');
+        Route::get('/recopasec/proyectoser/{proyecto_id}', [ProyectoSController::class, 'show_proyectoserv'])->name('show_proyectoserv');
+    //Descargar comprobante
         Route::get('documento', [ProyectoSController::class, 'documento'])->name('documento');
         Route::get('download-pdf', [ProyectoSController::class, 'descargar_pdf'])->name('descargar_pdf');
     //Rutas para las empresas de pasantias
