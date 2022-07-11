@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use  App\Models\Estudiante;
+use  App\Models\Sigecop\Expediente;
+
 use  App\Models\User;
 use  App\Models\Document;
 use  App\Models\Message;
@@ -35,28 +37,14 @@ class StudentController extends Controller
     public function profile($id = null)
 
     {   
-
         //VALIDATE ROUTE PROFILE
-        $user = User::where('id',$id)->first();
-        $user_auth = \Auth::user();
-        if($user == null){
+        $user = Estudiante::where('id',$id)->first();
+        $expediente = Expediente::where('estudiante_id', $id)->first();
 
-           
-            return view('recopasec.user.user',[
-                'user' => $user_auth
-            ]);
-
-        }elseif ($user != null ){
-                   
-            return view('recopasec.user.user',[
-                'user' => $user
-            ]);
-        }else{
-            return redirect()->route('home')
-            ->with(['message' => 'Ruta Inválida']);
-        }
-
-
+        return view('recopasec.student.studentProfile',[
+            'user' => $user,
+            'expediente'=> $expediente
+        ]);
 
     }
 
@@ -159,8 +147,7 @@ class StudentController extends Controller
         if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
-        $users = Estudiante::Join('users','users.id', '=' , 'estudiantes.usuario_id')
-                ->join('carreras','carreras.id', '=' , 'estudiantes.carrera_id')->paginate(12);
+        $users = Estudiante::Paginate(12);
                 
                 $field_name = 'Seleccione Estudiante para crearle un expediente';                 
         $flag = false;

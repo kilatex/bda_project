@@ -21,20 +21,18 @@
 
                     @if(count($users) >=1)
                     <table class="table">
-                        <thead>
-                            <tr>
+                        <thead class="header-table">
+                          <tr>
                             <th scope="col">Cédula</th>
                             <th scope="col">Nombres y Apellidos</th>
                             <th scope="col">Carrera</th>
                             <th scope="col">Correo</th>
                             <th scope="col">Más Info</th>
 
-                            </tr>
+                          </tr>
                         </thead>
-               
-                        @foreach($users as $user)
-
-                        <tbody class="table-group-divider">
+                        <tbody>
+                            @foreach($users as $user)
                             <tr>
                           
                                 <th scope="row">{{$user->user->cedula}}</th>
@@ -49,7 +47,7 @@
                                     </a>
 
                                     @else
-                                    <a href="#">
+                                    <a href="{{route('profile', ['id'=> $user->id])}}">
                                         Más Info
                                     </a>
                                     @endif
@@ -59,9 +57,10 @@
  
 
                             </tr>
+                            @endforeach 
                         </tbody>
-                    @endforeach
                     </table>
+                
                     @else
                     <h2 class="text-center">Usuarios no encontrados </h2>
                     @endif
@@ -72,6 +71,10 @@
              
                 {{$users->links()}}
             </div>
-         
+         <style>
+            .header-table{
+                background: rgb(96, 155, 255,0.2);
+            }
+         </style>
             
 @endsection

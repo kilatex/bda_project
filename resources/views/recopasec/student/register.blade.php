@@ -22,30 +22,26 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registrarse') }}</div>
+                <div class="card-header">{{ __('Registrar Nuevo Estudiante') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register_admin') }}" enctype="multipart/form-data" >
+                    <form method="POST" action="{{ route('register_student') }}" enctype="multipart/form-data" >
                     @csrf
-
                         <div class="row mb-3">
-                            <label for="dni" class="col-md-4 col-form-label text-md-end">{{ __('Cedula') }}</label>
-
+                            <label for="dni" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
                             
                             <div class="col-md-6">
-                                <input id="cedula" name="cedula" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
-
+                                <input id="cedula" name="cedula"  readonly value="{{$cedula}}"  type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
                                 @error('cedula')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                            
                         </div>
 
                         <div class="row mb-3">
-                            <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
+                            <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
 
                             <div class="col-md-6">
                                 <input id="nombres" type="text" class="form-control @error('nombres') is-invalid @enderror" name="nombres"  required autocomplete="nombres" autofocus>
@@ -59,7 +55,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="apellidos" class="col-md-4 col-form-label text-md-end">{{ __('Apellido') }}</label>
+                            <label for="apellidos" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
 
                             <div class="col-md-6">
                                 <input id="apellidos" type="text" class="form-control @error('apellidos') is-invalid @enderror" name="apellidos"  required autocomplete="apellidos" autofocus>
@@ -72,15 +68,11 @@
                             </div>
                         </div>
 
-
-
-                        
-
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electrónico') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"  required autocomplete="email">
+                                <input id="email" type="email" value="{{$email}}"  aria-readonly="true" readonly class="form-control @error('email') is-invalid @enderror" name="email"   autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -94,7 +86,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -108,19 +100,27 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirmar Contraseña') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password">
+                            </div>
+                        </div>
+                        <input type="hidden" name="rol" value="STUDENT">
+                        <div class="row mb-3">
+                            <label class="col-md-4 col-form-label text-md-end">Carrera</label>
+                            <div class="col-md-6">
+                                <select class="form-select" name="carrera" aria-label="Default select example">
+                                    <option selected>Carrera</option>
+                                    <option value="1">Ingeniería de Sistemas</option>
+                                    <option value="2">Ingeniería Eléctrica</option>
+                                    <option value="3">Ingeniería Civil</option>
+                                    <option value="4">Lic. Economía</option>
+                                    <option value="5">Lic. Turismo</option>
+                                    <option value="6">Lic. Administración</option>
+
+                                </select>   
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>   
-                        </div>
-                        <div class="row mb-0">
+                       <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Registrarse') }}

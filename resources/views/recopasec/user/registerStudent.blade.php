@@ -27,6 +27,18 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register_student') }}" enctype="multipart/form-data" >
                     @csrf
+                        <div class="row mb-3">
+                            <label for="dni" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
+                            
+                            <div class="col-md-6">
+                                <input id="cedula" name="cedula"  value="{{$cedula}} "  type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
+                                @error('cedula')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
@@ -56,28 +68,11 @@
                             </div>
                         </div>
 
-
-
-                        <div class="row mb-3">
-                            <label for="dni" class="col-md-4 col-form-label text-md-end">{{ __('Cedula') }}</label>
-
-                            
-                            <div class="col-md-6">
-                                <input id="cedula" name="cedula" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
-
-                                @error('cedula')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electrónico') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"   autocomplete="email">
+                                <input id="email" type="email" value="{{$email}}" disabled class="form-control @error('email') is-invalid @enderror" name="email"   autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -125,16 +120,7 @@
                             </div>
                         </div>
 
-
-             
-                        
-
-
-
-     
-  
-
-                        <div class="row mb-0">
+                       <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Registrarse') }}
