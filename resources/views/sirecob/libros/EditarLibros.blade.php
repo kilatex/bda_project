@@ -14,24 +14,26 @@
             <form action="{{route('update', $editar->id )}}" method="put">
                 <div class="container">
                     <div class="row mt-3">
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="form-group form-check">
                                 <label for="titulo"><b>Titulo</b>   </label>
                                 <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Titulo" value="{{$editar->titulo}}">
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="form-group form-check">
                                 <label for="categoria"><b>Categoria</b> </label>
                                 <input type="text" class="form-control" name="categoria" id="" placeholder="Categoria" value="{{$editar->Datos->categoria}}">
                             </div>
                         </div>
+                        <!--
                         <div class="col-4">
                             <div class="form-group form-check">
                                 <label for="cantidad"><b>cantidad</b></label>
                                 <input type="text" class="form-control" name="cantidad" id="" placeholder="cantidad" value="{{$editar->Datos->cantidad}}">
                             </div>
                         </div>
+-->
                     </div>
                     <div class="row">
                         <div class="col-4">

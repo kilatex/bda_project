@@ -6,7 +6,7 @@ use App\Models\Sirecob\prestamo_libros;
 use App\Models\Estudiante;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
 class PestamolibrosController extends Controller
 {
     /**
@@ -26,6 +26,17 @@ class PestamolibrosController extends Controller
         $editar = prestamo_libros::findOrfail($id);
         return view('sirecob/Prestamo_Libros/EditarPrestamo',compact('editar'));
     }
+    public function librosEntregados()
+    {   $prestamos = prestamo_libros::get();
+        return view('sirecob/Prestamo_Libros/librosEntregados', compact('prestamos'));
+        
+    }
+    public function libros_pendiente()
+    {   $prestamos = prestamo_libros::get();
+        return view('sirecob/Prestamo_Libros/entregaPendiente', compact('prestamos'));
+        
+    }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -76,9 +87,18 @@ class PestamolibrosController extends Controller
      * @param  \App\Models\prestamo_libros   $pestamolibros
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, prestamo_libros  $pestamolibros)
+    public function EditarPrestamo($id)
     {
-        //
+        $editar = prestamo_libros::findOrfail($id);
+        return view('sirecob/Prestamo_Libros/EditarPrestamo',compact('editar'));
+    }
+    public function update(Request $request,   $pestamolibros)
+    {
+        $actualizar=prestamo_libros::findOrfail($pestamolibros);
+        $actualizar ->estado =$request->estado;
+        
+        $actualizar->save();
+        return redirect('/Prestamos');
     }
 
     /**

@@ -151,12 +151,19 @@ route::get('/RegistroLibro', function () {
 });
 
 Route::get('/editarlibro/{id}', [App\Http\Controllers\sirecob\LibroController::class, 'EditBook'])->name('editarlibro');
-Route::get('/editarEstadoPrestamo/{id}', [App\Http\Controllers\sirecob\PestamolibrosController::class, 'EstadoPrestamo'])->name('editarlibro');
+
 Route::get('/libro/{libro}', [App\Http\Controllers\sirecob\LibroController::class, 'update'])->name('update');
 Route::get('/deletelibro/{libro}', [App\Http\Controllers\sirecob\LibroController::class, 'destroy'])->name('deletebook');
 //Prestamo de Libros
 route::get('/Registro_Prestamo',  [App\Http\Controllers\sirecob\Controladores::class, 'prestamo']);
 Route::get('/Prestamos', [App\Http\Controllers\sirecob\PestamolibrosController::class, 'index']);
+Route::get('/entregados', [App\Http\Controllers\sirecob\PestamolibrosController::class, 'librosEntregados']);
+Route::get('/Libros_Pendiente', [App\Http\Controllers\sirecob\PestamolibrosController::class, 'libros_pendiente']);
+Route::get('/buscar-biblioteca/{texto?}', [App\Http\Controllers\Sirecob\LibroController::class, 'search'])->name('BuscarLibro');
 //#############
 //Moduo de proyecto de grados
 Route::get('/proyectos', [App\Http\Controllers\sirecob\ProyectoGradoController::class, 'vista_registro']);
+Route::get('/Libros_Inactivos', [App\Http\Controllers\sirecob\LibroController::class, 'LibrosInactivos']);
+
+Route::get('/EditarPrestamos/{id}', [App\Http\Controllers\sirecob\PestamolibrosController::class, 'EditarPrestamo']);
+Route::get('/updatePrestamo/{libro}', [App\Http\Controllers\sirecob\PestamolibrosController::class, 'update'])->name('updatePrestamo');

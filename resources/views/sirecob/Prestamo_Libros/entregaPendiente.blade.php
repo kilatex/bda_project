@@ -18,7 +18,7 @@
             </div>
              -->
         <a class="btn btn-primary  ml-4" href="/Registro_Prestamo">Registrar Prestamo</a>
-        <a href="/entregados" class="  btn btn-success"> libros entregados</a>
+        <a href="" class="  btn btn-success"> libros entregados</a>
         <a href="/Libros_Pendiente" class="  btn btn-danger"> libros pendientes</a>
         <div class="row  mt-3 mr-4 ml-4 ">
           <table class="table">
@@ -39,6 +39,7 @@
             <tbody>
 
               @foreach ($prestamos as $prestamo)
+              @if($prestamo->estado =='prestado' )
               @isset($prestamo->Datos_estudiante->user)
               <tr>
                 <th scope="row"># </th>
@@ -64,7 +65,7 @@
                 </td>
               </tr>
               @endisset
-
+            
               @isset($prestamo->Datos_docente->user)
               <tr>
                 <th scope="row"># </th>
@@ -91,6 +92,7 @@
                 </td>
               </tr>
               @endisset
+              @endif
               @endforeach
 
 

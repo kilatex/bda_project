@@ -12,8 +12,8 @@
       
         <div class="row mr-4 ml-4 ">
           <div class="col-5">
-            <a href="/RegistroLibro" class="btn btn-primary"> Registro Libro</a>
-            <a href="/Libros_Inactivos" class="btn btn-danger"> Libros inactivos</a>
+            <a href="/Registro_libros" class="btn btn-primary"> Libros Activos</a>
+
           </div>
          <div class="col-6">
          <form action="{{ route('BuscarLibro') }}" class="d-flex" method="GET">
@@ -49,7 +49,7 @@
             <tbody>
 
               @foreach ($libros as $libro)
-              @if($libro->estado != 'inactivo')
+              @if($libro->estado == 'inactivo')
               <tr>
                 <th scope="row"># </th>
                 
@@ -66,7 +66,7 @@
                   <div class="row">
                     <div class="btn-group">
                     
-                      <a href="/editarlibro/{{$libro->id }}" class="btn btn-primary">editar</a>
+                      <a href="{{route('editarlibro', $libro->id )}}" class="btn btn-primary">editar</a>
 
                       <a href="{{route('deletebook', $libro->id )}}" class=" btn btn-danger">eliminar</a>
                     </div>

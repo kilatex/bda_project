@@ -32,5 +32,7 @@ class prestamo_libros  extends Model
     {
         return $this->belongsTo(Docente::class, 'prestamista_doc_id');
     }
-
+    public function user(){
+        return $this->belongsTo('App\Models\User','usuario_id');
+    }
 }

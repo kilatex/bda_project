@@ -19,10 +19,47 @@ class LibroController extends Controller
      */
     public function index(Request $request)
     {
-        $texto=trim($request->get('texto'));
+        
        $libros = Libro::get();
-       
        return view('sirecob/RegistroLibros',compact('libros'));
+       
+    }
+    public function LibrosInactivos(){
+        $libros = Libro::get();
+       
+        return view('sirecob/libros/LibrosInactivos',compact('libros'));
+    }
+
+    public function search(Request $request){
+
+        
+
+        $texto = trim($request->get('texto'));
+        $users = Libro::Where('titulo','LIKE', '%'.$texto.'%')
+        ->orWhereHas('Datos', function( $query ) use ( $request ){
+            $query->where('autor', $request->texto);
+        })
+        ->orWhereHas('Datos', function( $query ) use ( $request ){
+            $query->where('categoria', $request->texto);
+        })
+        ->orWhereHas('Datos', function( $query ) use ( $request ){
+            $query->where('editorial', $request->texto);
+        })
+        ->orWhereHas('Datos', function( $query ) use ( $request ){
+            $query->where('pais', $request->texto);
+        })
+        ->orWhereHas('Datos', function( $query ) use ( $request ){
+            $query->where('edicion', $request->texto);
+        })
+                ->paginate(12);
+
+        
+                
+                return view('sirecob/RegistroLibros',[
+                    'libros' => $users,
+                    
+                ]);
+
     }
 
     /**
@@ -115,6 +152,10 @@ class LibroController extends Controller
      */
     public function destroy(Libro $libro)
     {
-        $libro->delete();
+        $actualizar=$libro;
+        $actualizar->estado='inactivo';
+        $actualizar->save();
+        return $actualizar;
+        //$libro->delete();
     }
 }

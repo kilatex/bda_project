@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <div class="row">
     <div class="col-4">
@@ -12,9 +14,9 @@
 
             <div class="card-header">
                 <b>Registro de Prestamo</b>
-              </div>
+            </div>
             <div class="">
-
+                
 
                 <form action="/api/Prestamo_Libros" method="post">
                     <div class="container">
@@ -23,16 +25,12 @@
 
                             <div class="col-12 mt-3 mb-2" id="btnEstudiante">
 
-                                <input style="display:none;" value="estudiante" type="radio" class="btn-check"
-                                    name="valBtnPrestamista" id="danger-outlined" autocomplete="off">
-                                <label class="btn btn-primary" for="danger-outlined"
-                                    onclick="btncrearCliente();">Estudiantes</label>
+                                <input style="display:none;" value="estudiante" type="radio" class="btn-check" name="valBtnPrestamista" id="danger-outlined" autocomplete="off">
+                                <label class="btn btn-primary" for="danger-outlined" onclick="btncrearCliente();">Estudiantes</label>
 
                             </div>
                             <div class="col mb-2" id="btnDocente">
-                                <input value="docente" type="radio" class="btn btn-primary" name="valBtnPrestamista"
-                                    onclick="btnSelectCliente();" id="success-outlined" autocomplete="off" checked
-                                    style="display: none;">
+                                <input value="docente" type="radio" class="btn btn-primary" name="valBtnPrestamista" onclick="btnSelectCliente();" id="success-outlined" autocomplete="off" checked style="display: none;">
                                 <label class="btn btn-primary" for="success-outlined">Docentes
                                 </label>
 
@@ -59,7 +57,7 @@
 
                                     <label for="a">Estudiante:</label>
 
-                                    <select class="mt-3 ml-2 mr-2 mb-3 form-control" name="estudiante" id="a">
+                                    <select class="mi-selector mt-3 ml-2 mr-2 mb-3 form-control" name="estudiante" id="a">
 
                                         @foreach ($Estudiante as $estudiante)
                                         <option value="{{$estudiante->id}}">{{ $estudiante->user->cedula }} {{
@@ -76,7 +74,7 @@
                                     <div class="col-12">
                                         <label for="Docente">Docente:</label>
                                         <br>
-                                        <select class="mt-3  mb-3 form-control" name="docente" id="a">
+                                        <select class="mi-selector mt-3  mb-3 form-control" name="docente" id="a">
 
                                             @foreach ($Docente as $docente)
                                             <option value="{{ $docente->id }}">{{ $docente->user->cedula }} {{ $docente->user->nombres }}
@@ -96,12 +94,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <label for="">Libros Registrados:</label>
-                                <select class="form-control" name="libro" id="">
+                                <select class="mi-selector form-control" name="libro" id="">
 
                                     @foreach ($Libro as $libro)
-                                    <option value="{{ $libro->id }}"><b>Titulo:</b>{{ $libro->titulo }} //
+                                    <option value="{{ $libro->id }}"> {{ $libro->titulo }} //
                                         <b>Edicion:</b> {{ $libro->Datos->edicion }} // <b>Editorial:</b> {{
-                                        $libro->Datos->editorial }} // <b>Año:</b> {{ $libro->Datos->año }}</option>
+                                        $libro->Datos->editorial }} // <b>Año:</b> {{ $libro->Datos->año }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -130,7 +129,8 @@
     <div class="col-4"></div>
 
 </div>
-<script>/*
+<script>
+    /*
     var envio = false;
     document.getElementById("Btnestudiante").style.display = "none";
     document.getElementById("Docente").style.display = "none";
@@ -162,6 +162,7 @@
     document.getElementById("Docente").style.display = "block";
     document.getElementById("estudiante").style.display = "none";
     valorbtnClient = 2;
+
     function btncrearCliente() {
         //btns
         valorbtnClient = 1;
@@ -182,5 +183,13 @@
         valorbtnClient = 2;
 
     }
+
+
+
+    jQuery(document).ready(function($) {
+        $(document).ready(function() {
+            $('.mi-selector').select2();
+        });
+    });
 </script>
 @endsection

@@ -223,6 +223,6 @@
     </div>
 
     <script src="{{ asset('js/main.js') }}" defer></script>
-
+    <script src="{{ asset('js/validaciones_sirecob.js') }}" ></script>
 </body>
 </html>
