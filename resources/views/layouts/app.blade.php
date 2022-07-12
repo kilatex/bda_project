@@ -74,7 +74,7 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a id="" class="nav-link "  href="{{ route('create_tutorcom') }}" >
+                                <a id="" class="nav-link "  href="{{ route('create_direccion') }}" >
                                 Nuevo Proyecto
                                 </a>
                             </li>

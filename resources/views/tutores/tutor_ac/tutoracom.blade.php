@@ -72,7 +72,7 @@
                         <div class="row mb-3">
                             <label for="telefono" class="col-md-4 col-form-label text-md-end">{{ __('Telefono') }}</label>
                             <div class="col-md-6">
-                                <input id="telefono" name="telefono" value= "{{old('telefono')}}" type="text" class="form-control @error('telefono') is-invalid @enderror"   autofocus>
+                                <input id="telefono" name="telefono" value= "{{old('telefono')}}" type="tel" class="form-control @error('telefono') is-invalid @enderror"   autofocus>
 
                                 @error('telefono')
                                     <span class="invalid-feedback" role="alert">

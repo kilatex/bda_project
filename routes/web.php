@@ -106,14 +106,13 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::post('direcciones', [ProyectoSController::class, 'store_direccion'])->name('store_direccion');
         Route::get('comunitarios/create', [ProyectoSController::class, 'create_comunitario'])->name('create_comunitario');
         Route::post('comunitarios', [ProyectoSController::class, 'store_comunitario'])->name('store_comunitario');
-        Route::get('comunitarios/{comunitario}', [ProyectoSController::class, 'show_comunitario'])->name('show_comunitario');
         Route::get('comunitarios/{comunitario}/edit', [ProyectoSController::class, 'edit_comunitario'])->name('edit_comunitario');
         Route::put('comunitarios/{comunitario}', [ProyectoSController::class, 'update_comunitario'])->name('update_comunitario');
         Route::delete('comunitarios/{comunitario}', [ProyectoSController::class, 'destroy_comunitario'])->name('destroy_comunitario');
         Route::get('estudiantes/{comunitario}', [ProyectoSController::class, 'agregar_estudiante'])->name('agregar_estudiante');
-        Route::get('/recopasec/proyectos', [ProyectoSController::class, 'proyecto_list'])->name('proyecto_list');
         Route::get('/recopasec/proyecto-search/{texto?}', [ProyectoSController::class, 'search'])->name('search');
         Route::get('/recopasec/proyectoser/{proyecto_id}', [ProyectoSController::class, 'show_proyectoserv'])->name('show_proyectoserv');
+        Route::get('/recopasec/estudiante/{id?}', [ProyectoSController::class, 'profile_se'])->name('profile_se');
     //Descargar comprobante
         Route::get('documento', [ProyectoSController::class, 'documento'])->name('documento');
         Route::get('download-pdf', [ProyectoSController::class, 'descargar_pdf'])->name('descargar_pdf');

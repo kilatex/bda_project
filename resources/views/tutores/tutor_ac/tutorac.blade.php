@@ -72,7 +72,7 @@
                         <div class="row mb-3">
                             <label for="telefono" class="col-md-4 col-form-label text-md-end">{{ __('Telefono') }}</label>
                             <div class="col-md-6">
-                                <input id="telefono" name="telefono" value= "{{old('telefono')}}" type="text" class="form-control @error('telefono') is-invalid @enderror"   autofocus>
+                                <input id="telefono" name="telefono" value= "{{old('telefono')}}" type="tel" class="form-control @error('telefono') is-invalid @enderror"   autofocus>
 
                                 @error('telefono')
                                     <span class="invalid-feedback" role="alert">
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="condicion" name= 'nombre_especialidad' class="col-md-4 col-form-label text-md-end">{{ __('Condicion') }}</label>
+                            <label for="condicion" name= 'condicion' class="col-md-4 col-form-label text-md-end">{{ __('Condicion') }}</label>
                             <div class="col-md-6">
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>Seleccione una condición</option>
@@ -96,9 +96,9 @@
                         <div class="row mb-3">
                             <label for="especialidad" class="col-md-4 col-form-label text-md-end">{{ __('Especialidad') }}</label>
                             <div class="col-md-6">
-                                <input id="nombre_especialidad" name="nombre_especialidad" value= "{{old('nombre_especialidad')}}" type="text" class="form-control @error('nombre_especialidad') is-invalid @enderror"   autofocus>
+                                <input id="especialidad" name="especialidad" value= "{{old('especialidad')}}" type="text" class="form-control @error('especialidad') is-invalid @enderror"   autofocus>
 
-                                @error('nombre_especialidad')
+                                @error('especialidad')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

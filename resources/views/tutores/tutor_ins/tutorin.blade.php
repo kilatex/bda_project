@@ -13,15 +13,12 @@
                     @csrf
                         <div class="row mb-3">
                             <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
-
-                            
                             <div class="col-md-6">
                                 <select class="form-select select-cedula mr-2" name="tipo_cedula"  style="width: 60px;" aria-label="Default select example">
                                     <option selected value="V">V</option>
                                     <option  value="E">E</option>
                                 </select>
                                 <input id="cedula" name="cedula" value= "{{old('cedula')}}" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
-
                                 @error('cedula')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -72,7 +69,7 @@
                         <div class="row mb-3">
                             <label for="telefono" class="col-md-4 col-form-label text-md-end">{{ __('Telefono') }}</label>
                             <div class="col-md-6">
-                                <input id="telefono" name="telefono" value= "{{old('telefono')}}" type="text" class="form-control @error('telefono') is-invalid @enderror"   autofocus>
+                                <input id="telefono" name="telefono" value= "{{old('telefono')}}" type="tel" class="form-control @error('telefono') is-invalid @enderror"   autofocus>
 
                                 @error('telefono')
                                     <span class="invalid-feedback" role="alert">
@@ -82,13 +79,13 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="nombre_especialidad" class="col-md-4 col-form-label text-md-end">{{ __('Especialidad') }}</label>
+                            <label for="especialidad" class="col-md-4 col-form-label text-md-end">{{ __('Especialidad') }}</label>
 
                             
                             <div class="col-md-6">
-                                <input id="nombre_especialidad" name="nombre_especialidad" value= "{{old('nombre_especialidad')}}" type="text" class="form-control @error('nombre_especialidad') is-invalid @enderror"   autofocus>
+                                <input id="especialidad" name="especialidad" value= "{{old('especialidad')}}" type="text" class="form-control @error('especialidad') is-invalid @enderror"   autofocus>
 
-                                @error('nombre_especialidad')
+                                @error('especialidad')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

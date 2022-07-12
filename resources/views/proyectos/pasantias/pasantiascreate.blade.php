@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Titulo') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Título del proyecto') }}</label>
 
                             <div class="col-md-6">
                                 <input id="titulo" type="text" value= "{{old('titulo')}}" class="form-control @error('titulo') is-invalid @enderror" name="titulo"  required autocomplete="titulo" autofocus>
@@ -41,16 +41,53 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="periodo" class="col-md-4 col-form-label text-md-end">{{ __('periodo') }}</label>
+                            <label for="periodo" class="col-md-4 col-form-label text-md-end">{{ __('Periodo') }}</label>
                             <select class="form-select select-cedula mr-2" name="n-periodo" style="width: 60px;" aria-label="Default select example">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                             </select>
                             
                             <div class="col-md-6">
-                                <input id="periodo" type="text" value= "{{old('periodo')}}" class="form-control @error('periodo') is-invalid @enderror" name="periodo"  required autocomplete="periodo">
+                                <input id="periodo" type="number" min="2007" max="2022" placeholder="2007" style="width: 100px;" value= "{{old('periodo')}}" class="form-control @error('periodo') is-invalid @enderror" name="periodo"  required autocomplete="periodo">
 
                                 @error('periodo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="calificacion_tutorac" class="col-md-4 col-form-label text-md-end">{{ __('Calificación del Tutor Académico') }}</label>
+                            
+                            <div class="col-md-6">
+                                <input id="calificacion_tutorac" type="number" min="01" max="20" style="width: 70px;" value= "{{old('calificacion_tutorac')}}" class="form-control @error('calificacion_tutorac') is-invalid @enderror" name="calificacion_tutorac"  required autocomplete="calificacion_tutorac">
+
+                                @error('calificacion_tutorac')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div><div class="row mb-3">
+                            <label for="calificacion_tutorin" class="col-md-4 col-form-label text-md-end">{{ __('Calificación del Tutor institucional') }}</label>
+                            
+                            <div class="col-md-6">
+                                <input id="calificacion_tutorin" type="number" min="01" max="20" style="width: 70px;" value= "{{old('calificacion_tutorin')}}" class="form-control @error('calificacion_tutorin') is-invalid @enderror" name="calificacion_tutorin"  required autocomplete="calificacion_tutorin">
+
+                                @error('calificacion_tutorin')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div><div class="row mb-3">
+                            <label for="calificacion_docentevalu" class="col-md-4 col-form-label text-md-end">{{ __('Calificación del Docente Evaluador') }}</label>
+                            
+                            <div class="col-md-6">
+                                <input id="calificacion_docentevalu" type="number" min="01" max="20" style="width: 70px;" value= "{{old('calificacion_docentevalu')}}" class="form-control @error('calificacion_docentevalu') is-invalid @enderror" name="calificacion_docentevalu"  required autocomplete="calificacion_docentevalu">
+
+                                @error('calificacion_docentevalu')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

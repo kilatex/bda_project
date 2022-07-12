@@ -64,6 +64,16 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label for="periodo" class="col-md-4 col-form-label text-md-end">{{ __('Calificación del proyecto') }}</label>
+                            <div class="col-md-6">
+                                <select class="form-select select-cedula mr-2" name="calificacion" style="width: 60px;" aria-label="Default select example">
+                                    <option value="">Indique la calificación del estudiante</option>
+                                    <option value="aprob">Aprobado</option>
+                                    <option value="repro">Reprobado</option>
+                                </select>
+                            </div>
+                        </div>
                         <br>
                         <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">

@@ -9,14 +9,14 @@
 
                 <ul>
                     <li> <strong> Nombres y Apellidos: </strong> {{$user->user->nombres}}  {{$user->user->apellidos}} </li>
-                    <li> <strong> Cédula De Identidad o Pasaporte: </strong> {{$user->user->cedula}}  </li>
+                    <li> <strong> Cédula De Identidad: </strong> {{$user->user->cedula}}  </li>
                     <li> <strong> Correo Electrónico: </strong> {{$user->user->email}}  </li>
                     <li> <strong> Teléfono: </strong> {{$user->user->telefono}}</li>
                     <li> <strong> Carrera: </strong> {{$user->carrera->nombre}}</li>
                     @if($comunitario) 
-                    <li> <strong> Expediente: </strong> <strong> <a href="{{route('show_expediente', ['comunitario_id'=> $comunitario->id])}}">haz click aquí para observarlo</a></strong>  </li>
+                    <li> <strong> Proyecto: </strong> <strong> <a href="{{route('show_proyectoserv', ['comunitario_id'=> $comunitario->id])}}">haz click aquí para observarlo</a></strong>  </li>
                     @else
-                        <li> Este estudiante no posee proyecto, debe crear un proyecto nuevo o añadirlo a uni existente</li>
+                        <li> Este estudiante no posee proyecto, debe crear un proyecto nuevo o añadirlo a uno existente</li>
                     @endif
                 </ul>
             @else

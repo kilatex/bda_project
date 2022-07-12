@@ -3,18 +3,18 @@ CREATE DATABASE IF NOT EXISTS project;
 USE project;
 
 CREATE TABLE IF NOT EXISTS users(
-id  int(255) auto_increment not null,
-rol   varchar(20),
-nombres varchar(100),
-apellidos varchar(100),
-cedula varchar(100),
-email varchar(255),
-telefono varchar(255),
-password varchar(255),
-created_at datetime,
-updated_at datetime,
-remember_token varchar(255),
-CONSTRAINT pk_users PRIMARY KEY(id)
+    id  int(255) auto_increment not null,
+    rol   varchar(20),
+    nombres varchar(100),
+    apellidos varchar(100),
+    cedula varchar(100),
+    email varchar(255),
+    telefono varchar(255),
+    password varchar(255),
+    created_at datetime,
+    updated_at datetime,
+    remember_token varchar(255),
+    CONSTRAINT pk_users PRIMARY KEY(id)
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS carreras(
@@ -76,24 +76,20 @@ CREATE TABLE IF NOT EXISTS parroquias(
     CONSTRAINT fk_parroquias_municipios FOREIGN KEY(municipio_id) REFERENCES municipios(id)
 )ENGINE=InnoDb;
 
-CREATE TABLE IF NOT EXISTS comunidades(
+CREATE TABLE IF NOT EXISTS direcciones(
     id int(255) auto_increment not null,
-    nombre varchar(100),
+    estado_id int(100),
+    municipio_id int(100),
     parroquia_id int(100),
+    comunidad varchar(100),
+    consejo_comunal varchar(100),
     created_at datetime,
     updated_at datetime,
-    CONSTRAINT pk_comunidades PRIMARY KEY(id),
-    CONSTRAINT fk_comunidades_parroquias FOREIGN KEY(parroquia_id) REFERENCES parroquias(id)
-)ENGINE=InnoDb;
+    CONSTRAINT pk_direcciones PRIMARY KEY(id),
+    CONSTRAINT fk_direcciones_estados FOREIGN KEY(estado_id) REFERENCES estados(id),
+    CONSTRAINT fk_direcciones_municipios FOREIGN KEY(municipio_id) REFERENCES municipios(id),
+    CONSTRAINT fk_direcciones_parroquias FOREIGN KEY(parroquia_id) REFERENCES parroquias(id)
 
-CREATE TABLE IF NOT EXISTS consejo_comunales(
-    id int(255) auto_increment not null,
-    nombre varchar(100),
-    comunidad_id int(100),
-    created_at datetime,
-    updated_at datetime,
-    CONSTRAINT pk_consejo_comunales PRIMARY KEY(id),
-    CONSTRAINT fk_consejo_comunales_comunidades FOREIGN KEY(comunidad_id) REFERENCES comunidades(id)
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS empresas(
@@ -116,14 +112,6 @@ CREATE TABLE IF NOT EXISTS cargos(
     created_at datetime,
     updated_at datetime,
     CONSTRAINT pk_cargos PRIMARY KEY(id)
-)ENGINE=InnoDb;
-
-CREATE TABLE IF NOT EXISTS especialidades(
-    id int(255) auto_increment not null,
-    nombre varchar(100),
-    created_at datetime,
-    updated_at datetime,
-    CONSTRAINT pk_especialidades PRIMARY KEY(id)
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS expedientes(
@@ -158,14 +146,6 @@ CREATE TABLE IF NOT EXISTS notificaciones(
     CONSTRAINT fk_notificaciones_documentos FOREIGN KEY(documento_id) REFERENCES documentos(id)
 )ENGINE=InnoDb;
 
-CREATE TABLE IF NOT EXISTS cargos(
-    id int(255) auto_increment not null,
-    nombre varchar(100),
-    created_at datetime,
-    updated_at datetime,
-    CONSTRAINT pk_cargos PRIMARY KEY(id)
-)ENGINE=InnoDb;
-
 CREATE TABLE IF NOT EXISTS tutor_comunitarios(
     id int(255) auto_increment not null,
     nombres varchar(255),
@@ -173,13 +153,12 @@ CREATE TABLE IF NOT EXISTS tutor_comunitarios(
     cedula varchar(255),
     email varchar(255),
     telefono varchar(255),
-    consejo_comunal_id int(255),
-    cargo_id int(255),
+    direccion_id int(255),
+    cargo varchar(255),
     created_at datetime,
     updated_at datetime,
     CONSTRAINT pk_tutor_comunitarios PRIMARY KEY(id),
-    CONSTRAINT fk_tutor_comunitarios_consejo_comunales FOREIGN KEY(consejo_comunal_id) REFERENCES consejo_comunales(id),
-    CONSTRAINT fk_tutor_comunitarios_cargos FOREIGN KEY(cargo_id) REFERENCES cargos(id)
+    CONSTRAINT fk_tutor_comunitarios_direcciones FOREIGN KEY(direccion_id) REFERENCES direcciones(id)
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS tutor_institucionals(
@@ -190,12 +169,11 @@ CREATE TABLE IF NOT EXISTS tutor_institucionals(
     email varchar(255),
     telefono varchar(255),
     empresa_id int(255),
-    especialidad_id int(255),
+    especialidad varchar(255),
     created_at datetime,
     updated_at datetime,
     CONSTRAINT pk_tutor_institucionals PRIMARY KEY(id),
-    CONSTRAINT fk_tutor_institucional_empresas FOREIGN KEY(empresa_id) REFERENCES empresas(id),
-    CONSTRAINT fk_tutor_institucional_especialidades FOREIGN KEY(especialidad_id) REFERENCES especialidades(id)
+    CONSTRAINT fk_tutor_institucional_empresas FOREIGN KEY(empresa_id) REFERENCES empresas(id)
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS tutor_academicos(
@@ -206,11 +184,10 @@ CREATE TABLE IF NOT EXISTS tutor_academicos(
     email varchar(255),
     telefono varchar(255),
     condicion varchar(50),
-    especialidad_id int(255),
+    especialidad varchar(255),
     created_at datetime,
     updated_at datetime,
-    CONSTRAINT pk_tutor_academicos PRIMARY KEY(id),
-    CONSTRAINT fk_tutor_academicos_especialidades FOREIGN KEY(especialidad_id) REFERENCES especialidades(id)
+    CONSTRAINT pk_tutor_academicos PRIMARY KEY(id)
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS proyecto_comunitarios(
@@ -345,21 +322,4 @@ CREATE TABLE IF NOT EXISTS prestamo_libros(
     CONSTRAINT fk_prestamo_libros_libros FOREIGN KEY(libro_id) REFERENCES libros(id),
     CONSTRAINT fk_prestamo_libros_prestamista_est FOREIGN KEY(prestamista_est_id) REFERENCES estudiantes(id),
     CONSTRAINT fk_prestamo_libros_prestamista_doc FOREIGN KEY(prestamista_doc_id) REFERENCES docentes(id)
-)ENGINE=InnoDb;
-CREATE TABLE IF NOT EXISTS direcciones(
-    id int(255) auto_increment not null,
-    estado_id int(100),
-    municipio_id int(100),
-    parroquia_id int(100),
-    comunidad_id int(100),
-    consejo_comunal_id int(100),
-    created_at datetime,
-    updated_at datetime,
-    CONSTRAINT pk_direcciones PRIMARY KEY(id),
-    CONSTRAINT fk_direcciones_estados FOREIGN KEY(estado_id) REFERENCES estados(id),
-    CONSTRAINT fk_direcciones_municipios FOREIGN KEY(municipio_id) REFERENCES municipios(id),
-    CONSTRAINT fk_direcciones_parroquias FOREIGN KEY(parroquia_id) REFERENCES parroquias(id),
-    CONSTRAINT fk_direcciones_comunidades FOREIGN KEY(comunidad_id) REFERENCES comunidades(id),
-    CONSTRAINT fk_direcciones_consejo_comunales FOREIGN KEY(consejo_comunal_id) REFERENCES consejo_comunales(id)
-
 )ENGINE=InnoDb;
