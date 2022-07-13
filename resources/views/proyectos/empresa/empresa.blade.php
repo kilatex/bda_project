@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="telefono_tu" class="col-md-4 col-form-label text-md-end">{{ __('telefono_tu') }}</label>
+                                <label for="telefono_tu" class="col-md-4 col-form-label text-md-end">{{ __('Telefono') }}</label>
                                 <div class="col-md-6">
                                     <input id="telefono_tu" name="telefono_tu" value= "{{old('telefono')}}" type="tel" class="form-control @error('telefono_tu') is-invalid @enderror"   autofocus>
     

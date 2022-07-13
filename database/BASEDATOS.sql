@@ -99,11 +99,11 @@ CREATE TABLE IF NOT EXISTS empresas(
     departamento varchar(100),
     email varchar(255),
     telefono varchar(100),
-    parroquia_id int(100),
+    direccion_id int(100),
     created_at datetime,
     updated_at datetime,
     CONSTRAINT pk_empresas PRIMARY KEY(id),
-    CONSTRAINT fk_empresas_parroquias FOREIGN KEY(parroquia_id) REFERENCES parroquias(id)
+    CONSTRAINT fk_empresas_direccones FOREIGN KEY(direccion_id) REFERENCES direcciones(id)
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS expedientes(

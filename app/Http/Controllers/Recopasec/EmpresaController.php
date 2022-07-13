@@ -117,9 +117,8 @@ class EmpresaController extends Controller
             $estados = Estado::all();
             $municipios = Municipio::all();
             $parroquias = Parroquia::all();
-            
             return view('proyectos.empresa.empresa', 
-                compact('estados', 'rif', 'municipios', 'parroquias','email')
+                compact('rif', 'email', 'estados', 'municipios', 'parroquias')
             );
         }
         
