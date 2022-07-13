@@ -111,19 +111,17 @@ class EmpresaController extends Controller
         $empresaByEmail = Empresa::where('email', $email)->first();
 
         if($empresaByRif ||  $empresaByEmail){
-            return redirect()->route('create_tutorin', 
-                compact('empresaByRif', 'empresaByEmail'), 
+            return view('proyectos.empresa.buscarempresa', compact('empresaByRif', 'empresaByEmail'));
+
+        }else{
+            $estados = Estado::all();
+            $municipios = Municipio::all();
+            $parroquias = Parroquia::all();
+            
+            return view('proyectos.empresa.empresa', 
+                compact('estados', 'rif', 'municipios', 'parroquias','email')
             );
         }
-        $estados = Estado::all();
-        $municipios = Municipio::all();
-        $parroquias = Parroquia::all();
         
-        return view('proyectos.empresa.empresa', 
-            compact('estados', 'rif', 'municipios', 'parroquias','email'),
-            [
-            'rif' => $rif,
-            'email' => $email,              
-        ]);
     }
 }
