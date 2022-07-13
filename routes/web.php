@@ -165,6 +165,6 @@ Route::get('/buscar-biblioteca/{texto?}', [App\Http\Controllers\Sirecob\LibroCon
 //Moduo de proyecto de grados
 Route::get('/proyectos', [App\Http\Controllers\sirecob\ProyectoGradoController::class, 'vista_registro']);
 Route::get('/Libros_Inactivos', [App\Http\Controllers\sirecob\LibroController::class, 'LibrosInactivos']);
-
+Route::get('/Listar_proyectos', [App\Http\Controllers\sirecob\ProyectoGradoController::class, 'index']);
 Route::get('/EditarPrestamos/{id}', [App\Http\Controllers\sirecob\PestamolibrosController::class, 'EditarPrestamo']);
 Route::get('/updatePrestamo/{libro}', [App\Http\Controllers\sirecob\PestamolibrosController::class, 'update'])->name('updatePrestamo');

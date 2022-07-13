@@ -11,9 +11,13 @@ class DatosProyecto extends Model
 const UPDATED_AT = null;
     public $timestamps = false;
     protected $fillable = [
-        'id_Tutor_Academico',
-        'id_Tutor_Institucional',
-        'id_Jurado_examinador',
+        'tutor_institucional_id',
+        'tutor_academico_id',
+        'jurado_examinador1_id',
+        'jurado_examinador2_id',
+        'jurado_examinador3_id',
+        'jurado_examinador4_id',
+        'jurado_examinador5_id',
     ];
     
 }

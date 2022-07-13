@@ -6,7 +6,7 @@ use App\Models\Sirecob\proyectos_grados;
 use App\Models\Sirecob\DatosProyecto;
 use App\Models\Estudiante;
 use App\Models\Sirecob\Docente;
-//use App\Models\Tutor;
+use App\Models\Recopasec\Tutor_Institucional;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,11 +19,14 @@ class ProyectoGradoController extends Controller
      */
     public function index()
     {
-        //
+        $proyectoGrado=proyectos_grados::get();
+        return view('sirecob/ProyectoGrado/listarProyectos',compact('proyectoGrado'));
     }
     public function vista_registro()
-    {
-        return view('sirecob/ProyectoGrado/registro_proyecto');
+    {   $Estudiante=Estudiante::get();
+        $Docente = Docente::get();
+        $tutorInstitucional=Tutor_Institucional::get();
+        return view('sirecob/ProyectoGrado/registro_proyecto',compact('Estudiante','Docente','tutorInstitucional'));
     }
 
 
@@ -47,10 +50,10 @@ class ProyectoGradoController extends Controller
 
         proyectos_grados::create([
             'titulo' => $request->Titulo,//'kk',
-            'autor_id' => 1,
+            'autor_id' => $request->autor,
             'fecha_presentacion' => '21-12-12',
             'datos_proyectos_id' => $registro_proyecto->id,
-            'Tipo_proyecto' => 1,
+            'Tipo_proyecto' => $request->fav_language,
 
         ]);
     }
@@ -88,4 +91,5 @@ class ProyectoGradoController extends Controller
     {
         //
     }
+    
 }

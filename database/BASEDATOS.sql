@@ -229,11 +229,19 @@ CREATE TABLE IF NOT EXISTS datos_proyectos(
     id int(255) auto_increment not null,
     tutor_institucional_id int(255),
     tutor_academico_id int(255),
-    jurado_examinador_id int(255),
+    jurado_examinador1_id int(255),
+    jurado_examinador2_id int(255),
+    jurado_examinador3_id int(255),
+    jurado_examinador4_id int(255),
+    jurado_examinador5_id int(255),
     CONSTRAINT pk_datos_proyectos PRIMARY KEY(id),
     CONSTRAINT fk_datos_proyectos_tutor_institucionals FOREIGN KEY(tutor_institucional_id) REFERENCES tutor_institucionals(id),
     CONSTRAINT fk_datos_proyectos_tutor_academicos FOREIGN KEY(tutor_academico_id) REFERENCES tutor_academicos(id),
-    CONSTRAINT fk_datos_proyectos_docentes FOREIGN KEY(jurado_examinador_id) REFERENCES docentes(id)
+    CONSTRAINT fk_datos_proyectos_docentes1 FOREIGN KEY(jurado_examinador1_id) REFERENCES docentes(id),
+    CONSTRAINT fk_datos_proyectos_docentes2 FOREIGN KEY(jurado_examinador2_id) REFERENCES docentes(id),
+    CONSTRAINT fk_datos_proyectos_docentes3 FOREIGN KEY(jurado_examinador3_id) REFERENCES docentes(id),
+    CONSTRAINT fk_datos_proyectos_docentes4 FOREIGN KEY(jurado_examinador4_id) REFERENCES docentes(id),
+    CONSTRAINT fk_datos_proyectos_docentes5 FOREIGN KEY(jurado_examinador5_id) REFERENCES docentes(id)
 )ENGINE=InnoDb;
 
 CREATE TABLE IF NOT EXISTS proyectos_grados(
