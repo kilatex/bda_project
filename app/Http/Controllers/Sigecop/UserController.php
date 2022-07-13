@@ -20,16 +20,16 @@ class UserController extends Controller
 
     public function create_admin($code = 0)
     {
+        return view('recopasec.admin.register',[
+            'message' => null
+        ]);
 
         $user = \Auth::user();
         if($user){
             return redirect()->route('home');
                 }
             if($code == 20625196){
-                return view('recopasec.admin.register',[
-                    'message' => null
-                ]);
-
+              
             }else{
                 return redirect()->route('home');
 
@@ -68,7 +68,7 @@ class UserController extends Controller
         //Recoger Datos del Usuario
         $nombres = $request->input('nombres');
         $apellidos = $request->input('apellidos');
-        $cedula = $request->input('dni');
+        $cedula = $request->input('cedula');
         $email = $request->input('email');
         $pass = $request->input('password');
         $rol = "ADMIN";

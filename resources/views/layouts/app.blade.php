@@ -24,6 +24,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    @livewireStyles
 </head>
 <body>
     <div id="app">
@@ -54,7 +55,7 @@
                                 @endif
 
                             @else
-                            @if(Auth::user()->rol == "USER_serviciocom")
+                            @if(Auth::user()->rol == "USER_comunitario")
                             <li class="nav-item ">
                                 <a id="" class="nav-link "  href="{{ route('students_list') }}" >
                                 Estudiantes
@@ -68,31 +69,14 @@
                             </li>
 
                             <li class="nav-item ">
-                                <a id="" class="nav-link "  href="{{ route('comunitarios.index') }}" >
+                                <a id="" class="nav-link "  href="{{ route('proyecto_list') }}" >
                                     Proyectos
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a id="" class="nav-link "  href="{{ route('comunitarios.create') }}" >
+                                <a id="" class="nav-link "  href="{{ route('create_direccion') }}" >
                                 Nuevo Proyecto
                                 </a>
-                            </li>
-                            <li class="nav-item dropdown ">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->nombres }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right k" aria-labelledby="navbarDropdown">
-
-                                    <a class="dropdown-item text-black" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        {{ __('Salir') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
                             </li>
 
                             @elseif(Auth::user()->rol == "USER_pasantias")
@@ -110,12 +94,12 @@
                                 </li>
 
                                 <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('index_pasantias') }}" >
+                                    <a id="" class="nav-link "  href="{{ route('proyecto_listp') }}" >
                                         Proyectos
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('create_pasantias') }}" >
+                                    <a id="" class="nav-link "  href="{{ route('create_tutorin') }}" >
                                     Nuevo Proyecto
                                     </a>
                                 </li>
@@ -223,6 +207,9 @@
     </div>
 
     <script src="{{ asset('js/main.js') }}" defer></script>
-    <script src="{{ asset('js/validaciones_sirecob.js') }}" ></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    @livewireScripts
 </body>
 </html>

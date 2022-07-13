@@ -9,15 +9,14 @@ class Empresa extends Model
 {
     use HasFactory;
     protected $fillable = [
-        
+        'rif',
         'nombre',
         'email',
         'telefono',
         'departamento',
         'direccion_id'
-
     ];
-    public function direccion(){
+    public function parroquia(){
         return $this->belongsTo('App\Models\Recopasec\Direccione','direccion_id');
     }
 }

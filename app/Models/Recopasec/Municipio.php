@@ -5,10 +5,16 @@ namespace App\Models\Recopasec;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cargo extends Model
+class Municipio extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nombre'
+        
+        'nombre',
+        'estado_id',
+
     ];
+    public function estado(){
+        return $this->belongsTo('App\Models\Recopasec\Estado','estado_id');
+    }
 }

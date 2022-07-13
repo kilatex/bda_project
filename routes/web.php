@@ -5,7 +5,7 @@ use App\Http\Controllers\Recopasec\EmpresaController;
 use App\Http\Controllers\Recopasec\ProyectoPController;
 use App\Http\Controllers\Recopasec\ProyectoSController;
 use App\Http\Controllers\Recopasec\TutorController;
-use App\Models\Recopasec\Empresa;
+use App\Http\Controllers\ValidateformController;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\CodeCoverage\Filter\DirectoryCollectionIterator;
 
@@ -71,7 +71,9 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
     //Rutas de los tutores
         //Tutor academico
         Route::get('tutorac/create', [TutorController::class, 'create_tutorac'])->name('create_tutorac');
-        Route::post('tutorac', [TutorController::class, 'store_tutorac'])->name('store_tutorac');
+        Route::get('tutoracom/create', [TutorController::class, 'create_tutoracom'])->name('create_tutoracom');
+        Route::post('tutorac', [TutorController::class, 'store_tutorac'])->name('store_tutorac');        
+        Route::post('tutoracom', [TutorController::class, 'store_tutoracom'])->name('store_tutoracom');
         Route::get('tutorac/{tutor}/edit', [TutorController::class, 'edit_tutorac'])->name('edit_tutorac');
         Route::put('tutorac/{tutor}', [TutorController::class, 'update_tutorac'])->name('update_tutorac');
         Route::delete('tutorac/{tutor}', [TutorController::class, 'destroy_tutorac'])->name('destroy_tutoracy');
@@ -94,26 +96,34 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::get('pasantias/{pasantia}', [ProyectoPController::class, 'show_pasantias'])->name('show_pasantias');
         Route::get('pasantias/{pasantia}/edit', [ProyectoPController::class, 'edit_pasantias'])->name('edit_pasantias');
         Route::put('pasantias/{pasantia}', [ProyectoPController::class, 'update_pasantias'])->name('update_pasantias');
+        Route::get('/recopasec/proyectosp', [ProyectoPController::class, 'proyecto_listp'])->name('proyecto_listp');
+        Route::get('/recopasec/proyecto-searchp/{texto?}', [ProyectoSController::class, 'searchp'])->name('searchp');
         Route::delete('pasantias/{pasantia}', [ProyectoPController::class, 'destroy_pasantias'])->name('destroy_pasantias');
+        Route::get('/recopasec/proyectopas/{proyecto_id}', [ProyectoPController::class, 'show_proyectopa'])->name('show_proyectopa');
     //Rutas para el proyecto comunitario
         Route::get('comunitarios', [ProyectoSController::class, 'index_comunitario'])->name('index_comunitario');
         Route::get('direcciones/create', [ProyectoSController::class, 'create_direccion'])->name('create_direccion');
         Route::post('direcciones', [ProyectoSController::class, 'store_direccion'])->name('store_direccion');
-        Route::put('direcciones/{direccion}', [ProyectoSController::class, 'update_direccion'])->name('update_direccion');
-        Route::delete('direcciones/{direccion}', [ProyectoSController::class, 'destroy_direccion'])->name('destroy_direccion');
         Route::get('comunitarios/create', [ProyectoSController::class, 'create_comunitario'])->name('create_comunitario');
         Route::post('comunitarios', [ProyectoSController::class, 'store_comunitario'])->name('store_comunitario');
-        Route::get('comunitarios/{comunitario}', [ProyectoSController::class, 'show_comunitario'])->name('show_comunitario');
         Route::get('comunitarios/{comunitario}/edit', [ProyectoSController::class, 'edit_comunitario'])->name('edit_comunitario');
         Route::put('comunitarios/{comunitario}', [ProyectoSController::class, 'update_comunitario'])->name('update_comunitario');
         Route::delete('comunitarios/{comunitario}', [ProyectoSController::class, 'destroy_comunitario'])->name('destroy_comunitario');
+        Route::get('estudiantes/{comunitario}', [ProyectoSController::class, 'agregar_estudiante'])->name('agregar_estudiante');
+        Route::get('/recopasec/proyecto-search/{texto?}', [ProyectoSController::class, 'search'])->name('search');
+        Route::get('/recopasec/proyectoser/{proyecto_id}', [ProyectoSController::class, 'show_proyectoserv'])->name('show_proyectoserv');
+        Route::get('/recopasec/estudiante/{id?}', [ProyectoSController::class, 'profile_se'])->name('profile_se');
+    //Descargar comprobante
+        Route::get('documento', [ProyectoSController::class, 'documento'])->name('documento');
+        Route::get('download-pdf', [ProyectoSController::class, 'descargar_pdf'])->name('descargar_pdf');
     //Rutas para las empresas de pasantias
         Route::post('/empresas-crear', [EmpresaController::class, 'store_empresa'])->name('store_empresa');
         Route::get('empresas/create', [EmpresaController::class, 'create_empresa'])->name('create_empresa');
         Route::get('empresas/{empresa}/edit', [EmpresaController::class, 'edit_empresa'])->name('edit_empresa');
         Route::put('empresas/{empresa}', [EmpresaController::class, 'update_empresa'])->name('update_empresa');
         Route::delete('empresas/{empresa}', [EmpresaController::class, 'destroy_empresa'])->name('destroy_empresa');
-   
+        Route::get('/recopasec/verificar-rif', [EmpresaController::class, 'verificar_rif'])->name('verificar_rif');
+        Route::post('/verificar-empresa', [EmpresaController::class, 'verificar_empresa'])->name('verificar_empresa');
 //#########################################
 //                  SIRECOB
 //#########################################
