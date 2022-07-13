@@ -19,30 +19,19 @@
                             <select class="form-select" name="select_document" aria-label="Default select example">
 
                                 <option selected>Seleccione</option>
-                                <option value="planilla_datos_personales">Planilla de Datos Personales</option>
-                                <option value="copia_cedula">Copia de Cédula</option>
-                                <option value="record_academico">Record Académico</option>
-                                <option value="constancia_culminacion_servicio_comunitario">Constancia de Culmincación de Servicio Comunitario</option>
-                                <option value="acta_evaluacion_pasantias">Acta de Evaluación de Pasantias</option>
-                                <option value="certificado_pasantias">Certificado Pasantías</option>
-                                <option value="acta_defensa_trabajo_especial_grado">Acta de Defensa de Trabajo Especial de Grado</option>
-                                <option value="constancia_practicas_educativas">Constacia de Practicas Educativas</option>
-                                <option value="acta_pasantia_hospitalaria_comunitaria">Acta de Pasantía Hospitalaria Comunitaria</option>
-                                <option value="certificado_pastantia_hospitalaria_comunitaria">Certificado de Pasantía Hospitalaría Comunitaria</option>
-                                <option value="comunicacion_adicional_casos_concretos">Comunicación Relacionada en caso de Reingreso, traslados, etc</option>
-                                <option value="reconocimientos_amonestaciones">Reconocimientos y Amonestaciones</option>
-                                <option value="titulo_bachiller_fondonegro">Titulo de bachiller en fondonegro</option>
-                                <option value="copia_titulo_bachiller">Copia de Titulo de bachiller</option>
-                                <option value="copia_notas_certificadas_educacion_media">Copia de Notas Certificadas de Educación Media Diversificada</option>
-                                <option value="fotocopia_partida_nacimiento">Fotocopia de Partida de Nacimiento</option>
-                                <option value="planilla_rusni">Planilla Rusni</option>
-                                <option value="planilla_din">Planilla De Defensa Integral de la Nación</option>
-
+                                <option value="record_academico" >Record Académico</option>
+                                <option value="inscripcion_militar">Inscripcion militar, baja militar o carnet profesional activo o en reserva activa (Si es mayor de edad)</option>
+                                <option value="registro_ingreo_educacion_universitaria">Registro de sistema nacional de ingreso a la educación univeristaria (OPSU)</option>
+                                <option value="copia_titulo_educacion_media">Fotocopia simple del título de educación media</option>
+                                <option value="fondo_negro_titulo_educacion_media">Fondo negro del titulo de educacion media certificado por la instituciond e procedencia</option>
+                                <option value="copia_notas">Fotocopia simple de notas certificadas (educación media) certificadas por la institución de procedencia</option>
+                                <option value="copia_cedula">Fotocopia de cedula de Identidad (Pasaporte en caso de ser extranjero)</option>
+                                <option value="copia_partida_nacimiento">Fotocopia de la partida de nacimiento</option>
 
 
 
                             </select>
-
+                            <input type="hidden" name="estudiante_id" value="{{$estudiante->id}}">
                             <div class="input-group mb-3 mt-4">
                                 <label class="input-group-text" for="inputGroupFile01">Subir</label>
                                 <input type="file" class="form-control" name="file_modify">

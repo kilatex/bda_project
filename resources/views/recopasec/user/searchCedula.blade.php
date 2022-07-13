@@ -23,7 +23,7 @@
                                     <option value="E">E</option>
                                 </select>
                                 <div class="col-md-11">
-                                    <input id="cedula"  name="cedula" required type="text" placeholder="29699795" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
+                                    <input id="cedula"  name="cedula" required type="number"   placeholder="29699795" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
 
                                     @error('cedula')
                                     <span class="invalid-feedback" role="alert">

@@ -30,20 +30,25 @@ Auth::routes();
 Route::get('/sigecop/home', [App\Http\Controllers\Sigecop\HomeController::class, 'index'])->name('home');
 
 // DocumentController ROUTES
-Route::get('/sigecop/upload/{user}', [App\Http\Controllers\Sigecop\DocumentController::class, 'upload'])->name('upload');
+ Route::get('/sigecop/subir-expediente', [App\Http\Controllers\Sigecop\DocumentController::class, 'subir_expediente'])->name('subir_expediente');
+ Route::get('/sigecop/upload/{user}', [App\Http\Controllers\Sigecop\DocumentController::class, 'upload'])->name('upload');
 Route::post('/sigecop/subir', [App\Http\Controllers\Sigecop\DocumentController::class, 'subir'])->name('subir');
+Route::get('/sigecop/mi-expediente', [App\Http\Controllers\Sigecop\DocumentController::class, 'mi_expediente'])->name('mi_expediente');
 Route::get('/sigecop/expediente/{expediente_id}', [App\Http\Controllers\Sigecop\DocumentController::class, 'show_expediente'])->name('show_expediente');
 Route::get('/sigecop/doc/{filename}', [App\Http\Controllers\Sigecop\DocumentController::class, 'getDoc'])->name('getDoc');
 Route::get('/sigecop/modify', [App\Http\Controllers\Sigecop\DocumentController::class, 'modify'])->name('modify');
 Route::post('/sigecop/update_docs', [App\Http\Controllers\Sigecop\DocumentController::class, 'update_docs'])->name('update_docs');
+Route::post('/sigecop/change-status', [App\Http\Controllers\Sigecop\DocumentController::class, 'change_status'])->name('change_status');
 
 // UserController ROUTES
 Route::get('/sigecop/estudiante/{id?}', [App\Http\Controllers\Sigecop\StudentController::class, 'profile'])->name('profile');
 Route::post('/sigecop/update_profile', [App\Http\Controllers\Sigecop\StudentController::class, 'update_profile'])->name('update_profile');
 Route::get('/sigecop/edit-profile', [App\Http\Controllers\Sigecop\StudentController::class, 'edit_profile'])->name('edit_profile');
+Route::post('/sigecop/cambiar-contraseña', [App\Http\Controllers\Sigecop\StudentController::class, 'change_password'])->name('change_password');
 Route::get('/sigecop/img-profile/{filename}', [App\Http\Controllers\Sigecop\StudentController::class, 'img_profile'])->name('img_profile');
 Route::get('/sigecop/notification', [App\Http\Controllers\Sigecop\StudentController::class, 'notification'])->name('notification');
 Route::get('/sigecop/estudiantes', [App\Http\Controllers\Sigecop\StudentController::class, 'students_list'])->name('students_list');
+Route::get('/mi-perfil', [App\Http\Controllers\Sigecop\StudentController::class, 'my_profile'])->name('my_profile');
 
 // AdminController ROUTES
 Route::get('/sigecop/create-admin/{code?}', [App\Http\Controllers\Sigecop\UserController::class, 'create_admin'])->name('create_admin');
@@ -62,10 +67,11 @@ Route::get('/nuevo-expediente', [App\Http\Controllers\Sigecop\DocumentController
 Route::get('/eliminar-expediente/{expediente_id} ', [App\Http\Controllers\Sigecop\DocumentController::class, 'delete_expediente'])->name('delete_expediente');
 
 
-Route::post('/sigecop/register-admin', [App\Http\Controllers\Sigecop\AdminController::class, 'register_admin'])->name('register_admin');
+Route::get('/sigecop/users/list', [App\Http\Controllers\Sigecop\SuperAdminController::class, 'users_list'])->name('users_list');
+Route::get('/sigecop/register/user', [App\Http\Controllers\Sigecop\SuperAdminController::class, 'register_user'])->name('register_user');
 Route::get('/sigecop/user/{id}', [App\Http\Controllers\Sigecop\AdminController::class, 'user_docs'])->name('user_docs');
 Route::get('/sigecop/docs/pass/{docs_id}', [App\Http\Controllers\Sigecop\AdminController::class, 'pass_docs'])->name('pass_docs');
-Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::class, 'send_message'])->name('send_message');
+Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\UserController::class, 'send_message'])->name('send_message');
 
 //RECOPASEC
     //Rutas de los tutores

@@ -8,8 +8,9 @@ use Illuminate\Http\Response;
 use  App\Models\Estudiante;
 use  App\Models\User;
 use  App\Models\Sigecop\Expediente;
+use  App\Models\Sigecop\Documento;
 use  App\Models\Carrera;
-use  App\Models\Message;
+use  App\Models\Sigecop\Mensaje;
 use  App\Models\Document;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -106,40 +107,56 @@ class UserController extends Controller
             'apellidos' => 'required|string|max:255',
             'password' => 'nullable|string|min:6',
             'password_confirmation' => 'nullable|string|min:6',
-            'carrera' => 'required'
+            'carrera' => 'required',
+            'periodo_ingreso' => 'required'
         ]);
 
         //Recoger Datos del Usuario
+        $carrera =  $request->input('carrera');
         $user->nombres = $request->input('nombres');
         $user->apellidos = $request->input('apellidos');
         $user->cedula = $request->input('cedula');
         $user->rol = $request->input('rol');
+
         if( $request->input('email')){
             $user->email = $request->input('email');
+        }   
+
+        if($carrera == "null"){
+
+            $message = 'REGISTRO INCORRECTO,  POR FAVOR SELECCIONE UNA CARRERA ';
+            return redirect()->route('home')->with([
+                'message' => $message,
+                'alert_danger' => true
+            ]);
         }
 
-        if($request->input('password') == $request->input('password_confirmation')){
+        $pass = $request->input('password');
+        $pass_confirm =  $request->input('password_confirmation');
+        if( $pass == $pass_confirm && $pass != null){
             $password = hash::make($request->input('password'));
+            $user->password = $password;
         }
         else{   
+            $message = 'REGISTRO INCORRECTO, CONTRASEÑAS NO COINCIDEN ';
+            return redirect()->route('home')->with([
+                'message' => $message,
+                'alert_danger' => true
+            ]);
 
-            $message = 'Contraseñas no coinciden';
-            return view('recopasec.student.register',[
-                'message' => $message
-            ]
-            );
         }
 
         $user->save();
         $student = new Estudiante();
         $student->usuario_id = $user->id;
         $student->carrera_id = $request->input('carrera');
+        $student->periodo_ingreso = $request->input('periodo_ingreso');
         $student->save();
-        $message = false;
-        return view('home',[
-            'notification' => $message
-        ]
-        ); 
+
+        $message = 'EL REGISTRO DE USUARIO SE HA REALIZADO CORRECTAMENTE ';
+        return redirect()->route('home')->with([
+            'message' => $message,
+        ]); 
 
 
     }
@@ -211,34 +228,26 @@ class UserController extends Controller
             return redirect()->route('home');
         }
         
-        $docs_id = $request->input('document_id');
   
-        $messages = Message::where('document_id',$docs_id)->first();
-
-        if($messages == null){
-
-            $validate = $this->validate($request,[
-                'message' => 'required|string',
-                'document_id' => 'required'
-            ]);
-            
-            $message = new Message();
-            $message->document_id = $request->input('document_id');
-            $message->message = $request->input('message');
+      
+            $message = new Mensaje();
+            $message->documento_id = $request->input('id');
+            $message->usuario_id = $request->input('usuario_id');
+            $message->message = $request->input('observaciones');
+            if($request->input('status') != 'null'){
+                $documento = Documento::where('id', $message->documento_id)->first();
+                $documento->estado = $request->input('estado');
+                $documento->update();
+            }
     
     
             $message->save();
     
             $notification = 'Observación Enviada';
-            return redirect()->route('home')->with([
-                'message' => $notification  
+            return redirect('/sigecop/expediente/'. $documento->expediente->id)->with([
+                'obbb' => 'Observación enviada'
             ]);
-        }else{
-            $message = 'Ya Enviaste una Observación sobre estos documentos ';
-            return redirect()->route('home')->with([
-                'message' => $message
-            ]);  
-        }
+           
 
     }
 
@@ -369,7 +378,7 @@ class UserController extends Controller
         if ( $user == null || $user->rol != "USER"){
             return redirect()->route('home');
         }
-        $expedientes = Expediente::where('estado','En Progreso')->Paginate(12);                
+        $expedientes = Expediente::Paginate(12);                
 
         return view('recopasec.user.expedientes-list',[
             'expedientes' => $expedientes,

@@ -5,19 +5,14 @@
         @if ($message)
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Notificación') }}</div>
-
-                    <div class="card-body">
-                            <div class="alert alert-danger" role="alert">
-                                Registro Incorrecto, vuelve a intentarlo
-                            </div>
-                    </div>
+                <div class="alert alert-danger" role="alert">
+                    Registro Incorrecto, vuelve a intentarlo
+                    <strong> {{$message}}</strong>
                 </div>
                 
             </div>
         </div>
-    @endif
+        @endif
 
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -107,8 +102,8 @@
                         <div class="row mb-3">
                             <label class="col-md-4 col-form-label text-md-end">Carrera</label>
                             <div class="col-md-6">
-                                <select class="form-select" name="carrera" aria-label="Default select example">
-                                    <option selected>Carrera</option>
+                                <select class="form-select" required name="carrera" aria-label="Default select example">
+                                    <option selected value="null">Carrera</option>
                                     <option value="1">Ingeniería de Sistemas</option>
                                     <option value="2">Ingeniería Eléctrica</option>
                                     <option value="3">Ingeniería Civil</option>
@@ -119,7 +114,32 @@
                                 </select>   
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <label class="col-md-4 col-form-label text-md-end">Periodo De Ingreso</label>
+                            <div class="col-md-6">
+                                <select class="form-select" required name="periodo_ingreso" aria-label="Default select example">
+                                    <option selected value="null">Seleccione</option>
+                                    <option value="1-2014">1-2014</option>
+                                    <option value="2-2014">2-2014</option>
+                                    <option value="1-2015">1-2015</option>
+                                    <option value="2-2015">2-2015</option>
+                                    <option value="1-2016">1-2016</option>
+                                    <option value="2-2016">2-2016</option>
+                                    <option value="1-2017">1-2017</option>
+                                    <option value="2-2017">2-2017</option>
+                                    <option value="1-2018">1-2018</option>
+                                    <option value="2-2018">2-2018</option>
+                                    <option value="1-2019">1-2019</option>
+                                    <option value="2-2019">2-2019</option>
+                                    <option value="1-2020">1-2020</option>
+                                    <option value="2-2020">2-2020</option>
+                                    <option value="1-2021">1-2021</option>
+                                    <option value="2-2021">2-2021</option>
+                                    <option value="1-2022">1-2022</option>
 
+                                </select>   
+                            </div>
+                        </div>
                        <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

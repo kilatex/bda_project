@@ -97,14 +97,16 @@ CONSTRAINT fk_documents_users FOREIGN KEY(user_id) REFERENCES users(id)
 )ENGINE=InnoDb;
 
 
-CREATE TABLE IF NOT EXISTS messages(
+CREATE TABLE IF NOT EXISTS mensajes(
 id int(255) auto_increment not null,
-document_id int(255),
+documento_id int(255),
+usuario_id int(255),
 message varchar(255),
 created_at datetime,
 updated_at datetime,
-CONSTRAINT pk_messages PRIMARY KEY(id),
-CONSTRAINT fk_messages_document FOREIGN KEY(document_id) REFERENCES documents(id)
+CONSTRAINT pk_mensajes PRIMARY KEY(id),
+CONSTRAINT fk_mensajes_documento FOREIGN KEY(documento_id) REFERENCES documentos(id),
+CONSTRAINT fk_mensajes_usuario FOREIGN KEY(usuario_id) REFERENCES users(id)
 )ENGINE=InnoDb;
 
 

@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Sigecop;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use  App\Models\Estudiante;
 use  App\Models\Sigecop\Expediente;
-
+use  App\Models\Sigecop\Documento;
 use  App\Models\User;
 use  App\Models\Document;
-use  App\Models\Message;
+use  App\Models\Sigecop\Mensaje;
 use  App\Models\Periodo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -33,17 +34,28 @@ class StudentController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     
+     public function my_profile(){
+
+    }
      
     public function profile($id = null)
 
     {   
         //VALIDATE ROUTE PROFILE
         $user = Estudiante::where('id',$id)->first();
-        $expediente = Expediente::where('estudiante_id', $id)->first();
+        if($user){
+            $expediente = Expediente::where('estudiante_id', $id)->first();
 
+            if($expediente){
+                $documentos = Documento::where('expediente_id', $expediente->id)->get();
+            }else{
+                $documentos = null; 
+            }
+        }
         return view('recopasec.student.studentProfile',[
             'user' => $user,
-            'expediente'=> $expediente
+            'expediente'=> $expediente,
+            'documentos' => $documentos
         ]);
 
     }
@@ -59,85 +71,91 @@ class StudentController extends Controller
 
 
             $user = \Auth::user();
-            $periodos=DB::table('periodos')->get();
-            $periodos_grado=DB::table('periodogrados')->get();
-            $pregrado=DB::table('pregrados')->get();
-            $postgrados=DB::table('postgrados')->get();
-            $promociones=DB::table('promocions')->get();
-    
+
+            $messi = explode('-', $user->telefono);
+           
+            if($messi[0]){
+                $user->telefono =   $messi[1];
+            }
+
       
             return view('recopasec.user.edit',[
                 'user' => $user,
-                'periodos' => $periodos,
-                'periodos_grado' => $periodos_grado,
-                'pregrado' => $pregrado,
-                'postgrados' => $postgrados,
-                'promociones' => $promociones
+                'message' => ''
             ]);
     }
 
     public function update_profile(Request $request){
 
-                // Conseguir el Usuario Identificado
-                $user =  \Auth::user();
-                $id = $user->id;
+        // Conseguir el Usuario Identificado
+        $user =  \Auth::user();
+        $id = $user->id;
+        $user->telefono = $request->input('codigo').'-'.$request->input('telefono');
 
-                
-                // Validar Formulario
-                $validate = $this->validate($request,[
-                    'name' => 'required|string|max:255',
-                    'surname' => 'required|string|max:255',
-                    'img_profile' => 'image|max:5000',
-                    'dni' => 'required|int|unique:users,dni,'.$id,
-                    'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-                ]);
-
-               
-        //Recoger Datos del Usuario
-        $nombres = $request->input('nombres');
-        $apellidos = $request->input('apellidos');
-        $cedula = $request->input('cedula');
-        $email = $request->input('email');
-        $rol = "USER";
-
-        // Asignar nuevos valores al objeto del usuario
-        $user->cedula = $cedula;
-        $user->nombres = $nombres;
-        $user->apellidos = $apellidos;
-        $user->email = $email;
-        
-        $user->rol = $rol;
 
         $user->update();
 
-        return redirect()->route('profile')
+        return redirect()->route('home')
                         ->with(['message' => 'User Info Updated']);
 
     }
 
+    public function change_password(Request $request){
+        $user = \Auth::user();
 
+        
+        $password_confirm = $request->input('password_confirm');
+        $oldPassword = $request->input('old_password');
+        $newPassword = $request->input('new_password');
+
+
+        if($newPassword != $password_confirm){
+            return view('recopasec.user.edit',[
+                'message' => 'Contraseñas no coinciden',
+                'user' => $user,
+                'danger' => true
+            ]);
+        }
+        
+        if(strlen($newPassword) < 7){
+            return view('recopasec.user.edit',[
+                'message' => 'ERROR: La contraseña debe ser >= 8 caracteres',
+                'user' => $user,
+                'success' => '',
+                'danger' => true
+            ]);
+
+        }
+
+        if($newPassword == $password_confirm) {
+            $user->password = Hash::make($newPassword);
+            $user->save();
+            $notification = "Contraseña Actualizada ";
+            return redirect()->route('home')->with([
+                'message' => $notification,  
+            ]); 
+        } else {
+            return view('recopasec.user.edit',[
+                'message' => 'ERROR: La contraseña no pudo ser Actualizada',
+                'user' => $user,
+                'danger' => true,
+                'success' => false
+            ]); 
+        }
+    }
+  
     public function notification(){
         $user =  \Auth::user();
-        $user_id = $user->id;
-        if($user_id){
-            $document = Document::where('user_id',$user_id)->first();
-        }else{
-            $document = null;
+        $message = Mensaje::where('usuario_id',$user->id)->get();
+        if(!$message){
             return redirect()->route('home');
 
         }
-        if($document){
 
-            $document_id = $document->id;
-        }else{
-            $document_id = null;
-            return redirect()->route('home');
-        }
-
-        $message = Message::where('document_id',$document_id)->first();
  
         return view('recopasec.user.notification',[
-            'notification' => $message
+            'notifications' => $message,
+            'message' => 'null'
         ]);
     }
     

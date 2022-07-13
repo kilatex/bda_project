@@ -15,6 +15,15 @@
                     <li> <strong> Carrera: </strong> {{$user->carrera->nombre}}</li>
                     @if($expediente) 
                     <li> <strong> Expediente: </strong> <strong> <a href="{{route('show_expediente', ['expediente_id'=> $expediente->id])}}">haz click aquí para observarlo</a></strong>  </li>
+                        @if($documentos) 
+                        <ul>
+                            <li><strong>Documentos Subidos</strong></li>
+                            @foreach($documentos as $documento)
+                            <li>  {{$documento->nombre}}   </li> 
+                            @endforeach
+                        </ul>
+                        @endif
+               
                     @else
                         <li> Este estudiante no posee expediente, <strong> <a href="{{route('upload', ['user'=> $user->id])}}">haz click aquí para crearlo</a></strong> </li>
                     @endif

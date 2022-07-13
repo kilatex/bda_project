@@ -5,7 +5,7 @@ namespace App\Models\Sigecop;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Message extends Model
+class Mensaje extends Model
 {
     use HasFactory;
     
@@ -15,12 +15,15 @@ class Message extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'document_id',
+        'documento_id',
+        'usuario_id',
         'message'
      ];
 
-     public function promocion(){
-        return $this->belongsTo('App\Models\Sigecop\Documento','document_id');
+     public function documento(){
+        return $this->belongsTo('App\Models\Sigecop\Documento','documento_id');
     }
-
+    public function user(){
+        return $this->belongsTo('App\Models\User','usuario_id');
+    }
 }

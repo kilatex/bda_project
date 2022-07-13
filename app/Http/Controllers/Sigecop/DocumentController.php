@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-use  App\Models\Sigecop\Message;
+use  App\Models\Sigecop\Mensaje;
 use  App\Models\Estudiante;
 use  App\Models\User;
 use  App\Models\Sigecop\Documento;
@@ -27,23 +27,48 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function upload(Request $request)
+    public function upload(Request $request,$user)
     {   
-        $id = $request->user;
-        $estudiante = Estudiante::find($id)
-                ->first();
-            
-        $expediente = Expediente::where('estudiante_id', $id)->first();
+        $estudiante = Estudiante::where('id', $user)->first();
+        $id = null;
+        if($estudiante){
+            $id = $estudiante->id;
+            $expediente = Expediente::Where('estudiante_id', $estudiante->id)->first();
+        }
 
-        if(!$expediente){
+        if(!isset($expediente)){
             $expediente = null;
             $documentos = null;
         }else{
             $documentos = Documento::where('expediente_id', $expediente->id)->get();
         }
-
         $message = null;
-        return view('recopasec.user.upload', [
+        return view('recopasec.docs.upload', [
+            'estudiante' => $estudiante,
+            'estudiante_id'  => $id,
+            'expediente' => $expediente,
+            'message' => $message,
+            'documentos' => $documentos,
+        ]);
+        
+    }
+
+    public function subir_expediente(Request $request)
+    {   
+        $user = \Auth::user();
+        $estudiante = Estudiante::where('usuario_id', $user->id)->first();
+        if($estudiante){
+            $id = $estudiante->id;
+            $expediente = Expediente::Where('estudiante_id', $estudiante->id)->first();
+        }
+        if(!isset($expediente)){
+            $expediente = null;
+            $documentos = null;
+        }else{
+            $documentos = Documento::where('expediente_id', $expediente->id)->orderBy('orden','ASC')->get();
+        }
+        $message = null;
+        return view('recopasec.docs.upload', [
             'estudiante' => $estudiante,
             'estudiante_id'  => $id,
             'expediente' => $expediente,
@@ -80,15 +105,49 @@ class DocumentController extends Controller
             'estudiante_id'  => 'required'
         ]);
         $file = $request->file('file');
+
+     
+
         $doc = $request->input('field');
+        $order = null;
+        switch($doc){
+            case 'record_academico':
+                    $order = 1;
+                break;
+            case 'inscripcion_militar':
+                    $order = 2;
+                break;
+            case 'registro_ingreso_educacion_universitaria':
+                    $order = 3;
+                break;
+            case 'copia_titulo_educacion_media':
+                    $order = 4;
+                break;
+            case 'fondo_negro_titulo_educacion_media':
+                    $order = 5;
+                break;
+            case 'copia_notas':
+                    $order = 6;
+                break;
+            case 'copia_cedula':
+                    $order = 7;
+                break;
+            case 'copia_partida_nacimiento':
+                    $order = 8;
+                break;
+        }
+
+        
         $estudiante_id = $request->input('estudiante_id');
 
-
+        $estudiante = Estudiante::where('id',$estudiante_id)->first();
         $expediente = Expediente::where('estudiante_id',$estudiante_id)->first();
         
         
        if(!$expediente){
             $expediente =  new Expediente();
+            $codigo = $estudiante->periodo_ingreso.'-'.$estudiante->carrera->codigo.'-'.$estudiante->user->cedula;
+            $expediente->codigo =  $codigo;
             $expediente->estudiante_id = $estudiante_id;
             $expediente->estado = 'En Progreso';
             $expediente->save();
@@ -96,15 +155,18 @@ class DocumentController extends Controller
 
        $documento = Documento::Where('expediente_id', $expediente->id)
             ->where('nombre',$doc)->first();
- 
+       
        if($documento){
-        $message = 'Archivo repetido';
-        return redirect()->route('upload', ['user' => $estudiante_id])->with([
-            'message' => $message ]);
+            $messi = 'Archivo repetido, si desea resubir un archivo que ya está en el expediente, debe borrar el anterior';
+       
+            return redirect()->route('home')->with([
+                'message' => $messi
+            ]);  
        }
 
        $documento = new Documento();
        $documento->expediente_id = $expediente->id;
+       $documento->orden = $order;
        $documento->estado = 'En Progreso';
        $documento->nombre =  $request->input('field');
         //SAVE
@@ -311,9 +373,33 @@ class DocumentController extends Controller
         ]);
 
     }
-    public function modify(){
+    public function mi_expediente(){
 
-        return view('recopasec.docs.modify');
+        $user =  \Auth::user();
+        $estudiante = Estudiante::where('usuario_id',$user->id)->first();
+        $expediente = Expediente::where('estudiante_id', $estudiante->id)->first();
+        if(!$expediente){
+
+            $notification = 'Usuario no posee expediente';
+            return redirect()->route('home')->with([
+                'message' => $notification
+            ]);      
+
+        }
+        $docs = Documento::where('expediente_id',$expediente->id)->get();
+
+        return view('recopasec.docs.mydocs',[
+            'docs' => $docs,
+            'expediente' => $expediente,
+        ]);
+
+    }
+    public function modify(){
+        $user =  \Auth::user();
+        $estudiante = Estudiante::where('usuario_id',$user->id)->first();
+        return view('recopasec.docs.modify',[
+            'estudiante' => $estudiante
+        ]);
     }
 
     public function update_docs(Request $request){
@@ -322,37 +408,37 @@ class DocumentController extends Controller
         $file = $request->file('file_modify');
         $user = \Auth::user();
         $user_id = $user->id;
-        
-        
-      
+        $estudiante_id = $request->input('estudiante_id');
+             
 
         // VALIDATE NEW DOCUMENT
         $validate = $this->validate($request,[
             'file_modify' => 'image',
         ]);
 
+        $expediente = Expediente::where('estudiante_id', $estudiante_id)->first();
 
         //GET DOCUMENTS LIST
-        $docs = Document::where('user_id',$user_id)->first();
-
+        $docs = Documento::where('expediente_id',$expediente->id)
+                            ->where('nombre', $document_type)->first();
 
         // DELETE 
         $url = "/documents/".$docs->$document_type;
-        $docs->$document_type = null;
+        $docs->archivo = null;
 
-
-        
+      
         Storage::delete($url);
 
         //SAVE
         $image_path_name = time().$file->getClientOriginalName();
         Storage::putFileAs('/documents/',$file, $image_path_name);
-        $docs->$document_type = $image_path_name;
+        $docs->archivo = $image_path_name;
 
         $docs->update();
         
         //DELETE NOTIFICATION
-        $message = Message::where('document_id',$docs->id)->first();
+        $message = Mensaje::where('documento_id',$docs->id)
+                        ->where('usuario_id',$user->id)->first();
 
         $message->delete();
         
@@ -364,6 +450,33 @@ class DocumentController extends Controller
     
      
     }
+    public function change_status(Request $request)
+    {
+        if($request->input('estado') == "null"){
+            $notification = 'No Seleccionó un Status válido';
+            return redirect()->route('home')->with([
+                'message' => $notification
+            ]);  
+        }
+        $expediente = Expediente::where('id',$request->input('id'))->first();
+        $documentos = Documento::where('expediente_id', $expediente->id)->get();
+        if( $request->input('estado') == "Aprobado"){
+
+            foreach($documentos as $documento){
+
+                if($documento->estado != "Aprobado"){
+                    $notification = 'ERROR: El Expediente no se pudo actualizar a Aprobado ya que sus documentos no están aprobados';
+                    return redirect()->route('home')->with([
+                        'message' => $notification
+                    ]);  
+                }
+            }
+        }
+        $expediente->estado = $request->input('estado');
+        $expediente->save();
+        $notification = 'ERROR: El Expediente no se pudo actualizar a Aprobado ya que sus documentos no están aprobados';
+            return redirect('/sigecop/expediente/'. $expediente->id);
+    }
 
     public function delete_expediente($expediente_id){
         
@@ -372,8 +485,10 @@ class DocumentController extends Controller
         $expediente->estado = 'REMOVED';
         $expediente->save();
 
-        return redirect()->route('expedientes_list');
+        return redirect('/sigecop/expediente/'. $expediente->id);
     }
+
+
     
     
 }

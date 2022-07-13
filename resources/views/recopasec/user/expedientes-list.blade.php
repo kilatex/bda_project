@@ -23,34 +23,36 @@
                     <table class="table">
                         <thead>
                             <tr>
-                            <th scope="col">Cédula</th>
-                            <th scope="col">Nombres y Apellidos</th>
-                            <th scope="col">Carrera</th>
+                            <th scope="col">Código</th>
+                            <th scope="col">Estudiante</th>
+                            <th scope="col">Fecha de Creación</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Último cambio de status</th>
                             <th scope="col">Más Info</th>
 
                             </tr>
                         </thead>
                
-                        @foreach($expedientes as $expediente)
 
                         <tbody class="table-group-divider">
+                            @foreach($expedientes as $expediente)
+
                             <tr>
                           
                                 <th scope="row">{{$expediente->estudiante_id}}</th>
                                 <td>{{$expediente->estudiante->user->nombres}} {{$expediente->estudiante->user->apellidos}}</td>
-                                <td>{{$expediente->estudiante->carrera->nombre}}</td>
+                                <td> {{date_format($expediente->created_at,'d/m/Y')}}</td>                                 
                                 <td> {{$expediente->estado}}</td> 
+                                <td class=""> {{date_format($expediente->updated_at,'d/m/Y')}}</td> 
                                 <td>
-                                    <a  href="{{route('show_expediente',['expediente_id'=> $expediente->id])}}" class="text-success"> <strong>Observar</strong> </a>
-                                    <a href="#" class="text-primary"> <strong>Editar</strong> </a>
-                                    <a  href="{{route('delete_expediente',['expediente_id'=> $expediente->id])}}" class="text-danger"> <strong>Eliminar</strong> </a>
+                                 <a  href="{{route('show_expediente',['expediente_id'=> $expediente->id])}}" class="text-success"> <strong>Observar</strong> </a>
                                 </td>
  
 
                             </tr>
+                            @endforeach
+
                         </tbody>
-                    @endforeach
                     </table>
                     @else
                     <h2 class="text-center">Usuarios no encontrados </h2>
@@ -63,5 +65,5 @@
                 {{$expedientes->links()}}
             </div>
          
-            
+     
 @endsection

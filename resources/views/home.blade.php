@@ -9,9 +9,11 @@
                     <div class="card-header">{{ __('Notificación') }}</div>
 
                     <div class="card-body">
-                    
-                            <div class="alert alert-success" role="alert">
-                                {{ session('message') }}
+
+
+                        <div class="alert alert-warning" role="alert">
+
+                                    <strong>   {{ session('message') }} </strong>
                             </div>
 
                     
@@ -21,9 +23,8 @@
             </div>
         </div>
     @endif
-    @if($notification != null)
-                                
 
+    @if($observaciones)
     <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

@@ -4,7 +4,9 @@
 @section('content')
 
 <div class="container">
-    <h2 class="text-center">Seleccione El Documento</h2>
+
+
+    <h2 class="text-center">Expediente</h2>
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
@@ -16,12 +18,20 @@
             <div class="accordion-body bg-white">
                 <div>
                     <h5> <strong>Información del Estudiante</strong></h5> 
-                    <h6>{{$estudiante->nombres}} {{$estudiante->user->apellidos}} </h6>
-                    <h6> {{$estudiante->nombre}} {{$estudiante_id}}  </h6> 
-                    <h6> {{expediente}}</h6>
+                    <h6>{{$estudiante->user->nombres}} {{$estudiante->user->apellidos}} </h6>
+                    <h6>Cédula: {{$estudiante->user->cedula}} </h6>
+                    <h6>Carrera: {{$estudiante->carrera->nombre}} </h6>
+                    <h6> {{$estudiante->nombre}}   </h6>
+
+                    @if($message)      
+                     <h6 class="text-danger"><strong>{{$message}} </strong> </h6>
+                    @endif
+
+
+                   
                 </div>
                 <form method="POST" action=" {{ route('subir') }} " enctype="multipart/form-data" >
-                @csrf
+                    @csrf
                     <div class="d-flex">
                         <div class="select-unefa">
                             <select id="docs" class="form-select " onchange="select()" aria-label="Default select example" name="field">
@@ -36,18 +46,51 @@
                                 <option value="copia_partida_nacimiento">Fotocopia de la partida de nacimiento</option>
                             </select>  
                         </div>
+                        <input type="hidden" name="estudiante_id" value="{{$estudiante_id}}">
 
                         <div class="file-box">
-                            <input type="hidden" name="estudiante_id" value="{{$estudiante->id}}">
                             <input type="file" class="btn btn-primary hidden mt-2" name="file" required="required" id="file">
                         </div>
 
                     </div>
-
-                   <input type="submit" class="btn btn-success mt-3" value="Subir Documento">
+                    
+                    <div class="d-flex">
+                        
+                        <input type="submit" class="btn btn-success mt-3" value="Subir Documento">
+                    </div>
 
                </form>
-          
+               @if($expediente) 
+                <h4 class="mt-3 text-center">Documentos del Expediente</h4>
+                <div class="table-expediente">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Fecha de Subida</th>
+                                <th scope="col">Ultima Modificación</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($documentos as $documento)
+
+                                <tr>
+                                    <th scope="row">{{$documento->orden}}</th>
+                                    <td>{{$documento->nombre}}</td>
+                                    <td>{{$documento->estado}}</td>
+                                    <td>{{date_format($documento->created_at,'d/m/Y')}}</td>
+                                    <td>{{date_format($documento->updated_at,'d/m/Y')}}</td>
+                                </tr>
+                            @endforeach
+                    
+
+                            </tbody>
+                        </table>
+                </div>
+               @endif 
 
             </div>
           </div>

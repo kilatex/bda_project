@@ -12,7 +12,16 @@
                     
                         <div class="alert alert-warning">
                             <h5> <strong>Observación sobre los documentos subidos</strong> </h5>
-                            {{$notification->message}}
+                           
+                                @foreach($notifications as $notification)
+                                <ul>
+                                    <li> <strong>Nombre del Documento: </strong> {{$notification->documento->nombre}} </li> 
+                                    <li> <strong>Status: </strong> {{$notification->documento->estado}} </li> 
+                                    <li> <strong>Observación: </strong> {{$notification->message}} </li> 
+                                </ul>
+                                @endforeach
+                           
+                         
                         </div>           
 
                        <a href=" {{ route('modify') }} " class="btn btn-warning">Ir a Resubir los Documentos</a>
