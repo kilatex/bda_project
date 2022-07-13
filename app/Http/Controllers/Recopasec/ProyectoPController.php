@@ -41,6 +41,7 @@ class ProyectoPController extends Controller
             $calificacion->calificacion_tutor_academico = $calificacion_tutorac;
             $calificacion->calificacion_tutor_institucional = $calificacion_tutorin;
             $calificacion->calificacion_comite_evaluador = $calificacion_docentevalu;
+            $calificacion->proyecto_pasantia_id = $pasantia->id;
             $calificacion->save(); 
                  
         return redirect()->route('index_pasantias');

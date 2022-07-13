@@ -71,12 +71,12 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
     //Rutas de los tutores
         //Tutor academico
         Route::get('tutorac/create', [TutorController::class, 'create_tutorac'])->name('create_tutorac');
-        Route::get('tutoracom/create', [TutorController::class, 'create_tutoracom'])->name('create_tutoracom');
         Route::post('tutorac', [TutorController::class, 'store_tutorac'])->name('store_tutorac');        
-        Route::post('tutoracom', [TutorController::class, 'store_tutoracom'])->name('store_tutoracom');
         Route::get('tutorac/{tutor}/edit', [TutorController::class, 'edit_tutorac'])->name('edit_tutorac');
         Route::put('tutorac/{tutor}', [TutorController::class, 'update_tutorac'])->name('update_tutorac');
         Route::delete('tutorac/{tutor}', [TutorController::class, 'destroy_tutorac'])->name('destroy_tutoracy');
+        Route::get('/recopasec/verificar-cedula', [TutorController::class, 'verificar_cedulat'])->name('verificar_cedulat');
+        Route::post('/verificar-tutor', [TutorController::class, 'verificar_tutor'])->name('verificar_tutor');
         //Tutor comunitario
         Route::get('tutorcom/create', [TutorController::class, 'create_tutorcom'])->name('create_tutorcom');
         Route::post('tutorcom', [TutorController::class, 'store_tutorcom'])->name('store_tutorcom');
@@ -84,11 +84,11 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::put('tutorcom/{tutorco}', [TutorController::class, 'update_tutorcom'])->name('update_tutorcom');
         Route::delete('tutorcom/{tutorco}', [TutorController::class, 'destroy_tutorcom'])->name('destroy_tutorcom');
         //Tutor institucional
-        Route::get('tutorin/create', [TutorController::class, 'create_tutorin'])->name('create_tutorin');
-        Route::post('tutorin', [TutorController::class, 'store_tutorin'])->name('store_tutorin');
-        Route::get('tutorin/{tutori}/edit', [TutorController::class, 'edit_tutorin'])->name('edit_tutorin');
-        Route::put('tutorin/{tutori}', [TutorController::class, 'update_tutorin'])->name('update_tutorin');
-        Route::delete('tutorin/{tutori}', [TutorController::class, 'destroy_tutorin'])->name('destroy_tutorin');
+        // Route::get('tutorin/create', [EmpresaController::class, 'create_tutorin'])->name('create_tutorin');
+        // Route::post('tutorin', [EmpresaController::class, 'store_tutorin'])->name('store_tutorin');
+        // Route::get('tutorin/{tutori}/edit', [EmpresaController::class, 'edit_tutorin'])->name('edit_tutorin');
+        // Route::put('tutorin/{tutori}', [EmpresaController::class, 'update_tutorin'])->name('update_tutorin');
+        // Route::delete('tutorin/{tutori}', [EmpresaController::class, 'destroy_tutorin'])->name('destroy_tutorin');
     //Rutas para el proyecto de pasantias
         Route::get('pasantias', [ProyectoPController::class, 'index_pasantias'])->name('index_pasantias');
         Route::get('pasantias/create', [ProyectoPController::class, 'create_pasantias'])->name('create_pasantias');
@@ -102,8 +102,6 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::get('/recopasec/proyectopas/{proyecto_id}', [ProyectoPController::class, 'show_proyectopa'])->name('show_proyectopa');
     //Rutas para el proyecto comunitario
         Route::get('comunitarios', [ProyectoSController::class, 'index_comunitario'])->name('index_comunitario');
-        Route::get('direcciones/create', [ProyectoSController::class, 'create_direccion'])->name('create_direccion');
-        Route::post('direcciones', [ProyectoSController::class, 'store_direccion'])->name('store_direccion');
         Route::get('comunitarios/create', [ProyectoSController::class, 'create_comunitario'])->name('create_comunitario');
         Route::post('comunitarios', [ProyectoSController::class, 'store_comunitario'])->name('store_comunitario');
         Route::get('comunitarios/{comunitario}/edit', [ProyectoSController::class, 'edit_comunitario'])->name('edit_comunitario');

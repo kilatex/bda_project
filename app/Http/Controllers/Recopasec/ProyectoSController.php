@@ -7,9 +7,6 @@ use App\Models\Estudiante;
 use App\Models\Recopasec\Calificacion_proyecto_comunitario;
 use App\Models\Recopasec\Direccione;
 use App\Models\Recopasec\Proyecto_comunitario;
-use App\Models\Recopasec\Estado;
-use App\Models\Recopasec\Municipio;
-use App\Models\Recopasec\Parroquia;
 use App\Models\Recopasec\Tutor_comunitario;
 use App\Models\Recopasec\Tutor_institucional;
 use App\Models\User;
@@ -40,11 +37,9 @@ class ProyectoSController extends Controller
         $comunitario->titulo = $request->titulo;
         $comunitario->codigo = $request->n_codigo.$request->codigo;
         $comunitario->periodo= $request->n_periodo.$request->periodo;
-        $comunitario->tutor_comunitario_id = $tutorcomid;
-        $comunitario->tutor_academico_id = $tutoracid;
-        $calificacion->calificacion= $request->calificacion;
-        $calificacion->proyecto_comunitario_id = $proyectoid;
         $comunitario->save();
+        $calificacion->calificacion= $request->calificacion;
+        $calificacion->proyecto_comunitario_id= $comunitario->id;
         $calificacion->save(); 
                  
         return view('proyectos.serviciocom.agregar', compact('comunitario', 'calificacion'));
@@ -74,30 +69,6 @@ class ProyectoSController extends Controller
         $comunitario->delete();
         $calificacion->delete();
         return redirect()->route('index_comunitario');
-    }
-    public function create_direccion(Request $request){
-        $estados = Estado::all();
-        $municipios = Municipio::all();
-        $parroquias = Parroquia::all();
-        return view('proyectos.serviciocom.comunidad', compact('estados'), compact('municipios'), compact('parroquias'));
-    }
-    public function store_direccion(Request $request){
-        $direccion = new Direccione();
-        $request->validate([
-            'estado' => 'required',
-            'municipio' => 'required',
-            'parroquia' => 'required',
-            'comunidad' => 'required|max:100',
-            'consejo_comunal' => 'required|max:100',
-        ]);
-        
-        $direccion->estado_id = $request->estado;
-        $direccion->municipio_id = $request->municipio;
-        $direccion->parroquia_id = $request->parroquia;
-        $direccion->comunidad = $request->comunidad;
-        $direccion->consejo_comunal = $request->consejo_comunal;
-        $direccion->save();
-        return view('tutores.tutor_com.tutorcom', compact('direccion'));
     }
     public function edit_direccion(Direccione $direccion){
         return view('proyecto.serviciocom.edit', compact('direccion'));

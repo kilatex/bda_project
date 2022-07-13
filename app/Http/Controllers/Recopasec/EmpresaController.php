@@ -8,6 +8,7 @@ use App\Models\Recopasec\Municipio;
 use App\Models\Recopasec\Parroquia;
 use Illuminate\Http\Request;
 use App\Models\Recopasec\Direccione;
+use App\Models\Recopasec\Tutor_institucional;
 use Illuminate\Support\Facades\DB;
 
 class EmpresaController extends Controller
@@ -26,29 +27,44 @@ class EmpresaController extends Controller
             'estado'=>'required',
             'municipio'=>'required',
             'parroquia'=>'required',
+            'nombres'=> 'required|max:50',
+            'apellidos'=> 'required|max:50',
+            'tipo_cedula'=>'required',
+            'cedula'=> 'required|max:08',
+            'email_tu'=> 'required|max:100',
+            'telefono_tu'=> 'required|max:12',
+            'especialidad' => 'required|max:100'
         ]);
+        $direccion = new Direccione();
+        $direccion->estado_id = $request->estado;
+        $direccion->municipio_id = $request->municipio;
+        $direccion->parroquia_id = $request->parroquia;
+        $direccion->save();
         $empresa = new Empresa();
         $empresa->rif= $request->rif;
         $empresa->nombre = $request->nombre;
         $empresa->email = $request->email;
         $empresa->telefono = $request->telefono;
         $empresa->departamento = $request->departamento;
+        $empresa->direccion_id = $direccion->id;
         $empresa->save();
-        $direccion = new Direccione();
-        $direccion->estado_id = $request->estado;
-        $direccion->municipio_id = $request->municipio;
-        $direccion->parroquia_id = $request->parroquia;
-        $direccion->save();
-        
-            // $empresas = Empresa::where('rif','=',$empresa->rif)->get();
-            // $direcciones = Direccione::where('id'. '='. $direccion->id)->get();
-        return view('tutores.tutor_ins.tutorin', compact('empresa', 'direccion'));
+        $tutori= new Tutor_institucional();
+        $tutori->nombres = $request->nombres;
+        $tutori->apellidos = $request->apellidos;
+        $tutori->cedula = $request->tipo_cedula .$request->cedula;
+        $tutori->email = $request->email_tu;
+        $tutori->telefono = $request->telefono_tu;
+        $tutori->especialidad = $request->especialidad;
+        $tutori->empresa_id = $empresa->id;
+        $tutori->save();
+
+        return redirect()->route('index_pasantias');
         
     }
     public function edit_empresa(Empresa $empresa){
         return view('proyectos.pasantias.edit', compact('direccion'));
     }
-    public function update_empresa(Request $request, Empresa $empresa){
+    public function update_empresa(Request $request, Empresa $empresa, Tutor_institucional $tutori){
         $request->validate([
             'rif'=>'required',
             'nombre'=> 'required|max:50',
@@ -57,11 +73,21 @@ class EmpresaController extends Controller
             'estados'=>'required',
             'municipios'=>'required',
             'parroquias'=>'required',
+            'nombres'=> 'required|max:50',
+            'apellidos'=> 'required|max:50',
+            'tipo_cedula'=>'required',
+            'cedula'=> 'required|max:08',
+            'email_tu'=> 'required|max:100',
+            'telefono_tu'=> 'required|max:12',
+            'especialidad' => 'required|max:100'
         ]);
+        $tutori->update($request->all());
         $empresa->update($request->all());
         return redirect()->route('index_pasantias');
     } 
-    public function destroy_empresa(Empresa $empresa){
+    public function destroy_empresa(Empresa $empresa, Tutor_institucional $tutori){
+        $tutori->delete();
+
         $empresa->delete();
         return redirect()->route('index_pasantias');
     }

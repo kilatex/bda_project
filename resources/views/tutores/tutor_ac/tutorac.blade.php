@@ -13,19 +13,14 @@
                     @csrf
                     <div class="row mb-3">
                         <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
-                        <select class="form-select select-cedula mr-2" name="tipo_cedula"  style="width: 60px;" aria-label="Default select example">
-                            <option selected value="V">V</option>
-                            <option  value="E">E</option>
-                        </select>
+                        
                         <div class="col-md-6">
-                            
-                            <input id="cedula" name="cedula" value= "{{old('cedula')}}" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
-
+                            <input id="cedula" name="cedula"  readonly value="{{$cedula}}"  type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
                             @error('cedula')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror 
+                            @enderror
                         </div>
                     </div>
                         <div class="row mb-3">
@@ -58,15 +53,16 @@
                         </div>
                         
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electronico') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electrónico') }}</label>
+
                             <div class="col-md-6">
-                                <input id="email" name="email" value= "{{old('email')}}" type="email" class="form-control @error('email') is-invalid @enderror"   autofocus>
+                                <input id="email" type="email" value="{{$email}}"  aria-readonly="true" readonly class="form-control @error('email') is-invalid @enderror" name="email"   autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror 
+                                @enderror
                             </div>
                         </div>
                         <div class="row mb-3">

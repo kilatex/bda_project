@@ -68,8 +68,13 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a id="" class="nav-link "  href="{{ route('create_direccion') }}" >
+                                <a id="" class="nav-link "  href="{{ route('create_tutorcom') }}" >
                                 Nuevo Proyecto
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a id="" class="nav-link "  href="{{ route('verificar_cedulat') }}" >
+                                Agregar Tutor Académico
                                 </a>
                             </li>
 
@@ -88,7 +93,12 @@
                                 </li>
                                 <li class="nav-item ">
                                     <a id="" class="nav-link "  href="{{ route('verificar_rif') }}" >
-                                    Nuevo Proyecto
+                                    Agregar Empresas
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a id="" class="nav-link "  href="{{ route('verificar_cedulat') }}" >
+                                    Agregar Tutor Académico
                                     </a>
                                 </li>
                             @endif

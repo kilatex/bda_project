@@ -85,13 +85,97 @@
                             <div class="row mb-3">
                                 @livewire('select-component', ['estados' => $estados, 'municipios' => $municipios], key($estados->id, $municipios->id))
                             </div>
+                            <center><h5>Tutor Institucional</h5></center>
+
+                            <div class="row mb-3">
+                                <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
+                                <select class="form-select select-cedula mr-2" name="tipo_cedula"  style="width: 60px;" aria-label="Default select example">
+                                    <option selected value="V">V</option>
+                                    <option  value="E">E</option>
+                                </select>
+                                <div class="col-md-6">
+                                    
+                                    <input id="cedula" name="cedula" value= "{{old('cedula')}}" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
+                                    @error('cedula')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror 
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="nombres" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
+    
+                                
+                                <div class="col-md-6">
+                                    <input id="nombres" name="nombres" value= "{{old('nombres')}}" type="text" class="form-control @error('nombres') is-invalid @enderror"   autofocus>
+    
+                                    @error('nombres')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror 
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="apellidos" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
+    
+                                
+                                <div class="col-md-6">
+                                    <input id="apellidos" name="apellidos" value= "{{old('apellidos')}}" type="text" class="form-control @error('apellidos') is-invalid @enderror"   autofocus>
+    
+                                    @error('apellidos')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror 
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="email_tu" class="col-md-4 col-form-label text-md-end">{{ __('Correo Electronico') }}</label>
+                                <div class="col-md-6">
+                                    <input id="email_tu" name="email_tu" value= "{{old('email_tu')}}" type="email" class="form-control @error('email_tu') is-invalid @enderror"   autofocus>
+    
+                                    @error('email_tu')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror 
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="telefono_tu" class="col-md-4 col-form-label text-md-end">{{ __('telefono_tu') }}</label>
+                                <div class="col-md-6">
+                                    <input id="telefono_tu" name="telefono_tu" value= "{{old('telefono')}}" type="tel" class="form-control @error('telefono_tu') is-invalid @enderror"   autofocus>
+    
+                                    @error('telefono_tu')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror 
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="especialidad" class="col-md-4 col-form-label text-md-end">{{ __('Especialidad') }}</label>
+    
+                                
+                                <div class="col-md-6">
+                                    <input id="especialidad" name="especialidad" value= "{{old('especialidad')}}" type="text" class="form-control @error('especialidad') is-invalid @enderror"   autofocus>
+    
+                                    @error('especialidad')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror 
+                                </div>
+                            </div>
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Agregar Empresa') }}
                                     </button>
                                 </div>
-                            </div>  
+                            </div> 
                         </form>
                     </div>
                 </div>
