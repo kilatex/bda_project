@@ -144,37 +144,42 @@ class StudentController extends Controller
     public function students_list(){
         $user = \Auth::user();
 
-        if ( $user == null || $user->rol != "USER"){
-            return redirect()->route('home');
-        }
-        $users = Estudiante::Paginate(12);
+        if ($user->rol == "USER" || $user->rol == "USER_pasantias" || $user->rol == "USER_comunitario"){
+            $users = Estudiante::Paginate(12);
                 
-                $field_name = 'Seleccione Estudiante para crearle un expediente';                 
-        $flag = false;
-        foreach($users as $user){
-            if($user->id){
-                $flag = true;
+            $field_name = 'Seleccione Estudiante para crearle un expediente';                 
+            $flag = false;
+            
+            foreach($users as $user){
+                if($user->id){
+                    $flag = true;
 
-            }else{
-                $flag = false;
+                }else{
+                    $flag = false;
+                }
             }
+            
+            if($flag == false){
+
+                $notification = "No hay Estudiantes por listar ";
+                return redirect()->route('home')->with([
+                    'message' => $notification,  
+                ]);
+            }
+            $field_name = false;
+            $category = false;
+            $type = false;
+            return view('recopasec.user.user-lists',[
+                'users' => $users,
+                'field_name' => $field_name,
+                'type' => $type
+            ]);
+            
+        }else{
+            return redirect()->route('home');
+
         }
         
-        if($flag == false){
-
-            $notification = "No hay Estudiantes por listar ";
-            return redirect()->route('home')->with([
-                'message' => $notification,  
-            ]);
-        }
-        $field_name = false;
-        $category = false;
-        $type = false;
-        return view('recopasec.user.user-lists',[
-            'users' => $users,
-            'field_name' => $field_name,
-            'type' => $type
-        ]);
     }
     
 }

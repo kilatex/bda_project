@@ -263,16 +263,17 @@ class UserController extends Controller
     public function category_users(){
         $user = \Auth::user();
 
-        if ( $user == null || $user->rol != "USER"){
+        if ($user->rol == "USER" || $user->rol == "USER_pasantias" || $user->rol == "USER_comunitario"){
+            $pregrado=DB::table('carreras')->get();
+
+            return view('recopasec.admin.category-users', [
+                'pregrados' => $pregrado        
+            ]); 
+        }else{
             return redirect()->route('home');
-        }
 
-        $pregrado=DB::table('carreras')->get();
-       
+        }   
 
-        return view('recopasec.admin.category-users', [
-            'pregrados' => $pregrado        
-        ]); 
     }
     
     public function searchByCarreer($id){

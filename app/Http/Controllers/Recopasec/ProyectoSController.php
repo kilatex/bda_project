@@ -10,6 +10,8 @@ use App\Models\Recopasec\Proyecto_comunitario;
 use App\Models\Recopasec\Estado;
 use App\Models\Recopasec\Municipio;
 use App\Models\Recopasec\Parroquia;
+use App\Models\Recopasec\Tutor_comunitario;
+use App\Models\Recopasec\Tutor_institucional;
 use App\Models\User;
 use PDF;
 
@@ -19,41 +21,33 @@ class ProyectoSController extends Controller
         return view('proyectos.serviciocom.index');
     }
     public function create_comunitario(){
-        
         return view('proyectos.serviciocom.serviciocomcreate');
     }
     public function store_comunitario(Request $request){
-        $comunitario = new Proyecto_comunitario();
-        $calificacionser= new Calificacion_proyecto_comunitario();
+        
         $request->validate([
-            'n-codigo' => 'required',
-            'n-periodo'=>'required',
+            'n_codigo' => 'required',
+            'n_periodo'=>'required',
             'codigo'=> 'required|max:03',
             'titulo'=> 'required|max:255',
             'periodo'=> 'required',
             'calificacion'=>'required',
         ]);
+        
+        $comunitario = new Proyecto_comunitario();
+        $calificacion= new Calificacion_proyecto_comunitario();
         //Recoger Datos del proyecto
-        $codigo = $request->input('n-codigo').'-'.$request->input('codigo');
-        $titulo = $request->input('titulo');
-        $periodo = $request->input('n-periodo').'-'.$request->input('periodo');
-        $calificacion = $request->input('calificacion');
-        if($codigo && $titulo && $periodo){
-            $comunitario->codigo = $codigo;
-            $comunitario->titulo = $titulo;
-            $comunitario->periodo = $periodo;
-            $comunitario->save();
-            $calificacionser->calificacion = $calificacion;
-            $calificacion->save(); 
+        $comunitario->titulo = $request->titulo;
+        $comunitario->codigo = $request->n_codigo.$request->codigo;
+        $comunitario->periodo= $request->n_periodo.$request->periodo;
+        $comunitario->tutor_comunitario_id = $tutorcomid;
+        $comunitario->tutor_academico_id = $tutoracid;
+        $calificacion->calificacion= $request->calificacion;
+        $calificacion->proyecto_comunitario_id = $proyectoid;
+        $comunitario->save();
+        $calificacion->save(); 
                  
-        return view('proyectos.serviciocom.agregar', compact('comunitario'), compact('calificacion'));
-        }else{
-            $message = 'Registro incorrecto, por favor rellena bien los campos ';
-            return view('proyectos.serviciocom.serviciocomcreate',[
-                'message' => $message
-            ]
-            );
-        }
+        return view('proyectos.serviciocom.agregar', compact('comunitario', 'calificacion'));
    
     }
     public function profile_se($id = null){   
@@ -81,7 +75,7 @@ class ProyectoSController extends Controller
         $calificacion->delete();
         return redirect()->route('index_comunitario');
     }
-    public function create_direccion(){
+    public function create_direccion(Request $request){
         $estados = Estado::all();
         $municipios = Municipio::all();
         $parroquias = Parroquia::all();

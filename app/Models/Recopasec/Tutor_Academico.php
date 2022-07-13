@@ -16,10 +16,7 @@ class Tutor_academico extends Model
         'email',
         'telefono',
         'condicion',
-        'especialidad_id',
+        'especialidad',
 
     ];
-    public function especialidad(){
-        return $this->belongsTo('App\Models\Recopasec\Especialidade','especialidad_id');
-    }
 }

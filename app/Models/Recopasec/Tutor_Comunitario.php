@@ -16,13 +16,10 @@ class Tutor_comunitario extends Model
         'email',
         'telefono',
         'direccion_id',
-        'cargo_id',
+        'cargo',
 
     ];
     public function direccion(){
         return $this->belongsTo('App\Models\Recopasec\Direccione','direccion_id');
-    }
-    public function cargo(){
-        return $this->belongsTo('App\Models\Recopasec\Cargo','cargo_id');
     }
 }

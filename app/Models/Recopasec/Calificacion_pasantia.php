@@ -5,7 +5,7 @@ namespace App\Models\Recopasec;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Calificacion_proyecto_pasantia extends Model
+class Calificacion_pasantia extends Model
 {
     use HasFactory;
     protected $fillable = [

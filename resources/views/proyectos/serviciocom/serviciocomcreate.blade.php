@@ -13,7 +13,7 @@
 
                         <div class="row mb-3">
                             <label for="codigo" class="col-md-4 col-form-label text-md-end">{{ __('Código del proyecto') }}</label>
-                            <select class="form-select mr-2" name="n-codigo" style="width: 100px;" aria-label="Default select example">
+                            <select class="form-select mr-2" name="n_codigo" style="width: 100px;" aria-label="Default select example">
                                 <option value="">Indique el código de la carrera</option>
                                 <option value="ISS">ISS</option>
                                 <option value="ICV">ICV</option>
@@ -24,7 +24,7 @@
                                 <option value="MDC">MDC</option>
                             </select>
                             <div class="col-md-6">
-                                <input id="codigo" type="text" value= "{{old('codigo')}}" class="form-control @error('codigo') is-invalid @enderror" name="codigo"  required autocomplete="nombres" autofocus>
+                                <input id="codigo" type="number" value= "{{old('codigo')}}" class="form-control @error('codigo') is-invalid @enderror" name="codigo"  required autocomplete="nombres" autofocus>
         
                                 @error('codigo')
                                     <span class="invalid-feedback" role="alert">
@@ -35,7 +35,7 @@
                         </div>
                         <br>
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Titulo') }}</label>
+                            <label for="titulo" class="col-md-4 col-form-label text-md-end">{{ __('Titulo') }}</label>
 
                             <div class="col-md-6">
                                 <input id="titulo" type="text" value= "{{old('titulo')}}" class="form-control @error('titulo') is-invalid @enderror" name="titulo"  required autocomplete="titulo" autofocus>
@@ -50,13 +50,13 @@
 
                         <div class="row mb-3">
                             <label for="periodo" class="col-md-4 col-form-label text-md-end">{{ __('Periodo Acádemico') }}</label>
-                            <div class="col-md-6">
-                                <select class="form-select select-cedula mr-2" name="n-periodo" style="width: 60px;" aria-label="Default select example">
-                                    <option value="">Indique la seccion del periodo</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                </select>
-                                <input id="periodo" name="periodo" value= "{{old('periodo')}}" type="text" class="form-control @error('periodo') is-invalid @enderror" required autocomplete="periodo" autofocus>
+                            <select class="form-select select-cedula mr-2" name="n_periodo" style="width: 60px;" aria-label="Default select example">
+                                <option value="">Indique la seccion del periodo</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select><div class="col-md-6">
+                                <input id="periodo" name="periodo" value= "{{old('periodo')}}" type="number" min="2007" max="2022" placeholder="2007" style="width: 100px;" class="form-control @error('periodo') is-invalid @enderror" required autocomplete="periodo" autofocus>
+                                
                                 @error('periodo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -65,9 +65,9 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="periodo" class="col-md-4 col-form-label text-md-end">{{ __('Calificación del proyecto') }}</label>
+                            <label for="calificacion" class="col-md-4 col-form-label text-md-end">{{ __('Calificación del proyecto') }}</label>
                             <div class="col-md-6">
-                                <select class="form-select select-cedula mr-2" name="calificacion" style="width: 60px;" aria-label="Default select example">
+                                <select class="form-select select-cedula mr-2" name="calificacion" style="width: 175px;" aria-label="Default select example">
                                     <option value="">Indique la calificación del estudiante</option>
                                     <option value="aprob">Aprobado</option>
                                     <option value="repro">Reprobado</option>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Recopasec;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Recopasec\Calificacion_proyecto_pasantia;
+use App\Models\Recopasec\Calificacion_pasantia;
 use App\Models\Recopasec\Proyecto_Pasantia;
 
 class ProyectoPController extends Controller
@@ -16,16 +16,17 @@ class ProyectoPController extends Controller
     }
     public function store_pasantias(Request $request){
         $pasantia = new Proyecto_pasantia();
-        $calificacion = new Calificacion_proyecto_pasantia();
+        $calificacion = new Calificacion_pasantia();
         $request->validate([
             'n-periodo'=>'required',
             'codigo'=> 'required|max:06',
             'titulo'=> 'required|max:255',
             'periodo'=> 'required',
-            'calificacion_tutorac'=>'required|integer|max:02',
-            'calificacion_tutorin'=>'required|integer|max:02',
-            'calificacion_docentevalu'=>'required|integer|max:02'
+            'calificacion_tutorac'=>'required',
+            'calificacion_tutorin'=>'required',
+            'calificacion_docentevalu'=>'required'
         ]);
+
         $codigo = 'P-'.$request->input('codigo');
         $titulo = $request->input('titulo');
         $periodo = $request->input('n-periodo').'-'.$request->input('periodo');
@@ -42,7 +43,7 @@ class ProyectoPController extends Controller
             $calificacion->calificacion_comite_evaluador = $calificacion_docentevalu;
             $calificacion->save(); 
                  
-        return view('proyectos.serviciocom.agregar', compact('comunitario'), compact('calificacion'));
+        return redirect()->route('index_pasantias');
         }else{
             $message = 'Registro incorrecto, por favor rellena bien los campos ';
             return view('proyectos.serviciocom.serviciocomcreate',[

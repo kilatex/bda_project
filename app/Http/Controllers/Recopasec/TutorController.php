@@ -19,10 +19,9 @@ class TutorController extends Controller
         return view('tutores.tutor_ac.tutorac', compact('tutoresin'));
     }
     public function store_tutorac(Request $request){
-        $tutor = new Tutor_academico();
         $request->validate([
             'tipo_cedula'=>'required',
-            'cedula'=> 'required|integer|unique:tutor_academicos',
+            'cedula'=> 'required|max:09',
             'nombres'=> 'required|max:50',
             'apellidos'=> 'required|max:50',
             'email'=> 'required|max:100',
@@ -30,31 +29,35 @@ class TutorController extends Controller
             'telefono'=> 'required|max:12',
             'especialidad' => 'required',
         ]);
-            $tutor->cedula = $request->tipo_cedula.$request->cedula;
-            $tutor->nombres = $request->nombres;
-            $tutor->apellidos = $request->apellidos;
-            $tutor->email = $request->email;
-            $tutor->telefono = $request->telefono;
-            $tutor->condicion = $request->condicion;
-            $tutor->especialidad = $request->especialidad;
-            $tutor->save();
+        $tutorac = new Tutor_academico();
+
+        $tutorac->cedula = $request->tipo_cedula.$request->cedula;
+        $tutorac->nombres = $request->nombres;
+        $tutorac->apellidos = $request->apellidos;
+        $tutorac->email = $request->email;
+        $tutorac->telefono = $request->telefono;
+        $tutorac->condicion = $request->condicion;
+        $tutorac->especialidad = $request->especialidad;
+        $tutorac->save();
 
                 
-            return redirect()->route('create_pasantias', compact('tutor'));    }
+        return redirect()->route('create_pasantias', compact('tutorac'));    
+    }
     public function create_tutoracom(){
         return view('tutores.tutor_ac.tutoracom');
     }
     public function store_tutoracom(Request $request){
-        $tutor = new Tutor_academico();
         $request->validate([
             'tipo_cedula'=>'required',
-            'cedula'=> 'required|integer|unique:tutor_academicos,cedula',
+            'cedula'=> 'required|integer',
             'nombres'=> 'required|max:50',
             'apellidos'=> 'required|max:50',
             'email'=> 'required|max:100',
             'telefono'=> 'required|max:12',
-            'nombre_especialidad' => 'required',
+            'especialidad' => 'required',
         ]);
+        $tutor = new Tutor_academico();
+
             $tutor->cedula = $request->tipo_cedula.$request->cedula;
             $tutor->nombres = $request->nombres;
             $tutor->apellidos = $request->apellidos;
@@ -62,7 +65,8 @@ class TutorController extends Controller
             $tutor->telefono = $request->telefono;
             $tutor->especialidad = $request->especialidad;      
             $tutor->save();
-            return redirect()->route('create_comunitario');    }
+            return redirect()->route('create_comunitario');    
+        }
     public function edit_tutorac(Tutor_academico $tutorcom){
         $user = \Auth::user();
         if($user->rol == 'USER_pasantias'){
@@ -99,7 +103,6 @@ class TutorController extends Controller
         return view('tutores.tutor_com.tutorcom', compact('direcciones'));
     }
     public function store_tutorcom(Request $request){
-        $tutorco = new Tutor_comunitario();
         $request->validate([
             'tipo_cedula'=>'required',
             'cedula'=> 'required|max:09',
@@ -109,7 +112,8 @@ class TutorController extends Controller
             'telefono'=> 'required|max:12',
             'cargo' => 'required|max:100'
         ]);
-        
+        $tutorco = new Tutor_comunitario();
+
         $tutorco->cedula = $request->tipo_cedula.$request->cedula;
         $tutorco->nombres = $request->nombres;
         $tutorco->apellidos = $request->apellidos;
@@ -141,7 +145,10 @@ class TutorController extends Controller
 
     //Tutor Institucional
     public function create_tutorin(){
-        return view('tutores.tutor_ins.tutorin');
+        return view('tutores.tutor_ins.tutorin', [
+            'empresaByRif' => false,
+            'empresaByNombre' => false,
+        ]);
     }
     public function store_tutorin(Request $request){
         $request->validate([

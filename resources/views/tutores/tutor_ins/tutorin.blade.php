@@ -13,11 +13,12 @@
                     @csrf
                         <div class="row mb-3">
                             <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
+                            <select class="form-select select-cedula mr-2" name="tipo_cedula"  style="width: 60px;" aria-label="Default select example">
+                                <option selected value="V">V</option>
+                                <option  value="E">E</option>
+                            </select>
                             <div class="col-md-6">
-                                <select class="form-select select-cedula mr-2" name="tipo_cedula"  style="width: 60px;" aria-label="Default select example">
-                                    <option selected value="V">V</option>
-                                    <option  value="E">E</option>
-                                </select>
+                                
                                 <input id="cedula" name="cedula" value= "{{old('cedula')}}" type="text" class="form-control @error('cedula') is-invalid @enderror"   autofocus>
                                 @error('cedula')
                                     <span class="invalid-feedback" role="alert">

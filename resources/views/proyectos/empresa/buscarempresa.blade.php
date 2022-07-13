@@ -11,7 +11,7 @@
         <div class="card-body">
             <form method="POST" action="{{ route('verificar_empresa') }}" enctype="multipart/form-data" >
                 @csrf
-                    <h5 class="text-center mb-4"> <strong>Digite la cédula y el correo electrónico del estudiante a registrar para comprobar si ya está registrado</strong> </h5>
+                    <h5 class="text-center mb-4"> <strong>Digite el rif y el correo electrónico de la empresa a registrar para comprobar si ya está registrado</strong> </h5>
                     <div class="row mb-3">
                         <label for="rif" class="col-md-2 col-form-label text-md-end">{{ __('Rif') }}</label>
                         
@@ -22,7 +22,7 @@
                                     <option selected value="J">J</option>
                                 </select>
                                 <div class="col-md-11">
-                                    <input id="rif"  name="rif" required type="text" placeholder="123456789" class="form-control @error('rif') is-invalid @enderror"   autofocus>
+                                    <input id="rif"  name="rif" required type="number" placeholder="123456789" class="form-control @error('rif') is-invalid @enderror"   autofocus>
 
                                     @error('rif')
                                     <span class="invalid-feedback" role="alert">
@@ -31,11 +31,7 @@
                                 @enderror
                                 </div>
                             </div>
-
-                        
                         </div>
-            
-
                 
                         <label for="email" class="col-md-2 col-form-label text-md-end">{{ __('Email') }}</label>
                         <div class="col-md-3">
@@ -63,7 +59,7 @@
 
                 @if($empresaByRif)
                     <div class="empresaByRif">
-                        <div class="text-primary"> <strong>EMPRESA ENCONTRADO POR RIF</strong>   </div>
+                        <div class="text-primary"> <strong>EMPRESA ENCONTRADA POR RIF</strong>   </div>
                         <div> <strong>Nombre: </strong> {{$empresaByRif->nombre}} </div>
                         <div><strong>Rif: </strong>  {{$empresaByRif->rif}} </div>
                         <div><strong>Email: </strong>  {{$empresaByRif->email}} </div>
@@ -72,7 +68,7 @@
 
                 @if($empresaByEmail)
                 <div class="empresaByEmail">                   
-                    <div class="text-primary"> <strong>EMPRESA ENCONTRADO POR EMAIL</strong> </div>
+                    <div class="text-primary"> <strong>EMPRESA ENCONTRADA POR EMAIL</strong> </div>
                     <div> <strong>Nombre: </strong> {{$empresaByEmail->nombre}} </div>
                     <div><strong>Rif: </strong>  {{$empresaByEmail->rif}} </div>
                     <div><strong>Email: </strong>  {{$empresaByEmail->email}} </div>

@@ -106,14 +106,6 @@ CREATE TABLE IF NOT EXISTS empresas(
     CONSTRAINT fk_empresas_parroquias FOREIGN KEY(parroquia_id) REFERENCES parroquias(id)
 )ENGINE=InnoDb;
 
-CREATE TABLE IF NOT EXISTS cargos(
-    id int(255) auto_increment not null,
-    nombre varchar(100),
-    created_at datetime,
-    updated_at datetime,
-    CONSTRAINT pk_cargos PRIMARY KEY(id)
-)ENGINE=InnoDb;
-
 CREATE TABLE IF NOT EXISTS expedientes(
     id int(255) auto_increment not null,
     usuario_id int(255) not null,
@@ -222,8 +214,7 @@ CREATE TABLE IF NOT EXISTS calificacion_proyecto_comunitarios(
     id int(255) auto_increment not null,
     estudiante_id int(255),
     proyecto_comunitario_id int (255),
-    calificacion_tutor_academico int(255),
-    calificacion_tutor_comunitario int(255),
+    calificacion varchar(255),
     created_at datetime,
     updated_at datetime,
     CONSTRAINT pk_calificacion_proyecto_comunitarios PRIMARY KEY(id),

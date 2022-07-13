@@ -67,12 +67,6 @@
                                 Carreras
                                 </a>
                             </li>
-
-                            <li class="nav-item ">
-                                <a id="" class="nav-link "  href="{{ route('proyecto_list') }}" >
-                                    Proyectos
-                                </a>
-                            </li>
                             <li class="nav-item ">
                                 <a id="" class="nav-link "  href="{{ route('create_direccion') }}" >
                                 Nuevo Proyecto
@@ -92,14 +86,8 @@
                                     Carreras
                                     </a>
                                 </li>
-
                                 <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('proyecto_listp') }}" >
-                                        Proyectos
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('create_tutorin') }}" >
+                                    <a id="" class="nav-link "  href="{{ route('verificar_rif') }}" >
                                     Nuevo Proyecto
                                     </a>
                                 </li>

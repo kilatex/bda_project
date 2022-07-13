@@ -10,14 +10,14 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('store_pasantias') }}" enctype="multipart/form-data" >
                     @csrf
-
+                        
                         <div class="row mb-3">
                             <label for="codigo" class="col-md-4 col-form-label text-md-end">{{ __('Codigo del proyecto') }}</label>
                             <select class="form-select select-cedula mr-2" disabled style="width: 60px;" aria-label="Default select example">
                                 <option selected value="P">P</option>
                             </select>
                             <div class="col-md-6">
-                                <input id="codigo" type="text" value= "{{old('codigo')}}" class="form-control @error('codigo') is-invalid @enderror" name="codigo"  required autocomplete="nombres" autofocus>
+                                <input id="codigo" type="number" value= "{{old('codigo')}}" class="form-control @error('codigo') is-invalid @enderror" name="codigo"  required autocomplete="nombres" autofocus>
         
                                 @error('codigo')
                                     <span class="invalid-feedback" role="alert">
@@ -81,7 +81,8 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div><div class="row mb-3">
+                        </div>
+                        <div class="row mb-3">
                             <label for="calificacion_docentevalu" class="col-md-4 col-form-label text-md-end">{{ __('Calificación del Docente Evaluador') }}</label>
                             
                             <div class="col-md-6">

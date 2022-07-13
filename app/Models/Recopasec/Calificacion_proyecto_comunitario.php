@@ -12,11 +12,10 @@ class Calificacion_proyecto_comunitario extends Model
         
         'estudiante_id',
         'proyecto_comunitario_id',
-        'calificacion_tutor_comunitario_id',
-        'calificacion_tutor_academico_id',
+        'calificacion',
 
     ];
-    public function testudiante(){
+    public function estudiante(){
         return $this->belongsTo('App\Models\User','estudiante_id');
     }
     public function proyecto_comunitario(){

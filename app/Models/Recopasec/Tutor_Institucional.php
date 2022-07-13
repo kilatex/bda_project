@@ -16,13 +16,10 @@ class Tutor_institucional extends Model
         'email',
         'telefono',
         'empresa_id',
-        'especialidad_id',
+        'especialidad',
 
     ];
     public function empresa(){
         return $this->belongsTo('App\Models\Recopasec\Empresa','empresa_id');
-    }
-    public function especialidad(){
-        return $this->belongsTo('App\Models\Recopasec\Especialidade','especialidad_id');
     }
 }
