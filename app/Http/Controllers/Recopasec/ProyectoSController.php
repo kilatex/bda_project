@@ -34,12 +34,14 @@ class ProyectoSController extends Controller
         $comunitario = new Proyecto_comunitario();
         $calificacion= new Calificacion_proyecto_comunitario();
         //Recoger Datos del proyecto
+        /*
         $comunitario->titulo = $request->titulo;
         $comunitario->codigo = $request->n_codigo.$request->codigo;
         $comunitario->periodo= $request->n_periodo.$request->periodo;
-        $comunitario->save();
+        $comunitario->save();*/
+        $registro=$comunitario->create($request->all());
         $calificacion->calificacion= $request->calificacion;
-        $calificacion->proyecto_comunitario_id= $comunitario->id;
+        $calificacion->proyecto_comunitario_id= $registro->id;
         $calificacion->save(); 
                  
         return view('proyectos.serviciocom.agregar', compact('comunitario', 'calificacion'));

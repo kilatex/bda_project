@@ -41,8 +41,12 @@ class TutorController extends Controller
         $tutorac->condicion = $request->condicion;
         $tutorac->especialidad = $request->especialidad;
         $tutorac->save();
-        return redirect()->route('home');
- 
+        $user = \Auth::user();
+        if($user->rol == 'USER_pasantias'){
+            return redirect()->route('index_pasantias');
+        }else if($user->rol == 'USER_serviciocom'){ 
+            return redirect()->route('index_comunitario');
+        }  
     }
     public function edit_tutorac(Tutor_academico $tutorcom){
         $user = \Auth::user();
@@ -144,7 +148,7 @@ class TutorController extends Controller
         $tutorco->cargo = $request->cargo;
         $tutorco->direccion_id = $direccion->id;
         $tutorco->save();
-        return view('proyectos.pasantias.pasantiascreate', compact('tutorco'));        
+        return view('proyectos.serviciocom.serviciocomcreate', compact('tutorco'));        
     }
     public function edit_tutorcom(Tutor_comunitario $tutorcom){
         return view('edit.pasantias', compact('tutorcom'), compact('direccion'));

@@ -42,6 +42,7 @@
                                     @enderror 
                                 </div>
                             </div>
+                            <center><h3>Tutor Comunitario</h3></center>
                         <div class="row mb-3">
                             <label for="cedula" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
                             <select class="form-select select-cedula mr-2" name="tipo_cedula"  style="width: 60px;" aria-label="Default select example">

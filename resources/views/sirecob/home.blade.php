@@ -19,7 +19,7 @@
 		<div class="col-5">
 			<div class="card">
 					<div class="text-center">
-						<a href="/Modulo_libros">
+						<a href="/Listar_proyectos">
 						<img class="mt-3 mb-3 mr-3 ml-3" src="img/menu/projects.png" alt="" style=" width: 140px;height: 140px;">
 						<h5 class="text-success"><b>Proyectos de Grado</b></h5>
 						</a>

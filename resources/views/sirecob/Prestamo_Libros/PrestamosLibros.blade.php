@@ -27,7 +27,7 @@
                 <th scope="col">#</th>
                 <th scope="col">CI PRESTAMISTA</th>
                 <th scope="col">NOMBRE</th>
-                <th scope="col">TIPO</th>
+                <!--<th scope="col">TIPO</th>-->
                 <th scope="col">lIBRO PRESTADO</th>
                 <th scope="col">FECHA DE PRESTAMO</th>
                 <th scope="col">FECHA DE ENTREGA</th>
@@ -44,7 +44,7 @@
                 <th scope="row"># </th>
                 <td>{{$prestamo->Datos_estudiante->user->nombres}}</td>
                 <td>{{$prestamo->Datos_estudiante->user->cedula}}</td>
-                <td>Estudainte</td>
+                <!-- <td>Estudainte</td>-->
                 <td>{{$prestamo->Datos_libros->titulo}}</td>
 
 
