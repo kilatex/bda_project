@@ -18,8 +18,8 @@ use App\Models\Sirecob\Tutor;
 class TutorController extends Controller
 {
     // Tutor Academico
-    public function create_tutorac(){
-        return view('tutores.tutor_ac.tutorac');
+    public function create_tutorac($tutori){
+        return view('tutores.tutor_ac.tutorac', compact('tutori'));
     }
     public function store_tutorac(Request $request){
         $request->validate([
@@ -41,7 +41,7 @@ class TutorController extends Controller
         $tutorac->condicion = $request->condicion;
         $tutorac->especialidad = $request->especialidad;
         $tutorac->save();
-        return redirect()->route('home');
+        return redirect()->route('index_pasantias');
     }
     public function edit_tutorac(Tutor_academico $tutorcom){
         $user = \Auth::user();
@@ -79,8 +79,9 @@ class TutorController extends Controller
     }
     public function verificar_cedulat(){
         return view('tutores.tutor_ac.buscartutor',
-        [
-            'tutorByCedula' => false,
+        [   
+            'tipo_cedula'=> false,
+            'cedula' => false,
         ]);
     }
 
@@ -91,10 +92,9 @@ class TutorController extends Controller
             'cedula' => 'required|min:7|max:9',
         ]);
         $cedula = $request->input('tipo_cedula').$request->input('cedula');
-        $tutorByCedula = Tutor_academico::where('cedula', $cedula)->first();
-
-        if($tutorByCedula){
-            return view('tutores.tutor_ac.buscartutor', compact('tutorByCedula'));
+        $tutorac = Tutor_academico::where('cedula', $cedula)->first();
+        if($tutorac){
+            return view('proyectos.pasantias.index');
         }else{
             return view('tutores.tutor_ac.tutorac', compact('cedula'));            
         }

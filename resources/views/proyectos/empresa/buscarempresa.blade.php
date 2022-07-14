@@ -47,12 +47,12 @@
             
             <div class="usuarios-encontrados mb-4 justify-content-around d-flex">
 
-                @if($empresaByRif)
-                    <div class="empresaByRif">
+                @if($empresa)
+                    <div class="empresa">
                         <div class="text-primary"> <strong>EMPRESA ENCONTRADA POR RIF</strong>   </div>
-                        <div> <strong>Nombre: </strong> {{$empresaByRif->nombre}} </div>
-                        <div><strong>Rif: </strong>  {{$empresaByRif->rif}} </div>
-                        <div><strong>Email: </strong>  {{$empresaByRif->email}} </div>
+                        <div> <strong>Nombre: </strong> {{$empresa->nombre}} </div>
+                        <div><strong>Rif: </strong>  {{$empresa->rif}} </div>
+                        <div><strong>Email: </strong>  {{$empresa->email}} </div>
                     </div>
                 @endif
 

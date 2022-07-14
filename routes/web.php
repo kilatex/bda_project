@@ -84,7 +84,7 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::put('recopasec/tutorcom/{tutorco}', [TutorController::class, 'update_tutorcom'])->name('update_tutorcom');
         Route::delete('recopasec/tutorcom/{tutorco}', [TutorController::class, 'destroy_tutorcom'])->name('destroy_tutorcom');
         //Tutor institucional
-        // Route::get('tutorin/create', [EmpresaController::class, 'create_tutorin'])->name('create_tutorin');
+        Route::get('tutorin/create', [EmpresaController::class, 'create_tutorin'])->name('create_tutorin');
         // Route::post('tutorin', [EmpresaController::class, 'store_tutorin'])->name('store_tutorin');
         // Route::get('tutorin/{tutori}/edit', [EmpresaController::class, 'edit_tutorin'])->name('edit_tutorin');
         // Route::put('tutorin/{tutori}', [EmpresaController::class, 'update_tutorin'])->name('update_tutorin');

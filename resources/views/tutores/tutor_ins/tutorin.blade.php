@@ -60,8 +60,8 @@
 
                             
                             <div class="col-md-6">
-                                <input id="empresa" name="empresa" value= "{{$empresaByRif->nombre}}" readonly type="text" class="form-control @error('empresa') is-invalid @enderror"   autofocus>
-                                <input id="empresa_id" name="empresa_id" value= "{{$empresaByRif->id}}" readonly type="hidden">
+                                <input id="empresa" name="empresa" value= "{{$empresa->nombre}}" readonly type="text" class="form-control @error('empresa') is-invalid @enderror"   autofocus>
+                                <input id="empresa_id" name="empresa_id" value= "{{$empresa->id}}" readonly type="hidden">
 
                                 @error('empresa_id')
                                     <span class="invalid-feedback" role="alert">

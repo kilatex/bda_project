@@ -10,30 +10,24 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('store_pasantias') }}" enctype="multipart/form-data" >
                     @csrf
-                    <div class="row mb-3">
-                        <label for="tipo_cedulap" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
-                        <select class="form-select select-cedula mr-2" name="tipo_cedulap" style="width: 60px;" aria-label="Default select example">
-                            <option value="V">V</option>
-                            <option value="E">E</option>
-                        </select>
-                        
-                        <div class="col-md-6">
-                            <input id="cedulap" type="text"  style="width: 100px;" value= "{{$cedula}}" class="form-control @error('cedulap') is-invalid @enderror" name="periodo"  required autocomplete="cedulap">
-                            {{-- <input id="cedula" type="hidden"  style="width: 100px;" value= "{{$cedula->id}}" class="form-control > --}}
-
-                            @error('cedulap')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
+        
                         <div class="row mb-3">
-                            <label for="codigo" class="col-md-4 col-form-label text-md-end">{{ __('Codigo del proyecto') }}</label>
-                            <select class="form-select select-cedula mr-2" disabled style="width: 60px;" aria-label="Default select example">
-                                <option selected value="P">P</option>
-                            </select>
+                            <label for="cedulati" class="col-md-4 col-form-label text-md-end">{{ __('Tutor Académico') }}</label>
+                                <select class="form-select" name="tutorac" id="tutorac" style="width: 300px;" aria-label="Default select example">
+                                <option value="">Seleccione un tutor</option>
+                        @foreach ($tutoracs as $tutorac)
+                            <option value="{{$tutorac->id}}">{{$tutorac->nombres}} {{$tutorac->apellidos}}</option>
+                        @endforeach
+                        </div>
+                        <center><div class="row mb-3">
+
+                            <label for="codigo" class="col-md-4 col-form-label text-md-end">{{ __('Código del proyecto') }}</label>
+                            
+                            <select class="form-select select-cedula mr-2" aria-readonly="true" style="width: 60px;"></select>
+                                <option  value="P">P</option>
+                            
                             <div class="col-md-6">
+
                                 <input id="codigo" type="number" value= "{{old('codigo')}}" class="form-control @error('codigo') is-invalid @enderror" name="codigo"  required autocomplete="nombres" autofocus>
         
                                 @error('codigo')
@@ -42,8 +36,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-
+                        </div></center>
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Título del proyecto') }}</label>
 
@@ -59,9 +52,9 @@
                         </div>
                         <div class="row mb-3">
                             <label for="periodo" class="col-md-4 col-form-label text-md-end">{{ __('Periodo') }}</label>
-                            <select class="form-select select-cedula mr-2" name="n-periodo" style="width: 60px;" aria-label="Default select example">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
+                            <select class="form-select select-cedula mr-2" name="n_periodo" style="width: 60px;" aria-label="Default select example">
+                                <option value="1-">1</option>
+                                <option value="2-">2</option>
                             </select>
                             
                             <div class="col-md-6">
@@ -75,10 +68,10 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="calificacion_tutorac" class="col-md-4 col-form-label text-md-end">{{ __('Calificación del Tutor Académico') }}</label>
-                            
+                            <label for="calificacion_tutorac" class="col-md-4 col-form-label text-md-end">{{ __('Calificación Tutor Académico') }}</label>
+
                             <div class="col-md-6">
-                                <input id="calificacion_tutorac" type="number" min="01" max="20" style="width: 70px;" value= "{{old('calificacion_tutorac')}}" class="form-control @error('calificacion_tutorac') is-invalid @enderror" name="calificacion_tutorac"  required autocomplete="calificacion_tutorac">
+                                <input id="calificacion_tutorac" type="number" min="01" max="20" style="width: 60px;" class="form-control @error('calificacion_tutorac') is-invalid @enderror" name="calificacion_tutorac"  required autocomplete="calificacion_tutorac">
 
                                 @error('calificacion_tutorac')
                                     <span class="invalid-feedback" role="alert">
@@ -86,11 +79,13 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div><div class="row mb-3">
-                            <label for="calificacion_tutorin" class="col-md-4 col-form-label text-md-end">{{ __('Calificación del Tutor institucional') }}</label>
-                            
+                        
+                        </div>
+                        <div class="row mb-3">
+                            <label for="calificacion_tutorin" class="col-md-4 col-form-label text-md-end">{{ __('Calificación Tutor Institucional') }}</label>
+
                             <div class="col-md-6">
-                                <input id="calificacion_tutorin" type="number" min="01" max="20" style="width: 70px;" value= "{{old('calificacion_tutorin')}}" class="form-control @error('calificacion_tutorin') is-invalid @enderror" name="calificacion_tutorin"  required autocomplete="calificacion_tutorin">
+                                <input id="calificacion_tutorin" type="number" min="01" max="20" style="width: 60px;" class="form-control @error('calificacion_tutorin') is-invalid @enderror" name="calificacion_tutorin"  required autocomplete="calificacion_tutorin">
 
                                 @error('calificacion_tutorin')
                                     <span class="invalid-feedback" role="alert">
@@ -98,12 +93,13 @@
                                     </span>
                                 @enderror
                             </div>
+                        
                         </div>
                         <div class="row mb-3">
-                            <label for="calificacion_docentevalu" class="col-md-4 col-form-label text-md-end">{{ __('Calificación del Docente Evaluador') }}</label>
-                            
+                            <label for="calificacion_docentevalu" class="col-md-4 col-form-label text-md-end">{{ __('Calificación Comite Evaluador') }}</label>
+
                             <div class="col-md-6">
-                                <input id="calificacion_docentevalu" type="number" min="01" max="20" style="width: 70px;" value= "{{old('calificacion_docentevalu')}}" class="form-control @error('calificacion_docentevalu') is-invalid @enderror" name="calificacion_docentevalu"  required autocomplete="calificacion_docentevalu">
+                                <input id="calificacion_docentevalu" type="number" min="01" max="20" style="width: 60px;" class="form-control @error('calificacion_docentevalu') is-invalid @enderror" name="calificacion_docentevalu"  required autocomplete="calificacion_tutorin">
 
                                 @error('calificacion_docentevalu')
                                     <span class="invalid-feedback" role="alert">
@@ -111,8 +107,8 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
                         
+                        </div>
                         <br>
                         <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">

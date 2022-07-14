@@ -27,13 +27,6 @@ class EmpresaController extends Controller
             'estado'=>'required',
             'municipio'=>'required',
             'parroquia'=>'required',
-            'nombres'=> 'required|max:50',
-            'apellidos'=> 'required|max:50',
-            'tipo_cedula'=>'required',
-            'cedula'=> 'required|max:08',
-            'email_tu'=> 'required|max:100',
-            'telefono_tu'=> 'required|max:12',
-            'especialidad' => 'required|max:100'
         ]);
         $direccion = new Direccione();
         $direccion->estado_id = $request->estado;
@@ -48,18 +41,12 @@ class EmpresaController extends Controller
         $empresa->departamento = $request->departamento;
         $empresa->direccion_id = $direccion->id;
         $empresa->save();
-        $tutori= new Tutor_institucional();
-        $tutori->nombres = $request->nombres;
-        $tutori->apellidos = $request->apellidos;
-        $tutori->cedula = $request->tipo_cedula .$request->cedula;
-        $tutori->email = $request->email_tu;
-        $tutori->telefono = $request->telefono_tu;
-        $tutori->especialidad = $request->especialidad;
-        $tutori->empresa_id = $empresa->id;
-        $tutori->save();
 
-        return redirect()->route('index_pasantias');
-        
+        return redirect()->route('create_tutorin', compact('empresa'));
+      
+    }
+    public function create_tutorin($empresa){
+        return redirect()->route('store_tutorin', compact('empresa'));
     }
     public function store_tutorin(Request $request){
         $request->validate([
@@ -81,8 +68,7 @@ class EmpresaController extends Controller
         $tutori->especialidad = $request->especialidad;
         $tutori->empresa_id = $request->empresa_id;
         $tutori->save();
-        return redirect()->route('index_pasantias');
-
+        return redirect()->route('create_pasantias', compact('tutori'));
     }
     public function edit_empresa(Empresa $empresa){
         return view('proyectos.pasantias.edit', compact('direccion'));
@@ -117,7 +103,7 @@ class EmpresaController extends Controller
     public function verificar_rif(){
         return view('proyectos.empresa.buscarempresa',
         [
-            'empresaByRif' => false,  
+            'empresa' => false,  
         ]);
     }
 
@@ -127,11 +113,10 @@ class EmpresaController extends Controller
             'rif' => 'required|min:7|max:9',
         ]);
         $rif = 'J'.$request->input('rif');
-        $empresaByRif = Empresa::where('rif', $rif)->first();
+        $empresa = Empresa::where('rif', $rif)->first();
 
-        if($empresaByRif ){
-            return view('tutores.tutor_ins.tutorin', compact('empresaByRif'));
-
+        if($empresa ){
+            return view('tutores.tutor_ins.tutorin', compact('empresa'));
         }else{
             $estados = Estado::all();
             $municipios = Municipio::all();

@@ -93,12 +93,7 @@
                                 </li>
                                 <li class="nav-item ">
                                     <a id="" class="nav-link "  href="{{ route('verificar_rif') }}" >
-                                    Agregar Empresas
-                                    </a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('verificar_cedulat') }}" >
-                                    Agregar Tutor Académico
+                                    Agregar proyecto
                                     </a>
                                 </li>
                                 <li class="nav-item ">

@@ -11,14 +11,14 @@
         <div class="card-body">
             <form method="POST" action="{{ route('verificar_estudiante') }}" enctype="multipart/form-data" >
                 @csrf
-                    <h5 class="text-center mb-4"> <strong>Digite la cédula del estudiante a registrar para comprobar si ya está registrado</strong> </h5>
+                    <h5 class="text-center mb-4"> <strong>Digite la cédula del estudiante a registrar para comprobar si ya reaalizo las pasantias</strong> </h5>
                     <div class="row mb-3">
                         <label for="rif" class="col-md-2 col-form-label text-md-end">{{ __('Cédula') }}</label>
                         
                         <div class="col-md-3 ">
                             <div class="flex">
 
-                                <select class="form-select select-cedula mr-2"  style="width: 60px;" aria-label="Default select example">
+                                <select class="form-select select-cedula mr-2" name="tipo_cedula" style="width: 60px;" aria-label="Default select example">
                                     <option  value="V">V</option>
                                     <option  value="E">E</option>
                                 </select>

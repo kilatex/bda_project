@@ -47,19 +47,6 @@
                             </div>
                     </div>  
             </form>
-            
-            <div class="usuarios-encontrados mb-4 justify-content-around d-flex">
-
-                @if($tutorByCedula)
-                    <div class="tutorByCedula">
-                        <div class="text-primary"> <strong>USUARIO ENCONTRADO POR CEDULA</strong>   </div>
-                        <div> <strong>Nombres y Apellidos: </strong> {{$tutorByCedula->nombres}}  {{$tutorByCedula->apellidos}} </div>
-                        <div><strong>Cédula: </strong>  {{$tutorByCedula->cedula}} </div>
-                        <div><strong>Email: </strong>  {{$tutorByCedula->email}} </div>
-                        <div><strong>Cóndicion: </strong>  {{$tutorByCedula->condicion}} </div>
-                    </div>
-                @endif
-            </div>
         </div>
     </div>
 </div>
