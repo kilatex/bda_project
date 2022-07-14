@@ -10,7 +10,24 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('store_pasantias') }}" enctype="multipart/form-data" >
                     @csrf
+                    <div class="row mb-3">
+                        <label for="tipo_cedulap" class="col-md-4 col-form-label text-md-end">{{ __('Cédula') }}</label>
+                        <select class="form-select select-cedula mr-2" name="tipo_cedulap" style="width: 60px;" aria-label="Default select example">
+                            <option value="V">V</option>
+                            <option value="E">E</option>
+                        </select>
                         
+                        <div class="col-md-6">
+                            <input id="cedulap" type="text"  style="width: 100px;" value= "{{$cedula}}" class="form-control @error('cedulap') is-invalid @enderror" name="periodo"  required autocomplete="cedulap">
+                            {{-- <input id="cedula" type="hidden"  style="width: 100px;" value= "{{$cedula->id}}" class="form-control > --}}
+
+                            @error('cedulap')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                         <div class="row mb-3">
                             <label for="codigo" class="col-md-4 col-form-label text-md-end">{{ __('Codigo del proyecto') }}</label>
                             <select class="form-select select-cedula mr-2" disabled style="width: 60px;" aria-label="Default select example">
@@ -95,6 +112,7 @@
                                 @enderror
                             </div>
                         </div>
+                        
                         <br>
                         <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">

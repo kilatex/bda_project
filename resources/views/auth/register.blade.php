@@ -123,7 +123,7 @@
         </div>
     </div>
 
-    <div class="row  mt-4">
+    {{-- <div class="row  mt-4">
 
         <div class="col-md-6 quote-box bg-quote2  offset-md-3 d-flex">
             <img src="{{asset('images/miranda.png')}}" alt="" srcset="">
@@ -136,7 +136,7 @@
         </div>
       
       
-    </div>
+    </div> --}}
 
 </div>
 @endsection

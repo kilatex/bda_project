@@ -102,8 +102,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item ">
-                                    <a id="" class="nav-link "  href="{{ route('create_pasantias') }}" >
-                                    Agregar Proyecto
+                                    <a id="" class="nav-link "  href="{{ route('verificar_cedula') }}" >
+                                    Verificar Estudiante
                                     </a>
                                 </li>
                             @endif

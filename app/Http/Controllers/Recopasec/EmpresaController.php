@@ -61,6 +61,29 @@ class EmpresaController extends Controller
         return redirect()->route('index_pasantias');
         
     }
+    public function store_tutorin(Request $request){
+        $request->validate([
+            'nombres'=> 'required|max:50',
+            'apellidos'=> 'required|max:50',
+            'tipo_cedula'=>'required',
+            'cedula'=> 'required|max:08',
+            'empresa_id'=> 'required',
+            'email'=> 'required|max:100',
+            'telefono'=> 'required|max:12',
+            'especialidad' => 'required|max:100'
+        ]);
+        $tutori= new Tutor_institucional();
+        $tutori->nombres = $request->nombres;
+        $tutori->apellidos = $request->apellidos;
+        $tutori->cedula = $request->tipo_cedula .$request->cedula;
+        $tutori->email = $request->email;
+        $tutori->telefono = $request->telefono;
+        $tutori->especialidad = $request->especialidad;
+        $tutori->empresa_id = $request->empresa_id;
+        $tutori->save();
+        return redirect()->route('index_pasantias');
+
+    }
     public function edit_empresa(Empresa $empresa){
         return view('proyectos.pasantias.edit', compact('direccion'));
     }
@@ -94,31 +117,27 @@ class EmpresaController extends Controller
     public function verificar_rif(){
         return view('proyectos.empresa.buscarempresa',
         [
-            'empresaByRif' => false,
-            'empresaByEmail' => false,   
+            'empresaByRif' => false,  
         ]);
     }
 
     public function verificar_empresa(Request $request){
         // Validar Formulario
         $validate = $this->validate($request,[
-            'email' => 'required',
             'rif' => 'required|min:7|max:9',
         ]);
         $rif = 'J'.$request->input('rif');
-        $email = $request->input('email');
         $empresaByRif = Empresa::where('rif', $rif)->first();
-        $empresaByEmail = Empresa::where('email', $email)->first();
 
-        if($empresaByRif ||  $empresaByEmail){
-            return view('proyectos.empresa.buscarempresa', compact('empresaByRif', 'empresaByEmail'));
+        if($empresaByRif ){
+            return view('tutores.tutor_ins.tutorin', compact('empresaByRif'));
 
         }else{
             $estados = Estado::all();
             $municipios = Municipio::all();
             $parroquias = Parroquia::all();
             return view('proyectos.empresa.empresa', 
-                compact('rif', 'email', 'estados', 'municipios', 'parroquias')
+                compact('rif', 'estados', 'municipios', 'parroquias')
             );
         }
         

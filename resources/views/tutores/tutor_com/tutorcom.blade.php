@@ -128,10 +128,25 @@
                                 @enderror 
                             </div>
                         </div>
+                        <center><h4></h4></center>
+                        <div class="row mb-3">
+                            <label for="cargo" class="col-md-4 col-form-label text-md-end">{{ __('Estudiantes') }}</label>
+
+                            
+                            <div class="col-md-6">
+                                <input id="cargo" name="cargo" value= "{{old('cargo')}}" type="text" class="form-control @error('cargo') is-invalid @enderror"   autofocus>
+
+                                @error('cargo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror 
+                            </div>
+                        </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Agregar Tutor Comunitario') }}
+                                        {{ __('Agregar Información') }}
                                     </button>
                                 </div>
                         </div>  

@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="row  mt-4">
+    {{-- <div class="row  mt-4">
 
         <div class="col-md-6 quote-box bg-quote1   offset-md-3 d-flex">
             <img src="{{asset('images/bolivar.png')}}" alt="" srcset="">
@@ -69,7 +69,7 @@
         </div>
       
       
-    </div>
+    </div> --}}
 
 
     <style>

@@ -229,6 +229,7 @@ CREATE TABLE IF NOT EXISTS calificacion_pasantias(
     calificacion_tutor_academico int(255),
     calificacion_tutor_institucional int(255),
     calificacion_comite_evaluador int(255),
+    calificacion_global int(100),
     created_at datetime,
     updated_at datetime,
     CONSTRAINT pk_calificacion_pasantias PRIMARY KEY(id),

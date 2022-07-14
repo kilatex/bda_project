@@ -41,12 +41,7 @@ class TutorController extends Controller
         $tutorac->condicion = $request->condicion;
         $tutorac->especialidad = $request->especialidad;
         $tutorac->save();
-        $user = \Auth::user();
-        if($user->rol == 'USER_pasantias'){
-            return redirect()->route('index_pasantias');
-        }else if($user->rol == 'USER_serviciocom'){ 
-            return redirect()->route('index_comunitario');
-        }  
+        return redirect()->route('home');
     }
     public function edit_tutorac(Tutor_academico $tutorcom){
         $user = \Auth::user();
@@ -86,28 +81,23 @@ class TutorController extends Controller
         return view('tutores.tutor_ac.buscartutor',
         [
             'tutorByCedula' => false,
-            'tutorByEmail' => false,   
         ]);
     }
 
     public function verificar_tutor(Request $request){
         // Validar Formulario
         $validate = $this->validate($request,[
-            'email' => 'required',
+            'tipo_cedula'=> 'required',
             'cedula' => 'required|min:7|max:9',
         ]);
         $cedula = $request->input('tipo_cedula').$request->input('cedula');
-        $email = $request->input('email');
         $tutorByCedula = Tutor_academico::where('cedula', $cedula)->first();
-        $tutorByEmail = Tutor_academico::where('email', $email)->first();
 
-        if($tutorByCedula ||  $tutorByEmail){
-            return view('tutores.tutor_ac.buscartutor', compact('tutorByCedula', 'tutorByEmail'));
+        if($tutorByCedula){
+            return view('tutores.tutor_ac.buscartutor', compact('tutorByCedula'));
         }else{
-            return view('tutores.tutor_ac.tutorac', compact('cedula', 'email'));            
+            return view('tutores.tutor_ac.tutorac', compact('cedula'));            
         }
-        
-        
     }
 
     //Tutor Comunitario

@@ -75,7 +75,7 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::get('recopasec/tutorac/{tutor}/edit', [TutorController::class, 'edit_tutorac'])->name('edit_tutorac');
         Route::put('recopasec/tutorac/{tutor}', [TutorController::class, 'update_tutorac'])->name('update_tutorac');
         Route::delete('recopasec/tutorac/{tutor}', [TutorController::class, 'destroy_tutorac'])->name('destroy_tutoracy');
-        Route::get('/recopasec/verificar-cedula', [TutorController::class, 'verificar_cedulat'])->name('verificar_cedulat');
+        Route::get('/recopasec/verificar-cedulat', [TutorController::class, 'verificar_cedulat'])->name('verificar_cedulat');
         Route::post('recopasec/verificar-tutor', [TutorController::class, 'verificar_tutor'])->name('verificar_tutor');
         //Tutor comunitario
         Route::get('recopasec/tutorcom/create', [TutorController::class, 'create_tutorcom'])->name('create_tutorcom');
@@ -96,10 +96,10 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::get('recopasec/pasantias/{pasantia}', [ProyectoPController::class, 'show_pasantias'])->name('show_pasantias');
         Route::get('recopasec/pasantias/{pasantia}/edit', [ProyectoPController::class, 'edit_pasantias'])->name('edit_pasantias');
         Route::put('recopasec/pasantias/{pasantia}', [ProyectoPController::class, 'update_pasantias'])->name('update_pasantias');
-        Route::get('/recopasec/proyectosp', [ProyectoPController::class, 'proyecto_listp'])->name('proyecto_listp');
-        Route::get('/recopasec/proyecto-searchp/{texto?}', [ProyectoSController::class, 'searchp'])->name('searchp');
         Route::delete('recopasec/pasantias/{pasantia}', [ProyectoPController::class, 'destroy_pasantias'])->name('destroy_pasantias');
         Route::get('/recopasec/proyectopas/{proyecto_id}', [ProyectoPController::class, 'show_proyectopa'])->name('show_proyectopa');
+        Route::get('recopasec/verificar-cedula', [ProyectoPController::class, 'verificar_cedula'])->name('verificar_cedula');
+        Route::post('recopasec/verificar-estudiante', [ProyectoPController::class, 'verificar_estudiante'])->name('verificar_estudiante');
     //Rutas para el proyecto comunitario
         Route::get('recopasec/comunitarios', [ProyectoSController::class, 'index_comunitario'])->name('index_comunitario');
         Route::get('recopasec/comunitarios/create', [ProyectoSController::class, 'create_comunitario'])->name('create_comunitario');
@@ -122,6 +122,7 @@ Route::post('/sigecop/message', [App\Http\Controllers\Sigecop\AdminController::c
         Route::delete('recopasec/empresas/{empresa}', [EmpresaController::class, 'destroy_empresa'])->name('destroy_empresa');
         Route::get('recopasec/verificar-rif', [EmpresaController::class, 'verificar_rif'])->name('verificar_rif');
         Route::post('recopasec/verificar-empresa', [EmpresaController::class, 'verificar_empresa'])->name('verificar_empresa');
+        Route::post('tutorin', [EmpresaController::class, 'store_tutorin'])->name('store_tutorin');
 //#########################################
 //                  SIRECOB
 //#########################################

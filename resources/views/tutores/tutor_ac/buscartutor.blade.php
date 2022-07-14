@@ -11,7 +11,7 @@
         <div class="card-body">
             <form method="POST" action="{{ route('verificar_tutor') }}" enctype="multipart/form-data" >
                 @csrf
-                    <h5 class="text-center mb-4"> <strong>Digite la cédula y el correo electrónico del tutor a registrar para comprobar si ya está registrado</strong> </h5>
+                    <h5 class="text-center mb-4"> <strong>Digite la cédula del tutor a registrar para comprobar si ya está registrado</strong> </h5>
                     <div class="row mb-3">
                         <label for="dni" class="col-md-2 col-form-label text-md-end">{{ __('Cédula') }}</label>
                         
@@ -34,19 +34,6 @@
                             </div>
 
                         
-                        </div>
-            
-
-                
-                        <label for="email" class="col-md-2 col-form-label text-md-end">{{ __('Email') }}</label>
-                        <div class="col-md-3">
-                            <input id="email" required type="email" class="form-control @error('email') is-invalid @enderror" name="email"   autocomplete="email">
-
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
             
                     </div>
@@ -72,16 +59,6 @@
                         <div><strong>Cóndicion: </strong>  {{$tutorByCedula->condicion}} </div>
                     </div>
                 @endif
-
-                @if($tutorByEmail)
-                <div class="tutorByEmail">                   
-                    <div class="text-primary"> <strong>USUARIO ENCONTRADO POR EMAIL</strong> </div>
-                    <div> <strong>Nombres y Apellidos: </strong> {{$tutorByEmail->nombres}}  {{$tutorByEmail->apellidos}} </div>
-                    <div><strong>Cédula: </strong>  {{$tutorByEmail->cedula}} </div>
-                    <div><strong>Email: </strong>  {{$tutorByEmail->email}} </div>
-                    <div><strong>Condición: </strong>  {{$tutorByEmail->condicion}} </div>
-                </div>
-            @endif
             </div>
         </div>
     </div>

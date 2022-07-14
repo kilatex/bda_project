@@ -11,7 +11,7 @@
         <div class="card-body">
             <form method="POST" action="{{ route('verificar_empresa') }}" enctype="multipart/form-data" >
                 @csrf
-                    <h5 class="text-center mb-4"> <strong>Digite el rif y el correo electrónico de la empresa a registrar para comprobar si ya está registrado</strong> </h5>
+                    <h5 class="text-center mb-4"> <strong>Digite el rif de la empresa a registrar para comprobar si ya está registrado</strong> </h5>
                     <div class="row mb-3">
                         <label for="rif" class="col-md-2 col-form-label text-md-end">{{ __('Rif') }}</label>
                         
@@ -32,17 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                
-                        <label for="email" class="col-md-2 col-form-label text-md-end">{{ __('Email') }}</label>
-                        <div class="col-md-3">
-                            <input id="email" required type="email" class="form-control @error('email') is-invalid @enderror" name="email"   autocomplete="email">
 
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
             
                     </div>
                 </div>   
@@ -66,15 +56,6 @@
                     </div>
                 @endif
 
-                @if($empresaByEmail)
-                <div class="empresaByEmail">                   
-                    <div class="text-primary"> <strong>EMPRESA ENCONTRADA POR EMAIL</strong> </div>
-                    <div> <strong>Nombre: </strong> {{$empresaByEmail->nombre}} </div>
-                    <div><strong>Rif: </strong>  {{$empresaByEmail->rif}} </div>
-                    <div><strong>Email: </strong>  {{$empresaByEmail->email}} </div>
-                    </div>
-                </div>
-            @endif
             </div>
         </div>
     </div>
